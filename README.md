@@ -35,3 +35,24 @@ Peças de Borda: Existem 12 peças de borda. Elas possuem 2 painés de cores que
 
 ---
 
+#### Algoritmo:
+
+##### Objetivo:
+
+- Ter a face superior completa.
+- Ter a primeira linha de todas as faces completa.
+
+##### Descrição:
+
+1. Comece botando a face branca para cima.
+1. Identifique a cor da peça central da face frontal, e chame a cor de X.
+1. Busque pela Peça de Canto da cor X/Branca, chame a peça de Y.
+1. Mova Y para a face de baixo do cubo. *Se não for possível fazê-lo sem modificar o sinal de + que está se formando na face de cima, pule para o passo N*
+1. Rotacione a face de baixo de forma que um painel de Y esteja na face frontal.
+1. *Analise: Se o painél da face de baixo de Y for Branco, siga para o passo 7, caso contrário pule para o passo 8.*
+1. Gire a face frontal 180°. *Pule para o passo 9*.
+1. Assuma como face frontal o lado do cubo que teria a sua parte da cruz modificada.
+
+**WIP**
+
+
