@@ -39,27 +39,55 @@ module.exports = {
         ['U','B','L'],['U','B','R'],['U','F','L'],['U','F','R'], // 00/38/09 | 02/36/29 | 06/18/11 | 08/20/27
         ['D','B','L'],['D','B','R'],['D','F','L'],['D','F','R']  // 51/44/15 | 53/42/35 | 45/24/17 | 47/26/33   
       ];
-      this.scramble = function() {
-        let moves = "";
-        for(let i = 0; i < 35; i++){
-          let random = Math.random();
-          let z = random > 0.5 ? "'" : ""
-          console.log(random);
-          if (random < 0.16)
-            moves = moves.concat(" U".concat(z));
-          else if (random < 0.32)
-            moves = moves.concat(" L".concat(z));
-          else if (random < 0.48)
-            moves = moves.concat(" F".concat(z));
-          else if (random < 0.64)
-            moves = moves.concat(" R".concat(z));
-          else if (random < 0.80)
-            moves = moves.concat(" B".concat(z));
-          else if (random < 0.96)
-            moves = moves.concat(" D".concat(z));
-        }
-        this.move(moves);
+    }
+    this.scramble = function() {
+      let moves = "";
+      for(let i = 0; i < 35; i++){
+        let random = Math.random();
+        let z = random > 0.5 ? "'" : ""
+        console.log(random);
+        if (random < 0.16)
+          moves = moves.concat(" U".concat(z));
+        else if (random < 0.32)
+          moves = moves.concat(" L".concat(z));
+        else if (random < 0.48)
+          moves = moves.concat(" F".concat(z));
+        else if (random < 0.64)
+          moves = moves.concat(" R".concat(z));
+        else if (random < 0.80)
+          moves = moves.concat(" B".concat(z));
+        else if (random < 0.96)
+          moves = moves.concat(" D".concat(z));
       }
+      this.move(moves);
+    }
+    this.move = function(string){
+      let moves = string.trim().split(" ");
+      moves.forEach(command => {
+        verify(command);
+        let times = command[2] ? Number(command[2]) : (command[1] ? Number(command[1]) : 1);
+        let clockwise = command[1] == "'" ? false : true;
+        switch(command[0]){
+          case 'U':
+            rotUF(this, times, clockwise);
+            break;
+          case 'L':
+            rotLF(this, times, clockwise);
+            break;
+          case 'F':
+            rotFF(this, times, clockwise);
+            break;
+          case 'R':
+            rotRF(this, times, clockwise);
+            break;
+          case 'B':
+            rotBF(this, times, clockwise);
+            break;
+          case 'D':
+            rotDF(this, times, clockwise);
+            break;
+        }
+      });
     }
   },
 }
@@ -78,4 +106,41 @@ function importCube(s){
     [s[51], s[44], s[15]],[s[53], s[42], s[35]],[s[45], s[24], s[17]],[s[47], s[26], s[33]]
   ];
   return prototype;
+}
+
+function verify(command){
+  let ori = command[0];
+  if(ori != 'U' && ori != 'L' && ori != 'F' && ori != 'R' && ori != 'B' && ori != 'D')
+    return new Error(`cube.Move() - Erro no comando ${command}`);
+  if(command.length == 3)
+    if(command[1] != "'" || command[2] != Number || command[2] > 2 || command[2] <= 0)
+      return new Error(`cube.Move() - Erro no comando ${command}`);
+  if(command.length == 2)
+    if(command[1] != Number || command[2] > 2 || command[2] <= 0)
+      return new Error(`cube.Move() - Erro no comando ${command}`);
+  
+}
+
+function rotUF(cube, times, clockwise){
+  let aux = cube;
+  if(times == 2){ // Gira face de cima 180
+    aux.ep[0][0] = cube.ep[0][2];
+    aux.ep[0][1] = cube.ep[0][3];
+    aux.ep[0][2] = cube.ep[0][0];
+    aux.ep[0][3] = cube.ep[0][1];
+    aux.co[0][0] = cube.co[0][2];
+    aux.co[0][1] = cube.co[0][3];
+    aux.co[0][2] = cube.co[0][0];
+    aux.co[0][3] = cube.co[0][1];
+  } else {
+    clockwise ? aux.ep[0][0] = cube.ep[0][3] : aux.ep[0][0] = cube.ep[0][1];
+    clockwise ? aux.ep[0][1] = cube.ep[0][0] : aux.ep[0][1] = cube.ep[0][2];
+    clockwise ? aux.ep[0][2] = cube.ep[0][1] : aux.ep[0][2] = cube.ep[0][3];
+    clockwise ? aux.ep[0][3] = cube.ep[0][2] : aux.ep[0][3] = cube.ep[0][0];
+    clockwise ? aux.co[0][0] = cube.co[0][3] : aux.co[0][0] = cube.co[0][1];
+    clockwise ? aux.co[0][1] = cube.co[0][0] : aux.co[0][1] = cube.co[0][2];
+    clockwise ? aux.co[0][2] = cube.co[0][1] : aux.co[0][2] = cube.co[0][3];
+    clockwise ? aux.co[0][3] = cube.co[0][2] : aux.co[0][3] = cube.co[0][2];
+  }
+  return aux;
 }
