@@ -135,7 +135,7 @@ iii.	Caso F1/L3/U7: Execute L D D L’ . Siga para o passo 20
 
 17.3 Repita R’ D’ R D até a peça atingir as posições U3 (branca), B3 (Azul) e R3 (Vermelha)
 18. Buscar a peça da cor azul, branca e cor laranja
-18.1  Caso a peça esteja na face inferior: 
+18.1  Caso a peça esteja na face inferior: \n
 i.	Caso L7/B9/D7: Siga para o passo 20
 ii.	Caso L9/F7/D1: Execute D. Siga para o passo 20
 iii.	Caso F9/R7/D3 : Execute D D . Siga para o passo 20
