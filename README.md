@@ -86,6 +86,12 @@ S & S' : Gira a face do meio, a que possui 3 peças de cada uma das faces: cima,
 - Ter a face superior completa.
 - Ter a primeira linha de todas as faces completa.
 
+1. Rotacione a face de baixo de forma que um painel de Y na face onde está posicionada a peça central de cor X.
+1. *Analise: Se o painél da face de baixo de Y for Branco, siga para o passo 8, caso contrário pule para o passo 9.*
+1. Gire a face com a cor central X 180°. *Pule para o passo 10*.
+1. Execute a sequência: D' F' R F. *Siga para o passo 8*.
+1. ~~Mova sua perspectiva de forma que sua atual face direita, vire sua nova face frontal.~~ Chame a cor central da próxima face, no sentido horário de X. Exemplo: se você acabou de executar as intruções na face frontal, a próxima face seria a face direita. *Siga para o passo 4*.
+
 ##### Descrição:
 
 1. Comece botando a face branca para cima.
@@ -93,11 +99,11 @@ S & S' : Gira a face do meio, a que possui 3 peças de cada uma das faces: cima,
 1. Identifique a cor da peça central da face frontal, e chame a cor de X.
 1. Busque pela Peça de Canto da cor X/Branca, chame a peça de Y.
 1. Mova Y para a face de baixo do cubo. ***Se não for possível fazê-lo sem modificar o sinal de + que está se formando na face de cima, ou seja, se a peça residir na mesma coluna de uma face já montada, pule para o passo 11***
-1. Rotacione a face de baixo de forma que um painel de Y esteja na face frontal.
+1. Rotacione a face de baixo de forma que um painel de Y na face onde está posicionada a peça central de cor X.
 1. *Analise: Se o painél da face de baixo de Y for Branco, siga para o passo 8, caso contrário pule para o passo 9.*
-1. Gire a face frontal 180°. *Pule para o passo 10*.
+1. Gire a face com a cor central X 180°. *Pule para o passo 10*.
 1. Execute a sequência: D' F' R F. *Siga para o passo 8*.
-1. Mova sua perspectiva de forma que sua atual face direita, vire sua nova face frontal. *Siga para o passo 3*.
+1. ~~Mova sua perspectiva de forma que sua atual face direita, vire sua nova face frontal.~~ Chame a cor central da próxima face, no sentido horário de X. Exemplo: se você acabou de executar as intruções na face frontal, a próxima face seria a face direita. *Siga para o passo 4*.
 10. *Se sua peça for F4/L6, siga para o passo 12. Se sua peça for F6/R4, siga para o passo 13. Se sua peça for B6/L4, siga para o passo 14. Se sua peça for B4/R6, siga para o passo 15.*
 11. Execute: L D' L'. *Siga para o passo 6*.
 12. Execute: R' D R. *Siga para o passo 6*.
