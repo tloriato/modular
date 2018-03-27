@@ -111,47 +111,47 @@ S & S' : Gira a face do meio, a que possui 3 peças de cada uma das faces: cima,
 14. Execute: R' D R. *Siga para o passo 6*.
 15.Certificar-se que U2 U4 U6 e U8 são brancos, caso negativo ERRO. 
 16. Buscar a peça da cor verde, branca e cor vermelha
-16.1 Caso a peça esteja na face inferior: 
-i.	Caso L7/B9/D7: Execute D D. Siga para o passo 20
-ii.	Caso L9/F7/D1: Execute D’. Siga para o passo 20
-iii.	Caso F9/R7/D3 : Siga para o passo 20
-iv.	Caso R9/D9/B7: Execute D . Siga para o passo 20
-16.2 Caso a peça esteja na face superior: 
-i.	Caso U1/B3/L1: Execute L’ D’ L . Retorne para o passo 18.i
-ii.	Caso U3/B1/R3: Execute R D R’. Siga para o passo 20
-iii.	Caso F1/L3/U7: Execute L D’ L’ . Siga para o passo 20
-iv.	Caso U9/F3/R1. Siga para o passo 20
+  16.1 Caso a peça esteja na face inferior: 
+    i.Caso L7/B9/D7: Execute D D. Siga para o passo 20
+    ii. Caso L9/F7/D1: Execute D’. Siga para o passo 20
+    iii.	Caso F9/R7/D3 : Siga para o passo 20
+    iv.	Caso R9/D9/B7: Execute D . Siga para o passo 20
+  16.2 Caso a peça esteja na face superior: 
+    i.	Caso U1/B3/L1: Execute L’ D’ L . Retorne para o passo 18.i
+    ii.	Caso U3/B1/R3: Execute R D R’. Siga para o passo 20
+    iii.	Caso F1/L3/U7: Execute L D’ L’ . Siga para o passo 20
+    iv.	Caso U9/F3/R1. Siga para o passo 20
 16.3 Repita R’ D R D’ até a peça atingir as posições U9 (branca), F3 (Verde) e R1 (Vermelha)
 17. Buscar a peça da cor azul, branca e cor vermelha
-17.1  Caso a peça esteja na face inferior: 
-i.	Caso L7/B9/D7: Execute D’. Siga para o passo 20
-ii.	Caso L9/F7/D1: Execute D D. Siga para o passo 20
-iii.	Caso F9/R7/D3 : Execute D’ . Siga para o passo 20
-iv.	Caso R9/D9/B7:  Siga para o passo 20
-17.2 Caso a peça esteja na face superior: 
-i.	Caso U1/B3/L1: Execute L’ D  L . Retorne para o passo 20
-ii.	Caso U3/B1/R3:. Siga para o passo 20
-iii.	Caso F1/L3/U7: Execute L D D L’ . Siga para o passo 20
+  17.1  Caso a peça esteja na face inferior: 
+    i.	Caso L7/B9/D7: Execute D’. Siga para o passo 20
+    ii.	Caso L9/F7/D1: Execute D D. Siga para o passo 20
+    iii.	Caso F9/R7/D3 : Execute D’ . Siga para o passo 20
+    iv.	Caso R9/D9/B7:  Siga para o passo 20
+  17.2 Caso a peça esteja na face superior: 
+    i.	Caso U1/B3/L1: Execute L’ D  L . Retorne para o passo 20
+    ii.	Caso U3/B1/R3:. Siga para o passo 20
+    iii.	Caso F1/L3/U7: Execute L D D L’ . Siga para o passo 20
 
-17.3 Repita R’ D’ R D até a peça atingir as posições U3 (branca), B3 (Azul) e R3 (Vermelha)
+  17.3 Repita R’ D’ R D até a peça atingir as posições U3 (branca), B3 (Azul) e R3 (Vermelha)
 18. Buscar a peça da cor azul, branca e cor laranja
-18.1  Caso a peça esteja na face inferior: \n
-i.	Caso L7/B9/D7: Siga para o passo 20
-ii.	Caso L9/F7/D1: Execute D. Siga para o passo 20
-iii.	Caso F9/R7/D3 : Execute D D . Siga para o passo 20
-iv.	Caso R9/D9/B7: Execute D’. Siga para o passo 20
-18.2 Caso a peça esteja na face superior: 
-i.	Caso U1/B3/L1:  Retorne para o passo 20
-ii.	Caso F1/L3/U7: Execute L D D L’ D . Siga para o passo 20
-18.3  Repita L’  D  L D’ até a peça atingir as posições U1 (branca), B3 (Azul) e L1 (Laranja)
+  18.1  Caso a peça esteja na face inferior: 
+    i.	Caso L7/B9/D7: Siga para o passo 20
+    ii.	Caso L9/F7/D1: Execute D. Siga para o passo 20
+    iii.	Caso F9/R7/D3 : Execute D D . Siga para o passo 20
+    iv.	Caso R9/D9/B7: Execute D’. Siga para o passo 20
+  18.2 Caso a peça esteja na face superior: 
+    i.	Caso U1/B3/L1:  Retorne para o passo 20
+    ii.	Caso F1/L3/U7: Execute L D D L’ D . Siga para o passo 20
+  18.3  Repita L’  D  L D’ até a peça atingir as posições U1 (branca), B3 (Azul) e L1 (Laranja)
 19. Buscar a peça da cor verde, branca e cor laranja
-19.1  Caso a peça esteja na face inferior: 
-i.	Caso L7/B9/D7: Execute D’ Siga para o passo 20
-ii.	Caso L9/F7/D1:  Siga para o passo 20
-iii.	Caso F9/R7/D3 : Execute D . Siga para o passo 20
-iv.	Caso R9/D9/B7: Execute D D. Siga para o passo 20
-19.2 Caso a peça esteja na face superior: 
-i.	Caso F1/L3/U7: Siga para o passo 20
-19.3   Repita L  D’  L  D até a peça atingir as posições U7 (branca), L3 (Laranja) e F1 (Verde)
+  19.1  Caso a peça esteja na face inferior: 
+    i.	Caso L7/B9/D7: Execute D’ Siga para o passo 20
+    ii.	Caso L9/F7/D1:  Siga para o passo 20
+    iii.	Caso F9/R7/D3 : Execute D . Siga para o passo 20
+    iv.	Caso R9/D9/B7: Execute D D. Siga para o passo 20
+  19.2 Caso a peça esteja na face superior: 
+    i. aso F1/L3/U7: Siga para o passo 20
+  19.3   Repita L  D’  L  D até a peça atingir as posições U7 (branca), L3 (Laranja) e F1 (Verde)
 
 
