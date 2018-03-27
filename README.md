@@ -121,45 +121,45 @@ S & S' : Gira a face do meio, a que possui 3 peças de cada uma das faces: cima,
 8. Chame ``X`` como a cor central da próxima face, na ordem: ``frontal -> direita -> traseira -> esquerda``. *Pule para o passo 3* 
 10. Buscar a peça da cor verde, branca e cor vermelha:
 	  1. Caso a peça esteja na face inferior: 
-		    1. Caso ``L7/B9/D7``: Execute ``D D``. *Prossiga com o passo 11*
-		    2. Caso ``L9/F7/D1``: Execute ``D’``.  *Prossiga com o passo 11*
-		    3.	Caso ``F9/R7/D3``: *Prossiga com o passo 11*
-		    4.	Caso ``R9/D9/B7``: Execute ``D`` .  *Prossiga com o passo 11*
+		    1. Caso ``B9/D7/L7``: Execute ``D D``. *Prossiga com o passo 11*
+		    2. Caso ``F7/D1/L9``: Execute ``D’``.  *Prossiga com o passo 11*
+		    3.	Caso ``F9/D3/R7``: *Prossiga com o passo 11*
+		    4.	Caso ``B7/D9/R9``: Execute ``D`` .  *Prossiga com o passo 11*
 	  2. Caso a peça esteja na face superior: 
-		    1.	Caso ``U1/B3/L1``: Execute ``L’ D’ L`` . *Prossiga com o passo 11*
-		    1.	Caso ``U3/B1/R3``: Execute ``R D R’``. *Prossiga com o passo 11*
-		    1.	Caso ``F1/L3/U7``: Execute ``L D’ L’`` . *Prossiga com o passo 11*
-		    1.	Caso ``U9/F3/R1``: *Prossiga com o passo 11*
+		    1.	Caso ``B3/U1/L1``: Execute ``L’ D’ L`` . *Prossiga com o passo 11*
+		    1.	Caso ``B1/U3/R3``: Execute ``R D R’``. *Prossiga com o passo 11*
+		    1.	Caso ``F1/U7/L3``: Execute ``L D’ L’`` . *Prossiga com o passo 11*
+		    1.	Caso ``F3/U9/R1``: *Prossiga com o passo 11*
 11. Repita ``R’ D R D’`` até a peça atingir as posições ``U9 (branca), F3 (Verde) e R1 (Vermelha)``.
 12. Buscar a peça da cor azul, branca e cor vermelha:
 	  1.  Caso a peça esteja na face inferior: 
-		    1.	Caso ``L7/B9/D7``: Execute ``D’``. *Siga para o passo 13*
-		    1.	Caso ``L9/F7/D1``: Execute ``D D``. *Siga para o passo 13*
-		    1.	Caso ``F9/R7/D3`` : Execute ``D’`` . *Siga para o passo 13*
-		    1. Caso ``R9/D9/B7``:  *Siga para o passo 13*
+		    1.	Caso ``B9/D7/L7``: Execute ``D’``. *Siga para o passo 13*
+		    1.	Caso ``F7/D1/L9``: Execute ``D D``. *Siga para o passo 13*
+		    1.	Caso ``F9/D3/R7`` : Execute ``D’`` . *Siga para o passo 13*
+		    1. Caso ``B7/D9/R9``:  *Siga para o passo 13*
 	  1. Caso a peça esteja na face superior: 
-		    1.	Caso ``U1/B3/L1``: Execute ``L’ D  L`` . *Siga para o passo 13*
-		    1.	Caso ``U3/B1/R3``: *Siga para o passo 13*
-		    1.	Caso ``F1/L3/U7``: Execute ``L D D L’`` . *Siga para o passo 13*
+		    1.	Caso ``B3/U1/L1``: Execute ``L’ D  L`` . *Siga para o passo 13*
+		    1.	Caso ``B1/U3/R3``: *Siga para o passo 13*
+		    1.	Caso ``F1/U7/L3``: Execute ``L D D L’`` . *Siga para o passo 13*
 13. Repita ``R’ D’ R D`` até a peça atingir as posições ``U3 (branca), B3 (Azul) e R3 (Vermelha)``.
 14. Buscar a peça da cor azul, branca e cor laranja:
 	  1.  Caso a peça esteja na face inferior: 
-		    1.	Caso ``L7/B9/D7``: *Siga para o passo 15*
-		    1.	Caso ``L9/F7/D1``: Execute ``D``. *Siga para o passo 15*
-		    1.	Caso ``F9/R7/D3`` : Execute ``D D`` . *Siga para o passo 15*
-		    1.	Caso ``R9/D9/B7``: Execute`` D’``. *Siga para o passo 15*
+		    1.	Caso ``B9/D7/L7``: *Siga para o passo 15*
+		    1.	Caso ``F7/D1/L9``: Execute ``D``. *Siga para o passo 15*
+		    1.	Caso ``F9/D3/R7`` : Execute ``D D`` . *Siga para o passo 15*
+		    1.	Caso ``B7/D9/R9``: Execute`` D’``. *Siga para o passo 15*
 	  2. Caso a peça esteja na face superior: 
-		    1.	Caso ``U1/B3/L1``:* Siga para o passo 15*
-		    1.	Caso ``F1/L3/U7``: Execute ``L D D L’ D`` . *Siga para o passo 15*
+		    1.	Caso ``B3/U1/L1``:* Siga para o passo 15*
+		    1.	Caso ``F1/U7/L3``: Execute ``L D D L’ D`` . *Siga para o passo 15*
 15.  Repita ``L’  D  L D’`` até a peça atingir as posições ``U1 (branca), B3 (Azul) e L1 (Laranja)``.
 16. Buscar a peça da cor verde, branca e cor laranja:
 	  1.  Caso a peça esteja na face inferior: 
-		    1.	Caso ``L7/B9/D7``: Execute ``D’`` *Siga para o passo 17*
-		    1.	Caso ``L9/F7/D1``: *Siga para o passo 17*
-		    1.	Caso ``F9/R7/D3``: Execute ``D`` . *Siga para o passo 17*
-		    1.	Caso ``R9/D9/B7``: Execute ``D D``. *Siga para o passo 17*
+		    1.	Caso ``B9/D7/L7``: Execute ``D’`` *Siga para o passo 17*
+		    1.	Caso ``F7/D1/L9``: *Siga para o passo 17*
+		    1.	Caso ``F9/D3/R7``: Execute ``D`` . *Siga para o passo 17*
+		    1.	Caso ``B7/D9/R9``: Execute ``D D``. *Siga para o passo 17*
 	  1. Caso a peça esteja na face superior: 
-		    1. Caso ``F1/L3/U7``: *Siga para o passo 17*
+		    1. Caso ``F1/U7/L3``: *Siga para o passo 17*
  17.   Repita ``L  D’  L’  D`` até a peça atingir as posições ``U7 (branca), L3 (Laranja) e F1 (Verde)``.
 
 
