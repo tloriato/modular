@@ -1,0 +1,100 @@
+ peca = busca_cor(verde,branca,vermelha)
+ se ela estiver na face inferior
+{    se peca== B9/D7/L7  
+      execute D D;
+     se peca == F7/D1/L9
+      execute D';
+     se peca == B7/D9/R9
+      execute D;
+}
+senão
+{   se peca == B3/U1/L1
+      execute L' D' L;
+    se peca == B1/U3/R3
+      execute L D' L';
+    se peca == F1/U7/L3
+      execute L D' L';
+}
+arrumar_FR (cubo)
+  execute R' D R D'
+  se peca != F3/U9/R1
+    arrumar_FR (cubo); 
+    
+ peca = busca_cor(azul,branca,vermelha)
+ se ela estiver na face inferior
+{    se peca== B9/D7/L7  
+      execute D';
+     se peca == F7/D1/L9
+      execute D D;
+     se peca == F9/D3/R7
+      execute D';
+}
+senão
+{   se peca == B3/U1/L1
+      execute L' D L;
+    se peca == F1/U7/L3
+      execute L D D L';
+}
+arrumar_RB (cubo)
+  execute R' D' R D
+  se peca != B3/U3/R3
+    arrumar_RB (cubo); 
+    
+peca = busca_cor(azul,branca,laranja)
+ se ela estiver na face inferior
+{    se peca== F9/D3/R7  
+      execute D D;
+     se peca == F7/D1/L9
+      execute D;
+     se peca == B7/D9/R9
+      execute D';
+}
+senão
+    execute L D D L' D;
+arrumar_LF (cubo)
+{  execute L' D L D';
+  se peca == B3/U1/L1
+    se cor(B3)!= azul ou cor(U1) != branco ou cor(L1)!=laranja
+      arrumar_LF (cubo); 
+    retorna cubo;
+  arrumar_LF(cubo);
+}
+
+peca = busca_cor(verde,branca,laranja)
+ se ela estiver na face inferior
+{    se peca== F9/D3/R7  
+      execute D;
+     se peca == B9/D7/L7
+      execute D';
+     se peca == B7/D9/R9
+      execute D D;
+}
+senão
+    execute L D D L' D;
+arrumar_LF (cubo)
+{  execute L' D L D';
+  se peca == B3/U1/L1
+    se cor(B3)!= azul ou cor(U1) != branco ou cor(L1)!=laranja
+      arrumar_LF (cubo); 
+    retorna cubo;
+  arrumar_LF(cubo);
+}
+
+peca = busca_cor(verde,branca,laranja)
+ se ela estiver na face inferior
+{    se peca== F9/D3/R7  
+      execute D;
+     se peca == B9/D7/L9
+      execute D';
+     se peca == B7/D9/L7
+      execute D D;
+}
+arrumar_Lf (cubo)
+{  execute L' D L D';
+  se peca == B3/U1/L1
+    se cor(B3)!= azul ou cor(U1) != branco ou cor(L1)!=laranja
+      arrumar_LF (cubo); 
+    retorna cubo;
+  arrumar_LF(cubo);
+}
+
