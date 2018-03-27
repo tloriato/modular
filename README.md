@@ -94,21 +94,34 @@ S & S' : Gira a face do meio, a que possui 3 peças de cada uma das faces: cima,
 
 ##### Descrição:
 
-1. Comece botando a face branca para cima.
-1. Verifique se a cruz está formada, ou seja, se U2 U4 U6 e U8 são brancos. *Caso positivo, pule para o passo 16*.
-1. Identifique a cor da peça central da face frontal, e chame a cor de X.
-1. Busque pela Peça de Canto da cor X/Branca, chame a peça de Y.
-1. Mova Y para a face de baixo do cubo. ***Se não for possível fazê-lo sem modificar o sinal de + que está se formando na face de cima, ou seja, se a peça residir na mesma coluna de uma face já montada, pule para o passo 11***
-1. Rotacione a face de baixo de forma que um painel de Y na face onde está posicionada a peça central de cor X.
-1. *Analise: Se o painél da face de baixo de Y for Branco, siga para o passo 8, caso contrário pule para o passo 9.*
-1. Gire a face com a cor central X 180°. *Pule para o passo 10*.
-1. Execute a sequência: D' F' R F. *Siga para o passo 8*.
-1. ~~Mova sua perspectiva de forma que sua atual face direita, vire sua nova face frontal.~~ Chame a cor central da próxima face, no sentido horário de X. Exemplo: se você acabou de executar as intruções na face frontal, a próxima face seria a face direita. *Siga para o passo 4*.
-10. *Se sua peça for F4/L6, siga para o passo 12. Se sua peça for F6/R4, siga para o passo 13. Se sua peça for B6/L4, siga para o passo 14. Se sua peça for B4/R6, siga para o passo 15.*
-11. Execute: L D' L'. *Siga para o passo 6*.
-12. Execute: R' D R. *Siga para o passo 6*.
-13. Execute: L' D' L. *Siga para o passo 6*.
-14. Execute: R' D R. *Siga para o passo 6*.
+###### Primeira Parte:
+
+1. Comece com a face branca para cima e a verde como frontal. Chame a cor verde como ``X``.
+1. Verifique se a cruz está formada, ou seja, se `` U2 U4 U6 e U8``  são brancos. *Caso positivo, pule para o passo 15*.
+1. Busque a peça de canto da cor X/Branca. Chame a peça de``  Y`` .
+1. Mova ```` Y````  para a face de baixo do cubo. ***Se não for possível fazê-lo sem modificar a cruz que está se formando na face de cima, ou seja, se a peça residir na mesma coluna de uma face -já iterada-, pule para o passo 7***
+1. Rotacione a face de baixo de forma que a peça````  Y````  esteja na face correspondente a sua cor ```` X```` . *(Ou seja, na face frontal, face direita, traseira e esquerda, na primeira, segunda, terceira e quarta iteração respectivamente.)*
+1. Verifique:
+	1. Se o painél da face de baixo de Y for X:
+	    1. Se for a primeira iteração execute: `` D' F' R F`` . *Siga para o passo 6.2*
+	    2. Se for a segunda iteração execute: ``D' R' B' R`` *Siga para o passo 6.2* 
+	    3. Se for a terceira iteração execute: ``D' B L B'`` *Siga para o passo 6.2*
+	    4. Se for a quarta iteração execute: ``X`` *Siga para o passo 6.2*
+	2. Se o painél da face de baixo de Y for da cor branca:
+	    1. Se for a primeira iteração execute: ``F F`` *Siga para o passo 9*
+	    2. Se for a segunda iteração execute: ``R R`` *Siga para o passo 9* 
+	    3. Se for a terceira iteração execute: ``B B`` *Siga para o passo 9*
+	    4. Se for a quarta iteração execute: ``L L`` *Siga para o passo 8*
+ 1. Verifique:
+	 1. Se sua peça for F4/L6 execute: ``L D' L'``. *Pule para o passo 5*. 
+	 2. Se sua peça for F6/R4 execute: ``R' D R``. *Pule para o passo 5*. 
+	 3. Se sua peça for B6/L4 execute: ``L' D' L``. *Pule para o passo 5*. 
+	 4. Se sua peça for B4/R6 execute: ``R' D R``. *Pule para o passo 5*. 
+1. Verifique se ``U2 U4 U6 e U8`` são brancos. Caso positivo, prossiga para o *passo 10*.
+1. Chame X como a cor central da próxima face, na ordem: frontal -> direita -> traseira -> esquerda. *Pule para o passo 3*
+
+###### Segunda parte: 
+
 15.Certificar-se que U2 U4 U6 e U8 são brancos, caso negativo ERRO. 
 16. Buscar a peça da cor verde, branca e cor vermelha
   16.1 Caso a peça esteja na face inferior: 
