@@ -310,7 +310,7 @@ se (cantoQuatro == F1/U7/L3)
   // do nothing
 
 enquanto ( U7 != Branco || L3 != Laranja || F1 != Verde)
-  cubo.executar(L D' L' D);
+  cubo.executar(L D' L D);
 
 fim
 ````
