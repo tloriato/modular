@@ -1,0 +1,25 @@
+// Script: TesteArv.script
+// Autor: Bernardo Hörner Lopes
+// Data: 30/03/2018
+// Propósito: Testa a construção de várias árvores
+
+== Criar árvore no indice 0~4 -> Espera OK
+=criar 0 0
+=criar 1 0
+=criar 2 0
+=criar 3 0
+=criar 4 0
+
+== Verificar se o retorno de árvore não existente funciona
+=irdir 0 4
+=irdir 2 4
+=iresq 1 4
+=iresq 3 4
+=iresq 4 5
+
+== Destruir árvores
+=destruir 0
+=destruir 2
+=destruir 1
+=destruir 3
+
