@@ -109,22 +109,25 @@ static void DestroiArvore(tpNoArvore *pNo);
 *  Função: ARV Criar árvore
 *  ****/
 
-ARV_tpCondRet ARV_CriarArvore(void *pontArvore)
+ARV_tpCondRet ARV_CriarArvore(void **pontArvore)
 {
+    tpArvore *pArvore;
 
-    if (pontArvore != NULL)
+    if (*pontArvore != NULL)
     {
         ARV_DestruirArvore(pontArvore);
     } /* if */
 
-    pontArvore = (tpArvore *)malloc(sizeof(tpArvore));
-    if (pontArvore == NULL)
+    pArvore = (tpArvore *)malloc(sizeof(tpArvore));
+    if (pArvore == NULL)
     {
         return ARV_CondRetFaltouMemoria;
     } /* if */
 
-    ((tpArvore *)pontArvore)->pNoRaiz = NULL;
-    ((tpArvore *)pontArvore)->pNoCorr = NULL;
+    pArvore->pNoRaiz = NULL;
+    pArvore->pNoCorr = NULL;
+
+    *pontArvore = pArvore;
 
     return ARV_CondRetOK;
 
@@ -135,18 +138,22 @@ ARV_tpCondRet ARV_CriarArvore(void *pontArvore)
 *  Função: ARV Destruir árvore
 *  ****/
 
-void ARV_DestruirArvore(void *pontArvore)
+void ARV_DestruirArvore(void **pontArvore)
 {
+    tpArvore *pArvore;
 
-    if (pontArvore != NULL)
+    pArvore = (tpArvore *)(*pontArvore);
+
+    if (pArvore != NULL)
     {
-        if (((tpArvore *)pontArvore)->pNoRaiz != NULL)
+        if (pArvore->pNoRaiz != NULL)
         {
-            DestroiArvore(((tpArvore *)pontArvore)->pNoRaiz);
+            DestroiArvore(pArvore->pNoRaiz);
         } /* if */
-        free(pontArvore);
-        pontArvore = NULL;
-    } /* if */
+
+        free(pArvore);
+        *pontArvore = NULL;
+    }
 
 } /* Fim função: ARV Destruir árvore */
 
@@ -157,13 +164,21 @@ void ARV_DestruirArvore(void *pontArvore)
 
 ARV_tpCondRet ARV_InserirEsquerda(void *pontArvore, char ValorParm)
 {
+    tpArvore *pArvore;
 
     ARV_tpCondRet CondRet;
 
     tpNoArvore *pCorr;
     tpNoArvore *pNo;
 
+    if (pontArvore == NULL)
+    {
+        return ARV_CondRetArvoreNaoExiste;
+    }
+
     /* Tratar vazio, esquerda */
+
+    pArvore = (tpArvore *)(pontArvore);
 
     CondRet = CriarNoRaiz(pontArvore, ValorParm);
     if (CondRet != ARV_CondRetNaoCriouRaiz)
@@ -173,7 +188,7 @@ ARV_tpCondRet ARV_InserirEsquerda(void *pontArvore, char ValorParm)
 
     /* Criar nó à esquerda de folha */
 
-    pCorr = ((tpArvore *)pontArvore)->pNoCorr;
+    pCorr = pArvore->pNoCorr;
     if (pCorr == NULL)
     {
         return ARV_CondRetErroEstrutura;
@@ -181,14 +196,14 @@ ARV_tpCondRet ARV_InserirEsquerda(void *pontArvore, char ValorParm)
 
     if (pCorr->pNoEsq == NULL)
     {
-        pNo = CriarNo(ValorParm);
+        pNo = CriarNo(pArvore, ValorParm);
         if (pNo == NULL)
         {
             return ARV_CondRetFaltouMemoria;
         } /* if */
         pNo->pNoPai = pCorr;
         pCorr->pNoEsq = pNo;
-        ((tpArvore *)pontArvore)->pNoCorr = pNo;
+        pArvore->pNoCorr = pNo;
 
         return ARV_CondRetOK;
     } /* if */
@@ -206,11 +221,19 @@ ARV_tpCondRet ARV_InserirEsquerda(void *pontArvore, char ValorParm)
 
 ARV_tpCondRet ARV_InserirDireita(void *pontArvore, char ValorParm)
 {
+    tpArvore *pArvore;
 
     ARV_tpCondRet CondRet;
 
     tpNoArvore *pCorr;
     tpNoArvore *pNo;
+
+    if (pontArvore == NULL)
+    {
+        return ARV_CondRetArvoreNaoExiste;
+    }
+
+    pArvore = (tpArvore *)(pontArvore);
 
     /* Tratar vazio, direita */
 
@@ -222,7 +245,7 @@ ARV_tpCondRet ARV_InserirDireita(void *pontArvore, char ValorParm)
 
     /* Criar nó à direita de folha */
 
-    pCorr = ((tpArvore *)pontArvore)->pNoCorr;
+    pCorr = pArvore->pNoCorr;
     if (pCorr == NULL)
     {
         return ARV_CondRetErroEstrutura;
@@ -230,14 +253,14 @@ ARV_tpCondRet ARV_InserirDireita(void *pontArvore, char ValorParm)
 
     if (pCorr->pNoDir == NULL)
     {
-        pNo = CriarNo(ValorParm);
+        pNo = CriarNo(pArvore, ValorParm);
         if (pNo == NULL)
         {
             return ARV_CondRetFaltouMemoria;
         } /* if */
         pNo->pNoPai = pCorr;
         pCorr->pNoDir = pNo;
-        ((tpArvore *)pontArvore)->pNoCorr = pNo;
+        pArvore->pNoCorr = pNo;
 
         return ARV_CondRetOK;
     } /* if */
@@ -255,19 +278,23 @@ ARV_tpCondRet ARV_InserirDireita(void *pontArvore, char ValorParm)
 
 ARV_tpCondRet ARV_IrPai(void *pontArvore)
 {
+    tpArvore *pArvore;
 
     if (pontArvore == NULL)
     {
         return ARV_CondRetArvoreNaoExiste;
     } /* if */
-    if (((tpArvore *)pontArvore)->pNoCorr == NULL)
+
+    pArvore = (tpArvore *)pontArvore;
+
+    if (pArvore->pNoCorr == NULL)
     {
         return ARV_CondRetArvoreVazia;
     } /* if */
 
-    if (((tpArvore *)pontArvore)->pNoCorr->pNoPai != NULL)
+    if (pArvore->pNoCorr->pNoPai != NULL)
     {
-        ((tpArvore *)pontArvore)->pNoCorr = ((tpArvore *)pontArvore)->pNoCorr->pNoPai;
+        pArvore->pNoCorr = pArvore->pNoCorr->pNoPai;
         return ARV_CondRetOK;
     }
     else
@@ -284,23 +311,26 @@ ARV_tpCondRet ARV_IrPai(void *pontArvore)
 
 ARV_tpCondRet ARV_IrNoEsquerda(void *pontArvore)
 {
+    tpArvore *pArvore;
 
     if (pontArvore == NULL)
     {
         return ARV_CondRetArvoreNaoExiste;
     } /* if */
 
-    if (((tpArvore *)pontArvore)->pNoCorr == NULL)
+    pArvore = (tpArvore *)pontArvore;
+
+    if (pArvore->pNoCorr == NULL)
     {
         return ARV_CondRetArvoreVazia;
     } /* if */
 
-    if (((tpArvore *)pontArvore)->pNoCorr->pNoEsq == NULL)
+    if (pArvore->pNoCorr->pNoEsq == NULL)
     {
         return ARV_CondRetNaoPossuiFilho;
     } /* if */
 
-    ((tpArvore *)pontArvore)->pNoCorr = ((tpArvore *)pontArvore)->pNoCorr->pNoEsq;
+    pArvore->pNoCorr = pArvore->pNoCorr->pNoEsq;
     return ARV_CondRetOK;
 
 } /* Fim função: ARV Ir para nó à esquerda */
@@ -312,23 +342,26 @@ ARV_tpCondRet ARV_IrNoEsquerda(void *pontArvore)
 
 ARV_tpCondRet ARV_IrNoDireita(void *pontArvore)
 {
+    tpArvore *pArvore;
 
     if (pontArvore == NULL)
     {
         return ARV_CondRetArvoreNaoExiste;
     } /* if */
 
-    if (((tpArvore *)pontArvore)->pNoCorr == NULL)
+    pArvore = (tpArvore *)pontArvore;
+
+    if (pArvore->pNoCorr == NULL)
     {
         return ARV_CondRetArvoreVazia;
     } /* if */
 
-    if (((tpArvore *)pontArvore)->pNoCorr->pNoDir == NULL)
+    if (pArvore->pNoCorr->pNoDir == NULL)
     {
         return ARV_CondRetNaoPossuiFilho;
     } /* if */
 
-    ((tpArvore *)pontArvore)->pNoCorr = ((tpArvore *)pontArvore)->pNoCorr->pNoDir;
+    pArvore->pNoCorr = pArvore->pNoCorr->pNoDir;
     return ARV_CondRetOK;
 
 } /* Fim função: ARV Ir para nó à direita */
@@ -340,16 +373,20 @@ ARV_tpCondRet ARV_IrNoDireita(void *pontArvore)
 
 ARV_tpCondRet ARV_ObterValorCorr(void *pontArvore, char *ValorParm)
 {
+    tpArvore *pArvore;
 
     if (pontArvore == NULL)
     {
         return ARV_CondRetArvoreNaoExiste;
     } /* if */
-    if (((tpArvore *)pontArvore)->pNoCorr == NULL)
+
+    pArvore = (tpArvore *)pontArvore;
+
+    if (pArvore->pNoCorr == NULL)
     {
         return ARV_CondRetArvoreVazia;
     } /* if */
-    *ValorParm = ((tpArvore *)pontArvore)->pNoCorr->Valor;
+    *ValorParm = pArvore->pNoCorr->Valor;
 
     return ARV_CondRetOK;
 
@@ -369,7 +406,7 @@ ARV_tpCondRet ARV_ObterValorCorr(void *pontArvore, char *ValorParm)
 *
 ***********************************************************************/
 
-tpNoArvore *CriarNo(char ValorParm)
+tpNoArvore *CriarNo(tpArvore *pArvore, char ValorParm)
 {
 
     tpNoArvore *pNo;
@@ -379,6 +416,8 @@ tpNoArvore *CriarNo(char ValorParm)
     {
         return NULL;
     } /* if */
+
+    pArvore = NULL; // not sure
 
     pNo->pNoPai = NULL;
     pNo->pNoEsq = NULL;
@@ -399,31 +438,20 @@ tpNoArvore *CriarNo(char ValorParm)
 *
 ***********************************************************************/
 
-ARV_tpCondRet CriarNoRaiz(void *pontArvore, char ValorParm)
+ARV_tpCondRet CriarNoRaiz(tpArvore *pArvore, char ValorParm)
 {
 
-    ARV_tpCondRet CondRet;
     tpNoArvore *pNo;
 
-    if (pontArvore == NULL)
+    if (pArvore->pNoRaiz == NULL)
     {
-        CondRet = ARV_CriarArvore(pontArvore);
-
-        if (CondRet != ARV_CondRetOK)
-        {
-            return CondRet;
-        } /* if */
-    }     /* if */
-
-    if (((tpArvore *)pontArvore)->pNoRaiz == NULL)
-    {
-        pNo = CriarNo(ValorParm);
+        pNo = CriarNo(pArvore, ValorParm);
         if (pNo == NULL)
         {
             return ARV_CondRetFaltouMemoria;
         } /* if */
-        ((tpArvore *)pontArvore)->pNoRaiz = pNo;
-        ((tpArvore *)pontArvore)->pNoCorr = pNo;
+        pArvore->pNoRaiz = pNo;
+        pArvore->pNoCorr = pNo;
 
         return ARV_CondRetOK;
     } /* if */
