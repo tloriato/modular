@@ -96,7 +96,7 @@ typedef enum {
 *
 ***********************************************************************/
 
-ARV_tpCondRet ARV_CriarArvore(void *PontParam);
+ARV_tpCondRet ARV_CriarArvore(void **PontParam);
 
 /***********************************************************************
 *
@@ -111,7 +111,7 @@ ARV_tpCondRet ARV_CriarArvore(void *PontParam);
 *
 ***********************************************************************/
 
-void ARV_DestruirArvore(void *PontParam);
+void ARV_DestruirArvore(void **PontParam);
 
 /***********************************************************************
 *
