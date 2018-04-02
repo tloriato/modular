@@ -1,0 +1,6 @@
+Data	   Horas Trabalhadas,	 Tipo Tarefa,	 		              Descrição da Tarefa Realizada
+19/03/18   1		 	           Estudar 	 		                  Estudo algoritmo Cubo Mágico
+23/03/18   3:30              Estudo em grupo                Ler algoritmo e começar a fazer o pseudo código  
+27/03/18   2                 Trabalho em Grupo              Finalização das Specs
+28/03/18   5                 Programando                    Programando os módulos                                       
+1/04/18    2                 Revisão                        Corrigindo erro dos módulos
