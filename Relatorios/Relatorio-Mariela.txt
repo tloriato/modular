@@ -1,12 +1,12 @@
-Data	   Horas Trabalhadas,	 Tipo Tarefa,	 		Descrição da Tarefa Realizada
-20/03/18   1			 Estudar 	 		Ler sobre algoritmo de resolução do cubo mágico
-23/03/18   3:30                  Estudo em grupo                Ler algoritmo e começar a fazer o pseudo código  
-26/03/18   1                     Estudo em grupo                Aprender a fazer a intalação do arcabouço
-27/03/18   2                     Estudando                      Como fazer testes usando script
-28/03/18   1                     Estudo                         Ver vídeo sobre testes e aplicar no trabalho                             
-30/03/18   2			 Revisâo de código              começar a fazer um script             
-31/03/18   2                     Revisão de código              Erro encontrado ao criar arvore
-1/04/18    4                     Programar                      Revisão do código da árvore e elaboração do script de teste
+Data	   Horas Trabalhadas,	 Tipo Tarefa,	 		DescriÃ§Ã£o da Tarefa Realizada
+20/03/18   1			 Estudar 	 		Ler sobre algoritmo de resoluÃ§Ã£o do cubo mÃ¡gico
+23/03/18   3:30                  Estudo em grupo                Ler algoritmo e comeÃ§ar a fazer o pseudo cÃ³digo  
+26/03/18   1                     Estudo                Aprender a fazer a intalaÃ§Ã£o do arcabouÃ§o
+27/03/18   2                     Estudo em grupo                     Como fazer testes usando script
+28/03/18   1                     Estudo                         Ver vÃ­deo sobre testes e aplicar no trabalho                             
+30/03/18   2			 RevisÃ¢o de cÃ³digo              comeÃ§ar a fazer um script             
+31/03/18   2                     RevisÃ£o de cÃ³digo              Erro encontrado ao criar arvore
+1/04/18    4                     Programar                      RevisÃ£o do cÃ³digo da Ã¡rvore e elaboraÃ§Ã£o do script de teste
 
 
 
