@@ -91,11 +91,6 @@ typedef struct tgArvore
 
 } tpArvore;
 
-/*****  Dados encapsulados no módulo  *****/
-
-// static tpArvore *pArvore = NULL;
-/* Ponteiro para a cabea da árvore */
-
 /***** Protótipos das funções encapuladas no módulo *****/
 
 static tpNoArvore *CriarNo(char ValorParm);
