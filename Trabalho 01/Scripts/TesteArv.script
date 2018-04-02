@@ -1,0 +1,57 @@
+// Script: TesteArv.script
+// Autores: 	Ana Carolina Junger
+//		Bernardo Hörner
+//		Mariela Andrade
+//		Tiago Simões
+// Data: 01/04/2018
+// Propósito: Testa a construção de várias árvores
+
+
+== Verificar ObterValorCorr relativo a árvore inexistente
+=obter    0  '!'   4
+=obter    1  '!'   4
+
+== Criar árvore no indice 0~4 -> Espera OK
+=criar 0 0
+=criar 1 0
+
+
+== Verificar se o retorno de árvore não existente funciona
+=irdir 0 5
+=irdir 1 5
+
+== Inserir a direita
+=insdir 0  'C' 0
+=insdir 1 'Z'  0
+
+== Inserir a esquerda
+=insesq 1 'M'  0
+
+== Verificar ObterValorCorr 
+=obter    0  'C'   0
+=obter    1  'M'   0
+
+== Ir Pai
+=irpai 0 6
+=irpai 1 6
+=recuperar   //testar recuperar que deve retornar o 0
+
+
+==Ir Esquerda
+=iresq 0 7
+=iresq 1 0  
+
+
+
+==Ir Direita
+=irdir 0 7
+=irdir 1 7  
+
+
+
+== Destruir árvores
+=destruir 0
+=destruir 1
+
+// fim
+
