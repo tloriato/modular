@@ -13,9 +13,11 @@
 *  Projeto: Disciplinas INF 1628 / 1301
 *  Gestor:  DI/PUC-Rio
 *  Autores: avs - Arndt von Staa
+*           181 - Ana Carolina Junger, Bernardo Hörner,  Mariela Andrade, Tiago Loriato
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
+*       4.00   181   02/04/2018 Funções agora recebem ponteiros, permitindo a criação de inúmeras árvores pelo usuário.
 *       3.00   avs   28/02/2003 Uniformização da interface das funções e
 *                               de todas as condições de retorno.
 *       2.00   avs   03/08/2002 Eliminação de código duplicado, reestruturação
@@ -26,7 +28,6 @@
 *     explorar árvores binárias.
 *     A árvore possui uma cabeça que contém uma referência para a raíz da
 *     árvore e outra para um nó corrente da árvore.
-*     A cada momento o módulo admite no máximo uma única árvore.
 *     Ao iniciar a execução do programa não existe árvore.
 *     A árvore poderá estar vazia. Neste caso a raiz e o nó corrente
 *     serão nulos, embora a cabeça esteja definida.

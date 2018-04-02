@@ -10,9 +10,11 @@
 *  Projeto: Disciplinas INF 1628 / 1301
 *  Gestor:  DI/PUC-Rio
 *  Autores: avs - Arndt von Staa
+*           181 - Ana Carolina Junger, Bernardo Hörner,  Mariela Andrade, Tiago Loriato
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data     Observações
+*       4.00   181   02/04/2018 Atualização para compatibilidade à nova funcionalidade do módulo arvore.c
 *       3.00   avs   28/02/2003 Uniformização da interface das funções e
 *                               de todas as condições de retorno.
 *       2.00   avs   03/08/2002 Eliminação de código duplicado, reestruturação
