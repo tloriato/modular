@@ -1,0 +1,7 @@
+Data      Horas Trabalhadas,        Tipo Tarefa,        Descrição da Tarefa Realizada
+20/03/18  1                         Estudar             Pesquisar e estudar algoritmos de resolução de cubo mágico
+23/03/18  3:30                      Estudo em grupo     Ler algoritmo e começar a fazer o pseudo código 
+29/03/18  1                         Estudo              Instalar o arcabouço
+30/03/18  3                         Revisão de código   Analisar e tentar corrigir erros no código
+31/03/18  3                         Revisão de código   Analisar e tentar corrigir erros no código
+01/04/18  1                         Revisão de código   Analisar e tentar corrigir erros no código
