@@ -1,0 +1,5 @@
+Data	   Horas Trabalhadas,	Tipo Tarefa,	 		       Descrição da Tarefa Realizada
+20/03/18   1:20		 	        Estudar 	 		           Revisando algoritmos de cubos mágicos
+23/03/18   3:30                 Estudo em grupo                Ler algoritmo e começar a fazer o pseudo código  
+27/03/18   2:30                 Trabalho em Grupo              Finalizando a descrição da segunda parte e fazendo o pseudocódigo para ela
+28/03/18   2                    Revisão de Código              Revisando e rodando os testes do grupo                                       
