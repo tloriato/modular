@@ -1,0 +1,130 @@
+// Script:    TesteBasicoSimb.script
+// Autor:     Hugo Machado
+// Data:      25/03/2018
+// Propósito: Testa o modulo cubo usando valor simbolicos.
+//
+
+==Declarar as condicoes de retorno
+=declararparm	OK		int 0
+=declararparm	CuboInvalido	int 1
+=declararparm	CorInvalida	int 2
+=declararparm	FaceInvalida	int 3
+=declararparm	CoordInvalida	int 4
+=declararparm	FaltouMemoria	int 5
+
+==Declarar faces do cubo
+=declararparm	FaceSuperior	int 0
+=declararparm	FaceFrontal	int 1
+=declararparm	FaceDireita	int 2
+=declararparm	FaceTraseira	int 3
+=declararparm	FaceEsquerda	int 4
+=declararparm	FaceInferior	int 5
+
+==Declarar sentidos de giro
+=declararparm	antihorario	char 'a'
+=declararparm	horario		char 'h'
+
+//inicio do teste
+
+
+//Testa os casos de cubo invalido e testa o comando recuperar
+==girar cubo sem ter criado
+=girar	FaceSuperior	3	horario		CuboInvalido
+==testar com recuperar
+=girar FaceSuperior 	3	horario		OK
+=recuperar
+
+==checar cubo sem ter criado
+=checar 1	1	FaceSuperior	-1	CuboInvalido
+==testar com recuperar
+=checar 1	1	FaceSuperior	-1	OK
+=recuperar
+
+
+==encontrar aresta sem ter criado
+=encontrararesta 3	4	-1	-1	-1	CuboInvalido
+
+==encontrar quina sem ter sido criado
+=encontrarquina	3	4	5	-1	-1	-1	CuboInvalido
+//testa outros casos de condições de retorno
+==criar cubo
+=criar	OK
+
+==girar cubo
+=girar	FaceSuperior 	1 	antihorario 	OK
+
+==girar cubo novamente
+=girar FaceFrontal	3	antihorario	OK
+
+==girar cubo
+=girar FaceTraseira	2	horario		OK
+
+==tentar girar cubo face invalida com codicao de retorno errada
+=girar 6		1	horario		OK
+=recuperar
+
+==tentar girar cubo face invalida com condicao de retorno certo
+=girar 7		2	horario		FaceInvalida
+
+==checar cor coordenada invalida
+=checar 10	11	FaceEsquerda	-1	CoordInvalida
+
+==checar cor face invalida
+=checar 1	2	7	-1	FaceInvalida
+
+==encontrar aresta cor invalida
+=encontrararesta 20	25	-1	-1	-1	CorInvalida
+
+==encontrar quina cor invalida
+=encontrarquina 10	5	3	-1	-1	-1	CorInvalida
+
+==destruir cubo
+=destruir OK
+
+==tentar girar apos destruicao do cubo
+=girar FaceInferior	1	antihorario	CuboInvalido
+
+//checar para ver se esta recebendo como esperado
+//e ver os casos errados
+
+==criar outro cubo apos destruicao
+=criar OK
+==girar cubo
+=girar FaceSuperior	1	antihorario	OK
+==girar cubo
+=girar FaceSuperior	1	antihorario	OK
+==checar cor do cubo
+=checar 0	2	FaceSuperior	6	OK
+==checar cor nao esperada
+=checar 0	2	FaceSuperior	5	OK
+=recuperar
+==gira novamente
+=girar FaceFrontal	1	horario		OK
+==encontrar aresta
+=encontrararesta 23	24	FaceSuperior	2	1	OK
+==encontrar aresta face errada
+=encontrararesta 23	24	FaceFrontal	2	1	OK
+=recuperar
+==encontrar aresta linha errada
+=encontrararesta 23	24	FaceSuperior	1	1	OK
+=recuperar
+==encontrar aresta coluna errada
+=encontrararesta 23	24	FaceSuperior	2	0	OK
+=recuperar
+==gira
+=girar FaceDireita	1	horario		OK
+==encontrar quina
+=encontrarquina 0	9	20	FaceDireita	0	0	OK
+==encontrar quina face errada
+=encontrarquina 0	9	20	FaceEsquerda	0	0	OK
+=recuperar
+==encontrar quina linha errada
+=encontrarquina 0	9	20	FaceDireita	1	0	OK
+=recuperar
+==encontrar quina coluna errada
+=encontrarquina 0	9	20	FaceDireita	0	2	OK
+=recuperar
+==destruir
+=destruir OK
+
+//fim

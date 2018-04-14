@@ -1,0 +1,27 @@
+Autores: Hugo de Barros Pimentel Dutra Machado
+
+Data: 25/03/2018
+
+------------------------------------------------------
+
+		Objetivo
+/////////////////////////////////////////////////////
+Testar o modulo cubo de acordo com as funções criadas
+pelo arquivo de teste(TESTCUBO.C)
+------------------------------------------------------
+
+Instruções para execução do teste
+////////////////////////////////////////////////////////////////////////////////
+Executar o arquivo teste.bat e aguardar o arquivo Cubo.log aparecer.
+-------------------------------------------------------------------------------
+
+Observações
+/////////////////////////////////////////////////////////////////////////////
+-O arquivo teste.bat executa o TestaCubo.script e gera um arquivo de log chamado 
+Cubo.log que contem todo o log gerado pelo teste executado.
+
+-As cores usadas pelo script de teste são valores inteiros indo de 0 a 53(cada bloco tem um inteiro)
+ e foram criada no arquivo TESTCUBO.C com o objetivo de apenas para testar.
+
+-Nos casos de cubo invalido(cubo é um ponteiro para null) os "valores esperados" são de -1 pois as variaveis de teste  não
+serão modificadas.

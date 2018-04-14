@@ -1,0 +1,31 @@
+======================================================================================================================================================
+Relatório Programação Modular - Primeira Entrega - 29/03/2018
+Aluno: Sergio Gustavo Mendonça Pyrrho Moreira - Matrícula: 1621240
+Colegas de Equipe: Hugo Machado // Daniel Luca
+Professor: Flavio Heleno Bevilacqua e Silva - Turma: 3WB
+------------------------------------------------------------------------------------------------------------------------------------------------------
+	Abaixo segue o relatório referente as atividades realizadas por mim, Sergio Gustavo Mendonça Pyrrho Moreira, com certo detalhamento.
+	Todas as informações fornecidas neste relatório se referem a atividades em prol do trabalho e apenas do trabalho.
+
+---TOTAL DE HORAS CONTABILIZADAS: 14 HORAS
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------
+DATA		HORAS TRABALHADAS		TIPO DE TAREFA			DESCRIÇÃO
+------------------------------------------------------------------------------------------------------------------------------------------------------
+
+09/03/18	2 HORAS				ANALISE DA TAREFA		Elaboração e modelagem da estrutura de dados a ser usada pelo projeto.
+
+10/03/18	1 HORA				ESTUDO ARCABOUÇO		Estudar e entender o conceito e utilização do Arcabouço de Teste, aplicado no projeto.
+
+11/03/18	2 HORAS				TESTES ARCABOUÇO		Utilizar e aprender, através de testes, o uso do Arcabouço e sua estrutura.
+
+12/03/18	1 HORA				PLANEJAMENTO			Planejamento, esboçado, de otimização do conteúdo criado até então.
+
+16/03/18	2 HORAS				AVALIAÇÃO			Averiguação do módulo e sugestões de alteração, a fim de otimizar o sistema.
+
+18/03/18	1 HORA				REVISÃO				Revisão do Arcabouço, bem como revisão do conteúdo novo inserido no módulo.
+
+28/03/18	4 HORAS				DOCUMENTAÇÃO E FORMATAÇÃO	Formatação e ajustes da documentação disponível no módulo, para melhor compreensão.
+
+29/03/18	1 HORA				FINALIZAÇÃO			Revisão do projeto, bem como a realização do relatório.

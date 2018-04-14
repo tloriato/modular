@@ -1,0 +1,6 @@
+07/03/18 - 2 horas - Esboço do CUBO.h e sugestão de interface.
+12/03/18 - 3 horas - Implementação das funções de inicialização e visualização do cubo.
+19/03/18 - 3 horas - Adequação do arquivo de interface ao padrão exigido pela disciplina.
+25/03/18 - 6 horas - Implementação da função de giro das faces.
+26/03/18 - 4 horas - Finalização da interface e início da implementação da função de busca por peça de aresta.
+28/03/18 - 5 horas - Finalização da primeira e implementação e finalização da segunda função de busca por peça.
