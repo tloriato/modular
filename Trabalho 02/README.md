@@ -5,6 +5,8 @@ Gabriel Faria – 1512424
 
 Pseudo código para futura implementação:
 
+````
+
 //Utilizando a face fornecida pelo programa.
 
 //Verificar a cor da peça do meio.
@@ -424,3 +426,5 @@ if (peça do centro == azul){
 }
 
 /\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*FIM DA FACE AZUL\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*\*/
+
+````
