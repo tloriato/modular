@@ -31,11 +31,11 @@ if (peça do centro == vermelha){
 
                         if (a peça estiver à direita)
 
-                                aplicar o algoritmo para a DIREITA U R U&#39; R&#39; U&#39; F&#39; U F;
+                                aplicar o algoritmo para a DIREITA U R U'; R'; U'; F'; U F;
 
                         else
 
-                                aplicar o algoritmo para a ESQUERDA U&#39; L&#39; U L U F U&#39; F&#39;;
+                                aplicar o algoritmo para a ESQUERDA U'; L'; U L U F U'; F';;
 
                 }
 
@@ -61,7 +61,7 @@ if (peça do centro == vermelha){
 
         if (peça da face vermelha superior == peça do centro) // F[0][1] == F[1][1]
 
-                aplicar algoritmo para a ESQUERDA U&#39; L&#39; U L U F U&#39; F&#39;; //pois U[2][1] == L[1][1]
+                aplicar algoritmo para a ESQUERDA U'; L'; U L U F U'; F';; //pois U[2][1] == L[1][1]
 
         procurar a peça vermelha e verde;
 
@@ -79,11 +79,11 @@ if (peça do centro == vermelha){
 
                         if (a peça estiver à direita)
 
-                                aplicar o algoritmo para a DIREITA U R U&#39; R&#39; U&#39; F&#39; U F;
+                                aplicar o algoritmo para a DIREITA U R U'; R'; U'; F'; U F;
 
                         else
 
-                                aplicar o algoritmo para a ESQUERDA U&#39; L&#39; U L U F U&#39; F&#39;;
+                                aplicar o algoritmo para a ESQUERDA U'; L'; U L U F U'; F';;
 
                 }
 
@@ -109,7 +109,7 @@ if (peça do centro == vermelha){
 
         if (peça da face vermelha superior == peça do centro) // F[0][1] == F[1][1]
 
-                aplicar algoritmo para a DIREITA U R U&#39; R&#39; U&#39; F&#39; U F; //pois U[2][1] == R[1][1]
+                aplicar algoritmo para a DIREITA U R U'; R'; U'; F'; U F; //pois U[2][1] == R[1][1]
 
 }
 
@@ -135,11 +135,11 @@ if (peça do centro == verde){
 
                         if (a peça estiver à direita)
 
-                                aplicar o algoritmo para a DIREITA U R U&#39; R&#39; U&#39; F&#39; U F;
+                                aplicar o algoritmo para a DIREITA U R U'; R'; U'; F'; U F;
 
                         else
 
-                                aplicar o algoritmo para a ESQUERDA U&#39; L&#39; U L U F U&#39; F&#39;;
+                                aplicar o algoritmo para a ESQUERDA U'; L'; U L U F U'; F';;
 
                 }
 
@@ -165,7 +165,7 @@ if (peça do centro == verde){
 
         if (peça da face verde superior == peça do centro) // F[0][1] == F[1][1]
 
-                aplicar algoritmo para a ESQUERDA U&#39; L&#39; U L U F U&#39; F&#39;; //pois U[2][1] == L[1][1]
+                aplicar algoritmo para a ESQUERDA U'; L'; U L U F U'; F';; //pois U[2][1] == L[1][1]
 
         procurar a peça verde e laranja;
 
@@ -183,11 +183,11 @@ if (peça do centro == verde){
 
                         if (a peça estiver à direita)
 
-                                aplicar o algoritmo para a DIREITA U R U&#39; R&#39; U&#39; F&#39; U F;
+                                aplicar o algoritmo para a DIREITA U R U'; R'; U'; F'; U F;
 
                         else
 
-                                aplicar o algoritmo para a ESQUERDA U&#39; L&#39; U L U F U&#39; F&#39;;
+                                aplicar o algoritmo para a ESQUERDA U'; L'; U L U F U'; F';;
 
                 }
 
@@ -213,7 +213,7 @@ if (peça do centro == verde){
 
         if (peça da face verde superior == peça do centro) // F[0][1] == F[1][1]
 
-                aplicar algoritmo para a DIREITA U R U&#39; R&#39; U&#39; F&#39; U F; // F[0][1] == R[1][1]
+                aplicar algoritmo para a DIREITA U R U'; R'; U'; F'; U F; // F[0][1] == R[1][1]
 
 }
 
@@ -239,11 +239,11 @@ if (peça do centro == laranja){
 
                         if (a peça estiver à direita)
 
-                                aplicar o algoritmo para a DIREITA U R U&#39; R&#39; U&#39; F&#39; U F;
+                                aplicar o algoritmo para a DIREITA U R U'; R'; U'; F'; U F;
 
                         else
 
-                                aplicar o algoritmo para a ESQUERDA U&#39; L&#39; U L U F U&#39; F&#39;;
+                                aplicar o algoritmo para a ESQUERDA U'; L'; U L U F U'; F';;
 
                 }
 
@@ -269,7 +269,7 @@ if (peça do centro == laranja){
 
         if (peça da face laranja superior == peça do centro) // F[0][1] == F[1][1]
 
-                aplicar algoritmo para a ESQUERDA U&#39; L&#39; U L U F U&#39; F&#39;; //pois U[2][1] == L[1][1]
+                aplicar algoritmo para a ESQUERDA U'; L'; U L U F U'; F';; //pois U[2][1] == L[1][1]
 
         procurar a peça laranja e azul;
 
@@ -287,11 +287,11 @@ if (peça do centro == laranja){
 
                         if (a peça estiver à direita)
 
-                                aplicar o algoritmo para a DIREITA U R U&#39; R&#39; U&#39; F&#39; U F;
+                                aplicar o algoritmo para a DIREITA U R U'; R'; U'; F'; U F;
 
                         else
 
-                                aplicar o algoritmo para a ESQUERDA U&#39; L&#39; U L U F U&#39; F&#39;;
+                                aplicar o algoritmo para a ESQUERDA U'; L'; U L U F U'; F';;
 
                 }
 
@@ -317,7 +317,7 @@ if (peça do centro == laranja){
 
         if (peça da face laranja superior == peça do centro) // F[0][1] == F[1][1]
 
-                aplicar algoritmo para a DIREITA U R U&#39; R&#39; U&#39; F&#39; U F; // F[0][1] == R[1][1]
+                aplicar algoritmo para a DIREITA U R U'; R'; U'; F'; U F; // F[0][1] == R[1][1]
 
 }
 
@@ -343,11 +343,11 @@ if (peça do centro == azul){
 
                         if (a peça estiver à direita)
 
-                                aplicar o algoritmo para a DIREITA U R U&#39; R&#39; U&#39; F&#39; U F;
+                                aplicar o algoritmo para a DIREITA U R U'; R'; U'; F'; U F;
 
                         else
 
-                                aplicar o algoritmo para a ESQUERDA U&#39; L&#39; U L U F U&#39; F&#39;;
+                                aplicar o algoritmo para a ESQUERDA U'; L'; U L U F U'; F';;
 
                 }
 
@@ -373,7 +373,7 @@ if (peça do centro == azul){
 
         if (peça da face azul superior == peça do centro) // F[0][1] == F[1][1]
 
-                aplicar algoritmo para a ESQUERDA U&#39; L&#39; U L U F U&#39; F&#39;; //pois U[2][1] == L[1][1]
+                aplicar algoritmo para a ESQUERDA U'; L'; U L U F U'; F';; //pois U[2][1] == L[1][1]
 
         procurar a peça azul e vermelha;
 
@@ -391,11 +391,11 @@ if (peça do centro == azul){
 
                         if (a peça estiver à direita)
 
-                                aplicar o algoritmo para a DIREITA U R U&#39; R&#39; U&#39; F&#39; U F;
+                                aplicar o algoritmo para a DIREITA U R U'; R'; U'; F'; U F;
 
                         else
 
-                                aplicar o algoritmo para a ESQUERDA U&#39; L&#39; U L U F U&#39; F&#39;;
+                                aplicar o algoritmo para a ESQUERDA U'; L'; U L U F U'; F';;
 
                 }
 
@@ -421,7 +421,7 @@ if (peça do centro == azul){
 
         if (peça da face azul superior == peça do centro) // F[0][1] == F[1][1]
 
-                aplicar algoritmo para a DIREITA U R U&#39; R&#39; U&#39; F&#39; U F; // F[0][1] == R[1][1]
+                aplicar algoritmo para a DIREITA U R U'; R'; U'; F'; U F; // F[0][1] == R[1][1]
 
 }
 
