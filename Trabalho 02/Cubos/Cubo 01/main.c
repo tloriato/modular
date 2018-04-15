@@ -71,9 +71,10 @@ void main() {
 
 	int i;
 	int config[54];
+	CUB_tppCUBO cubo;
 	for ( i = 0; i < 54; i++)
 		config[i] = i;
-	CUB_tppCUBO cubo;
+	
 	CUB_CriarCUBO(&cubo, config);
 	printf("Resp: %d\n",CUB_GirarFace(cubo, CUB_faceSuperior, 5,'a'));
 	CUB_ExibirCUBO(cubo);

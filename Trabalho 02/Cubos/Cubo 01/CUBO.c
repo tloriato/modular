@@ -74,6 +74,8 @@ static int geraIndice(int x, int y, int z); //Documentado dentro da função
 
 static int geraIndiceEmBuffer(int a, int b); //Documentado dentro da função
 
+static int conjuntosSaoEquivalentes(int elementoA1, int elementoA2, int elementoB1, int elementoB2); //Documentado dentro da função
+
 /*****  Código das funções exportadas pelo módulo  *****/
 
 /***************************************************************************
