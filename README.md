@@ -86,12 +86,6 @@ S & S' : Gira a face do meio, a que possui 3 peças de cada uma das faces: cima,
 - Ter a face superior completa.
 - Ter a primeira linha de todas as faces completa.
 
-1. Rotacione a face de baixo de forma que um painel de Y na face onde está posicionada a peça central de cor X.
-1. *Analise: Se o painél da face de baixo de Y for Branco, siga para o passo 8, caso contrário pule para o passo 9.*
-1. Gire a face com a cor central X 180°. *Pule para o passo 10*.
-1. Execute a sequência: D' F' R F. *Siga para o passo 8*.
-1. ~~Mova sua perspectiva de forma que sua atual face direita, vire sua nova face frontal.~~ Chame a cor central da próxima face, no sentido horário de X. Exemplo: se você acabou de executar as intruções na face frontal, a próxima face seria a face direita. *Siga para o passo 4*.
-
 ##### Descrição:
 
 1. Comece com a face branca para cima e a verde como frontal. Chame a cor verde como ``X``.
