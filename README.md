@@ -133,7 +133,7 @@ S & S' : Gira a face do meio, a que possui 3 peças de cada uma das faces: cima,
 		    1.	Caso ``B3/U1/L1``: Execute ``L' D  L`` . *Siga para o passo 13*
 		    1.	Caso ``B1/U3/R3``: *Siga para o passo 13*
 		    1.	Caso ``F1/U7/L3``: Execute ``L D D L'`` . *Siga para o passo 13*
-13. Repita ``R' D' R D`` até a peça atingir as posições ``U3 (branca), B3 (Azul) e R3 (Vermelha)``.
+13. Repita ``R D' R' D`` até a peça atingir as posições ``U3 (branca), B3 (Azul) e R3 (Vermelha)``.
 14. Buscar a peça da cor azul, branca e cor laranja:
 	  1.  Caso a peça esteja na face inferior: 
 		    1.	Caso ``B9/D7/L7``: *Siga para o passo 15*
@@ -152,7 +152,7 @@ S & S' : Gira a face do meio, a que possui 3 peças de cada uma das faces: cima,
 		    1.	Caso ``B7/D9/R9``: Execute ``D D``. *Siga para o passo 17*
 	  1. Caso a peça esteja na face superior: 
 		    1. Caso ``F1/U7/L3``: *Siga para o passo 17*
- 17.   Repita ``L  D'  L  D`` até a peça atingir as posições ``U7 (branca), L3 (Laranja) e F1 (Verde)``.
+ 17.   Repita ``L  D'  L'  D`` até a peça atingir as posições ``U7 (branca), L3 (Laranja) e F1 (Verde)``.
 
 ##### Pseudocódigo
 
