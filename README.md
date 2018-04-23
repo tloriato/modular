@@ -127,7 +127,7 @@ S & S' : Gira a face do meio, a que possui 3 peças de cada uma das faces: cima,
 	  1.  Caso a peça esteja na face inferior: 
 		    1.	Caso ``B9/D7/L7``: Execute ``D``. *Siga para o passo 13*
 		    1.	Caso ``F7/D1/L9``: Execute ``D D``. *Siga para o passo 13*
-		    1.	Caso ``F9/D3/R7`` : Execute ``D`` . *Siga para o passo 13*
+		    1.	Caso ``F9/D3/R7`` : Execute ``D'`` . *Siga para o passo 13*
 		    1.  Caso ``B7/D9/R9``:  *Siga para o passo 13*
 	  1. Caso a peça esteja na face superior: 
 		    1.	Caso ``B3/U1/L1``: Execute ``L' D  L`` . *Siga para o passo 13*
