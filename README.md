@@ -125,7 +125,7 @@ S & S' : Gira a face do meio, a que possui 3 peças de cada uma das faces: cima,
 11. Repita ``R' D R D'`` até a peça atingir as posições ``U9 (branca), F3 (Verde) e R1 (Vermelha)``.
 12. Buscar a peça da cor azul, branca e cor vermelha:
 	  1.  Caso a peça esteja na face inferior: 
-		    1.	Caso ``B9/D7/L7``: Execute ``D'``. *Siga para o passo 13*
+		    1.	Caso ``B9/D7/L7``: Execute ``D``. *Siga para o passo 13*
 		    1.	Caso ``F7/D1/L9``: Execute ``D D``. *Siga para o passo 13*
 		    1.	Caso ``F9/D3/R7`` : Execute ``D'`` . *Siga para o passo 13*
 		    1.  Caso ``B7/D9/R9``:  *Siga para o passo 13*
