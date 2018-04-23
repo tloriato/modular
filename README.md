@@ -90,7 +90,7 @@ S & S' : Gira a face do meio, a que possui 3 peças de cada uma das faces: cima,
 
 1. Comece com a face branca para cima e a verde como frontal. Chame a cor verde como ``X``.
 2. Verifique se a cruz está formada, ou seja, se `` U2 U4 U6 e U8``  são brancos. *Caso positivo, pule para o passo 15*.
-3. Busque a peça de canto da cor X/Branca. Chame a peça de``  Y`` .
+3. Busque a peça de borda da cor X/Branca. Chame a peça de``  Y`` .
 4. Mova ```` Y````  para a face de baixo do cubo. ***Se não for possível fazê-lo sem modificar a cruz que está se formando na face de cima, ou seja, se a peça residir na mesma coluna de uma face -já iterada-, pule para o passo 7***
 5. Rotacione a face de baixo de forma que a peça````  Y````  esteja na face correspondente a sua cor ```` X```` . *(Ou seja, na face frontal, face direita, traseira e esquerda, na primeira, segunda, terceira e quarta iteração respectivamente.)*
 6. Verifique:
