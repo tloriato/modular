@@ -186,13 +186,13 @@ enquanto (U2 != Branco || U4 != Branco || U6 != Branco || U8 != Branco)
   se (res == false)
   {
     se (Y == F4/L6)
-      cubo.executar(L D' L);
+      cubo.executar(L D' L');
     se (Y == F6/R4)
       cubo.executar(R' D R);
     se (Y == B6/L4)
       cubo.executar(L' D' L);
     se (Y == B4/R6)
-      cubo.executar(R' D R);
+      cubo.executar(R D R');
   }
 
   enquanto Y.face != faceX
@@ -207,10 +207,10 @@ enquanto (U2 != Branco || U4 != Branco || U6 != Branco || U8 != Branco)
     senão se (i == 3)
       cubo.executar(D' B L B');
     senão se (i == 4)
-      cubo.executar(D' L' F L);
+      cubo.executar(D' L' F L F');
   }
 
-  senão se Y.corfaceDebaixo == Branca
+  se Y.corfaceDebaixo == Branca
   {
     se (i == 1)
       cubo.executar(F F);
@@ -241,25 +241,25 @@ se (cantoUm == F9/D3/R7)
 se (cantoUm == B7/D9/R9)
   cubo.executar(D);
 se (cantoUm == B3/U1/L1)
-  cubo.executar(L' D' L);
+  cubo.executar(L' D' L D D);
 se (cantoUm == B1/U3/R3)
-  cubo.executar(R D R');
+  cubo.executar(R D R' D);
 se (cantoUm == F1/U7/L3)
   cubo.executar(L D' L);
 se (cantoUm == F3/U9/R1)
   // do nothing
 
 enquanto ( U9 != Branco || F3 != Verde || R1 != Vermelho)
-  cubo.executar(R' D R D);
+  cubo.executar(R' D R D');
 
 seja cantoDois = cubo.acharPeca(Azul, Branca, Vermelha);
 
 se (cantoDois == B9/D7/L7)
-  cubo.executar(D');
+  cubo.executar(D);
 se (cantoDois == F7/D1/L9)
   cubo.executar(D D);
 se (cantoDois == F9/D3/R7)
-  cubo.executar(D');
+  cubo.executar(D);
 se (cantoDois == B7/D9/R9)
   // do nothing
 se (cantoDois == B3/U1/L1)
@@ -270,14 +270,14 @@ se (cantoDois == F1/U7/L3)
   cubo.executar(L D D L');
 
 enquanto ( U3 != Branco || B3 != Azul || R3 != Vermelho)
-  cubo.executar(R' D' R D);
+  cubo.executar(R D' R' D);
 
 seja cantoTres = cubo.acharPeca(Azul, Branca, Laranja);
 
 se (cantoTres == B9/D7/L7)
   // do nothing
 se (cantoTres == F7/D1/L9)
-  cubo.executar(D');
+  cubo.executar(D);
 se (cantoTres == F9/D3/R7)
   cubo.executar(D D);
 se (cantoTres == B7/D9/R9)
@@ -285,12 +285,12 @@ se (cantoTres == B7/D9/R9)
 se (cantoTres == B3/U1/L1)
   // do nothing
 se (cantoTres == F1/U7/L3)
-  cubo.executar(L D D L' D);
+  cubo.executar(L D D L' D');
 
 enquanto ( U1 != Branco || B3 != Azul || L1 != Laranja)
   cubo.executar(L' D L D');
 
-seja cantoQuatro = cubo.acharPeca(Verde, Branca, Vermelha);
+seja cantoQuatro = cubo.acharPeca(Verde, Branca, Laranja);
 
 se (cantoQuatro == B9/D7/L7)
   cubo.executar(D');
@@ -304,7 +304,7 @@ se (cantoQuatro == F1/U7/L3)
   // do nothing
 
 enquanto ( U7 != Branco || L3 != Laranja || F1 != Verde)
-  cubo.executar(L D' L D);
+  cubo.executar(L D' L' D);
 
 fim
 ````
