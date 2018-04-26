@@ -758,7 +758,7 @@ void main() {
 
 	CUB_ExibirCUBO(cubo);
 	i = 0;
-	while (i < 10) {
+	while (r) {
 		printf("Frente: \n");
 		if (i % 2 == 0)
 			a = resolveFrente(cubo);
@@ -798,10 +798,15 @@ void main() {
 		}
 
 		i++;
-		r = aux(a, b, c, d);
+
+		if (i % 2 == 0)
+			r = aux(a, b, c, d);
+		else
+			r = aux(a, b, c, d);
 	}
 
 	CUB_ExibirCUBO(cubo);
+	printf("Loops: %d\n", i);
 
 	system("pause");
 
