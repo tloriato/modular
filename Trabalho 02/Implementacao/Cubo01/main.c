@@ -274,47 +274,64 @@ int resolveFrente(CUB_tppCUBO cubo) {
 				executaAlgoritmo(cubo, "U U"); // Gira a peça
 				executaAlgoritmo(cubo, "U R U' R' U' F' U F"); // 2x pra Direita
 			}
+			else if (faceAresta1 == CIMA && linhaAresta1 == 2 && colunaAresta1 == 1) {
+				// É um caso onde a peça está com orientação errada na posição de cima. Nós vamos mover ela para a posição certa na orientação errada, 
+				// depois iremos trazer ela de volta para a posição cima com a orientação certa, e ai movermos de novo para o lugar e orientação certos.
+				// Algoritmo Direita -> Algoritmo de Troca de Orientação do Lado direito, ou seja: Direita -> Direita -> U U -> Direita
+				// ps: uma solução mais elegante seria apenas realizar a primeira mudança, deixando a segunda para o próximo loop ou função :)
+				executaAlgoritmo(cubo, "U R U' R' U' F' U F");
+				executaAlgoritmo(cubo, "U R U' R' U' F' U F");
+				executaAlgoritmo(cubo, "U U");
+				executaAlgoritmo(cubo, "U R U' R' U' F' U F");
+			
+			}
 		}
 	}
 
-	if (faceAresta2 == FRENTE && linhaAresta2 == 1 & colunaAresta2 == 0) {
-		// Aresta da Esquerda Resolvida
-		restantes--;
-	}
-	else {
-		// Tenta resolver a Aresta da Esquerda
-
-		if (resolvidoAcima(cubo)) {
-			// Face resolvida está para cima
-			if (faceAresta2 == FRENTE && linhaAresta2 == 2 && colunaAresta2 == 1) {
-				// Algoritmo Cima -> Esquerda invertido, "Baixo -> Esquerda",
-				// pois o cubo está de cabeça para baixo
-				executaAlgoritmo(cubo, "D R' D R D' F D F'");
-				restantes--;
-			}
-			else if (faceAresta2 == ESQUERDA && linhaAresta2 == 1 && colunaAresta2 == 2) {
-				// Algoritmo de trocar de orientação do lado esquerdo invertido
-				executaAlgoritmo(cubo, "D R' D R D' F D F'"); // 1x pra Esquerda
-				executaAlgoritmo(cubo, "D D"); // Gira a face
-				executaAlgoritmo(cubo, "D R' D R D' F D F'"); // 2x pra Esquerda	
-			}
-
+		if (faceAresta2 == FRENTE && linhaAresta2 == 1 & colunaAresta2 == 0) {
+			// Aresta da Esquerda Resolvida
+			restantes--;
 		}
 		else {
-			// Face resolvida está para baixo
-			if (faceAresta2 == FRENTE && linhaAresta2 == 0 && colunaAresta2 == 1) {
-				// Algoritmo Cima -> Esquerda
-				executaAlgoritmo(cubo, "U' L' U L U F U' F'");
-				restantes--;
+			// Tenta resolver a Aresta da Esquerda
+
+			if (resolvidoAcima(cubo)) {
+				// Face resolvida está para cima
+				if (faceAresta2 == FRENTE && linhaAresta2 == 2 && colunaAresta2 == 1) {
+					// Algoritmo Cima -> Esquerda invertido, "Baixo -> Esquerda",
+					// pois o cubo está de cabeça para baixo
+					executaAlgoritmo(cubo, "D R' D R D' F D F'");
+					restantes--;
+				}
+				else if (faceAresta2 == ESQUERDA && linhaAresta2 == 1 && colunaAresta2 == 2) {
+					// Algoritmo de trocar de orientação do lado esquerdo invertido
+					executaAlgoritmo(cubo, "D R' D R D' F D F'"); // 1x pra Esquerda
+					executaAlgoritmo(cubo, "D D"); // Gira a face
+					executaAlgoritmo(cubo, "D R' D R D' F D F'"); // 2x pra Esquerda	
+				}
+
 			}
-			else if (faceAresta2 == ESQUERDA && linhaAresta2 == 1 && colunaAresta2 == 2) {
-				// Algoritmo de trocar a orientação do lado esquerdo
-				executaAlgoritmo(cubo, "U' L' U L U F U' F'"); // 1x pra Esquerda
-				executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
-				executaAlgoritmo(cubo, "U' L' U L U F U' F'"); // 2x pra Esquerda
+			else {
+				// Face resolvida está para baixo
+				if (faceAresta2 == FRENTE && linhaAresta2 == 0 && colunaAresta2 == 1) {
+					// Algoritmo Cima -> Esquerda
+					executaAlgoritmo(cubo, "U' L' U L U F U' F'");
+					restantes--;
+				}
+				else if (faceAresta2 == ESQUERDA && linhaAresta2 == 1 && colunaAresta2 == 2) {
+					// Algoritmo de trocar a orientação do lado esquerdo
+					executaAlgoritmo(cubo, "U' L' U L U F U' F'"); // 1x pra Esquerda
+					executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
+					executaAlgoritmo(cubo, "U' L' U L U F U' F'"); // 2x pra Esquerda
+				}
+				else if (faceAresta2 == CIMA && linhaAresta2 == 2 && colunaAresta1 == 2) {
+					executaAlgoritmo(cubo, "U' L' U L U F U' F'"); // 1x pra Esquerda
+					executaAlgoritmo(cubo, "U' L' U L U F U' F'"); // 1x pra Esquerda
+					executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
+					executaAlgoritmo(cubo, "U' L' U L U F U' F'"); // 2x pra Esquerda
+				}
 			}
 		}
-	}
 
 	return restantes;
 }
@@ -387,7 +404,14 @@ int resolveEsquerda(CUB_tppCUBO cubo) {
 				// Algoritmo de trocar a orientação do lado direito
 				executaAlgoritmo(cubo, "U F U' F' U' L' U L"); // 1x pra Direita
 				executaAlgoritmo(cubo, "U U"); // Gira a peça
-				executaAlgoritmo(cubo, "U F U' F' U' L' U L"); // 2x pra Direita
+				executaAlgoritmo(cubo, "U F U' F' U' L' U L"); // 1x pra Direita
+			}
+
+			else if (faceAresta1 == CIMA && linhaAresta1 == 1 && colunaAresta1 == 0) {
+				executaAlgoritmo(cubo, "U F U' F' U' L' U L"); // 1x pra Direita
+				executaAlgoritmo(cubo, "U F U' F' U' L' U L"); // 1x pra Direita
+				executaAlgoritmo(cubo, "U U"); // Gira a peça
+				executaAlgoritmo(cubo, "U F U' F' U' L' U L"); // 1x pra Direita
 			}
 		}
 	}
@@ -427,6 +451,14 @@ int resolveEsquerda(CUB_tppCUBO cubo) {
 				executaAlgoritmo(cubo, "U' F' U F U' L U' L'"); // 1x pra Esquerda
 				executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
 				executaAlgoritmo(cubo, "U' F' U F U' L U' L'"); // 2x pra Esquerda
+			}
+
+			else if (faceAresta2 == CIMA && linhaAresta2 == 1 && colunaAresta1 == 0) {
+				executaAlgoritmo(cubo, "U' F' U F U' L U' L'"); // 1x pra Esquerda
+				// Algoritmo de trocar a orientação do lado esquerdo
+				executaAlgoritmo(cubo, "U' F' U F U' L U' L'"); // 1x pra Esquerda
+				executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
+				executaAlgoritmo(cubo, "U' F' U F U' L U' L'"); // 1x pra Esquerda
 			}
 		}
 	}
@@ -504,6 +536,14 @@ int resolveDireita(CUB_tppCUBO cubo) {
 				executaAlgoritmo(cubo, "U U"); // Gira a peça
 				executaAlgoritmo(cubo, "U B' U' B U' R' U R"); // 2x pra Direita
 			}
+
+			else if (faceAresta1 == CIMA && linhaAresta1 == 2 && colunaAresta1 == 2) {
+				executaAlgoritmo(cubo, "U B' U' B U' R' U R"); // 1x pra Direita
+				// Algoritmo de trocar a orientação do lado direito
+				executaAlgoritmo(cubo, "U B' U' B U' R' U R"); // 1x pra Direita
+				executaAlgoritmo(cubo, "U U"); // Gira a peça
+				executaAlgoritmo(cubo, "U B' U' B U' R' U R"); // 2x pra Direita
+			}
 		}
 	}
 
@@ -538,6 +578,14 @@ int resolveDireita(CUB_tppCUBO cubo) {
 				restantes--;
 			}
 			else if (faceAresta2 == FRENTE && linhaAresta2 == 1 && colunaAresta2 == 2) {
+				// Algoritmo de trocar a orientação do lado esquerdo
+				executaAlgoritmo(cubo, "U' F' U F U R U' R'"); // 1x pra Esquerda
+				executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
+				executaAlgoritmo(cubo, "U' F' U F U R U' R'"); // 2x pra Esquerda
+			}
+
+			else if (faceAresta2 == CIMA && linhaAresta2 == 2 && colunaAresta2 == 2) {
+				executaAlgoritmo(cubo, "U' F' U F U R U' R'"); // 1x pra Esquerda
 				// Algoritmo de trocar a orientação do lado esquerdo
 				executaAlgoritmo(cubo, "U' F' U F U R U' R'"); // 1x pra Esquerda
 				executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
@@ -620,6 +668,14 @@ int resolveTraseira(CUB_tppCUBO cubo) {
 				executaAlgoritmo(cubo, "U U"); // Gira a peça
 				executaAlgoritmo(cubo, "U L U' L' U' B U B'"); // 2x pra Direita
 			}
+
+			else if (faceAresta1 == CIMA && linhaAresta1 == 0 && colunaAresta1 == 1) {
+				executaAlgoritmo(cubo, "U L U' L' U' B U B'"); // 1x pra Direita
+				// Algoritmo de trocar a orientação do lado direito
+				executaAlgoritmo(cubo, "U L U' L' U' B U B'"); // 1x pra Direita
+				executaAlgoritmo(cubo, "U U"); // Gira a peça
+				executaAlgoritmo(cubo, "U L U' L' U' B U B'"); // 2x pra Direita
+			}
 		}
 	}
 
@@ -659,6 +715,15 @@ int resolveTraseira(CUB_tppCUBO cubo) {
 				executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
 				executaAlgoritmo(cubo, "U' R' U R U B' U' B"); // 2x pra Esquerda
 			}
+
+			else if (faceAresta1 == CIMA && linhaAresta1 == 0 && colunaAresta1 == 1) {
+				executaAlgoritmo(cubo, "U' R' U R U B' U' B"); // 1x pra Esquerda
+				// Algoritmo de trocar a orientação do lado esquerdo
+				executaAlgoritmo(cubo, "U' R' U R U B' U' B"); // 1x pra Esquerda
+				executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
+				executaAlgoritmo(cubo, "U' R' U R U B' U' B"); // 2x pra Esquerda
+
+			}
 		}
 	}
 
@@ -678,7 +743,8 @@ void main() {
 	int i, fd;
 	int config[54];
 
-	int r = 1, a, b, c, d;
+	int r = 1, a = 0 , b = 0, c = 0, d = 0;
+	int oldA = 2, oldB = 2, oldC = 2, oldD = 2;
 
 	char * algoritmoDireita = "U R U' R' U' F' U F";
 	char * algoritmoEsquerda = "U' L' U L U F U' F'";
@@ -692,28 +758,45 @@ void main() {
 
 	CUB_ExibirCUBO(cubo);
 	i = 0;
-	while (i < 20) {
+	while (i < 10) {
 		printf("Frente: \n");
-		a = resolveFrente(cubo);
+		if (i % 2 == 0)
+			a = resolveFrente(cubo);
+		else
+			oldA = resolveFrente(cubo);
 		printf("Restantes: %d \n", a);
-		CUB_ExibirCUBO(cubo);
+		//CUB_ExibirCUBO(cubo);
 
 		printf("Direita: \n");
-		b = resolveDireita(cubo);
+		if (i % 2 == 0)
+			b = resolveDireita(cubo);
+		else
+			oldB = resolveDireita(cubo);
 		printf("Restantes: %d \n", b);
-		CUB_ExibirCUBO(cubo);
+		//CUB_ExibirCUBO(cubo);
 
 		printf("Traseira: \n");
-		c = resolveTraseira(cubo);
+		if (i % 2 == 0)
+			c = resolveTraseira(cubo);
+		else
+			oldC = resolveTraseira(cubo);
 		printf("Restantes: %d \n", c);
-		CUB_ExibirCUBO(cubo);
+		//CUB_ExibirCUBO(cubo);
 
 		printf("Esquerda: \n");
-		d = resolveEsquerda(cubo);
+		if (i % 2 == 0)
+			d = resolveEsquerda(cubo);
+		else
+			oldD = resolveEsquerda(cubo);
 		printf("Restantes: %d \n", d);
-		CUB_ExibirCUBO(cubo);
+		//CUB_ExibirCUBO(cubo);
 
-		printf("Restantes: F  %d D %d T %d E %d \n", a, b, c, d);
+		//printf("Restantes: F  %d D %d T %d E %d \n", a, b, c, d);
+
+		if (oldA == a && oldB == b && oldC == c && oldD == d) {
+			executaAlgoritmo(cubo, "U");
+		}
+
 		i++;
 		r = aux(a, b, c, d);
 	}
