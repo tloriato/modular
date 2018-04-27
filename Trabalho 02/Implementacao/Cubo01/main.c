@@ -600,7 +600,7 @@ int resolveDireita(CUB_tppCUBO cubo) {
 				restantes--;
 			}
 
-			else if (faceAresta2 == CIMA && linhaAresta2 == 2 && colunaAresta2 == 2) {
+			else if (faceAresta2 == CIMA && linhaAresta2 == 1 && colunaAresta2 == 2) {
 				executaAlgoritmo(cubo, "U' F' U F U R U' R'"); // 1x pra Esquerda
 															   // Algoritmo de trocar a orientação do lado esquerdo
 				executaAlgoritmo(cubo, "U' F' U F U R U' R'"); // 1x pra Esquerda
