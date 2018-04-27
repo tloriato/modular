@@ -1,0 +1,81 @@
+	// 1: Verde | 2: Vermelho | 3: Amarelo | 4: Azul | 5: Branco | 6: Laranja
+
+	// Up Face 0
+	config[0] = VERDE;
+	config[1] = AMARELO;
+	config[2] = LARANJA;
+
+	config[3] = LARANJA;
+	config[4] = AMARELO;
+	config[5] = VERDE;
+
+	config[6] = LARANJA;
+	config[7] = AZUL;
+	config[8] = AZUL;
+
+	// Left Face 4
+	config[9] = VERMELHO;
+	config[10] = VERDE;
+	config[11] = AMARELO;
+
+	config[21] = LARANJA;
+	config[22] = VERMELHO;
+	config[23] = AMARELO;
+
+	config[33] = VERMELHO;
+	config[34] = VERMELHO;
+	config[35] = VERMELHO;
+
+	// Front Face 1
+	config[12] = VERDE;
+	config[13] = LARANJA;
+	config[14] = VERMELHO;
+
+	config[24] = AZUL;
+	config[25] = VERDE;
+	config[26] = AZUL;
+
+	config[36] = VERDE;
+	config[37] = VERDE;
+	config[38] = VERDE;
+
+	// Right Face 2
+	config[15] = AMARELO;
+	config[16] = VERMELHO;
+	config[17] = AZUL;
+
+	config[27] = VERMELHO;
+	config[28] = LARANJA;
+	config[29] = VERDE;
+
+	config[39] = LARANJA;
+	config[40] = LARANJA;
+	config[41] = LARANJA;
+
+	// Back Face 3
+	config[18] = AMARELO;
+	config[19] = VERMELHO;
+	config[20] = AMARELO;
+
+	config[30] = AMARELO;
+	config[31] = AZUL;
+	config[32] = AMARELO;
+
+	config[42] = AZUL;
+	config[43] = AZUL;
+	config[44] = AZUL;
+
+	// Down Face 5
+	config[45] = BRANCO;
+	config[46] = BRANCO;
+	config[47] = BRANCO;
+
+	config[48] = BRANCO;
+	config[49] = BRANCO;
+	config[50] = BRANCO;
+
+	config[51] = BRANCO;
+	config[52] = BRANCO;
+	config[53] = BRANCO;
+
+	return 0;
