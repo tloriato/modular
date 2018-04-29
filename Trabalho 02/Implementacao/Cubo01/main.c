@@ -32,52 +32,52 @@ int populaCubo(int *config) {
 	// 1: Verde | 2: Vermelho | 3: Amarelo | 4: Azul | 5: Branco | 6: Laranja
 
 	// Up Face 0
-	config[0] = VERDE;
-	config[1] = AMARELO;
-	config[2] = LARANJA;
+	config[0] =LARANJA;
+	config[1] = LARANJA;
+	config[2] = VERDE;
 
-	config[3] = LARANJA;
+	config[3] = AZUL;
 	config[4] = AMARELO;
-	config[5] = VERDE;
+	config[5] = AMARELO;
 
-	config[6] = LARANJA;
-	config[7] = AZUL;
-	config[8] = AZUL;
+	config[6] = VERDE;
+	config[7] = AMARELO;
+	config[8] = VERMELHO;
 
 	// Left Face 4
-	config[9] = VERMELHO;
-	config[10] = VERDE;
+	config[9] = AMARELO;
+	config[10] = AMARELO;
 	config[11] = AMARELO;
 
-	config[21] = LARANJA;
+	config[21] = VERDE;
 	config[22] = VERMELHO;
-	config[23] = AMARELO;
+	config[23] = VERMELHO;
 
 	config[33] = VERMELHO;
 	config[34] = VERMELHO;
 	config[35] = VERMELHO;
 
 	// Front Face 1
-	config[12] = VERDE;
-	config[13] = LARANJA;
-	config[14] = VERMELHO;
+	config[12] = VERMELHO;
+	config[13] = VERMELHO;
+	config[14] = AMARELO;
 
-	config[24] = AZUL;
+	config[24] = VERDE;
 	config[25] = VERDE;
-	config[26] = AZUL;
+	config[26] = VERMELHO;
 
 	config[36] = VERDE;
 	config[37] = VERDE;
 	config[38] = VERDE;
 
 	// Right Face 2
-	config[15] = AMARELO;
-	config[16] = VERMELHO;
-	config[17] = AZUL;
+	config[15] = AZUL;
+	config[16] = VERDE;
+	config[17] = LARANJA;
 
-	config[27] = VERMELHO;
+	config[27] = AZUL;
 	config[28] = LARANJA;
-	config[29] = VERDE;
+	config[29] = LARANJA;
 
 	config[39] = LARANJA;
 	config[40] = LARANJA;
@@ -85,12 +85,12 @@ int populaCubo(int *config) {
 
 	// Back Face 3
 	config[18] = AMARELO;
-	config[19] = VERMELHO;
-	config[20] = AMARELO;
+	config[19] = AMARELO;
+	config[20] = AZUL;
 
-	config[30] = AMARELO;
+	config[30] = AZUL;
 	config[31] = AZUL;
-	config[32] = AMARELO;
+	config[32] = LARANJA;
 
 	config[42] = AZUL;
 	config[43] = AZUL;
