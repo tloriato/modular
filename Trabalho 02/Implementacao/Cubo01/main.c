@@ -290,7 +290,7 @@ int resolveFrente(CUB_tppCUBO cubo) {
 		}
 	}
 
-	if (faceAresta2 == FRENTE && linhaAresta2 == 1 & colunaAresta2 == 0) {
+	if (faceAresta2 == FRENTE && linhaAresta2 == 1 && colunaAresta2 == 0) {
 		// Aresta da Esquerda Resolvida
 		restantes--;
 	}
@@ -424,7 +424,7 @@ int resolveEsquerda(CUB_tppCUBO cubo) {
 		}
 	}
 
-	if (faceAresta2 == ESQUERDA && linhaAresta2 == 1 & colunaAresta2 == 0) {
+	if (faceAresta2 == ESQUERDA && linhaAresta2 == 1 && colunaAresta2 == 0) {
 		// Aresta da Esquerda Resolvida
 		restantes--;
 	}
@@ -561,7 +561,7 @@ int resolveDireita(CUB_tppCUBO cubo) {
 		}
 	}
 
-	if (faceAresta2 == DIREITA && linhaAresta2 == 1 & colunaAresta2 == 0) {
+	if (faceAresta2 == DIREITA && linhaAresta2 == 1 && colunaAresta2 == 0) {
 		// Aresta da Esquerda Resolvida
 		restantes--;
 	}
@@ -699,7 +699,7 @@ int resolveTraseira(CUB_tppCUBO cubo) {
 		}
 	}
 
-	if (faceAresta2 == TRASEIRA && linhaAresta2 == 1 & colunaAresta2 == 0) {
+	if (faceAresta2 == TRASEIRA && linhaAresta2 == 1 && colunaAresta2 == 0) {
 		// Aresta da Esquerda Resolvida
 		restantes--;
 	}
@@ -754,7 +754,7 @@ int resolveTraseira(CUB_tppCUBO cubo) {
 }
 
 int aux(int a, int b, int c, int d) {
-	if (a == 0 & b == 0 && c == 0 & d == 0) {
+	if (a == 0 && b == 0 && c == 0 && d == 0) {
 		return 0;
 	}
 
