@@ -120,7 +120,8 @@ int populaCubo(int *config) {
 //	inteiro =
 //		0 -> sucesso
 //		-1 -> entradas invalidas (TODO)
-int executaAlgoritmo(CUB_tppCUBO cubo, char* algoritmo) {
+int executaAlgoritmo(CUB_tpCubo* cubo, char* algoritmo)
+{
 
 	int i = 0;
 	int ret;
@@ -132,54 +133,77 @@ int executaAlgoritmo(CUB_tppCUBO cubo, char* algoritmo) {
 	while (comandos[i]) {
 
 		if( comandos[i] == 'U'){
-			if ( comandos[i+1] == '\'')
+			if ( comandos[i+1] == '\''){
+				CUB_giraTrasDireita(cubo,1);
 				//excuta sentido antihorario
-				i+=3
-			else 
+				i+=3;
+			}
+			else{
+				CUB_giraTopoEsquerda(cubo,1);
 			    //executa sentido horario
-				i+=2
+				i+=2;
+			}
 		}
 
 		else if( comandos[i] == 'B'){
-			if ( comandos[i+1] == '\'')
+			if ( comandos[i+1] == '\''){
+				CUB_giraTopoDireita(cubo,1);
 				//excuta sentido antihorario
-				i+=3
-			else 
+				i+=3;
+			}
+			else {
+				CUB_giraTrasEsquerda(cubo,1);
 			    //executa sentido horario
 				i+=2;
+			}
 		}
 
 			else if( comandos[i] == 'D'){
-			if ( comandos[i+1] == '\'')
+			if ( comandos[i+1] == '\''){
+				CUB_giraBaixoDireita(cubo,1);
 				//excuta sentido antihorario
-				i+=3
-			else 
+				i+=3;
+			}
+			else {
+				CUB_giraBaixoEsquerda(cubo,1);
 			    //executa sentido horario
 				i+=2;
+			}
 		}
 		else if( comandos[i] == 'F'){
-			if ( comandos[i+1] == '\'')
+			if ( comandos[i+1] == '\''){
+				CUB_giraFrenteDireita(cubo,1);
 				//excuta sentido antihorario
-				i+=3
+				i+=3;
+			}
 			else 
+				CUB_giraFrenteEsquerda(cubo, 1);
 			    //executa sentido horario
 				i+=2;
 		}
 		else if( comandos[i] == 'R'){
-			if ( comandos[i+1] == '\'')
+			if ( comandos[i+1] == '\''){
+				CUB_giraDireitaFrente(cubo,1);
 				//excuta sentido antihorario
-				i+=3
-			else 
+				i+=3;
+			}
+			else {
+				CUB_giraDireitaTras(cubo, 1);
 			    //executa sentido horario
 				i+=2;
+			}
 		}
 		else if( comandos[i] == 'L'){
-			if ( comandos[i+1] == '\'')
+			if ( comandos[i+1] == '\''){
+				CUB_giraEsquerdaTras(cubo,1);
 				//excuta sentido antihorario
-				i+=3
-			else 
+				i+=3;
+			}
+			else{ 
+				CUB_giraEsquerdaFrente(cubo,1);
 			    //executa sentido horario
 				i+=2;
+			}
 		}
 
 		
