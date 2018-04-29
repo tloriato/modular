@@ -208,7 +208,6 @@ int resolvidoAcima(CUB_tppCUBO cubo) {
 //	- 0
 //	- 1
 // 	- 2
-
 int resolveFrente(CUB_tppCUBO cubo) {
 
 	int restantes = 2;
@@ -275,7 +274,7 @@ int resolveFrente(CUB_tppCUBO cubo) {
 				executaAlgoritmo(cubo, "U U"); // Gira a peça
 				executaAlgoritmo(cubo, "U R U' R' U' F' U F"); // 2x pra Direita
 			}
-			else if (faceAresta1 == CIMA && linhaAresta1 == 2 && colunaAresta2 == 1) {
+			else if (faceAresta1 == CIMA && linhaAresta1 == 2 && colunaAresta1 == 1) {
 				// É um caso onde a peça está com orientação errada na posição de cima. Nós vamos mover ela para a posição certa na orientação errada, 
 				// depois iremos trazer ela de volta para a posição cima com a orientação certa, e ai movermos de novo para o lugar e orientação certos.
 				// Algoritmo Direita -> Algoritmo de Troca de Orientação do Lado direito, ou seja: Direita -> Direita -> U U -> Direita
@@ -463,7 +462,7 @@ int resolveEsquerda(CUB_tppCUBO cubo) {
 				restantes--;
 			}
 
-			else if (faceAresta2 == CIMA && linhaAresta2 == 1 && colunaAresta1 == 0) {
+			else if (faceAresta2 == CIMA && linhaAresta2 == 1 && colunaAresta2 == 0) {
 				executaAlgoritmo(cubo, "U' F' U F U' L U' L'"); // 1x pra Esquerda
 																// Algoritmo de trocar a orientação do lado esquerdo
 				executaAlgoritmo(cubo, "U' F' U F U' L U' L'"); // 1x pra Esquerda
