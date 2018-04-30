@@ -23,12 +23,237 @@
 #define BRANCO 5
 #define LARANJA 6
 
+int pecaDeCimaTrocada(int face, int faceAresta, int linhaAresta, int colunaAresta, int resolvidoPraCima) {
+
+	if (face == DIREITA) {
+		if (faceAresta == CIMA && linhaAresta == 1 && colunaAresta == 2 && resolvidoPraCima == 0) {
+			return 1;
+		}
+	}
+
+	else if (face == TRASEIRA) {
+		if (faceAresta == CIMA && linhaAresta == 0 && colunaAresta == 1 && resolvidoPraCima == 0) {
+			return 1;
+		}
+	}
+
+	else if (face == ESQUERDA) {
+		if (faceAresta == CIMA && linhaAresta == 1 && colunaAresta == 0 && resolvidoPraCima == 0) {
+			return 1;
+		}
+	}
+
+	else if (face == FRENTE) {
+		if (faceAresta == CIMA && linhaAresta == 2 && colunaAresta == 1 && resolvidoPraCima == 0) {
+			return 1;
+		}
+	}
+
+	return 0;
+}
+
+int resolveFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
+
+	if (cubo == NULL)
+		return -1;
+
+	int restantes = 2;
+
+	int corFrente, corCima, corDireita, corEsquerda, corTraseira, corBaixo;
+	int faceDireitaRelativa = 0, faceEsquerdaRelativa = 0;
+
+	int faceAresta1, linhaAresta1, colunaAresta1, cor1Aresta1, cor2Aresta1;
+	int faceAresta2, linhaAresta2, colunaAresta2, cor1Aresta2, cor2Aresta2;
+
+	char * algoDireita;
+	char * algoEsquerda;
+	char * algoIntermediario;
+
+	CUB_ChecarCorDaFace(&corFrente, cubo, 1, 1, FRENTE);
+	CUB_ChecarCorDaFace(&corCima, cubo, 1, 1, CIMA);
+	CUB_ChecarCorDaFace(&corDireita, cubo, 1, 1, DIREITA);
+	CUB_ChecarCorDaFace(&corEsquerda, cubo, 1, 1, ESQUERDA);
+	CUB_ChecarCorDaFace(&corTraseira, cubo, 1, 1, TRASEIRA);
+	CUB_ChecarCorDaFace(&corBaixo, cubo, 1, 1, BAIXO);
+
+	switch (face) {
+	case(FRENTE): {
+		cor1Aresta1 = corFrente;
+		cor1Aresta2 = corFrente;
+
+		cor2Aresta1 = corDireita;
+		cor2Aresta2 = corEsquerda;
+
+		if (resolvidoPraCima) {
+			return -1;
+
+		}
+		else {
+			algoDireita = "U R U' R' U' F' U F";
+			algoEsquerda = "U' L' U L U F U' F'";
+			algoIntermediario = "U U";
+		}
+
+		break;
+	}
+	case(DIREITA): {
+		cor1Aresta1 = corDireita;
+		cor1Aresta2 = corDireita;
+
+		cor2Aresta1 = corTraseira;
+		cor2Aresta2 = corFrente;
+
+		if (resolvidoPraCima) {
+			return -1;
+
+		}
+		else {
+			algoDireita = "U B U' B' U' R' U R";
+			algoEsquerda = "U' F' U F U R U' R'";
+			algoIntermediario = "U U";
+		}
+
+		break;
+	}
+	case(ESQUERDA): {
+		cor1Aresta1 = corEsquerda;
+		cor1Aresta2 = corEsquerda;
+
+		cor2Aresta1 = corFrente;
+		cor2Aresta2 = corTraseira;
+
+		if (resolvidoPraCima) {
+			return -1;
+
+		}
+		else {
+			algoDireita = "U F U' F' U' L' U L";
+			algoEsquerda = "U' B' U B U L U' L'";
+			algoIntermediario = "U U";
+		}
+
+		break;
+	}
+	case(TRASEIRA): {
+		cor1Aresta1 = corTraseira;
+		cor1Aresta2 = corTraseira;
+
+		cor2Aresta1 = corEsquerda;
+		cor2Aresta2 = corDireita;
+
+		if (resolvidoPraCima) {
+			return -1;
+
+		}
+		else {
+			algoDireita = "U L U' L' U' B' U B";
+			algoEsquerda = "U' R' U R U B U' B'";
+			algoIntermediario = "U U";
+		}
+
+		break;
+	}
+	default: {
+		return -1;
+	}
+	}
+
+	CUB_EncontrarPosicaoDePecaDeAresta(&faceAresta1, &linhaAresta1, &colunaAresta1, cubo, cor1Aresta1, cor2Aresta1);
+	CUB_EncontrarPosicaoDePecaDeAresta(&faceAresta2, &linhaAresta2, &colunaAresta2, cubo, cor1Aresta2, cor2Aresta2);
+
+	(face + 1) == 5 ? faceDireitaRelativa = 1 : (faceDireitaRelativa = (face + 1));
+	(face - 1) == 0 ? faceDireitaRelativa = 4 : (faceDireitaRelativa = (face - 1));
+
+
+	if (faceAresta1 == face && linhaAresta1 == 1 && colunaAresta1 == 2) {
+		// Aresta da Direita de [face] está resolvida
+		restantes--;
+	}
+
+	else {
+
+		if (resolvidoPraCima) {
+			// Cubo está resolvido para cima
+		}
+		else {
+
+			if (faceAresta1 == face && linhaAresta1 == 0 && colunaAresta1 == 1) {
+				// Algoritmo Cima -> Direita
+				executaAlgoritmo(cubo, algoDireita);
+				restantes--;
+			}
+
+			else if (faceAresta1 == faceDireitaRelativa && linhaAresta1 == 1 && colunaAresta1 == 0) {
+				// Algoritmo de trocar a orientação do lado direito
+				executaAlgoritmo(cubo, algoDireita);
+				executaAlgoritmo(cubo, algoIntermediario);
+				executaAlgoritmo(cubo, algoDireita);
+				restantes--;
+			}
+
+			else if (pecaDeCimaTrocada(face, faceAresta1, linhaAresta1, colunaAresta1, resolvidoPraCima)) {
+				// Algoritmo Cima -> Direita + Trocar orientação do lado direito
+				executaAlgoritmo(cubo, algoDireita);
+				executaAlgoritmo(cubo, algoDireita);
+				executaAlgoritmo(cubo, algoIntermediario);
+				executaAlgoritmo(cubo, algoDireita);
+				restantes--;
+			}
+
+		}
+
+	}
+
+	if (faceAresta2 == face && linhaAresta2 == 1 && colunaAresta2 == 0) {
+		// Aresta da Esquerda de [face] está resolvida
+		restantes--;
+	}
+
+	else {
+
+		if (resolvidoPraCima) {
+
+		}
+
+		else {
+
+			if (faceAresta2 == face && linhaAresta2 == 0 && colunaAresta2 == 1) {
+				// Algoritmo Cima -> Esquerda
+				executaAlgoritmo(cubo, algoEsquerda);
+				restantes--;
+
+			}
+
+			else if (faceAresta2 == faceEsquerdaRelativa && linhaAresta2 == 1 && colunaAresta2 == 2) {
+				// Algoritmo de trocar a orientação do lado esquerdo
+				executaAlgoritmo(cubo, algoEsquerda);
+				executaAlgoritmo(cubo, algoIntermediario);
+				executaAlgoritmo(cubo, algoEsquerda);
+				restantes--;
+
+			}
+
+			else if (pecaDeCimaTrocada(face, faceAresta2, linhaAresta2, colunaAresta2, resolvidoPraCima)) {
+				// Algoritmo Cima -> Esquerda + Trocar orientação do lado esquerda
+				executaAlgoritmo(cubo, algoEsquerda);
+				executaAlgoritmo(cubo, algoEsquerda);
+				executaAlgoritmo(cubo, algoIntermediario);
+				executaAlgoritmo(cubo, algoEsquerda);
+				restantes--;
+			}
+
+		}
+
+	}
+
+	return restantes;
+}
+
 // (config) ~> inteiro
 //	config = vetor de 54 inteiros
 //	inteiro =
 //		0 -> sucesso
 int populaCubo(int *config) {
-
 
 	// 1: Verde | 2: Vermelho | 3: Amarelo | 4: Azul | 5: Branco | 6: Laranja
 
@@ -123,6 +348,8 @@ int populaCubo(int *config) {
 //		-1 -> entradas invalidas (TODO)
 int executaAlgoritmo(CUB_tppCUBO cubo, char* algoritmo) {
 
+	printf("%s\n", algoritmo);
+
 	int i = 0;
 	int jump = 2;
 
@@ -179,7 +406,7 @@ int executaAlgoritmo(CUB_tppCUBO cubo, char* algoritmo) {
 	return 0;
 }
 
-// (cubo) -> Bool
+// (cubo) -> 1 | 0
 int resolvidoAcima(CUB_tppCUBO cubo) {
 	int corCima, aux1, aux2, aux3, aux4, aux5, aux6, aux7, aux8;
 
@@ -204,523 +431,6 @@ int resolvidoAcima(CUB_tppCUBO cubo) {
 	}
 }
 
-// (cubo) -> Int Restante
-// Restante: Número de peças fora de posição:
-//	- 0
-//	- 1
-// 	- 2
-int resolveFrente(CUB_tppCUBO cubo) {
-
-	int restantes = 2;
-
-	int corFrente, corCima, corDireita, corEsquerda, corTraseira, corBaixo;
-
-	int faceAresta1, linhaAresta1, colunaAresta1, cor1Aresta1, cor2Aresta1;
-	int faceAresta2, linhaAresta2, colunaAresta2, cor1Aresta2, cor2Aresta2;
-
-	CUB_ChecarCorDaFace(&corFrente, cubo, 1, 1, FRENTE);
-	CUB_ChecarCorDaFace(&corCima, cubo, 1, 1, CIMA);
-	CUB_ChecarCorDaFace(&corDireita, cubo, 1, 1, DIREITA);
-	CUB_ChecarCorDaFace(&corEsquerda, cubo, 1, 1, ESQUERDA);
-	CUB_ChecarCorDaFace(&corTraseira, cubo, 1, 1, TRASEIRA);
-	CUB_ChecarCorDaFace(&corBaixo, cubo, 1, 1, BAIXO);
-
-	cor1Aresta1 = corFrente;
-	cor1Aresta2 = corFrente;
-
-	cor2Aresta1 = corDireita;
-	cor2Aresta2 = corEsquerda;
-
-	printf("Cor da Face: %d \n Primeira Aresta: %d (cor ref.) %d (seg. cor) \n Segunda Aresta:  %d (cor ref.) %d (seg. cor)\n",
-		corFrente, cor1Aresta1, cor2Aresta1, cor1Aresta2, cor2Aresta2);
-
-	CUB_EncontrarPosicaoDePecaDeAresta(&faceAresta1, &linhaAresta1, &colunaAresta1, cubo, cor1Aresta1, cor2Aresta1);
-	CUB_EncontrarPosicaoDePecaDeAresta(&faceAresta2, &linhaAresta2, &colunaAresta2, cubo, cor1Aresta2, cor2Aresta2);
-
-	if (faceAresta1 == FRENTE && linhaAresta1 == 1 && colunaAresta1 == 2) {
-		// Aresta da Direita Resolvida
-		restantes--;
-	}
-	else {
-		// Tenta resolver a Aresta da Direita
-
-		if (resolvidoAcima(cubo)) {
-			// Face resolvida está para cima
-
-			if (faceAresta1 == FRENTE && linhaAresta1 == 2 && colunaAresta1 == 1) {
-				// Algoritmo Cima -> Direita Invertido, "Baixo -> Direita" 
-				// pois o cubo está de cabeça pra baixo
-				// Later
-			}
-			else if (faceAresta1 == DIREITA && linhaAresta1 == 1 && colunaAresta1 == 0) {
-				// Algoritmo de trocar de orientação do lado direito invertido
-				// Later
-			}
-		}
-		else {
-			// Face resolvida está para baixo
-
-			if (faceAresta1 == FRENTE && linhaAresta1 == 0 && colunaAresta1 == 1) {
-				// Algoritmo Cima -> Direita
-				executaAlgoritmo(cubo, "U R U' R' U' F' U F");
-				restantes--;
-			}
-			else if (faceAresta1 == DIREITA && linhaAresta1 == 1 && colunaAresta1 == 0) {
-				// Algoritmo de trocar a orientação do lado direito
-				executaAlgoritmo(cubo, "U R U' R' U' F' U F"); // 1x pra Direita
-				executaAlgoritmo(cubo, "U U"); // Gira a peça
-				executaAlgoritmo(cubo, "U R U' R' U' F' U F"); // 2x pra Direita
-			}
-			else if (faceAresta1 == CIMA && linhaAresta1 == 2 && colunaAresta1 == 1) {
-				// É um caso onde a peça está com orientação errada na posição de cima. Nós vamos mover ela para a posição certa na orientação errada, 
-				// depois iremos trazer ela de volta para a posição cima com a orientação certa, e ai movermos de novo para o lugar e orientação certos.
-				// Algoritmo Direita -> Algoritmo de Troca de Orientação do Lado direito, ou seja: Direita -> Direita -> U U -> Direita
-				// ps: uma solução mais elegante seria apenas realizar a primeira mudança, deixando a segunda para o próximo loop ou função :)
-				executaAlgoritmo(cubo, "U R U' R' U' F' U F");
-				executaAlgoritmo(cubo, "U R U' R' U' F' U F");
-				executaAlgoritmo(cubo, "U U");
-				executaAlgoritmo(cubo, "U R U' R' U' F' U F");
-				restantes--;
-
-			}
-		}
-	}
-
-	if (faceAresta2 == FRENTE && linhaAresta2 == 1 && colunaAresta2 == 0) {
-		// Aresta da Esquerda Resolvida
-		restantes--;
-	}
-	else {
-		// Tenta resolver a Aresta da Esquerda
-
-		if (resolvidoAcima(cubo)) {
-			// Face resolvida está para cima
-			if (faceAresta2 == FRENTE && linhaAresta2 == 2 && colunaAresta2 == 1) {
-				// Algoritmo Cima -> Esquerda invertido, "Baixo -> Esquerda",
-				// pois o cubo está de cabeça para baixo
-				// Later
-			}
-			else if (faceAresta2 == ESQUERDA && linhaAresta2 == 1 && colunaAresta2 == 2) {
-				// Algoritmo de trocar de orientação do lado esquerdo invertido
-				// Later
-			}
-
-		}
-		else {
-			// Face resolvida está para baixo
-			if (faceAresta2 == FRENTE && linhaAresta2 == 0 && colunaAresta2 == 1) {
-				// Algoritmo Cima -> Esquerda
-				executaAlgoritmo(cubo, "U' L' U L U F U' F'");
-				restantes--;
-			}
-			else if (faceAresta2 == ESQUERDA && linhaAresta2 == 1 && colunaAresta2 == 2) {
-				// Algoritmo de trocar a orientação do lado esquerdo
-				executaAlgoritmo(cubo, "U' L' U L U F U' F'"); // 1x pra Esquerda
-				executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
-				executaAlgoritmo(cubo, "U' L' U L U F U' F'"); // 2x pra Esquerda
-				restantes--;
-			}
-			else if (faceAresta2 == CIMA && linhaAresta2 == 2 && colunaAresta2 == 1) {
-				executaAlgoritmo(cubo, "U' L' U L U F U' F'"); // 1x pra Esquerda
-				executaAlgoritmo(cubo, "U' L' U L U F U' F'"); // 1x pra Esquerda
-				executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
-				executaAlgoritmo(cubo, "U' L' U L U F U' F'"); // 2x pra Esquerda
-				restantes--;
-			}
-		}
-	}
-
-	return restantes;
-}
-
-// (cubo) -> Int Restante
-// Restante: Número de peças fora de posição:
-//	- 0
-//	- 1
-// 	- 2
-int resolveEsquerda(CUB_tppCUBO cubo) {
-
-	int restantes = 2;
-
-	int corFrente, corCima, corDireita, corEsquerda, corTraseira, corBaixo;
-
-	int faceAresta1, linhaAresta1, colunaAresta1, cor1Aresta1, cor2Aresta1;
-	int faceAresta2, linhaAresta2, colunaAresta2, cor1Aresta2, cor2Aresta2;
-
-	CUB_ChecarCorDaFace(&corFrente, cubo, 1, 1, FRENTE);
-	CUB_ChecarCorDaFace(&corCima, cubo, 1, 1, CIMA);
-	CUB_ChecarCorDaFace(&corDireita, cubo, 1, 1, DIREITA);
-	CUB_ChecarCorDaFace(&corEsquerda, cubo, 1, 1, ESQUERDA);
-	CUB_ChecarCorDaFace(&corTraseira, cubo, 1, 1, TRASEIRA);
-	CUB_ChecarCorDaFace(&corBaixo, cubo, 1, 1, BAIXO);
-
-	cor1Aresta1 = corEsquerda;
-	cor1Aresta2 = corEsquerda;
-
-	cor2Aresta1 = corFrente;
-	cor2Aresta2 = corTraseira;
-
-	printf("Cor da Face: %d \n Primeira Aresta: %d (cor ref.) %d (seg. cor) \n Segunda Aresta:  %d (cor ref.) %d (seg. cor)\n",
-		corEsquerda, cor1Aresta1, cor2Aresta1, cor1Aresta2, cor2Aresta2);
-
-	CUB_EncontrarPosicaoDePecaDeAresta(&faceAresta1, &linhaAresta1, &colunaAresta1, cubo, cor1Aresta1, cor2Aresta1);
-	CUB_EncontrarPosicaoDePecaDeAresta(&faceAresta2, &linhaAresta2, &colunaAresta2, cubo, cor1Aresta2, cor2Aresta2);
-
-	if (faceAresta1 == ESQUERDA && linhaAresta1 == 1 && colunaAresta1 == 2) {
-		// Aresta da Direita Resolvida
-		restantes--;
-	}
-	else {
-		// Tenta resolver a Aresta da Direita
-
-		if (resolvidoAcima(cubo)) {
-			// Face resolvida está para cima
-
-			if (faceAresta1 == ESQUERDA && linhaAresta1 == 2 && colunaAresta1 == 1) {
-				// Algoritmo Cima -> Direita Invertido, "Baixo -> Direita" 
-				// pois o cubo está de cabeça pra baixo
-				// Later
-			}
-			else if (faceAresta1 == FRENTE && linhaAresta1 == 1 && colunaAresta1 == 0) {
-				// Algoritmo de trocar de orientação do lado direito invertido
-				// Later
-			}
-		}
-		else {
-			// Face resolvida está para baixo
-
-			if (faceAresta1 == ESQUERDA && linhaAresta1 == 0 && colunaAresta1 == 1) {
-				// Algoritmo Cima -> Direita
-				executaAlgoritmo(cubo, "U F U' F' U' L' U L");
-				restantes--;
-			}
-			else if (faceAresta1 == FRENTE && linhaAresta1 == 1 && colunaAresta1 == 0) {
-				// Algoritmo de trocar a orientação do lado direito
-				executaAlgoritmo(cubo, "U F U' F' U' L' U L"); // 1x pra Direita
-				executaAlgoritmo(cubo, "U U"); // Gira a peça
-				executaAlgoritmo(cubo, "U F U' F' U' L' U L"); // 1x pra Direita
-				restantes--;
-			}
-
-			else if (faceAresta1 == CIMA && linhaAresta1 == 1 && colunaAresta1 == 0) {
-				executaAlgoritmo(cubo, "U F U' F' U' L' U L"); // 1x pra Direita
-				executaAlgoritmo(cubo, "U F U' F' U' L' U L"); // 1x pra Direita
-				executaAlgoritmo(cubo, "U U"); // Gira a peça
-				executaAlgoritmo(cubo, "U F U' F' U' L' U L"); // 1x pra Direita
-				restantes--;
-			}
-		}
-	}
-
-	if (faceAresta2 == ESQUERDA && linhaAresta2 == 1 && colunaAresta2 == 0) {
-		// Aresta da Esquerda Resolvida
-		restantes--;
-	}
-	else {
-		// Tenta resolver a Aresta da Esquerda
-
-		if (resolvidoAcima(cubo)) {
-			// Face resolvida está para cima
-			if (faceAresta2 == ESQUERDA && linhaAresta2 == 2 && colunaAresta2 == 1) {
-				// Algoritmo Cima -> Esquerda invertido, "Baixo -> Esquerda",
-				// pois o cubo está de cabeça para baixo
-				// Later
-			}
-			else if (faceAresta2 == TRASEIRA && linhaAresta2 == 1 && colunaAresta2 == 2) {
-				// Algoritmo de trocar de orientação do lado esquerdo invertido
-				// Later
-			}
-
-		}
-		else {
-			// Face resolvida está para baixo
-			if (faceAresta2 == ESQUERDA && linhaAresta2 == 0 && colunaAresta2 == 1) {
-				// Algoritmo Cima -> Esquerda
-				executaAlgoritmo(cubo, "U' B' U B U L U' L'");
-				restantes--;
-			}
-			else if (faceAresta2 == TRASEIRA && linhaAresta2 == 1 && colunaAresta2 == 2) {
-				// Algoritmo de trocar a orientação do lado esquerdo
-				executaAlgoritmo(cubo, "U' B' U B U L U' L'"); // 1x pra Esquerda
-				executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
-				executaAlgoritmo(cubo, "U' B' U B U L U' L'"); // 2x pra Esquerda
-				restantes--;
-			}
-
-			else if (faceAresta2 == CIMA && linhaAresta2 == 1 && colunaAresta2 == 0) {
-				executaAlgoritmo(cubo, "U' B' U B U L U' L'"); // 1x pra Esquerda
-															   // Algoritmo de trocar a orientação do lado esquerdo
-				executaAlgoritmo(cubo, "U' B' U B U L U' L'"); // 1x pra Esquerda
-				executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
-				executaAlgoritmo(cubo, "U' B' U B U L U' L'"); // 1x pra Esquerda
-				restantes--;
-			}
-		}
-	}
-
-	return restantes;
-}
-
-// (cubo) -> Int Restante
-// Restante: Número de peças fora de posição:
-//	- 0
-//	- 1
-// 	- 2
-int resolveDireita(CUB_tppCUBO cubo) {
-
-	int restantes = 2;
-
-	int corFrente, corCima, corDireita, corEsquerda, corTraseira, corBaixo;
-
-	int faceAresta1, linhaAresta1, colunaAresta1, cor1Aresta1, cor2Aresta1;
-	int faceAresta2, linhaAresta2, colunaAresta2, cor1Aresta2, cor2Aresta2;
-
-	CUB_ChecarCorDaFace(&corFrente, cubo, 1, 1, FRENTE);
-	CUB_ChecarCorDaFace(&corCima, cubo, 1, 1, CIMA);
-	CUB_ChecarCorDaFace(&corDireita, cubo, 1, 1, DIREITA);
-	CUB_ChecarCorDaFace(&corEsquerda, cubo, 1, 1, ESQUERDA);
-	CUB_ChecarCorDaFace(&corTraseira, cubo, 1, 1, TRASEIRA);
-	CUB_ChecarCorDaFace(&corBaixo, cubo, 1, 1, BAIXO);
-
-	cor1Aresta1 = corDireita;
-	cor1Aresta2 = corDireita;
-
-	cor2Aresta1 = corTraseira;
-	cor2Aresta2 = corFrente;
-
-	printf("Cor da Face: %d \n Primeira Aresta: %d (cor ref.) %d (seg. cor) \n Segunda Aresta:  %d (cor ref.) %d (seg. cor)\n",
-		corDireita, cor1Aresta1, cor2Aresta1, cor1Aresta2, cor2Aresta2);
-
-	CUB_EncontrarPosicaoDePecaDeAresta(&faceAresta1, &linhaAresta1, &colunaAresta1, cubo, cor1Aresta1, cor2Aresta1);
-	CUB_EncontrarPosicaoDePecaDeAresta(&faceAresta2, &linhaAresta2, &colunaAresta2, cubo, cor1Aresta2, cor2Aresta2);
-
-	if (faceAresta1 == DIREITA && linhaAresta1 == 1 && colunaAresta1 == 2) {
-		// Aresta da Direita Resolvida
-		restantes--;
-	}
-	else {
-		// Tenta resolver a Aresta da Direita
-
-		if (resolvidoAcima(cubo)) {
-			// Face resolvida está para cima
-
-			if (faceAresta1 == DIREITA && linhaAresta1 == 2 && colunaAresta1 == 1) {
-				// Algoritmo Cima -> Direita Invertido, "Baixo -> Direita" 
-				// pois o cubo está de cabeça pra baixo
-				// Later
-			}
-			else if (faceAresta1 == TRASEIRA && linhaAresta1 == 1 && colunaAresta1 == 0) {
-				// Algoritmo de trocar de orientação do lado direito invertido
-				// Later
-			}
-		}
-		else {
-			// Face resolvida está para baixo
-
-			if (faceAresta1 == DIREITA && linhaAresta1 == 0 && colunaAresta1 == 1) {
-				// Algoritmo Cima -> Direita
-				executaAlgoritmo(cubo, "U B U' B' U' R' U R");
-				restantes--;
-			}
-			else if (faceAresta1 == TRASEIRA && linhaAresta1 == 1 && colunaAresta1 == 0) {
-				// Algoritmo de trocar a orientação do lado direito
-				executaAlgoritmo(cubo, "U B U' B' U' R' U R"); // 1x pra Direita
-				executaAlgoritmo(cubo, "U U"); // Gira a peça
-				executaAlgoritmo(cubo, "U B U' B' U' R' U R"); // 2x pra Direita
-				restantes--;
-			}
-
-			else if (faceAresta1 == CIMA && linhaAresta1 == 1 && colunaAresta1 == 2) {
-				executaAlgoritmo(cubo, "U B U' B' U' R' U R"); // 1x pra Direita
-															   // Algoritmo de trocar a orientação do lado direito
-				executaAlgoritmo(cubo, "U B U' B' U' R' U R"); // 1x pra Direita
-				executaAlgoritmo(cubo, "U U"); // Gira a peça
-				executaAlgoritmo(cubo, "U B U' B' U' R' U R"); // 2x pra Direita
-				restantes--;
-			}
-		}
-	}
-
-	if (faceAresta2 == DIREITA && linhaAresta2 == 1 && colunaAresta2 == 0) {
-		// Aresta da Esquerda Resolvida
-		restantes--;
-	}
-	else {
-		// Tenta resolver a Aresta da Esquerda
-
-		if (resolvidoAcima(cubo)) {
-			// Face resolvida está para cima
-			if (faceAresta2 == DIREITA && linhaAresta2 == 2 && colunaAresta2 == 1) {
-				// Algoritmo Cima -> Esquerda invertido, "Baixo -> Esquerda",
-				// pois o cubo está de cabeça para baixo
-				// Later
-			}
-			else if (faceAresta2 == FRENTE && linhaAresta2 == 1 && colunaAresta2 == 2) {
-				// Algoritmo de trocar de orientação do lado esquerdo invertido
-				// Later
-			}
-
-		}
-		else {
-			// Face resolvida está para baixo
-			if (faceAresta2 == DIREITA && linhaAresta2 == 0 && colunaAresta2 == 1) {
-				// Algoritmo Cima -> Esquerda
-				executaAlgoritmo(cubo, "U' F' U F U R U' R'");
-				restantes--;
-			}
-			else if (faceAresta2 == FRENTE && linhaAresta2 == 1 && colunaAresta2 == 2) {
-				// Algoritmo de trocar a orientação do lado esquerdo
-				executaAlgoritmo(cubo, "U' F' U F U R U' R'"); // 1x pra Esquerda
-				executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
-				executaAlgoritmo(cubo, "U' F' U F U R U' R'"); // 2x pra Esquerda
-				restantes--;
-			}
-
-			else if (faceAresta2 == CIMA && linhaAresta2 == 1 && colunaAresta2 == 2) {
-				executaAlgoritmo(cubo, "U' F' U F U R U' R'"); // 1x pra Esquerda
-															   // Algoritmo de trocar a orientação do lado esquerdo
-				executaAlgoritmo(cubo, "U' F' U F U R U' R'"); // 1x pra Esquerda
-				executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
-				executaAlgoritmo(cubo, "U' F' U F U R U' R'"); // 2x pra Esquerda
-				restantes--;
-			}
-		}
-	}
-
-	return restantes;
-}
-
-// (cubo) -> Int Restante
-// Restante: Número de peças fora de posição:
-//	- 0
-//	- 1
-// 	- 2
-int resolveTraseira(CUB_tppCUBO cubo) {
-
-	int restantes = 2;
-
-	int corFrente, corCima, corDireita, corEsquerda, corTraseira, corBaixo;
-
-	int faceAresta1, linhaAresta1, colunaAresta1, cor1Aresta1, cor2Aresta1;
-	int faceAresta2, linhaAresta2, colunaAresta2, cor1Aresta2, cor2Aresta2;
-
-	CUB_ChecarCorDaFace(&corFrente, cubo, 1, 1, FRENTE);
-	CUB_ChecarCorDaFace(&corCima, cubo, 1, 1, CIMA);
-	CUB_ChecarCorDaFace(&corDireita, cubo, 1, 1, DIREITA);
-	CUB_ChecarCorDaFace(&corEsquerda, cubo, 1, 1, ESQUERDA);
-	CUB_ChecarCorDaFace(&corTraseira, cubo, 1, 1, TRASEIRA);
-	CUB_ChecarCorDaFace(&corBaixo, cubo, 1, 1, BAIXO);
-
-	cor1Aresta1 = corTraseira;
-	cor1Aresta2 = corTraseira;
-
-	cor2Aresta1 = corEsquerda;
-	cor2Aresta2 = corDireita;
-
-	printf("Cor da Face: %d \n Primeira Aresta: %d (cor ref.) %d (seg. cor) \n Segunda Aresta:  %d (cor ref.) %d (seg. cor)\n",
-		corTraseira, cor1Aresta1, cor2Aresta1, cor1Aresta2, cor2Aresta2);
-
-
-	CUB_EncontrarPosicaoDePecaDeAresta(&faceAresta1, &linhaAresta1, &colunaAresta1, cubo, cor1Aresta1, cor2Aresta1);
-	CUB_EncontrarPosicaoDePecaDeAresta(&faceAresta2, &linhaAresta2, &colunaAresta2, cubo, cor1Aresta2, cor2Aresta2);
-
-	if (faceAresta1 == TRASEIRA && linhaAresta1 == 1 && colunaAresta1 == 2) {
-		// Aresta da Direita Resolvida
-		restantes--;
-	}
-	else {
-		// Tenta resolver a Aresta da Direita
-
-		if (resolvidoAcima(cubo)) {
-			// Face resolvida está para cima
-
-			if (faceAresta1 == TRASEIRA && linhaAresta1 == 2 && colunaAresta1 == 1) {
-				// Algoritmo Cima -> Direita Invertido, "Baixo -> Direita" 
-				// pois o cubo está de cabeça pra baixo
-				// Later
-			}
-			else if (faceAresta1 == ESQUERDA && linhaAresta1 == 1 && colunaAresta1 == 0) {
-				// Algoritmo de trocar de orientação do lado direito invertido
-				// Later
-			}
-		}
-		else {
-			// Face resolvida está para baixo
-
-			if (faceAresta1 == TRASEIRA && linhaAresta1 == 0 && colunaAresta1 == 1) {
-				// Algoritmo Cima -> Direita
-				executaAlgoritmo(cubo, "U L U' L' U' B' U B");
-				restantes--;
-			}
-			else if (faceAresta1 == ESQUERDA && linhaAresta1 == 1 && colunaAresta1 == 0) {
-				// Algoritmo de trocar a orientação do lado direito
-				executaAlgoritmo(cubo, "U L U' L' U' B' U B"); // 1x pra Direita
-				executaAlgoritmo(cubo, "U U"); // Gira a peça
-				executaAlgoritmo(cubo, "U L U' L' U' B' U B"); // 2x pra Direita
-				restantes--;
-			}
-
-			else if (faceAresta1 == CIMA && linhaAresta1 == 0 && colunaAresta1 == 1) {
-				executaAlgoritmo(cubo, "U L U' L' U' B' U B"); // 1x pra Direita
-															   // Algoritmo de trocar a orientação do lado direito
-				executaAlgoritmo(cubo, "U L U' L' U' B' U B"); // 1x pra Direita
-				executaAlgoritmo(cubo, "U U"); // Gira a peça
-				executaAlgoritmo(cubo, "U L U' L' U' B' U B"); // 2x pra Direita
-				restantes--;
-			}
-		}
-	}
-
-	if (faceAresta2 == TRASEIRA && linhaAresta2 == 1 && colunaAresta2 == 0) {
-		// Aresta da Esquerda Resolvida
-		restantes--;
-	}
-	else {
-		// Tenta resolver a Aresta da Esquerda
-
-		if (resolvidoAcima(cubo)) {
-			// Face resolvida está para cima
-			if (faceAresta2 == TRASEIRA && linhaAresta2 == 2 && colunaAresta2 == 1) {
-				// Algoritmo Cima -> Esquerda invertido, "Baixo -> Esquerda",
-				// pois o cubo está de cabeça para baixo
-				// Later
-			}
-			else if (faceAresta2 == DIREITA && linhaAresta2 == 1 && colunaAresta2 == 2) {
-				// Algoritmo de trocar de orientação do lado esquerdo invertido
-				// Later
-			}
-
-		}
-		else {
-			// Face resolvida está para baixo
-			if (faceAresta2 == TRASEIRA && linhaAresta2 == 0 && colunaAresta2 == 1) {
-				// Algoritmo Cima -> Esquerda
-				executaAlgoritmo(cubo, "U' R' U R U B U' B'");
-				restantes--;
-			}
-			else if (faceAresta2 == DIREITA && linhaAresta2 == 1 && colunaAresta2 == 2) {
-				// Algoritmo de trocar a orientação do lado esquerdo
-				executaAlgoritmo(cubo, "U' R' U R U B U' B'"); // 1x pra Esquerda
-				executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
-				executaAlgoritmo(cubo, "U' R' U R U B U' B'"); // 2x pra Esquerda
-				restantes--;
-			}
-
-			else if (faceAresta2 == CIMA && linhaAresta2 == 0 && colunaAresta2 == 1) {
-				executaAlgoritmo(cubo, "U' R' U R U B U' B'"); // 1x pra Esquerda
-															   // Algoritmo de trocar a orientação do lado esquerdo
-				executaAlgoritmo(cubo, "U' R' U R U B U' B'"); // 1x pra Esquerda
-				executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
-				executaAlgoritmo(cubo, "U' R' U R U B U' B'"); // 2x pra Esquerda
-				restantes--;
-
-			}
-		}
-	}
-
-	return restantes;
-}
-
 int aux(int a, int b, int c, int d) {
 	if (a == 0 && b == 0 && c == 0 && d == 0) {
 		return 0;
@@ -730,7 +440,7 @@ int aux(int a, int b, int c, int d) {
 }
 
 int forcaCuboFrente(CUB_tppCUBO cubo) {
-	
+
 	int alterado = 0;
 
 	int corFrente, corCima, corDireita, corEsquerda, corTraseira, corBaixo;
@@ -771,7 +481,7 @@ int forcaCuboFrente(CUB_tppCUBO cubo) {
 		return 1;
 	}
 
-	else if (faceAresta1 == ESQUERDA &&  linhaAresta1 == 1 && colunaAresta1 == 2) {
+	else if (faceAresta1 == ESQUERDA && linhaAresta1 == 1 && colunaAresta1 == 2) {
 		// Aresta da Direita está na Direita da Face Esquerda
 		// Algorima Cima <> Direita [da Esquerda]
 		executaAlgoritmo(cubo, "U F U' F' U' L' U L");
@@ -782,7 +492,7 @@ int forcaCuboFrente(CUB_tppCUBO cubo) {
 		// Aresta da Direita está na Esquerda da Face Traseira
 		// Algoritmo Cima <> Esquerda [da Traseira]
 		executaAlgoritmo(cubo, "U' R' U R U B U' B'");
-		
+
 		return 1;
 	}
 
@@ -798,7 +508,7 @@ int forcaCuboFrente(CUB_tppCUBO cubo) {
 		// Aresta da Esquerda está na Esquerda da Face Direita
 		// Algoritmo Cima <> Esquerda [da Direita]
 		executaAlgoritmo(cubo, "U' F' U F U R U' R'");
-		
+
 		return 1;
 	}
 
@@ -815,7 +525,7 @@ int forcaCuboFrente(CUB_tppCUBO cubo) {
 		// Algoritmo Cima <> Esquerda [da Esquerda]
 		executaAlgoritmo(cubo, "U' B' U B U L U' L'");
 
-		return 1;	
+		return 1;
 	}
 
 	else if (faceAresta2 == TRASEIRA && linhaAresta2 == 1 && colunaAresta2 == 0) {
@@ -837,6 +547,83 @@ int forcaCuboFrente(CUB_tppCUBO cubo) {
 	return 0;
 }
 
+int resolveCubo(CUB_tppCUBO cubo) {
+	int r = 1, j = 1, i = 0;
+
+	int primeiraFrente = 2, segundaFrente = 2;
+	int primeiraDireita = 2, segundaDireita = 2;
+	int primeiraTraseira = 2, segundaTraseira = 2;
+	int primeiraEsquerda = 2, segundaEsquerda = 2;
+
+	int resolvidoPraCima = resolvidoAcima(cubo);
+
+	while (r) {
+
+
+		if (i == 3) {
+			// força o cubo
+			i = 0;
+
+			forcaCuboFrente(cubo);
+		}
+
+		if (j == 0) {
+			j++;
+
+			printf("Frente: \n");
+			primeiraFrente = resolveFace(cubo, FRENTE, resolvidoPraCima);
+			printf("Restantes: %d\n", primeiraFrente);
+
+			printf("Direita: \n");
+			primeiraDireita = resolveFace(cubo, DIREITA, resolvidoPraCima);
+			printf("Restantes: %d\n", primeiraDireita);
+
+			printf("Traseira: \n");
+			primeiraTraseira = resolveFace(cubo, TRASEIRA, resolvidoPraCima);
+			printf("Restantes: %d\n", primeiraTraseira);
+
+			printf("Esquerda: \n");
+			primeiraEsquerda = resolveFace(cubo, ESQUERDA, resolvidoPraCima);
+			printf("Restantes: %d\n", primeiraEsquerda);
+
+			r = aux(primeiraFrente, primeiraDireita, primeiraTraseira, primeiraEsquerda);
+		}
+		else if (j == 1) {
+			j++;
+
+			printf("Frente: \n");
+			segundaFrente = resolveFace(cubo, FRENTE, resolvidoPraCima);
+			printf("Restantes: %d\n", segundaFrente);
+
+			printf("Direita: \n");
+			segundaDireita = resolveFace(cubo, DIREITA, resolvidoPraCima);
+			printf("Restantes: %d\n", segundaDireita);
+
+			printf("Traseira: \n");
+			segundaTraseira = resolveFace(cubo, TRASEIRA, resolvidoPraCima);
+			printf("Restantes: %d\n", segundaTraseira);
+
+			printf("Esquerda: \n");
+			segundaEsquerda = resolveFace(cubo, ESQUERDA, resolvidoPraCima);
+			printf("Restantes: %d\n", segundaEsquerda);
+
+			r = aux(segundaFrente, segundaDireita, segundaTraseira, segundaEsquerda);
+		}
+		else if (j == 2) {
+			// Move o layer de cima/baixo do cubo
+			j = 0;
+			i++;
+
+			if (segundaFrente == primeiraFrente && segundaDireita == primeiraDireita && segundaTraseira == primeiraTraseira && segundaEsquerda == primeiraEsquerda) {
+				executaAlgoritmo(cubo, "U");
+			}
+		}
+	}
+}
+
+
+
+
 void main() {
 
 	int i, j = 0;
@@ -850,81 +637,9 @@ void main() {
 
 	CUB_ExibirCUBO(cubo);
 
-	int r = 1, a = 0, b = 0, c = 0, d = 0;
-	int oldA = 2, oldB = 2, oldC = 2, oldD = 2;
-
-	int primeiraFrente = 2, segundaFrente = 2;
-	int primeiraDireita = 2, segundaDireita = 2;
-	int primeiraTraseira = 2, segundaTraseira = 2;
-	int primeiraEsquerda = 2, segundaEsquerda = 2;
-
-	i = 0;
-	j = 1;
-	while (r) {
-		
-
-		if (i == 3) {
-			// força o cubo
-			i = 0;
-
-			forcaCuboFrente(cubo);
-		}
-
-		if (j == 0) {
-			j++;
-
-			printf("Frente: \n");
-			primeiraFrente = resolveFrente(cubo);
-			printf("Restantes: %d\n", primeiraFrente);
-
-			printf("Direita: \n");
-			primeiraDireita = resolveDireita(cubo);
-			printf("Restantes: %d\n", primeiraDireita);
-
-			printf("Traseira: \n");
-			primeiraTraseira = resolveTraseira(cubo);
-			printf("Restantes: %d\n", primeiraTraseira);
-
-			printf("Esquerda: \n");
-			primeiraEsquerda = resolveEsquerda(cubo);
-			printf("Restantes: %d\n", primeiraEsquerda);
-
-			r = aux(primeiraFrente, primeiraDireita, primeiraTraseira, primeiraEsquerda);
-		}
-		else if (j == 1) {
-			j++;
-
-			printf("Frente: \n");
-			segundaFrente = resolveFrente(cubo);
-			printf("Restantes: %d\n", segundaFrente);
-
-			printf("Direita: \n");
-			segundaDireita = resolveDireita(cubo);
-			printf("Restantes: %d\n", segundaDireita);
-
-			printf("Traseira: \n");
-			segundaTraseira = resolveTraseira(cubo);
-			printf("Restantes: %d\n", segundaTraseira);
-
-			printf("Esquerda: \n");
-			segundaEsquerda = resolveEsquerda(cubo);
-			printf("Restantes: %d\n", segundaEsquerda);
-			
-			r = aux(segundaFrente, segundaDireita, segundaTraseira, segundaEsquerda);
-		}
-		else if (j == 2) {
-			// Move o layer de cima/baixo do cubo
-			j = 0;
-			i++; 
-
-			if (segundaFrente == primeiraFrente && segundaDireita == primeiraDireita && segundaTraseira == primeiraTraseira && segundaEsquerda == primeiraEsquerda) {
-				executaAlgoritmo(cubo, "U");
-			}	
-		}
-	}
+	resolveCubo(cubo);
 
 	CUB_ExibirCUBO(cubo);
-	printf("Loops: %d\n", i);
 
 	system("pause");
 
