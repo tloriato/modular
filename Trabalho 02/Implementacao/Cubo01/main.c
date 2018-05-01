@@ -568,43 +568,19 @@ int resolveCubo(CUB_tppCUBO cubo) {
 		if (j == 0) {
 			j++;
 
-			printf("Frente: \n");
 			primeiraFrente = resolveArestaDeFace(cubo, FRENTE, resolvidoPraCima);
-			printf("Restantes: %d\n", primeiraFrente);
-
-			printf("Direita: \n");
 			primeiraDireita = resolveArestaDeFace(cubo, DIREITA, resolvidoPraCima);
-			printf("Restantes: %d\n", primeiraDireita);
-
-			printf("Traseira: \n");
 			primeiraTraseira = resolveArestaDeFace(cubo, TRASEIRA, resolvidoPraCima);
-			printf("Restantes: %d\n", primeiraTraseira);
-
-			printf("Esquerda: \n");
 			primeiraEsquerda = resolveArestaDeFace(cubo, ESQUERDA, resolvidoPraCima);
-			printf("Restantes: %d\n", primeiraEsquerda);
-
 			r = aux(primeiraFrente, primeiraDireita, primeiraTraseira, primeiraEsquerda);
 		}
 		else if (j == 1) {
 			j++;
 
-			printf("Frente: \n");
 			segundaFrente = resolveArestaDeFace(cubo, FRENTE, resolvidoPraCima);
-			printf("Restantes: %d\n", segundaFrente);
-
-			printf("Direita: \n");
 			segundaDireita = resolveArestaDeFace(cubo, DIREITA, resolvidoPraCima);
-			printf("Restantes: %d\n", segundaDireita);
-
-			printf("Traseira: \n");
 			segundaTraseira = resolveArestaDeFace(cubo, TRASEIRA, resolvidoPraCima);
-			printf("Restantes: %d\n", segundaTraseira);
-
-			printf("Esquerda: \n");
 			segundaEsquerda = resolveArestaDeFace(cubo, ESQUERDA, resolvidoPraCima);
-			printf("Restantes: %d\n", segundaEsquerda);
-
 			r = aux(segundaFrente, segundaDireita, segundaTraseira, segundaEsquerda);
 		}
 		else if (j == 2) {
