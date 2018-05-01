@@ -114,7 +114,6 @@
 		if (faceAresta1 == FRENTE && linhaAresta1 == 1 && colunaAresta1 == 2) {
 			// Aresta da Direita Resolvida
 			restantes--;
-			printf("Peca na posicao desejada\n");
 			return C2C_CondRetOK; 
 		}
 		else {
@@ -140,7 +139,6 @@
 					// Algoritmo Cima -> Direita
 					executaAlgoritmo(cubo, "U R U' R' U' F' U F");
 					restantes--;
-					printf("Execute U R U' R' U' F' U F \n");
 					return C2C_CondRetOK; 
 				}
 				else if (faceAresta1 == DIREITA && linhaAresta1 == 1 && colunaAresta1 == 0) {
@@ -149,7 +147,6 @@
 					executaAlgoritmo(cubo, "U U"); // Gira a peça
 					executaAlgoritmo(cubo, "U R U' R' U' F' U F"); // 2x pra Direita
 					restantes--;
-					printf("Execute U R U' R' U' F' U F, em seguida U U e depois U R U' R' U' F' U F \n");
 					return C2C_CondRetOK; 
 				}
 				else if (faceAresta1 == CIMA && linhaAresta1 == 2 && colunaAresta1 == 1) {
@@ -162,7 +159,6 @@
 					executaAlgoritmo(cubo, "U U");
 					executaAlgoritmo(cubo, "U R U' R' U' F' U F");
 					restantes--;
-					printf("Execute 2 vezes U R U' R' U' F' U F, em seguida U U e depois U R U' R' U' F' U F \n");
 					return C2C_CondRetOK; 
 
 				}
@@ -172,7 +168,6 @@
 		if (faceAresta2 == FRENTE && linhaAresta2 == 1 && colunaAresta2 == 0) {
 			// Aresta da Esquerda Resolvida
 			restantes--;
-			printf("Peca na posicao desejada\n");
 			return C2C_CondRetOK; 
 		}
 		else {
@@ -197,7 +192,6 @@
 					// Algoritmo Cima -> Esquerda
 					executaAlgoritmo(cubo, "U' L' U L U F U' F'");
 					restantes--;
-					printf("Execute U' L' U L U F U' F' \n");
 					return C2C_CondRetOK; 
 				}
 				else if (faceAresta2 == ESQUERDA && linhaAresta2 == 1 && colunaAresta2 == 2) {
@@ -206,7 +200,6 @@
 					executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
 					executaAlgoritmo(cubo, "U' L' U L U F U' F'"); // 2x pra Esquerda
 					restantes--;
-					printf("Execute U' L' U L U F U' F', em seguida U U e depois U' L' U L U F U' F' \n");
 					return C2C_CondRetOK; 
 				}
 				else if (faceAresta2 == CIMA && linhaAresta2 == 2 && colunaAresta2 == 1) {
@@ -215,7 +208,6 @@
 					executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
 					executaAlgoritmo(cubo, "U' L' U L U F U' F'"); // 2x pra Esquerda
 					restantes--;
-					printf("Execute 2 vezes U' L' U L U F U' F', em seguida U U e depois U' L' U L U F U' F' \n");
 					return C2C_CondRetOK; 
 				}
 			}
@@ -261,7 +253,6 @@
 		if (faceAresta1 == ESQUERDA && linhaAresta1 == 1 && colunaAresta1 == 2) {
 			// Aresta da Direita Resolvida
 			restantes--;
-			printf("Peca na posicao desejada\n");
 			return C2C_CondRetOK;
 		}
 		else {
@@ -287,7 +278,6 @@
 					// Algoritmo Cima -> Direita
 					executaAlgoritmo(cubo, "U F U' F' U' L' U L");
 					restantes--;
-					printf("Execute U F U' F' U' L' U L\n");
 					return C2C_CondRetOK;
 				}
 				else if (faceAresta1 == FRENTE && linhaAresta1 == 1 && colunaAresta1 == 0) {
@@ -296,7 +286,6 @@
 					executaAlgoritmo(cubo, "U U"); // Gira a peça
 					executaAlgoritmo(cubo, "U F U' F' U' L' U L"); // 1x pra Direita
 					restantes--;
-					printf("Execute U F U' F' U' L' U L, em seguida U U e depois U F U' F' U' L' U L \n");
 					return C2C_CondRetOK;
 				}
 
@@ -306,7 +295,6 @@
 					executaAlgoritmo(cubo, "U U"); // Gira a peça
 					executaAlgoritmo(cubo, "U F U' F' U' L' U L"); // 1x pra Direita
 					restantes--;
-					printf("Execute 2 vezes U F U' F' U' L' U L, em seguida U U e depois U F U' F' U' L' U L \n");
 					return C2C_CondRetOK;
 				}
 			}
@@ -315,7 +303,6 @@
 		if (faceAresta2 == ESQUERDA && linhaAresta2 == 1 && colunaAresta2 == 0) {
 			// Aresta da Esquerda Resolvida
 			restantes--;
-			printf("Peca na posicao desejada\n");
 			return C2C_CondRetOK;
 		}
 		else {
@@ -340,7 +327,6 @@
 					// Algoritmo Cima -> Esquerda
 					executaAlgoritmo(cubo, "U' B' U B U L U' L'");
 					restantes--;
-					printf("Execute U' B' U B U L U' L' \n");
 					return C2C_CondRetOK;
 				}
 				else if (faceAresta2 == TRASEIRA && linhaAresta2 == 1 && colunaAresta2 == 2) {
@@ -349,7 +335,6 @@
 					executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
 					executaAlgoritmo(cubo, "U' B' U B U L U' L'"); // 2x pra Esquerda
 					restantes--;
-					printf("Execute U' B' U B U L U' L', em seguida U U e depois U' B' U B U L U' L'\n");
 					return C2C_CondRetOK;
 				}
 
@@ -360,7 +345,6 @@
 					executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
 					executaAlgoritmo(cubo, "U' B' U B U L U' L'"); // 1x pra Esquerda
 					restantes--;
-					printf("Execute 2 vezes U' B' U B U L U' L', em seguida U U e depois U' B' U B U L U' L'\n");
 					return C2C_CondRetOK;
 				}
 			}
@@ -406,7 +390,6 @@
 		if (faceAresta1 == DIREITA && linhaAresta1 == 1 && colunaAresta1 == 2) {
 			// Aresta da Direita Resolvida
 			restantes--;
-			printf("Peca na posicao desejada\n");
 			return C2C_CondRetOK;
 		}
 		else {
@@ -432,7 +415,6 @@
 					// Algoritmo Cima -> Direita
 					executaAlgoritmo(cubo, "U B U' B' U' R' U R");
 					restantes--;
-					printf("Execute U B U' B' U' R' U R \n");
 					return C2C_CondRetOK;
 				}
 				else if (faceAresta1 == TRASEIRA && linhaAresta1 == 1 && colunaAresta1 == 0) {
@@ -441,7 +423,6 @@
 					executaAlgoritmo(cubo, "U U"); // Gira a peça
 					executaAlgoritmo(cubo, "U B U' B' U' R' U R"); // 2x pra Direita
 					restantes--;
-					printf("Execute U B U' B' U' R' U R, em seguida U U e depois U B U' B' U' R' U R\n");
 					return C2C_CondRetOK;
 				}
 
@@ -452,7 +433,6 @@
 					executaAlgoritmo(cubo, "U U"); // Gira a peça
 					executaAlgoritmo(cubo, "U B U' B' U' R' U R"); // 2x pra Direita
 					restantes--;
-					printf("Execute 2 vezes U B U' B' U' R' U R, em seguida U U e depois U B U' B' U' R' U R \n");
 					return C2C_CondRetOK;
 				}
 			}
@@ -461,7 +441,6 @@
 		if (faceAresta2 == DIREITA && linhaAresta2 == 1 && colunaAresta2 == 0) {
 			// Aresta da Esquerda Resolvida
 			restantes--;
-			printf("Peca na posicao desejada\n");
 			return C2C_CondRetOK;
 		}
 		else {
@@ -486,7 +465,6 @@
 					// Algoritmo Cima -> Esquerda
 					executaAlgoritmo(cubo, "U' F' U F U R U' R'");
 					restantes--;
-					printf("Execute U' F' U F U R U' R'\n");
 					return C2C_CondRetOK;
 				}
 				else if (faceAresta2 == FRENTE && linhaAresta2 == 1 && colunaAresta2 == 2) {
@@ -495,7 +473,6 @@
 					executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
 					executaAlgoritmo(cubo, "U' F' U F U R U' R'"); // 2x pra Esquerda
 					restantes--;
-					printf("Execute U' F' U F U R U' R', em seguida U U e depois U' F' U F U R U' R' \n");
 					return C2C_CondRetOK;
 				}
 
@@ -506,7 +483,6 @@
 					executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
 					executaAlgoritmo(cubo, "U' F' U F U R U' R'"); // 2x pra Esquerda
 					restantes--;
-					printf("Execute 2 vezes U' F' U F U R U' R', em seguida U U e depois U' F' U F U R U' R' \n");
 					return C2C_CondRetOK;
 				}
 			}
@@ -553,7 +529,6 @@
 		if (faceAresta1 == TRASEIRA && linhaAresta1 == 1 && colunaAresta1 == 2) {
 			// Aresta da Direita Resolvida
 			restantes--;
-			printf("Peca na posicao desejada\n");
 			return C2C_CondRetOK;
 		}
 		else {
@@ -578,7 +553,6 @@
 				if (faceAresta1 == TRASEIRA && linhaAresta1 == 0 && colunaAresta1 == 1) {
 					// Algoritmo Cima -> Direita
 					executaAlgoritmo(cubo, "U L U' L' U' B' U B");
-					printf("Execute U L U' L' U' B' U B \n");
 					restantes--;
 					return C2C_CondRetOK;
 				}
@@ -588,7 +562,6 @@
 					executaAlgoritmo(cubo, "U U"); // Gira a peça
 					executaAlgoritmo(cubo, "U L U' L' U' B' U B"); // 2x pra Direita
 					restantes--;
-					printf("Execute U L U' L' U' B' U B, em seguida U U e depois U L U' L' U' B' U B \n");
 					return C2C_CondRetOK;
 				}
 
@@ -599,7 +572,6 @@
 					executaAlgoritmo(cubo, "U U"); // Gira a peça
 					executaAlgoritmo(cubo, "U L U' L' U' B' U B"); // 2x pra Direita
 					restantes--;
-					printf("Execute 2 vezes U L U' L' U' B' U B, em seguida U U e depois U L U' L' U' B' U B \n");
 					return C2C_CondRetOK;
 				}
 			}
@@ -608,7 +580,6 @@
 		if (faceAresta2 == TRASEIRA && linhaAresta2 == 1 && colunaAresta2 == 0) {
 			// Aresta da Esquerda Resolvida
 			restantes--;
-			printf("Peca na posicao desejada\n");
 			return C2C_CondRetOK;
 		}
 		else {
@@ -633,7 +604,6 @@
 					// Algoritmo Cima -> Esquerda
 					executaAlgoritmo(cubo, "U' R' U R U B U' B'");
 					restantes--;
-					printf("Execute U' R' U R U B U' B' \n");
 					return C2C_CondRetOK;
 				}
 				else if (faceAresta2 == DIREITA && linhaAresta2 == 1 && colunaAresta2 == 2) {
@@ -642,7 +612,6 @@
 					executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
 					executaAlgoritmo(cubo, "U' R' U R U B U' B'"); // 2x pra Esquerda
 					restantes--;
-					printf("Execute U' R' U R U B U' B', em seguida U U e depois U' R' U R U B U' B'\n");
 					return C2C_CondRetOK;
 				}
 
@@ -653,7 +622,6 @@
 					executaAlgoritmo(cubo, "U U"); // (?) Gira a peça
 					executaAlgoritmo(cubo, "U' R' U R U B U' B'"); // 2x pra Esquerda
 					restantes--;
-					printf("Execute 2 vezes U' R' U R U B U' B', em seguida U U e depois U' R' U R U B U' B' \n");
 					return C2C_CondRetOK;
 
 				}
@@ -997,6 +965,8 @@ int executaAlgoritmo(cubo, algoritmo) {
 
 			i += jump;
 		}
+
+		printf("\nExecute %s\n", algoritmo);
 
 	return 0;
 }
