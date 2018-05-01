@@ -1,4 +1,3 @@
-#define ALG 55
 
 #include "2camada.h"
 #include "CUBO.h"
@@ -8,9 +7,7 @@
 
 
 
-
-
-int main (){
+void main() {
 
 	CUB_tppCUBO cubo;
 
@@ -19,7 +16,5 @@ int main (){
 
 	system("pause");
 	return 0;
-
-
 
 }
