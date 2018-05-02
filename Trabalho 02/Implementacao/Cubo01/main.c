@@ -69,12 +69,12 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 	char * algoEsquerda;
 	char * algoIntermediario;
 
-	CUB_ChecarCorDaFace(&corFrente, cubo, 1, 1, FRENTE);
-	CUB_ChecarCorDaFace(&corCima, cubo, 1, 1, CIMA);
-	CUB_ChecarCorDaFace(&corDireita, cubo, 1, 1, DIREITA);
-	CUB_ChecarCorDaFace(&corEsquerda, cubo, 1, 1, ESQUERDA);
-	CUB_ChecarCorDaFace(&corTraseira, cubo, 1, 1, TRASEIRA);
-	CUB_ChecarCorDaFace(&corBaixo, cubo, 1, 1, BAIXO);
+	if (CUB_ChecarCorDaFace(&corFrente, cubo, 1, 1, FRENTE) != 0) { exit(1);}
+	if (CUB_ChecarCorDaFace(&corCima, cubo, 1, 1, CIMA != 0) { exit(2);}
+	if (CUB_ChecarCorDaFace(&corDireita, cubo, 1, 1, DIREITA != 0) { exit(3);}
+	if (CUB_ChecarCorDaFace(&corEsquerda, cubo, 1, 1, ESQUERDA) != 0) { exit(4);}
+	if (CUB_ChecarCorDaFace(&corTraseira, cubo, 1, 1, TRASEIRA != 0) { exit(5);}
+	if (CUB_ChecarCorDaFace(&corBaixo, cubo, 1, 1, BAIXO != 0) { exit(6);}
 
 	switch (face) {
 	case(FRENTE): {
@@ -158,8 +158,8 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 	}
 	}
 
-	CUB_EncontrarPosicaoDePecaDeAresta(&faceArestaD, &linhaArestaD, &colunaArestaD, cubo, cor1ArestaD, cor2ArestaD);
-	CUB_EncontrarPosicaoDePecaDeAresta(&faceArestaE, &linhaArestaE, &colunaArestaE, cubo, cor1ArestaE, cor2ArestaE);
+	if (CUB_EncontrarPosicaoDePecaDeAresta(&faceArestaD, &linhaArestaD, &colunaArestaD, cubo, cor1ArestaD, cor2ArestaD) != 0) { exit(8);}
+	if (CUB_EncontrarPosicaoDePecaDeAresta(&faceArestaE, &linhaArestaE, &colunaArestaE, cubo, cor1ArestaE, cor2ArestaE) != 0) { exit(9);}
 
 	(face + 1) == 5 ? faceDireitaRelativa = 1 : (faceDireitaRelativa = (face + 1));
 	(face - 1) == 0 ? faceDireitaRelativa = 4 : (faceDireitaRelativa = (face - 1));
@@ -398,7 +398,7 @@ int executaAlgoritmo(CUB_tppCUBO cubo, char* algoritmo) {
 		if (face < 0)
 			return -1;
 
-		CUB_GirarFace(cubo, face, 1, rot);
+		if (CUB_GirarFace(cubo, face, 1, rot) != 0) { exit(10);}
 
 		i += jump;
 	}
@@ -410,18 +410,18 @@ int executaAlgoritmo(CUB_tppCUBO cubo, char* algoritmo) {
 int resolvidoAcima(CUB_tppCUBO cubo) {
 	int corCima, aux1, aux2, aux3, aux4, aux5, aux6, aux7, aux8;
 
-	CUB_ChecarCorDaFace(&corCima, cubo, 1, 1, CIMA);
+	if (CUB_ChecarCorDaFace(&corCima, cubo, 1, 1, CIMA) != 0) { exit(11);}
 
-	CUB_ChecarCorDaFace(&aux1, cubo, 0, 0, CIMA);
-	CUB_ChecarCorDaFace(&aux2, cubo, 0, 1, CIMA);
-	CUB_ChecarCorDaFace(&aux3, cubo, 0, 2, CIMA);
+	if (CUB_ChecarCorDaFace(&aux1, cubo, 0, 0, CIMA) != 0) { exit(11);}
+	if (CUB_ChecarCorDaFace(&aux2, cubo, 0, 1, CIMA) != 0) { exit(12);}
+	if (CUB_ChecarCorDaFace(&aux3, cubo, 0, 2, CIMA) != 0) { exit(13);}
 
-	CUB_ChecarCorDaFace(&aux4, cubo, 1, 0, CIMA);
-	CUB_ChecarCorDaFace(&aux5, cubo, 1, 2, CIMA);
+	if (CUB_ChecarCorDaFace(&aux4, cubo, 1, 0, CIMA) != 0) { exit(14);}
+	if (CUB_ChecarCorDaFace(&aux5, cubo, 1, 2, CIMA) != 0) { exit(15);}
 
-	CUB_ChecarCorDaFace(&aux6, cubo, 2, 0, CIMA);
-	CUB_ChecarCorDaFace(&aux7, cubo, 2, 1, CIMA);
-	CUB_ChecarCorDaFace(&aux8, cubo, 2, 2, CIMA);
+	if (CUB_ChecarCorDaFace(&aux6, cubo, 2, 0, CIMA) != 0) { exit(16);}
+	if (CUB_ChecarCorDaFace(&aux7, cubo, 2, 1, CIMA) != 0) { exit(17);}
+	if (CUB_ChecarCorDaFace(&aux8, cubo, 2, 2, CIMA) != 0) { exit(18);}
 
 	if (corCima == aux1 == aux2 == aux3 == aux4 == aux5 == aux6 == aux7 == aux8) {
 		return 1;
@@ -448,12 +448,12 @@ int forcaCuboFrente(CUB_tppCUBO cubo) {
 	int faceAresta1, linhaAresta1, colunaAresta1, cor1Aresta1, cor2Aresta1;
 	int faceAresta2, linhaAresta2, colunaAresta2, cor1Aresta2, cor2Aresta2;
 
-	CUB_ChecarCorDaFace(&corFrente, cubo, 1, 1, FRENTE);
-	CUB_ChecarCorDaFace(&corCima, cubo, 1, 1, CIMA);
-	CUB_ChecarCorDaFace(&corDireita, cubo, 1, 1, DIREITA);
-	CUB_ChecarCorDaFace(&corEsquerda, cubo, 1, 1, ESQUERDA);
-	CUB_ChecarCorDaFace(&corTraseira, cubo, 1, 1, TRASEIRA);
-	CUB_ChecarCorDaFace(&corBaixo, cubo, 1, 1, BAIXO);
+	if (CUB_ChecarCorDaFace(&corFrente, cubo, 1, 1, FRENTE) != 0) { exit(18);}
+	if (CUB_ChecarCorDaFace(&corCima, cubo, 1, 1, CIMA) != 0) { exit(19);}
+	if (CUB_ChecarCorDaFace(&corDireita, cubo, 1, 1, DIREITA) != 0) { exit(20);}
+	if (CUB_ChecarCorDaFace(&corEsquerda, cubo, 1, 1, ESQUERDA) != 0) { exit(21);}
+	if (CUB_ChecarCorDaFace(&corTraseira, cubo, 1, 1, TRASEIRA) != 0) { exit(22);}
+	if (CUB_ChecarCorDaFace(&corBaixo, cubo, 1, 1, BAIXO) != 0) { exit(23);}
 
 	/* Cuidando da Face da Frente! */
 	cor1Aresta1 = corFrente;
@@ -462,8 +462,8 @@ int forcaCuboFrente(CUB_tppCUBO cubo) {
 	cor2Aresta1 = corDireita;
 	cor2Aresta2 = corEsquerda;
 
-	CUB_EncontrarPosicaoDePecaDeAresta(&faceAresta1, &linhaAresta1, &colunaAresta1, cubo, cor1Aresta1, cor2Aresta1);
-	CUB_EncontrarPosicaoDePecaDeAresta(&faceAresta2, &linhaAresta2, &colunaAresta2, cubo, cor1Aresta2, cor2Aresta2);
+	if (CUB_EncontrarPosicaoDePecaDeAresta(&faceAresta1, &linhaAresta1, &colunaAresta1, cubo, cor1Aresta1, cor2Aresta1) != 0) { exit(24);}
+	if (CUB_EncontrarPosicaoDePecaDeAresta(&faceAresta2, &linhaAresta2, &colunaAresta2, cubo, cor1Aresta2, cor2Aresta2) != 0) { exit(25);}
 
 	if (faceAresta1 == DIREITA && linhaAresta1 == 1 && colunaAresta1 == 2) {
 		// Aresta da Direita está na Direita da Face Direita
@@ -568,43 +568,19 @@ int resolveCubo(CUB_tppCUBO cubo) {
 		if (j == 0) {
 			j++;
 
-			printf("Frente: \n");
 			primeiraFrente = resolveArestaDeFace(cubo, FRENTE, resolvidoPraCima);
-			printf("Restantes: %d\n", primeiraFrente);
-
-			printf("Direita: \n");
 			primeiraDireita = resolveArestaDeFace(cubo, DIREITA, resolvidoPraCima);
-			printf("Restantes: %d\n", primeiraDireita);
-
-			printf("Traseira: \n");
 			primeiraTraseira = resolveArestaDeFace(cubo, TRASEIRA, resolvidoPraCima);
-			printf("Restantes: %d\n", primeiraTraseira);
-
-			printf("Esquerda: \n");
 			primeiraEsquerda = resolveArestaDeFace(cubo, ESQUERDA, resolvidoPraCima);
-			printf("Restantes: %d\n", primeiraEsquerda);
-
 			r = aux(primeiraFrente, primeiraDireita, primeiraTraseira, primeiraEsquerda);
 		}
 		else if (j == 1) {
 			j++;
 
-			printf("Frente: \n");
 			segundaFrente = resolveArestaDeFace(cubo, FRENTE, resolvidoPraCima);
-			printf("Restantes: %d\n", segundaFrente);
-
-			printf("Direita: \n");
 			segundaDireita = resolveArestaDeFace(cubo, DIREITA, resolvidoPraCima);
-			printf("Restantes: %d\n", segundaDireita);
-
-			printf("Traseira: \n");
 			segundaTraseira = resolveArestaDeFace(cubo, TRASEIRA, resolvidoPraCima);
-			printf("Restantes: %d\n", segundaTraseira);
-
-			printf("Esquerda: \n");
 			segundaEsquerda = resolveArestaDeFace(cubo, ESQUERDA, resolvidoPraCima);
-			printf("Restantes: %d\n", segundaEsquerda);
-
 			r = aux(segundaFrente, segundaDireita, segundaTraseira, segundaEsquerda);
 		}
 		else if (j == 2) {
