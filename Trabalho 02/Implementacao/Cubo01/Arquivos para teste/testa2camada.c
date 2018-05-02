@@ -14,7 +14,8 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor      Data     Observações
-*	  2.0     MMA,BHL    1/05     atualização e mais casos de teste
+*	  3.0	  MMA,BHL    02/05	  atualização e mais casos de teste
+*	  2.0     MMA,BHL    01/05    atualização e mais casos de teste
 *     1.0     MMA        30/04    protótipo das funções de teste
 *
 *  $ED Descrição do módulo
@@ -32,18 +33,30 @@
 *									um cubo com a 1a camada resolvida e para baixo, tendo que
 *									resolver usando o algoritmo de jogar peça p/ direita.
 *
-*		"=resolve2resolvida"       - Chama a funcao resolve 2 camada passando como
-*									parametro um cubo com a 1 e 2 camada resolvida e para baixo.
-*		
-*		"=resolve2inverso"		   - Chama a função resolve 2 camada passando como parametro um
-*									cubo com a 1a camada resolvida e para cima.
+*		"=resolve2resolvida"       - Chama a funcao resolve 2a camada passando como
+*									parametro um cubo com a 1a e 2a camada resolvida e para baixo.
 *
-*		"=resolveCuboNull"         - Chama a funcao resolve 2 camada passando como
-*									parametro um cubo nulo.
-*
-*		"=resolveCasoPreso"        - Chama a funcao resolve 2 camada passando como
-*									parametro um cubo com caso de peca presa com a 1 camada 
+*		"=resolve2CasoPreso"       - Chama a funcao resolve 2a camada passando como
+*									parametro um cubo com caso de peca presa com a 1a camada 
 *									resolvida e para baixo.
+*
+*		"=resolve2esquerdaInverso" - Chama a funcao resolve 2a camada passando como parametro
+*									um cubo com a 1a camada resolvida e para cima, tendo que
+*									resolver usando o algoritmo de jogar peça p/ esquerda.
+*
+*		"=resolve2direitaInverso" - Chama a funcao resolve 2a camada passando como parametro
+*									um cubo com a 1a camada resolvida e para cima, tendo que
+*									resolver usando o algoritmo de jogar peça p/ direita.
+*
+*		"=resolve2resolvidaInverso"- Chama a funcao resolve 2a camada passando como
+*									parametro um cubo com a 1a e 2a camada resolvida e para cima.
+*
+*		"=resolve2CasoPresoInverso"- Chama a funcao resolve 2a camada passando como
+*									parametro um cubo com caso de peca presa com a 1a camada 
+*									resolvida e para cima.
+*
+*		"=resolve2CuboNull"        - Chama a funcao resolve 2a camada passando como
+*									parametro um cubo nulo.
 *
 *
 *************************************************************************************************/
@@ -78,12 +91,15 @@
 
 /* Tabela dos nomes dos comandos de teste específicos */
 
-#define     RESOLVE_2_CASO_ESQ_CMD			 "=resolve2casoEsquerda"
-#define     RESOLVE_2_CASO_DIR_CMD			 "=resolve2casoDireita"
-#define     RESOLVE_2_RESOLVIDA_CMD			 "=resolve2resolvida"
-#define		RESOLVE_2_INVERSO_CMD			 "=resolve2inverso"
-#define     RESOLVE_CUBO_NULL_CMD			 "=resolve2CuboNull"
-#define     RESOLVE_CASO_PRESO_CMD			 "=resolve2CasoPreso"
+#define     RESOLVE_2_CASO_ESQ_CMD			 "=resolve2casoEsquerda" //#0
+#define     RESOLVE_2_CASO_DIR_CMD			 "=resolve2casoDireita" //#1
+#define     RESOLVE_2_RESOLVIDA_CMD			 "=resolve2resolvida" //#2
+#define     RESOLVE_CASO_PRESO_CMD			 "=resolve2CasoPreso" //#3 
+#define		RESOLVE_2_ESQUERDA_INVERSO_CMD	 "=resolve2esquerdaInverso" //#4
+#define		RESOLVE_2_DIREITA_INVERSO_CMD	 "=resolve2direitaInverso" //#5
+#define     RESOLVE_2_RESOLVIDA_INVERSO_CMD	 "=resolve2resolvidaInverso" //#6
+#define		RESOLVE_CASO_PRESO_INVERSO_CMD	 "=resolve2CasoPresoInverso" //#7
+#define     RESOLVE_CUBO_NULL_CMD			 "=resolve2CuboNull" // Sem cubo
 
 // (config) ~> inteiro
 //	config = vetor de 54 inteiros
@@ -95,8 +111,11 @@ int populaCubo(int *config, int numCubo) {
 
 	// 1: Verde | 2: Vermelho | 3: Amarelo | 4: Azul | 5: Branco | 6: Laranja
 
-	// Cubos: 0) Normal corrige esquerda | 1) Normal corrige direita | 2) Já resolvido | 3) Peça presa | 4) Cubo inverso
-	if (numCubo == 0)	// Cubo normal -> só corrige pra esquerda
+	/* Cubos: 
+	#0) Normal corrige esquerda | #1) Normal corrige direita | #2) Já resolvido | #3) Inverso corrige esquerda | 
+	#4) Inverso corrige direita | #5) Inverso já resolvido | #6) Peça presa */
+
+	if (numCubo == 0)	// #0 Cubo normal corrige pra esquerda
 	{              
 		// Up Face 0
 		config[0] = AMARELO;
@@ -177,10 +196,10 @@ int populaCubo(int *config, int numCubo) {
 		config[53] = BRANCO;
 	}
 	//-----------------------------------------------------------
-	else if (numCubo == 1)	// Cubo normal -> Só corrige pra direita
+	else if (numCubo == 1)	// #1 Cubo normal corrige pra direita
 	{		
 
-			// Up Face 0
+		// Up Face 0
 		config[0] = VERMELHO;
 		config[1] = AMARELO;
 		config[2] = AMARELO;
@@ -257,11 +276,9 @@ int populaCubo(int *config, int numCubo) {
 		config[51] = BRANCO;
 		config[52] = BRANCO;
 		config[53] = BRANCO;
-
-	
 	}
 	//-----------------------------------------------------------
-	else if (numCubo == 2)	// Cubo ja resolvido
+	else if (numCubo == 2)	// #2 Cubo normal ja resolvido 
 	{                 
 
 		// Up Face 0
@@ -341,11 +358,9 @@ int populaCubo(int *config, int numCubo) {
 		config[51] = BRANCO;
 		config[52] = BRANCO;
 		config[53] = BRANCO;
-
-
 	}
 	//-----------------------------------------------------------
-	else if (numCubo == 3)	//Peça presa
+	else if (numCubo == 3)	// #3 Cubo normal com peça presa
 	{		
 
 		// Up Face 0
@@ -427,9 +442,9 @@ int populaCubo(int *config, int numCubo) {
 		config[53] = BRANCO;
 
 	
-	}
+	}	
 	//-----------------------------------------------------------
-	else if (numCubo == 4)	//Cubo inverso
+	else if (numCubo == 4)	// #4 Cubo inverso com correção pra esquerda (Mari plz update) 
 	{		
 
 		// Up Face 0
@@ -510,6 +525,254 @@ int populaCubo(int *config, int numCubo) {
 		config[52] = AMARELO;
 		config[53] = LARANJA;
 	}
+	//-----------------------------------------------------------
+	else if (numCubo == 5)	// #5 Cubo inverso com correção pra direita (Mari plz make cube) 
+	{		
+
+		// Up Face 0
+		config[0] = BRANCO;
+		config[1] = BRANCO;
+		config[2] = BRANCO;
+
+		config[3] = BRANCO;
+		config[4] = BRANCO;
+		config[5] = BRANCO;
+
+		config[6] = BRANCO;
+		config[7] = BRANCO;
+		config[8] = BRANCO;
+
+		// Left Face 4
+		config[9] = LARANJA;
+		config[10] = LARANJA;
+		config[11] = LARANJA;
+
+		config[21] = AZUL;
+		config[22] = LARANJA;
+		config[23] = VERMELHO;
+
+		config[33] = AMARELO;
+		config[34] = AZUL;
+		config[35] = VERMELHO;
+
+		// Front Face 1
+		config[12] = VERDE;
+		config[13] = VERDE;
+		config[14] = VERDE;
+
+		config[24] = AZUL;
+		config[25] = VERDE;
+		config[26] = VERDE;
+
+		config[36] = AZUL;
+		config[37] = VERDE;
+		config[38] = VERDE;
+
+		// Right Face 2
+		config[15] = VERMELHO;
+		config[16] = VERMELHO;
+		config[17] = VERMELHO;
+
+		config[27] = VERMELHO;
+		config[28] = VERMELHO;
+		config[29] = VERMELHO;
+
+		config[39] = VERMELHO;
+		config[40] = LARANJA;
+		config[41] = AMARELO;
+
+		// Back Face 3
+		config[18] = AZUL;
+		config[19] = AZUL;
+		config[20] = AZUL;
+
+		config[30] = AMARELO;
+		config[31] = AZUL;
+		config[32] = AMARELO;
+
+		config[42] = AZUL;
+		config[43] = VERDE;
+		config[44] = VERDE;
+
+		// Down Face 5
+		config[45] = AMARELO;
+		config[46] = LARANJA;
+		config[47] = AMARELO;
+
+		config[48] = LARANJA;
+		config[49] = AMARELO;
+		config[50] = AMARELO;
+
+		config[51] = LARANJA;
+		config[52] = AMARELO;
+		config[53] = LARANJA;
+	}
+	//-----------------------------------------------------------
+	else if (numCubo == 6)	// #6 Cubo inverso com primeira camada já feita (Mari plz make cube) 
+	{		
+
+		// Up Face 0
+		config[0] = BRANCO;
+		config[1] = BRANCO;
+		config[2] = BRANCO;
+
+		config[3] = BRANCO;
+		config[4] = BRANCO;
+		config[5] = BRANCO;
+
+		config[6] = BRANCO;
+		config[7] = BRANCO;
+		config[8] = BRANCO;
+
+		// Left Face 4
+		config[9] = LARANJA;
+		config[10] = LARANJA;
+		config[11] = LARANJA;
+
+		config[21] = AZUL;
+		config[22] = LARANJA;
+		config[23] = VERMELHO;
+
+		config[33] = AMARELO;
+		config[34] = AZUL;
+		config[35] = VERMELHO;
+
+		// Front Face 1
+		config[12] = VERDE;
+		config[13] = VERDE;
+		config[14] = VERDE;
+
+		config[24] = AZUL;
+		config[25] = VERDE;
+		config[26] = VERDE;
+
+		config[36] = AZUL;
+		config[37] = VERDE;
+		config[38] = VERDE;
+
+		// Right Face 2
+		config[15] = VERMELHO;
+		config[16] = VERMELHO;
+		config[17] = VERMELHO;
+
+		config[27] = VERMELHO;
+		config[28] = VERMELHO;
+		config[29] = VERMELHO;
+
+		config[39] = VERMELHO;
+		config[40] = LARANJA;
+		config[41] = AMARELO;
+
+		// Back Face 3
+		config[18] = AZUL;
+		config[19] = AZUL;
+		config[20] = AZUL;
+
+		config[30] = AMARELO;
+		config[31] = AZUL;
+		config[32] = AMARELO;
+
+		config[42] = AZUL;
+		config[43] = VERDE;
+		config[44] = VERDE;
+
+		// Down Face 5
+		config[45] = AMARELO;
+		config[46] = LARANJA;
+		config[47] = AMARELO;
+
+		config[48] = LARANJA;
+		config[49] = AMARELO;
+		config[50] = AMARELO;
+
+		config[51] = LARANJA;
+		config[52] = AMARELO;
+		config[53] = LARANJA;
+	}
+	//-----------------------------------------------------------
+	else if (numCubo == 7)	// #7 Cubo inverso com peça presa (Mari plz make cube)
+	{		
+
+		// Up Face 0
+		config[0] = VERDE;
+		config[1] = AMARELO;
+		config[2] = LARANJA;
+
+		config[3] = LARANJA;
+		config[4] = AMARELO;
+		config[5] = VERDE;
+
+		config[6] = LARANJA;
+		config[7] = AZUL;
+		config[8] = AZUL;
+
+		// Left Face 4
+		config[9] = VERMELHO;
+		config[10] = VERDE;
+		config[11] = AMARELO;
+
+		config[21] = LARANJA;
+		config[22] = VERMELHO;
+		config[23] = AMARELO;
+
+		config[33] = VERMELHO;
+		config[34] = VERMELHO;
+		config[35] = VERMELHO;
+
+		// Front Face 1
+		config[12] = VERDE;
+		config[13] = LARANJA;
+		config[14] = VERMELHO;
+
+		config[24] = AZUL;
+		config[25] = VERDE;
+		config[26] = AZUL;
+
+		config[36] = VERDE;
+		config[37] = VERDE;
+		config[38] = VERDE;
+
+		// Right Face 2
+		config[15] = AMARELO;
+		config[16] = VERMELHO;
+		config[17] = AZUL;
+
+		config[27] = VERMELHO;
+		config[28] = LARANJA;
+		config[29] = VERDE;
+
+		config[39] = LARANJA;
+		config[40] = LARANJA;
+		config[41] = LARANJA;
+
+		// Back Face 3
+		config[18] = AMARELO;
+		config[19] = VERMELHO;
+		config[20] = AMARELO;
+
+		config[30] = AMARELO;
+		config[31] = AZUL;
+		config[32] = AMARELO;
+
+		config[42] = AZUL;
+		config[43] = AZUL;
+		config[44] = AZUL;
+
+		// Down Face 5
+		config[45] = BRANCO;
+		config[46] = BRANCO;
+		config[47] = BRANCO;
+
+		config[48] = BRANCO;
+		config[49] = BRANCO;
+		config[50] = BRANCO;
+
+		config[51] = BRANCO;
+		config[52] = BRANCO;
+		config[53] = BRANCO;
+
+	
+	}	
 
 	return 0;
 
@@ -567,7 +830,7 @@ int populaCubo(int *config, int numCubo) {
 
 		/* Testar resolver 2 camada com camada resolvida para baixo, tendo vários casos que usam o algoritmo de "jogar pra direita" */
 
-		if ( strcmp( ComandoTeste , RESOLVE_2_CASO_ESQ_CMD) == 0 )
+		if ( strcmp( ComandoTeste , RESOLVE_2_CASO_DIR_CMD) == 0 )
         {
 			populaCubo(config, 1);
 			CUB_CriarCUBO(&cubo, config);
@@ -611,28 +874,6 @@ int populaCubo(int *config, int numCubo) {
 
          }  /* fim ativa: Testar resolver 2 camada de um cubo ja resolvido*/
 
-		  /* Testar resolver 2 camada cubo com peca presa*/
-
-		 if ( strcmp( ComandoTeste , RESOLVE_CASO_PRESO_CMD) == 0 )
-         {
-			populaCubo(config, 3);
-			CUB_CriarCUBO(&cubo, config);
-
-            numLidos = LER_LerParametros( "i" ,
-                               &CondRetEsperada ) ;
-            if ( numLidos != 1 )
-            { 
-               return TST_CondRetParm ;
-            } /* if */
-
-            CondRetObtido =  resolve2camada(cubo);  
-			CUB_DestruirCUBO(cubo);
-			
-
-            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
-                                    "Retorno errado ao resolver 2 Camada.");
-
-         }  /* fim ativa: Testar resolver 2 camada cubo com peca presa*/
 
 		/* Testar resolver 2 camada com camada resolvida para cima */
 		if ( strcmp( ComandoTeste , RESOLVE_2_CASO_ESQ_CMD) == 0 )
@@ -654,6 +895,29 @@ int populaCubo(int *config, int numCubo) {
                                     "Retorno errado ao resolver 2 Camada.");
 
          } /* fim ativa: Testar resolver 2 camada com camada resolvida para cima */
+
+		 /* Testar resolver 2 camada cubo com peca presa*/
+
+		 if ( strcmp( ComandoTeste , RESOLVE_CASO_PRESO_CMD) == 0 )
+         {
+			populaCubo(config, 6);
+			CUB_CriarCUBO(&cubo, config);
+
+            numLidos = LER_LerParametros( "i" ,
+                               &CondRetEsperada ) ;
+            if ( numLidos != 1 )
+            { 
+               return TST_CondRetParm ;
+            } /* if */
+
+            CondRetObtido =  resolve2camada(cubo);  
+			CUB_DestruirCUBO(cubo);
+			
+
+            return TST_CompararInt( CondRetEsperada , CondRetObtido ,
+                                    "Retorno errado ao resolver 2 Camada.");
+
+         }  /* fim ativa: Testar resolver 2 camada cubo com peca presa*/
 
 		 /* Testar resolver 2 camada com cubo NULL*/
 
