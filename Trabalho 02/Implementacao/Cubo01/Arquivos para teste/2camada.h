@@ -1,6 +1,6 @@
 ﻿/******************************************************************************
 *
-*  $MCD Módulo de definição: 2L		Segunda Camada
+*  $MCD Módulo de definição: 2C		Segunda Camada
 *
 *  Arquivo gerado:              2camada.h
 *  Letras identificadoras:      2C
@@ -39,7 +39,7 @@ typedef enum {
 	C2C_CondRetOK,
 	/* Concluiu corretamente */
 
-	C2C_CondRetNenhumMovPossivel,
+	C2C_CondRetCuboVazio,
 	/* Nào tem movimento que possa ser realizado */
 
 } C2C_tpCondRet;
@@ -62,4 +62,4 @@ typedef enum {
 **************************************************************************/
 
 C2C_tpCondRet resolve2camada (CUB_tppCUBO cubo);
-C2C_tpCondRet resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima);
+

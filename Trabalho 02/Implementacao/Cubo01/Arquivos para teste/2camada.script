@@ -1,0 +1,33 @@
+// Script:    	2camada.script
+// Autor:    	Ana Carolina Junger
+//		Bernardo Horner
+//		Mariela Andrade
+//		Tiago Simoes
+//
+// Data:       01/05/18
+// Propósito: Testa o modulo 2 camada.
+//
+
+
+==Caso cubo NULL
+=resolveCuboNull 1
+
+==Caso cubo NULL com recuperar
+=resolveCuboNull 0
+=recuperar
+
+== Teste com cubo com 1 camada resolvida e para baixo
+=resolve2 0
+
+== Teste comando recuperar
+=resolve2 1
+=recuperar
+
+== Teste com cubo com 2 camada ja resolvida
+=resolve2resolvida 0
+
+==Teste Cubo com peca presa
+=resolveCasoPreso 0
+
+
+

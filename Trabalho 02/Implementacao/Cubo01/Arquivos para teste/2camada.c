@@ -268,96 +268,6 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 	
 }
 
-// (config) ~> inteiro
-//	config = vetor de 54 inteiros
-//	inteiro =
-//		0 -> sucesso
-int populaCubo(int *config) {
-
-	// 1: Verde | 2: Vermelho | 3: Amarelo | 4: Azul | 5: Branco | 6: Laranja
-
-	// Up Face 0
-	config[0] = AMARELO;
-	config[1] = LARANJA;
-	config[2] = AZUL;
-
-	config[3] = VERMELHO;
-	config[4] = AMARELO; 
-	config[5] = VERMELHO;
-
-	config[6] = VERDE;
-	config[7] = AZUL;
-	config[8] = AMARELO; 
-
-	// Left Face 4
-	config[9] = VERDE;
-	config[10] = AMARELO;
-	config[11] = LARANJA;
-
-	config[21] = LARANJA;
-	config[22] = VERMELHO;	
-	config[23] = AZUL;
-
-	config[33] = VERMELHO;
-	config[34] = VERMELHO;
-	config[35] = VERMELHO;
-
-	// Front Face 1
-	config[12] = AMARELO;
-	config[13] = VERMELHO;
-	config[14] = AZUL;
-
-	config[24] = AMARELO;
-	config[25] = VERDE;  
-	config[26] = AMARELO;
-
-	config[36] = VERDE;
-	config[37] = VERDE;
-	config[38] = VERDE;
-
-	// Right Face 2
-	config[15] = VERMELHO;
-	config[16] = VERDE;
-	config[17] = AMARELO;
-
-	config[27] = LARANJA;
-	config[28] = LARANJA; 
-	config[29] = AMARELO;
-
-	config[39] = LARANJA;
-	config[40] = LARANJA;
-	config[41] = LARANJA;
-
-	// Back Face 3
-	config[18] = LARANJA;
-	config[19] = AZUL;
-	config[20] = VERMELHO;
-
-	config[30] = VERDE;
-	config[31] = AZUL;  
-	config[32] = VERDE;
-
-	config[42] = AZUL;
-	config[43] = AZUL;
-	config[44] = AZUL;
-
-	// Down Face 5
-	config[45] = BRANCO;
-	config[46] = BRANCO;
-	config[47] = BRANCO;
-
-	config[48] = BRANCO;
-	config[49] = BRANCO;
-	config[50] = BRANCO;
-
-	config[51] = BRANCO;
-	config[52] = BRANCO;
-	config[53] = BRANCO;
-
-	return 0;
-
-
-}
 
 // (cubo, algoritmo) ~> inteiro
 //	cubo = estrutura CUB_tppCUBO populada
@@ -374,8 +284,7 @@ int executaAlgoritmo(CUB_tppCUBO cubo, char* algoritmo) {
 	int jump = 2;
 
 	char comandos[ALG];
-	printf("%s\n", algoritmo);
-
+	
 	memset(comandos, '\0', sizeof(comandos));
 	strcpy(comandos, algoritmo);
 
@@ -592,42 +501,42 @@ int resolveCubo(CUB_tppCUBO cubo) {
 		if (j == 0) {
 			j++;
 
-			printf("Frente: \n");
+			//printf("Frente: \n");
 			primeiraFrente = resolveArestaDeFace(cubo, FRENTE, resolvidoPraCima);
-			printf("Restantes: %d\n", primeiraFrente);
+			//printf("Restantes: %d\n", primeiraFrente);
 
-			printf("Direita: \n");
+			//printf("Direita: \n");
 			primeiraDireita = resolveArestaDeFace(cubo, DIREITA, resolvidoPraCima);
-			printf("Restantes: %d\n", primeiraDireita);
+			//printf("Restantes: %d\n", primeiraDireita);
 
-			printf("Traseira: \n");
+			//printf("Traseira: \n");
 			primeiraTraseira = resolveArestaDeFace(cubo, TRASEIRA, resolvidoPraCima);
-			printf("Restantes: %d\n", primeiraTraseira);
+			//printf("Restantes: %d\n", primeiraTraseira);
 
-			printf("Esquerda: \n");
+			//printf("Esquerda: \n");
 			primeiraEsquerda = resolveArestaDeFace(cubo, ESQUERDA, resolvidoPraCima);
-			printf("Restantes: %d\n", primeiraEsquerda);
+			//printf("Restantes: %d\n", primeiraEsquerda);
 
 			r = aux(primeiraFrente, primeiraDireita, primeiraTraseira, primeiraEsquerda);
 		}
 		else if (j == 1) {
 			j++;
 
-			printf("Frente: \n");
+			//printf("Frente: \n");
 			segundaFrente = resolveArestaDeFace(cubo, FRENTE, resolvidoPraCima);
-			printf("Restantes: %d\n", segundaFrente);
+			//printf("Restantes: %d\n", segundaFrente);
 
-			printf("Direita: \n");
+			//printf("Direita: \n");
 			segundaDireita = resolveArestaDeFace(cubo, DIREITA, resolvidoPraCima);
-			printf("Restantes: %d\n", segundaDireita);
+			//printf("Restantes: %d\n", segundaDireita);
 
-			printf("Traseira: \n");
+			//printf("Traseira: \n");
 			segundaTraseira = resolveArestaDeFace(cubo, TRASEIRA, resolvidoPraCima);
-			printf("Restantes: %d\n", segundaTraseira);
+			//printf("Restantes: %d\n", segundaTraseira);
 
-			printf("Esquerda: \n");
+			//printf("Esquerda: \n");
 			segundaEsquerda = resolveArestaDeFace(cubo, ESQUERDA, resolvidoPraCima);
-			printf("Restantes: %d\n", segundaEsquerda);
+			//printf("Restantes: %d\n", segundaEsquerda);
 
 			r = aux(segundaFrente, segundaDireita, segundaTraseira, segundaEsquerda);
 		}
@@ -648,25 +557,22 @@ int resolveCubo(CUB_tppCUBO cubo) {
 
 C2C_tpCondRet resolve2camada(CUB_tppCUBO cubo){
 
-
 	int i, j = 0;
-	int config[54];
 
-	//CUB_tppCUBO cubo;
+	if (cubo == NULL){
+		return C2C_CondRetCuboVazio;
+	}
 
-	populaCubo(config);
-
-	CUB_CriarCUBO(&cubo, config);
-
+	
+	
+	printf("\n");
 	CUB_ExibirCUBO(cubo);
 
 	resolveCubo(cubo);
 
+	printf("\n");
 	CUB_ExibirCUBO(cubo);
 
 	return C2C_CondRetOK;
-
-
-
 }
 
