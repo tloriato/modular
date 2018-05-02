@@ -8,26 +8,30 @@
 // Propósito: Testa o modulo 2 camada.
 //
 
+==Declarar as condicoes de retorno
+=declararparm	OK			 int 0
 
-==Caso cubo NULL
-=resolveCuboNull 1
 
-==Caso cubo NULL com recuperar
-=resolveCuboNull 0
+//inicio do teste
+
+== Verificar resolve 2 camada com correção pra esquerda 
+=resolve2casoEsquerda  0
+
+== Verificar resolve 2 camada com correção pra direita
+=resolve2casoDireita   0
+
+== Verificar resolve 2 camada com cubo já resolvido
+=resolve2resolvida   0
+
+== Verificar resolve 2 camada com peça presa
+=resolve2pecaPresa   0
+
+== Verificar resolve 2 camada com cubo inverso
+=resolve2inverso   0
+
+== Verificar comando recuperar
+=resolve2casoEsquerda  1
 =recuperar
 
-== Teste com cubo com 1 camada resolvida e para baixo
-=resolve2 0
-
-== Teste comando recuperar
-=resolve2 1
-=recuperar
-
-== Teste com cubo com 2 camada ja resolvida
-=resolve2resolvida 0
-
-==Teste Cubo com peca presa
-=resolveCasoPreso 0
-
-
+// fim
 
