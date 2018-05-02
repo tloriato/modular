@@ -1,4 +1,4 @@
-/***************************************************************************
+/*************************************************************************************************
 *  $MCI Módulo de implementação: Módulo de teste específico
 *
 *  Arquivo gerado:              
@@ -24,11 +24,19 @@
 *  $EIU Interface com o usuário pessoa
 *     Comandos de teste específicos para testar o módulo:
 *
-*		"=resolve2"                - Chama a funcao resolve 2 camada passando como
-*									parametro um cubo com a 1 camada resolvida e para baixo.
+*		"=resolve2casoEsquerda"    - Chama a funcao resolve 2a camada passando como parametro
+*									um cubo com a 1a camada resolvida e para baixo, tendo que
+*									resolver usando o algoritmo de jogar peça p/ esquerda.
+*
+*		"=resolve2casoDireita"    - Chama a funcao resolve 2a camada passando como parametro
+*									um cubo com a 1a camada resolvida e para baixo, tendo que
+*									resolver usando o algoritmo de jogar peça p/ direita.
 *
 *		"=resolve2resolvida"       - Chama a funcao resolve 2 camada passando como
 *									parametro um cubo com a 1 e 2 camada resolvida e para baixo.
+*		
+*		"=resolve2inverso"		   - Chama a função resolve 2 camada passando como parametro um
+*									cubo com a 1a camada resolvida e para cima.
 *
 *		"=resolveCuboNull"         - Chama a funcao resolve 2 camada passando como
 *									parametro um cubo nulo.
@@ -38,7 +46,7 @@
 *									resolvida e para baixo.
 *
 *
-***************************************************************************/
+*************************************************************************************************/
 
 #include    <string.h>
 #include    <stdio.h>
@@ -73,9 +81,9 @@
 #define     RESOLVE_2_CASO_ESQ_CMD			 "=resolve2casoEsquerda"
 #define     RESOLVE_2_CASO_DIR_CMD			 "=resolve2casoDireita"
 #define     RESOLVE_2_RESOLVIDA_CMD			 "=resolve2resolvida"
-#define		RESOLVE_2_PECA_PRESA_CMD		 "=resolve2pecaPresa"
-#define     RESOLVE_CUBO_NULL_CMD			 "=resolveCuboNull"
-#define     RESOLVE_CASO_PRESO_CMD			 "=resolveCasoPreso"
+#define		RESOLVE_2_INVERSO_CMD			 "=resolve2inverso"
+#define     RESOLVE_CUBO_NULL_CMD			 "=resolve2CuboNull"
+#define     RESOLVE_CASO_PRESO_CMD			 "=resolve2CasoPreso"
 
 // (config) ~> inteiro
 //	config = vetor de 54 inteiros
