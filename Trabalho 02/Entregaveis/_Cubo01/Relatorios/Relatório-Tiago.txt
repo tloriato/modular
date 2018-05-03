@@ -1,0 +1,29 @@
+Data        Commit      Tipo Tarefa             Descrição da Tarefa Realizada
+14/04       8dd1f97     Correção                Correção/Adequação das Especificações da 2a Camada
+14/04       b786c42     Correção                Correção/Adequação das Especificações da 2a Camada
+23/04       ee06952     Correção                Correção da nossa especificação da 1a Camada
+23/04       751063b     Correção                Correção da nossa especificação da 1a Camada
+23/04       1ab8d9e     Programação             Criação de Funções Auxiliares para Resolução do Problema
+25/04       0f8a9e4     Programação             Criação & Finalização da Função de Resolver Face da Frente
+25/04       12016fb     Programação             Recriação da Função a cima para outras faces do Cubo
+25/04       c28ef9d     Estudo & Programação    Desenvolvimento de novas rotinas e algoritmos 
+26/04       3e72b76     Programação             Conserto de Algoritmos, Abstrações de Funções
+26/04       52c3f2f     Programação             Implementação de um novo caso possível que travaria o Cubo          
+26/04       186d4ad     Programação             Criação de Rotina para Execução do Código
+26/04       6fd55d6     Programação             Bug fix: contadores
+26/04       acb8679     Programação             Bug fix: condições erradas
+26/04       f63f733     Programação             Criação de um exemplo que não funcionava      
+26/04       f72c2a09    Programação             Consertando algoritmos de rotação 
+28/04       80170b9     Programação             Consertando typos (& -> &&)
+28/04       9986c2f     Programação             Consertando assertivas de entrada 1/2         
+28/04       e41ce0e     Programação             Consertando assertivas de entrada 2/2
+28/04       1e435b8     Revisão & Programação   Removendo código antigo
+29/04       2d49958     Programação             Resolve a Issue #7 & #8: Conseto de Algoritmo da Face Esquerda
+29/04       bc06ad9     Programação             Implementa um novo algoritmo para um caso específico
+30/04       92039f1     Refatoração             Abstrai as funções em torno de uma uma só função            
+30/04       3e98d4c     Refatoração             Aumenta a coerência do módulo
+
+
+		
+
+

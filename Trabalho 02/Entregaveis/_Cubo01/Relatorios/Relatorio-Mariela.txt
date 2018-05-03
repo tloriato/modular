@@ -1,0 +1,12 @@
+﻿Data	   Horas Trabalhadas,	Tipo Tarefa,	 		Descrição da Tarefa Realizada
+21/04/18   2			Estudar algoritmo 2 camada 	Ler sobre documentação da 2 camada
+22/04/18   1               	Estudar algoritmo 2 camada      Ler sobre documentação da 2 camada
+25/04/18   2			Estudo em grupo			Tirar dúvidas do cubo 1 e ver como ficaria o algoritmo do cubo no código
+26/04/18   4                    Revisão código                	Ver algoritoms de rotação do cubo                            
+28/04/18   2			Ver cubo 1        		Tentar enteder como o cubo 01 funcionava
+29/04/18   1			Início do teste cubo 2          Relembrar teste
+29/04/18   4			Início do teste cubo 2          Separar arquivos, criar .c de teste, condições de retorno                     
+01/05/18   30 min 		Feedback para o usuário		Colocar qual movimento realizar em cada etapa
+01/05/18   5 		        Organizar testa2camada.c	Criar casos de teste e testar com script (cubo 2)
+02/05/18   5 		        Organizar testa2camada.c	Consertar esros casos de teste e testar com script (cubo 2)
+

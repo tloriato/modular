@@ -1,0 +1,16 @@
+Data		Horas Trabalhadas,	Tipo Tarefa,		Descrição da Tarefa Realizada
+15/04/18	1			Estudar			Estudei como o cubo 1 funciona
+15/04/18	1			Estudar			Estudei como o cubo 1 funciona
+16/04/18	2			Consultar		Conversamos com os outros grupos para tentarmos chegar a um consenso sobre os sentidos de rotação do cubo
+23/04/18	2			Revisão de código	Correção dos sentidos das rotações no cubo
+25/04/18	1			Estudar			Eu e Ana estudamos como o cubo 2 funciona
+25/04/18	1			Consultar		Falamos com um dos membros do grupo do cubo2 para entender melhor o seu código
+25/04/18	1			Estudar			Busquei entender melhor como a nossa implementação estava sendo feita
+27/04/18	3			Estudar			Pesquisar e estudar algoritmos de resolução de cubo mágico
+28/04/18	1			Estudar			Pesquisar e estudar algoritmos de resolução de cubo mágico
+28/04/18	6			Estudar e documentar	Busquei entender o nosso código já escrito, enquanto escrevia os comentários para documentar as funções
+29/04/18	6			Fazer casos de teste	Junto da Mariela, comecei a fazer todas as questões relativas aos testes do arcabouço
+29/04/18	1			Polimento		Poli a checklist que estávamos usando para preparar as entregas do trabalho
+		
+
+
