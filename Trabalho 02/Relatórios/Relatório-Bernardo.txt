@@ -11,6 +11,9 @@ Data		Horas Trabalhadas,	Tipo Tarefa,		Descrição da Tarefa Realizada
 28/04/18	6			Estudar e documentar	Busquei entender o nosso código já escrito, enquanto escrevia os comentários para documentar as funções
 29/04/18	6			Fazer casos de teste	Junto da Mariela, comecei a fazer todas as questões relativas aos testes do arcabouço
 29/04/18	1			Polimento		Poli a checklist que estávamos usando para preparar as entregas do trabalho
-		
+01/05/18	2			Fazer casos de teste	Continuei fazendo os casos de teste
+02/05/18	4			Fazer casos de teste	Continuei fazendo os casos de teste
+02/05/18	1			Revisão de código	Revisei o código, buscando erros
+02/05/18	4			Programar		Programei parte da implementação do cubo 1	
 
 
