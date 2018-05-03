@@ -8,6 +8,7 @@
 #include <string.h>
 
 #define ALG 55
+#define MAX 600
 
 #define CIMA 0
 #define FRENTE 1
@@ -23,7 +24,11 @@
 #define VERMELHO 4
 #define AMARELO 5
 
-// Ou seja, cores das faces são fixas
+// Ou seja, cores das faces sÃ£o fixas
+
+/* STRING GLOBAL QUE GUARDA OS COMANDOS */
+
+char comandos[MAX] = "";
 
 // (cubo) -> 1 | 0
 int resolvidoAcima(CUB_tpCubo* cubo) {
@@ -236,29 +241,32 @@ int resolveArestaDeFace(CUB_tpCubo* cubo, int face, int resolvidoPraCima) {
 
 	(face + 1) == 5 ? faceDireitaRelativa = 1 : (faceDireitaRelativa = (face + 1));
 	(face - 1) == 0 ? faceDireitaRelativa = 4 : (faceDireitaRelativa = (face - 1));
-
+	
+	
 
 	if (faceArestaD == face && linhaArestaD == 1 && colunaArestaD == 2) {
-		// Aresta da Direita de [face] está resolvida
+		// Aresta da Direita de [face] estÃ¡ resolvida
 		restantes--;
 	}
 
 	else {
 
 		if (resolvidoPraCima) {
-			// Cubo está resolvido para cima
+			// Cubo estÃ¡ resolvido para cima
 			if (faceArestaD == face && linhaArestaD == 2 && colunaArestaD == 1) {
 				// Algoritmo "Baixo" -> Direita
 				restantes--;
 			}
 
 			else if (faceArestaD == faceDireitaRelativa && linhaArestaD == 1 && colunaArestaD == 0) {
-				// Algoritmo de trocar a orientação da aresta do lado direito
+				// Algoritmo de trocar a orientaÃ§Ã£o da aresta do lado direito
 				restantes--;
 			}
 
-			else if (pecaDeCimaTrocada(face, faceArestaD, linhaArestaD, colunaArestaD, resolvidoPraCima)) {
-				// Algoritmo "Baixo" - > Direita + Trocar orientação do lado direito
+			else if (
+				
+				(face, faceArestaD, linhaArestaD, colunaArestaD, resolvidoPraCima)) {
+				// Algoritmo "Baixo" - > Direita + Trocar orientaÃ§Ã£o do lado direito
 				restantes--;
 			}
 		}
@@ -271,7 +279,7 @@ int resolveArestaDeFace(CUB_tpCubo* cubo, int face, int resolvidoPraCima) {
 			}
 
 			else if (faceArestaD == faceDireitaRelativa && linhaArestaD == 1 && colunaArestaD == 0) {
-				// Algoritmo de trocar a orientação do lado direito
+				// Algoritmo de trocar a orientaÃ§Ã£o do lado direito
 				executaAlgoritmo(cubo, algoDireita);
 				executaAlgoritmo(cubo, algoIntermediario);
 				executaAlgoritmo(cubo, algoDireita);
@@ -279,7 +287,7 @@ int resolveArestaDeFace(CUB_tpCubo* cubo, int face, int resolvidoPraCima) {
 			}
 
 			else if (pecaDeCimaTrocada(face, faceArestaD, linhaArestaD, colunaArestaD, resolvidoPraCima)) {
-				// Algoritmo Cima -> Direita + Trocar orientação do lado direito
+				// Algoritmo Cima -> Direita + Trocar orientaÃ§Ã£o do lado direito
 				executaAlgoritmo(cubo, algoDireita);
 				executaAlgoritmo(cubo, algoDireita);
 				executaAlgoritmo(cubo, algoIntermediario);
@@ -292,7 +300,7 @@ int resolveArestaDeFace(CUB_tpCubo* cubo, int face, int resolvidoPraCima) {
 	}
 
 	if (faceArestaE == face && linhaArestaE == 1 && colunaArestaE == 0) {
-		// Aresta da Esquerda de [face] está resolvida
+		// Aresta da Esquerda de [face] estÃ¡ resolvida
 		restantes--;
 	}
 
@@ -306,12 +314,12 @@ int resolveArestaDeFace(CUB_tpCubo* cubo, int face, int resolvidoPraCima) {
 			}
 
 			else if (faceArestaE == faceEsquerdaRelativa && linhaArestaE == 1 && colunaArestaE == 2) {
-				// Algoritmo de trocar a orientação da aresta do lado esquerdo
+				// Algoritmo de trocar a orientaÃ§Ã£o da aresta do lado esquerdo
 				restantes--;
 			}
 
 			else if (pecaDeCimaTrocada(face, faceArestaE, linhaArestaE, colunaArestaE, resolvidoPraCima)) {
-				// Algoritmo "Baixo" - > Esquerda + Trocar orientação do lado esquerda
+				// Algoritmo "Baixo" - > Esquerda + Trocar orientaÃ§Ã£o do lado esquerda
 				restantes--;
 			}
 
@@ -327,7 +335,7 @@ int resolveArestaDeFace(CUB_tpCubo* cubo, int face, int resolvidoPraCima) {
 			}
 
 			else if (faceArestaE == faceEsquerdaRelativa && linhaArestaE == 1 && colunaArestaE == 2) {
-				// Algoritmo de trocar a orientação do lado esquerdo
+				// Algoritmo de trocar a orientaÃ§Ã£o do lado esquerdo
 				executaAlgoritmo(cubo, algoEsquerda);
 				executaAlgoritmo(cubo, algoIntermediario);
 				executaAlgoritmo(cubo, algoEsquerda);
@@ -336,7 +344,7 @@ int resolveArestaDeFace(CUB_tpCubo* cubo, int face, int resolvidoPraCima) {
 			}
 
 			else if (pecaDeCimaTrocada(face, faceArestaE, linhaArestaE, colunaArestaE, resolvidoPraCima)) {
-				// Algoritmo Cima -> Esquerda + Trocar orientação do lado esquerda
+				// Algoritmo Cima -> Esquerda + Trocar orientaÃ§Ã£o do lado esquerda
 				executaAlgoritmo(cubo, algoEsquerda);
 				executaAlgoritmo(cubo, algoEsquerda);
 				executaAlgoritmo(cubo, algoIntermediario);
@@ -354,7 +362,7 @@ int resolveArestaDeFace(CUB_tpCubo* cubo, int face, int resolvidoPraCima) {
 
 // (cubo, algoritmo) ~> inteiro
 //	cubo = estrutura CUB_tppCUBO populada
-//	algoritmo = string de no máximo ALG elementos com comandos no estilo:
+//	algoritmo = string de no mÃ¡ximo ALG elementos com comandos no estilo:
 //		"U R U' R' U' F' U U F F"
 //	inteiro =
 //		0 -> sucesso
@@ -475,7 +483,7 @@ int resolveCubo(CUB_tpCubo* cubo) {
 
 
 		if (i == 3) {
-			// força o cubo
+			// forÃ§a o cubo
 			i = 0;
 
 			//forcaCuboFrente(cubo);
