@@ -1,0 +1,13 @@
+Data		Horas Trabalhadas,	Tipo Tarefa,		Descrição da Tarefa Realizada
+09/04/18	2			Estudar			Estudei como o cubo 1 funcionava
+09/04/18	2			Estudar			Estudei o algoritimo da segunda camada
+16/04/18	2			Consultar		Conversamos com os outros grupos para tentarmos chegar a um consenso sobre os sentidos de rotação do cubo
+25/04/18	1			Estudar			Eu e Bernardo estudamos como o cubo 2 funciona
+25/04/18	1			Consultar		Falamos com um dos membros do grupo do cubo2 para entender melhor o seu código
+25/04/18	2			Revisāo			Revisei e alterei os algaritimos da segunda camada
+27/04/18	3			Programacao Comecei a alterar no codigo caso o cubo estivesse com a primeira camada pra cima
+28/04/18	6			Programacao Continuar alteracoes e corrigir erros encontrados
+01/05/18	3			Correcao	  Corrigi erros relativos a face resolvida estar em cima
+02/05/18  8     Correcao    Finalizei os erros relativos a face resolvida estar em cima
+
+
