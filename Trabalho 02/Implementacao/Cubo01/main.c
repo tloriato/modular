@@ -8,6 +8,7 @@
 #include <string.h>
 
 #define ALG 55
+#define MAX 600
 
 #define CIMA 0
 #define ESQUERDA 4
@@ -22,6 +23,10 @@
 #define AZUL 4
 #define BRANCO 5
 #define LARANJA 6
+
+/* STRING GLOBAL QUE GUARDA OS COMANDOS */
+
+char comandos[MAX] = "";
 
 int pecaDeCimaTrocada(int face, int faceAresta, int linhaAresta, int colunaAresta, int resolvidoPraCima) {
 
@@ -97,14 +102,14 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 		cor2ArestaE = corEsquerda;
 
 		if (resolvidoPraCima) {
-			algoDireita = "D' R' D R D F D' F'";
-			algoEsquerda = "D L D' L' D' F' D F";
-			algoIntermediario = "D D";
+			algoDireita = "D' R' D R D F D' F' ";
+			algoEsquerda = "D L D' L' D' F' D F ";
+			algoIntermediario = "D D ";
 		}
 		else {
-			algoDireita = "U R U' R' U' F' U F";
-			algoEsquerda = "U' L' U L U F U' F'";
-			algoIntermediario = "U U";
+			algoDireita = "U R U' R' U' F' U F ";
+			algoEsquerda = "U' L' U L U F U' F' ";
+			algoIntermediario = "U U ";
 		}
 
 		break;
@@ -117,15 +122,15 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 		cor2ArestaE = corFrente;
 
 		if (resolvidoPraCima) {
-			algoDireita = "D' B' D B D R D' R'";
-			algoEsquerda = "D F D' F' D' R' D R"; 
-			algoIntermediario = "D D";
+			algoDireita = "D' B' D B D R D' R' ";
+			algoEsquerda = "D F D' F' D' R' D R "; 
+			algoIntermediario = "D D ";
 
 		}
 		else {
-			algoDireita = "U B U' B' U' R' U R";
-			algoEsquerda = "U' F' U F U R U' R'";
-			algoIntermediario = "U U";
+			algoDireita = "U B U' B' U' R' U R ";
+			algoEsquerda = "U' F' U F U R U' R' ";
+			algoIntermediario = "U U ";
 		}
 
 		break;
@@ -138,15 +143,15 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 		cor2ArestaE = corTraseira;
 
 		if (resolvidoPraCima) {
-			algoDireita = "D' F' D F D L D' L'";
-			algoEsquerda = "D B D' B' D' L' D L";
-			algoIntermediario = "D D";
+			algoDireita = "D' F' D F D L D' L' ";
+			algoEsquerda = "D B D' B' D' L' D L ";
+			algoIntermediario = "D D ";
 
 		}
 		else {
-			algoDireita = "U F U' F' U' L' U L";
-			algoEsquerda = "U' B' U B U L U' L'";
-			algoIntermediario = "U U";
+			algoDireita = "U F U' F' U' L' U L ";
+			algoEsquerda = "U' B' U B U L U' L' ";
+			algoIntermediario = "U U ";
 		}
 
 		break;
@@ -159,15 +164,15 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 		cor2ArestaE = corDireita;
 
 		if (resolvidoPraCima) {
-			algoDireita = "D R D' R' D' B' D B";
-			algoEsquerda = "D' L' D L D B D' B'";
-			algoIntermediario = "D D";
+			algoDireita = "D R D' R' D' B' D B ";
+			algoEsquerda = "D' L' D L D B D' B' ";
+			algoIntermediario = "D D ";
 
 		}
 		else {
-			algoDireita = "U L U' L' U' B' U B";
-			algoEsquerda = "U' R' U R U B U' B'";
-			algoIntermediario = "U U";
+			algoDireita = "U L U' L' U' B' U B ";
+			algoEsquerda = "U' R' U R U B U' B' ";
+			algoIntermediario = "U U ";
 		}
 
 		break;
@@ -410,7 +415,7 @@ int populaCubo(int *config) {
 //		-1 -> entradas invalidas (TODO)
 int executaAlgoritmo(CUB_tppCUBO cubo, char* algoritmo) {
 
-	printf("Execute: %s\n", algoritmo);
+	strcat(comandos, algoritmo);
 
 	int i = 0;
 	int jump = 2;
@@ -533,11 +538,11 @@ int forcaCuboFrente(CUB_tppCUBO cubo, int resolvidoPraCima) {
 		// Aresta da Direita está na Direita da Face Direita
 		// Algoritmo Cima <> Direita [da Direita]
 		if (!resolvidoPraCima) {
-			executaAlgoritmo(cubo, "U B U' B' U' R' U R");
+			executaAlgoritmo(cubo, "U B U' B' U' R' U R ");
 		}
 		else {
 			// Algoritmo Baixo <> Direita [da Direita]
-			executaAlgoritmo(cubo, "D' B' D B D R D' R'");
+			executaAlgoritmo(cubo, "D' B' D B D R D' R' ");
 		}
 		
 
@@ -548,11 +553,11 @@ int forcaCuboFrente(CUB_tppCUBO cubo, int resolvidoPraCima) {
 		// Aresta da Direita está na Esquerda da Face Esquerda
 		// Algoritmo Cima <> Esquerda [da Esquerda]
 		if (!resolvidoPraCima) {
-			executaAlgoritmo(cubo, "U' B' U B U L U' L'");
+			executaAlgoritmo(cubo, "U' B' U B U L U' L' ");
 		}
 		else {
 			// Algoritmo Baixo <> Esquerda [da Esquerda]
-			executaAlgoritmo(cubo, "D B D' B' D' L' D L");
+			executaAlgoritmo(cubo, "D B D' B' D' L' D L ");
 		}
 		
 
@@ -563,11 +568,11 @@ int forcaCuboFrente(CUB_tppCUBO cubo, int resolvidoPraCima) {
 		// Aresta da Direita está na Direita da Face Esquerda
 		// Algorima Cima <> Direita [da Esquerda]
 		if (!resolvidoPraCima) {
-			executaAlgoritmo(cubo, "U F U' F' U' L' U L");
+			executaAlgoritmo(cubo, "U F U' F' U' L' U L ");
 		}
 		else {
 			// Algorima Baixo <> Direita [da Esquerda]
-			executaAlgoritmo(cubo, "D' F' D F D L D' L'");
+			executaAlgoritmo(cubo, "D' F' D F D L D' L' ");
 		}
 		
 		return 1;
@@ -577,11 +582,11 @@ int forcaCuboFrente(CUB_tppCUBO cubo, int resolvidoPraCima) {
 		// Aresta da Direita está na Esquerda da Face Traseira
 		// Algoritmo Cima <> Esquerda [da Traseira]
 		if (!resolvidoPraCima) {
-			executaAlgoritmo(cubo, "U' R' U R U B U' B'");
+			executaAlgoritmo(cubo, "U' R' U R U B U' B' ");
 		}
 		else {
 			// Algoritmo Baixo <> Esquerda [da Traseira]
-			executaAlgoritmo(cubo, "D' L' D L D B D' B'");
+			executaAlgoritmo(cubo, "D' L' D L D B D' B' ");
 		}
 		
 
@@ -592,11 +597,11 @@ int forcaCuboFrente(CUB_tppCUBO cubo, int resolvidoPraCima) {
 		// Aresta da Direita está na Direita da Face Traseira
 		// Algoritmo Cima <> Direita [da Traseira]
 		if (!resolvidoPraCima) {
-			executaAlgoritmo(cubo, "U L U' L' U' B' U B");
+			executaAlgoritmo(cubo, "U L U' L' U' B' U B ");
 		}
 		else {
 			// Algoritmo Baixo <> Direita [da Traseira]
-			executaAlgoritmo(cubo, "D R D' R' D' B' D B");
+			executaAlgoritmo(cubo, "D R D' R' D' B' D B ");
 		}
 		
 
@@ -607,11 +612,11 @@ int forcaCuboFrente(CUB_tppCUBO cubo, int resolvidoPraCima) {
 		// Aresta da Esquerda está na Esquerda da Face Direita
 		// Algoritmo Cima <> Esquerda [da Direita]
 		if (!resolvidoPraCima) {
-			executaAlgoritmo(cubo, "U' F' U F U R U' R'");
+			executaAlgoritmo(cubo, "U' F' U F U R U' R' ");
 		}
 		else {
 			// Algoritmo Baixo <> Esquerda [da Direita]
-			executaAlgoritmo(cubo, "D F D' F' D' R' D R");
+			executaAlgoritmo(cubo, "D F D' F' D' R' D R ");
 		}
 		
 
@@ -622,11 +627,11 @@ int forcaCuboFrente(CUB_tppCUBO cubo, int resolvidoPraCima) {
 		// Aresta da Esquerda está na Direita da Face Direita
 		// Algoritmo Cima <> Direita [da Direita]
 		if (!resolvidoPraCima) {
-			executaAlgoritmo(cubo, "U B U' B' U' R' U R");
+			executaAlgoritmo(cubo, "U B U' B' U' R' U R ");
 		}
 		else {
 			// Algoritmo Baixo <> Direita [da Direita]
-			executaAlgoritmo(cubo, "D' B' D B D R D' R'");
+			executaAlgoritmo(cubo, "D' B' D B D R D' R' ");
 		}
 		
 
@@ -637,11 +642,11 @@ int forcaCuboFrente(CUB_tppCUBO cubo, int resolvidoPraCima) {
 		// Aresta da Esquerda está na Esquerda da Face Esquerda
 		// Algoritmo Cima <> Esquerda [da Esquerda]
 		if (!resolvidoPraCima) {
-			executaAlgoritmo(cubo, "U' B' U B U L U' L'");
+			executaAlgoritmo(cubo, "U' B' U B U L U' L' ");
 		}
 		else {
 			// Algoritmo Baixo <> Esquerda [da Esquerda]
-			executaAlgoritmo(cubo, "D B D' B' D' L' D L");
+			executaAlgoritmo(cubo, "D B D' B' D' L' D L ");
 		}
 		
 
@@ -652,11 +657,11 @@ int forcaCuboFrente(CUB_tppCUBO cubo, int resolvidoPraCima) {
 		// Aresta da Esquerda está na Esquerda da Face Traseira
 		// Algoritmo Cima <> Esquerda [da Traseira]
 		if (!resolvidoPraCima) {
-			executaAlgoritmo(cubo, "U' R' U R U B U' B'");
+			executaAlgoritmo(cubo, "U' R' U R U B U' B' ");
 		}
 		else {
 			// Algoritmo Baixo <> Esquerda [da Traseira]
-			executaAlgoritmo(cubo, "D' L' D L D B D' B'");
+			executaAlgoritmo(cubo, "D' L' D L D B D' B' ");
 		}
 		
 		return 1;
@@ -666,11 +671,11 @@ int forcaCuboFrente(CUB_tppCUBO cubo, int resolvidoPraCima) {
 		// Aresta da Esquerda está na Direita da Face Traseira
 		// Algoritmo Cima <> Direita [da Traseira]
 		if (!resolvidoPraCima) {
-			executaAlgoritmo(cubo, "U L U' L' U' B' U B");
+			executaAlgoritmo(cubo, "U L U' L' U' B' U B ");
 		}
 		else {
 			// Algoritmo Baixo <> Direita [da Traseira]
-			executaAlgoritmo(cubo, "D R D' R' D' B' D B");
+			executaAlgoritmo(cubo, "D R D' R' D' B' D B ");
 		}
 
 		return 1;
@@ -722,18 +727,15 @@ int resolveCubo(CUB_tppCUBO cubo) {
 			i++;
 
 			if (resolvidoPraCima) {
-				executaAlgoritmo(cubo, "D");
+				executaAlgoritmo(cubo, "D ");
 			}
 			else {
-				executaAlgoritmo(cubo, "U");
+				executaAlgoritmo(cubo, "U ");
 			}
 		}
 	}
 
 }
-
-
-
 
 void main() {
 
@@ -751,6 +753,8 @@ void main() {
 	resolveCubo(cubo);
 
 	CUB_ExibirCUBO(cubo);
+
+	printf("\n%s\n", comandos);
 
 	system("pause");
 
