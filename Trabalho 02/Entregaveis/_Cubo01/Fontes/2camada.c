@@ -1,4 +1,4 @@
-﻿/******************************************************************************
+/******************************************************************************
 *  $MCD Módulo de definição: 2L		Segunda Camada
 *
 *  Arquivo gerado:              secondLayer.h
@@ -44,6 +44,23 @@
 /* STRING GLOBAL QUE GUARDA OS COMANDOS */
 char execute[MAX]= "";
 
+/**************************
+*  $FC Função: 2C  PecaDeCimaTrocada
+*
+*  $ED Descrição da função
+*		checa se a cor da peca esta trocada
+*  $EParâmetros
+*		$P face
+        $P faceAresta
+        $P linhaAresta
+        $P colunaAresta
+        $P resolvidoPraCima
+*				
+*  $FV Valor retornado
+*		1- esta trocada
+*       0- sucesso
+**************************/
+
 int pecaDeCimaTrocada(int face, int faceAresta, int linhaAresta, int colunaAresta, int resolvidoPraCima) {
 
 	if (face == DIREITA) {
@@ -84,6 +101,20 @@ int pecaDeCimaTrocada(int face, int faceAresta, int linhaAresta, int colunaArest
 
 	return 0;
 }
+
+/**************************
+*  $FC Função: 2C  resolveArestaDeFace
+*
+*  $ED Descrição da função
+*		Checa aonde pecas podem estar e chama o algoritmo certo
+*  $EParâmetros
+*		$P cubo
+*       $P face
+*       $P resolvidoPraCima
+*				
+*  $FV Valor retornado
+*		restantes - numero de pecas que nao estao no lugar
+**************************/
 
 int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 	int restantes = 2;
@@ -335,14 +366,20 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 	
 }
 
+/**************************
+*  $FC Função: 2C  executaAlgoritmo
+*
+*  $ED Descrição da função
+*    Executa algoritmo recebido pela string
+*		
+*  $EParâmetros
+*		$P cubo = estrutura CUB_tppCUBO populada
+*       $P algoritmo = string de no máximo ALG elementos com comandos no estilo: "U R U' R' U' F' U U F F"
+*  $FV Valor retornado
+*       0 - sucesso
+*       1 - entrada inválida
+**************************/
 
-// (cubo, algoritmo) ~> inteiro
-//	cubo = estrutura CUB_tppCUBO populada
-//	algoritmo = string de no máximo ALG elementos com comandos no estilo:
-//		"U R U' R' U' F' U U F F"
-//	inteiro =
-//		0 -> sucesso
-//		-1 -> entradas invalidas (TODO)
 int executaAlgoritmo(CUB_tppCUBO cubo, char* algoritmo) {
 
 	
@@ -409,6 +446,18 @@ int executaAlgoritmo(CUB_tppCUBO cubo, char* algoritmo) {
 	return 0;
 }
 
+/**************************
+*  $FC Função: 2C  resolvidoAcima
+*
+*  $ED Descrição da função
+*	Verifica se cubo está com a face branca para cima	
+*  $EParâmetros
+*		$P cubo			
+*  $FV Valor retornado
+*		1- cubo para baixo
+*       0- sucesso
+**************************/
+
 // (cubo) -> 1 | 0
 int resolvidoAcima(CUB_tppCUBO cubo) {
 	int corCima, aux1, aux2, aux3, aux4, aux5, aux6, aux7, aux8;
@@ -434,6 +483,20 @@ int resolvidoAcima(CUB_tppCUBO cubo) {
 	}
 }
 
+/**************************
+*  $FC Função: 2C  aux
+*
+*  $ED Descrição da função
+*		Funcao auxiliar
+*  $EParâmetros
+*		 $P a
+*        $P b
+*        $P c
+*        $P d
+*  $FV Valor retornado
+*		1- nao sao todas iguais
+*       0- se a=b=c=d
+**************************/
 int aux(int a, int b, int c, int d) {
 	if (a == 0 && b == 0 && c == 0 && d == 0) {
 		return 0;
@@ -441,6 +504,23 @@ int aux(int a, int b, int c, int d) {
 
 	return 1;
 }
+
+/**************************
+*  $FC Função: 2C  forcaCuboFrente
+*
+*  $ED Descrição da função
+*		Cuida do caso de pacas presas
+*  $EParâmetros
+*		$P face
+        $P faceAresta
+        $P linhaAresta
+        $P colunaAresta
+        $P resolvidoPraCima
+*				
+*  $FV Valor retornado
+*		1- n executou movimento
+*       0- sucesso
+**************************/
 
 int forcaCuboFrente(CUB_tppCUBO cubo, int resolvidoPraCima) {
 
@@ -620,6 +700,22 @@ int forcaCuboFrente(CUB_tppCUBO cubo, int resolvidoPraCima) {
 	return 0;
 }
 
+/**************************
+*  $FC Função: 2C  resolveCubo
+*
+*  $ED Descrição da função
+*		Resolve 2 camada
+*  $EParâmetros
+*		$P face
+        $P faceAresta
+        $P linhaAresta
+        $P colunaAresta
+        $P resolvidoPraCima
+*				
+*  $FV Valor retornado
+*		
+**************************/
+
 int resolveCubo(CUB_tppCUBO cubo) {
 	int r = 1, j = 1, i = 0;
 	int resolvidoPraCima = resolvidoAcima(cubo);
@@ -697,4 +793,3 @@ C2C_tpCondRet resolve2camada(CUB_tppCUBO cubo){
 
 	return C2C_CondRetOK;
 }
-
