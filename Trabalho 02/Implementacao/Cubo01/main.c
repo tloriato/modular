@@ -97,9 +97,9 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 		cor2ArestaE = corEsquerda;
 
 		if (resolvidoPraCima) {
-			algoDireita = "D R' D' R D' F D F'";
-			algoEsquerda = "D' L D L' D F' D' F";
-			algoIntermediario = "D' D'";
+			algoDireita = "D' R' D R D F D' F'";
+			algoEsquerda = "D L D' L' D' F' D F";
+			algoIntermediario = "D D";
 		}
 		else {
 			algoDireita = "U R U' R' U' F' U F";
@@ -117,9 +117,9 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 		cor2ArestaE = corFrente;
 
 		if (resolvidoPraCima) {
-			algoDireita = "D F' D' F D' L D L'";
-			algoEsquerda = "D' B D B' D L' D' L";
-			algoIntermediario = "D' D'";;
+			algoDireita = "D' B' D B D R D' R'";
+			algoEsquerda = "D F D' F' D' R' D R"; 
+			algoIntermediario = "D D";
 
 		}
 		else {
@@ -138,9 +138,9 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 		cor2ArestaE = corTraseira;
 
 		if (resolvidoPraCima) {
-			algoDireita = "D B' D' B D' R D R'";
-			algoEsquerda = "D' F D F' D R' D' R";
-			algoIntermediario = "D' D'";
+			algoDireita = "D' F' D F D L D' L'";
+			algoEsquerda = "D B D' B' D' L' D L";
+			algoIntermediario = "D D";
 
 		}
 		else {
@@ -159,9 +159,9 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 		cor2ArestaE = corDireita;
 
 		if (resolvidoPraCima) {
-			algoDireita = "D L' D' L D' B D B'";
-			algoEsquerda = "D' R D R' D B' D' B";
-			algoIntermediario = "D' D'";
+			algoDireita = "D R D' R' D' B' D B";
+			algoEsquerda = "D' L' D L D B D' B'";
+			algoIntermediario = "D D";
 
 		}
 		else {
@@ -174,14 +174,14 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 	}
 	default: {
 		return -1;
-		}
+	}
 	}
 
 	if (CUB_EncontrarPosicaoDePecaDeAresta(&faceArestaD, &linhaArestaD, &colunaArestaD, cubo, cor1ArestaD, cor2ArestaD) != 0) { exit(8); }
 	if (CUB_EncontrarPosicaoDePecaDeAresta(&faceArestaE, &linhaArestaE, &colunaArestaE, cubo, cor1ArestaE, cor2ArestaE) != 0) { exit(9); }
 
 	(face + 1) == 5 ? faceDireitaRelativa = 1 : (faceDireitaRelativa = (face + 1));
-	(face - 1) == 0 ? faceDireitaRelativa = 4 : (faceDireitaRelativa = (face - 1));
+	(face - 1) == 0 ? faceEsquerdaRelativa = 4 : (faceEsquerdaRelativa = (face - 1));
 
 
 	if (faceArestaD == face && linhaArestaD == 1 && colunaArestaD == 2) {
@@ -195,16 +195,24 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 			// Cubo está resolvido para cima
 			if (faceArestaD == face && linhaArestaD == 2 && colunaArestaD == 1) {
 				// Algoritmo "Baixo" -> Direita
+				executaAlgoritmo(cubo, algoDireita);
 				restantes--;
 			}
 
 			else if (faceArestaD == faceDireitaRelativa && linhaArestaD == 1 && colunaArestaD == 0) {
 				// Algoritmo de trocar a orientação da aresta do lado direito
+				executaAlgoritmo(cubo, algoDireita);
+				executaAlgoritmo(cubo, algoIntermediario);
+				executaAlgoritmo(cubo, algoDireita);
 				restantes--;
 			}
 
 			else if (pecaDeCimaTrocada(face, faceArestaD, linhaArestaD, colunaArestaD, resolvidoPraCima)) {
 				// Algoritmo "Baixo" - > Direita + Trocar orientação do lado direito
+				executaAlgoritmo(cubo, algoDireita);
+				executaAlgoritmo(cubo, algoDireita);
+				executaAlgoritmo(cubo, algoIntermediario);
+				executaAlgoritmo(cubo, algoDireita);
 				restantes--;
 			}
 		}
@@ -248,16 +256,24 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 
 			if (faceArestaE == face && linhaArestaE == 2 && colunaArestaE == 1) {
 				// Algoritmo "Baixo" -> Esquerda
+				executaAlgoritmo(cubo, algoEsquerda);
 				restantes--;
 			}
 
 			else if (faceArestaE == faceEsquerdaRelativa && linhaArestaE == 1 && colunaArestaE == 2) {
 				// Algoritmo de trocar a orientação da aresta do lado esquerdo
+				executaAlgoritmo(cubo, algoEsquerda);
+				executaAlgoritmo(cubo, algoIntermediario);
+				executaAlgoritmo(cubo, algoEsquerda);
 				restantes--;
 			}
 
 			else if (pecaDeCimaTrocada(face, faceArestaE, linhaArestaE, colunaArestaE, resolvidoPraCima)) {
 				// Algoritmo "Baixo" - > Esquerda + Trocar orientação do lado esquerda
+				executaAlgoritmo(cubo, algoEsquerda);
+				executaAlgoritmo(cubo, algoEsquerda);
+				executaAlgoritmo(cubo, algoIntermediario);
+				executaAlgoritmo(cubo, algoEsquerda);
 				restantes--;
 			}
 
@@ -303,85 +319,83 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 //		0 -> sucesso
 int populaCubo(int *config) {
 
-	// 1: Verde | 2: Vermelho | 3: Amarelo | 4: Azul | 5: Branco | 6: Laranja
-
 	// Up Face 0
-	config[0] = LARANJA;
-	config[1] = LARANJA;
-	config[2] = VERDE;
+	config[0] = BRANCO;
+	config[1] = BRANCO;
+	config[2] = BRANCO;
 
-	config[3] = AZUL;
-	config[4] = AMARELO;
-	config[5] = AMARELO;
+	config[3] = BRANCO;
+	config[4] = BRANCO;
+	config[5] = BRANCO;
 
-	config[6] = VERDE;
-	config[7] = AMARELO;
-	config[8] = VERMELHO;
+	config[6] = BRANCO;
+	config[7] = BRANCO;
+	config[8] = BRANCO;
 
 	// Left Face 4
-	config[9] = AMARELO;
-	config[10] = AMARELO;
-	config[11] = AMARELO;
+	config[9] = LARANJA;
+	config[10] = LARANJA;
+	config[11] = LARANJA;
 
-	config[21] = VERDE;
-	config[22] = VERMELHO;
-	config[23] = VERMELHO;
+	config[21] = AZUL;
+	config[22] = LARANJA;
+	config[23] = AZUL;
 
-	config[33] = VERMELHO;
-	config[34] = VERMELHO;
+	config[33] = AMARELO;
+	config[34] = VERDE;
 	config[35] = VERMELHO;
 
 	// Front Face 1
-	config[12] = VERMELHO;
-	config[13] = VERMELHO;
-	config[14] = AMARELO;
+	config[12] = VERDE;
+	config[13] = VERDE;
+	config[14] = VERDE;
 
-	config[24] = VERDE;
+	config[24] = AMARELO;
 	config[25] = VERDE;
-	config[26] = VERMELHO;
+	config[26] = VERDE;
 
-	config[36] = VERDE;
-	config[37] = VERDE;
-	config[38] = VERDE;
+	config[36] = AZUL;
+	config[37] = AZUL;
+	config[38] = LARANJA;
 
 	// Right Face 2
-	config[15] = AZUL;
-	config[16] = VERDE;
-	config[17] = LARANJA;
+	config[15] = VERMELHO;
+	config[16] = VERMELHO;
+	config[17] = VERMELHO;
 
-	config[27] = AZUL;
-	config[28] = LARANJA;
-	config[29] = LARANJA;
+	config[27] = VERMELHO;
+	config[28] = VERMELHO;
+	config[29] = VERDE;
 
-	config[39] = LARANJA;
+	config[39] = VERDE;
 	config[40] = LARANJA;
-	config[41] = LARANJA;
+	config[41] = AMARELO;
 
 	// Back Face 3
-	config[18] = AMARELO;
-	config[19] = AMARELO;
+	config[18] = AZUL;
+	config[19] = AZUL;
 	config[20] = AZUL;
 
-	config[30] = AZUL;
+	config[30] = AMARELO;
 	config[31] = AZUL;
 	config[32] = LARANJA;
 
-	config[42] = AZUL;
-	config[43] = AZUL;
-	config[44] = AZUL;
+	config[42] = VERDE;
+	config[43] = AMARELO;
+	config[44] = LARANJA;
 
 	// Down Face 5
-	config[45] = BRANCO;
-	config[46] = BRANCO;
-	config[47] = BRANCO;
+	config[45] = AMARELO;
+	config[46] = VERMELHO;
+	config[47] = AMARELO;
 
-	config[48] = BRANCO;
-	config[49] = BRANCO;
-	config[50] = BRANCO;
+	config[48] = LARANJA;
+	config[49] = AMARELO;
+	config[50] = AMARELO;
 
-	config[51] = BRANCO;
-	config[52] = BRANCO;
-	config[53] = BRANCO;
+	config[51] = AZUL;
+	config[52] = VERMELHO;
+	config[53] = VERMELHO;
 
 	return 0;
 
@@ -396,7 +410,7 @@ int populaCubo(int *config) {
 //		-1 -> entradas invalidas (TODO)
 int executaAlgoritmo(CUB_tppCUBO cubo, char* algoritmo) {
 
-	printf("%s\n", algoritmo);
+	printf("Execute: %s\n", algoritmo);
 
 	int i = 0;
 	int jump = 2;
@@ -471,7 +485,7 @@ int resolvidoAcima(CUB_tppCUBO cubo) {
 	if (CUB_ChecarCorDaFace(&aux7, cubo, 2, 1, CIMA) != 0) { exit(17); }
 	if (CUB_ChecarCorDaFace(&aux8, cubo, 2, 2, CIMA) != 0) { exit(18); }
 
-	if (corCima == aux1 == aux2 == aux3 == aux4 == aux5 == aux6 == aux7 == aux8) {
+	if (corCima == aux1 && aux1 == aux2 && aux2 == aux3 && aux3 == aux4 && aux4 == aux5 && aux5 == aux6 && aux6 == aux7 && aux7 == aux8) {
 		return 1;
 	}
 	else {
@@ -487,7 +501,7 @@ int aux(int a, int b, int c, int d) {
 	return 1;
 }
 
-int forcaCuboFrente(CUB_tppCUBO cubo) {
+int forcaCuboFrente(CUB_tppCUBO cubo, int resolvidoPraCima) {
 
 	int alterado = 0;
 
@@ -513,10 +527,19 @@ int forcaCuboFrente(CUB_tppCUBO cubo) {
 	if (CUB_EncontrarPosicaoDePecaDeAresta(&faceAresta1, &linhaAresta1, &colunaAresta1, cubo, cor1Aresta1, cor2Aresta1) != 0) { exit(24); }
 	if (CUB_EncontrarPosicaoDePecaDeAresta(&faceAresta2, &linhaAresta2, &colunaAresta2, cubo, cor1Aresta2, cor2Aresta2) != 0) { exit(25); }
 
+
+
 	if (faceAresta1 == DIREITA && linhaAresta1 == 1 && colunaAresta1 == 2) {
 		// Aresta da Direita está na Direita da Face Direita
 		// Algoritmo Cima <> Direita [da Direita]
-		executaAlgoritmo(cubo, "U B U' B' U' R' U R");
+		if (!resolvidoPraCima) {
+			executaAlgoritmo(cubo, "U B U' B' U' R' U R");
+		}
+		else {
+			// Algoritmo Baixo <> Direita [da Direita]
+			executaAlgoritmo(cubo, "D' B' D B D R D' R'");
+		}
+		
 
 		return 1;
 	}
@@ -524,7 +547,14 @@ int forcaCuboFrente(CUB_tppCUBO cubo) {
 	else if (faceAresta1 == ESQUERDA && linhaAresta1 == 1 && colunaAresta1 == 0) {
 		// Aresta da Direita está na Esquerda da Face Esquerda
 		// Algoritmo Cima <> Esquerda [da Esquerda]
-		executaAlgoritmo(cubo, "U' B' U B U L U' L'");
+		if (!resolvidoPraCima) {
+			executaAlgoritmo(cubo, "U' B' U B U L U' L'");
+		}
+		else {
+			// Algoritmo Baixo <> Esquerda [da Esquerda]
+			executaAlgoritmo(cubo, "D B D' B' D' L' D L");
+		}
+		
 
 		return 1;
 	}
@@ -532,14 +562,28 @@ int forcaCuboFrente(CUB_tppCUBO cubo) {
 	else if (faceAresta1 == ESQUERDA && linhaAresta1 == 1 && colunaAresta1 == 2) {
 		// Aresta da Direita está na Direita da Face Esquerda
 		// Algorima Cima <> Direita [da Esquerda]
-		executaAlgoritmo(cubo, "U F U' F' U' L' U L");
+		if (!resolvidoPraCima) {
+			executaAlgoritmo(cubo, "U F U' F' U' L' U L");
+		}
+		else {
+			// Algorima Baixo <> Direita [da Esquerda]
+			executaAlgoritmo(cubo, "D' F' D F D L D' L'");
+		}
+		
 		return 1;
 	}
 
 	else if (faceAresta1 == TRASEIRA && linhaAresta1 == 1 && colunaAresta1 == 0) {
 		// Aresta da Direita está na Esquerda da Face Traseira
 		// Algoritmo Cima <> Esquerda [da Traseira]
-		executaAlgoritmo(cubo, "U' R' U R U B U' B'");
+		if (!resolvidoPraCima) {
+			executaAlgoritmo(cubo, "U' R' U R U B U' B'");
+		}
+		else {
+			// Algoritmo Baixo <> Esquerda [da Traseira]
+			executaAlgoritmo(cubo, "D' L' D L D B D' B'");
+		}
+		
 
 		return 1;
 	}
@@ -547,7 +591,14 @@ int forcaCuboFrente(CUB_tppCUBO cubo) {
 	else if (faceAresta1 == TRASEIRA && linhaAresta1 == 1 && colunaAresta1 == 2) {
 		// Aresta da Direita está na Direita da Face Traseira
 		// Algoritmo Cima <> Direita [da Traseira]
-		executaAlgoritmo(cubo, "U L U' L' U' B' U B");
+		if (!resolvidoPraCima) {
+			executaAlgoritmo(cubo, "U L U' L' U' B' U B");
+		}
+		else {
+			// Algoritmo Baixo <> Direita [da Traseira]
+			executaAlgoritmo(cubo, "D R D' R' D' B' D B");
+		}
+		
 
 		return 1;
 	}
@@ -555,7 +606,14 @@ int forcaCuboFrente(CUB_tppCUBO cubo) {
 	else if (faceAresta2 == DIREITA && linhaAresta2 == 1 && colunaAresta2 == 0) {
 		// Aresta da Esquerda está na Esquerda da Face Direita
 		// Algoritmo Cima <> Esquerda [da Direita]
-		executaAlgoritmo(cubo, "U' F' U F U R U' R'");
+		if (!resolvidoPraCima) {
+			executaAlgoritmo(cubo, "U' F' U F U R U' R'");
+		}
+		else {
+			// Algoritmo Baixo <> Esquerda [da Direita]
+			executaAlgoritmo(cubo, "D F D' F' D' R' D R");
+		}
+		
 
 		return 1;
 	}
@@ -563,7 +621,14 @@ int forcaCuboFrente(CUB_tppCUBO cubo) {
 	else if (faceAresta2 == DIREITA && linhaAresta2 == 1 && colunaAresta2 == 2) {
 		// Aresta da Esquerda está na Direita da Face Direita
 		// Algoritmo Cima <> Direita [da Direita]
-		executaAlgoritmo(cubo, "U B U' B' U' R' U R");
+		if (!resolvidoPraCima) {
+			executaAlgoritmo(cubo, "U B U' B' U' R' U R");
+		}
+		else {
+			// Algoritmo Baixo <> Direita [da Direita]
+			executaAlgoritmo(cubo, "D' B' D B D R D' R'");
+		}
+		
 
 		return 1;
 	}
@@ -571,7 +636,14 @@ int forcaCuboFrente(CUB_tppCUBO cubo) {
 	else if (faceAresta2 == ESQUERDA && linhaAresta2 == 1 && colunaAresta2 == 0) {
 		// Aresta da Esquerda está na Esquerda da Face Esquerda
 		// Algoritmo Cima <> Esquerda [da Esquerda]
-		executaAlgoritmo(cubo, "U' B' U B U L U' L'");
+		if (!resolvidoPraCima) {
+			executaAlgoritmo(cubo, "U' B' U B U L U' L'");
+		}
+		else {
+			// Algoritmo Baixo <> Esquerda [da Esquerda]
+			executaAlgoritmo(cubo, "D B D' B' D' L' D L");
+		}
+		
 
 		return 1;
 	}
@@ -579,14 +651,28 @@ int forcaCuboFrente(CUB_tppCUBO cubo) {
 	else if (faceAresta2 == TRASEIRA && linhaAresta2 == 1 && colunaAresta2 == 0) {
 		// Aresta da Esquerda está na Esquerda da Face Traseira
 		// Algoritmo Cima <> Esquerda [da Traseira]
-		executaAlgoritmo(cubo, "U' R' U R U B U' B'");
+		if (!resolvidoPraCima) {
+			executaAlgoritmo(cubo, "U' R' U R U B U' B'");
+		}
+		else {
+			// Algoritmo Baixo <> Esquerda [da Traseira]
+			executaAlgoritmo(cubo, "D' L' D L D B D' B'");
+		}
+		
 		return 1;
 	}
 
 	else if (faceAresta2 == TRASEIRA && linhaAresta2 == 1 && colunaAresta2 == 2) {
 		// Aresta da Esquerda está na Direita da Face Traseira
 		// Algoritmo Cima <> Direita [da Traseira]
-		executaAlgoritmo(cubo, "U L U' L' U' B' U B");
+		if (!resolvidoPraCima) {
+			executaAlgoritmo(cubo, "U L U' L' U' B' U B");
+		}
+		else {
+			// Algoritmo Baixo <> Direita [da Traseira]
+			executaAlgoritmo(cubo, "D R D' R' D' B' D B");
+		}
+
 		return 1;
 	}
 
@@ -605,12 +691,11 @@ int resolveCubo(CUB_tppCUBO cubo) {
 
 	while (r) {
 
-
 		if (i == 3) {
 			// força o cubo
 			i = 0;
 
-			forcaCuboFrente(cubo);
+			forcaCuboFrente(cubo, resolvidoPraCima);
 		}
 
 		if (j == 0) {
@@ -644,6 +729,7 @@ int resolveCubo(CUB_tppCUBO cubo) {
 			}
 		}
 	}
+
 }
 
 
@@ -660,7 +746,7 @@ void main() {
 
 	CUB_CriarCUBO(&cubo, config);
 
-	CUB_ExibirCUBO(cubo);
+	//CUB_ExibirCUBO(cubo);
 
 	resolveCubo(cubo);
 
