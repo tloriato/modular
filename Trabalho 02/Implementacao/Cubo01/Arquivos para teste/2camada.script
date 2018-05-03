@@ -1,33 +1,49 @@
-// Script:    	2camada.script
-// Autor:    	Ana Carolina Junger
-//		Bernardo Horner
+// Script: 2camada.script
+// Autores: 	Ana Carolina Junger
+//		Bernardo Hörner
 //		Mariela Andrade
-//		Tiago Simoes
-//
-// Data:       01/05/18
-// Propósito: Testa o modulo 2 camada.
-//
+//		Tiago Simões
+// Data: 02/05/2018
+// Propósito: Testa a resolução da 2 camada
 
 
-==Caso cubo NULL
-=resolveCuboNull 1
+//CUBOS FACE BRANCA PARA BAIXO
 
-==Caso cubo NULL com recuperar
+== Caso cubo null
 =resolveCuboNull 0
 =recuperar
 
-== Teste com cubo com 1 camada resolvida e para baixo
-=resolve2 0
 
-== Teste comando recuperar
-=resolve2 1
-=recuperar
-
-== Teste com cubo com 2 camada ja resolvida
+== Resolve Cubo face branca p baixo com 2 camada ja resolvida
 =resolve2resolvida 0
 
-==Teste Cubo com peca presa
+
+== Resolve Cubo face branca p baixo com peca presa
 =resolveCasoPreso 0
+
+== Resolve Cubo face branca p baixo algoritmo para esquerda 
+=resolve2casoEsquerda 0
+
+== Resolve Cubo face branca p baixo algoritmo para direita
+=resolve2casoDireita 0
+
+
+//CUBOS FACE BRANCA PARA CIMA
+
+== Resolve Cubo face branca p cima algoritmo para esquerda 
+=resolve2esquerdaInverso
+
+== Resolve Cubo face branca p cima algoritmo para direita
+=resolve2direitaInverso
+
+== Resolve Cubo face branca p cima com 2 camada ja resolvida
+=resolve2resolvidaInverso
+
+
+
+
+
+
 
 
 
