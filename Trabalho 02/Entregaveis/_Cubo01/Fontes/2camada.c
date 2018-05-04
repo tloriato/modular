@@ -390,7 +390,7 @@ int executaAlgoritmo(CUB_tppCUBO cubo, char* algoritmo) {
 	char comandos[ALG];
 
 	strcat(execute, algoritmo);
-	printf("Excute %s \n", algoritmo);
+	
 
 
 	
@@ -454,8 +454,8 @@ int executaAlgoritmo(CUB_tppCUBO cubo, char* algoritmo) {
 *  $EParâmetros
 *		$P cubo			
 *  $FV Valor retornado
-*		1- cubo para baixo
-*       0- sucesso
+*		1- cubo para cima
+*       0- cubo para baixo
 **************************/
 
 // (cubo) -> 1 | 0
