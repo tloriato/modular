@@ -1364,3 +1364,16 @@ void pegaCoordenadas(CUB_tpCubo *cubo, int cores[], int cords[], int numCores)
 	else
 		return;
 }
+
+CUB_tpCondRet CUB_ChecarCorDaFace(int * pCor, CUB_tpCubo * pCubo, int face, int linha, int coluna) //Função para checar a cor da face em questão
+{
+	CUB_tpCubo *cubo;
+	cubo = pCubo;
+
+	if (linha >= 0 && linha <= 2 && coluna >= 0 && coluna <= 2 && face >= 0 && face <= 5) {
+		*pCor = cubo->faces[face][linha][coluna];
+		return CUB_CondRetOK; //Retorna o sucesso da função
+	}
+
+	return CUB_CondRetPecaNaoExiste;
+}

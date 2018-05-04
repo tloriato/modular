@@ -457,4 +457,7 @@ CUB_tpCondRet CUB_giraTopoDireita(CUB_tpCubo *cubo, int n);
 CUB_tpCondRet CUB_buscaPeca(CUB_tpCubo *cubo, int cores[], int numCores, CUB_tpPeca *peca);
 
 
+CUB_tpCondRet CUB_ChecarCorDaFace(int * pCor, CUB_tpCubo * pCubo, int linha, int coluna, int face);
+
+
 /********** Fim do módulo de definição: CUB Módulo Cubo **********/
