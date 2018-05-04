@@ -1,0 +1,22 @@
+﻿Autores:        Ana Carolina Junger, 
+                Bernardo Hörner, 
+                Mariela Andrade, 
+                Tiago Loriato
+
+Data:           03/05/2018
+
+
+Para executar o programa:
+
+2- Clique no execute.bat duas vezes.
+
+3- Leie a saida com relatorio de erro no arquivo saida.txt .  
+
+Estruturação de diretórios:
+
+EXECUTAVEL - Contém o arquivo compilado
+
+FONTES - Contém o .h e .c para compilação do programa.
+
+SCRIPTS - Contém o arquivo de testes feito pelo grupo
+
