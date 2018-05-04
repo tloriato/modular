@@ -1,0 +1,18 @@
+CUB_tpCondRet CUB_ChecarCorDaFace(int * pCor, CUB_tpCubo pCubo, int linha, int coluna, int face) //Função para checar a cor da face em questão
+{
+    //CUB_tagCUBO* cubo = pCubo;
+    CUB_tpCubo *cubo;
+    *cubo = pCubo;
+    int i;
+    
+    for (i=0;i<6;i++)
+    {
+        if (face == i){
+            *pCor = cubo->faces[i][linha][coluna];
+            break;
+        }
+        
+    }
+    
+    return CUB_CondRetOK; //Retorna o sucesso da função
+}
