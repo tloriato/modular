@@ -1,22 +1,22 @@
 /******************************************************************************
-*  $MCD MÛdulo de definiÁ„o: 2L		Segunda Camada
+*  $MCD M√≥dulo de defini√ß√£o: 2L		Segunda Camada
 *
 *  Arquivo gerado:              secondLayer.h
 *  Letras identificadoras:      2L
 *
-*  Projeto: INF 1301 Cubo m·gico
+*  Projeto: INF 1301 Cubo m√°gico
 *  Gestor:  LES/DI/PUC-Rio
 *  Autores:	 CJ - Ana Carolina Junger
-*			 TS - Tiago Simıes	
+*			 TS - Tiago Sim√µes	
 *			 MMA - Mariela Mendonca de Andrade
 *			 BHL - 	Bernardo Horner Lopes  
 *
-*  $HA HistÛico de evoluÁ„o:
-*     Vers„o  Autor    Data     ObservaÁıes
-*		2.0   TS      30/04/18  CÛdigo refatorado
-*		0.1   TS	  20/04/18   InÌcio do cÛdigo
-*  $ED DescriÁ„o do mÛdulo
-*		Implementa 2 Camada do Cubo m·gico.
+*  $HA Hist√≥ico de evolu√ß√£o:
+*     Vers√£o  Autor    Data     Observa√ß√µes
+*		2.0   CJTSMMABHL      30/04/18  C√≥digo refatorado
+*		0.1   CJTSMMABHL	  20/04/18   In√≠cio do c√≥digo
+*  $ED Descri√ß√£o do m√≥dulo
+*		Implementa 2 Camada do Cubo m√°gico.
 ******************************************************************************/
 #include "CUBO.h"
 #ifdef _MSC_VER
@@ -51,11 +51,11 @@ char instrucoes[MAX] = "";
 
 /**************************************************************************
 *
-*  $FC FunÁ„o: 2L  ResolvidoAcima
+*  $FC Fun√ß√£o: 2L  ResolvidoAcima
 *
-*  $ED DescriÁ„o da funÁ„o
+*  $ED Descri√ß√£o da fun√ß√£o
 *		checa se cubo esta com face branca para cima
-*  $EPar‚metros
+*  $EPar√¢metros
 *		$P Cubo- Recebe um ponteiro para cubo
 *				
 *  $FV Valor retornado
@@ -93,11 +93,11 @@ int resolvidoAcima(CUB_tpCubo** cubo) {
 }
 
 /**************************
-*  $FC FunÁ„o: 2C  aux
+*  $FC Fun√ß√£o: 2C  aux
 *
-*  $ED DescriÁ„o da funÁ„o
+*  $ED Descri√ß√£o da fun√ß√£o
 *		Funcao auxiliar
-*  $EPar‚metros
+*  $EPar√¢metros
 *		 $P a
 *        $P b
 *        $P c
@@ -120,11 +120,11 @@ int aux(int a, int b, int c, int d) {
 }
 
 /**************************
-*  $FC FunÁ„o: 2C  PecaDeCimaTrocada
+*  $FC Fun√ß√£o: 2C  PecaDeCimaTrocada
 *
-*  $ED DescriÁ„o da funÁ„o
+*  $ED Descri√ß√£o da fun√ß√£o
 *		checa se a cor da peca esta trocada
-*  $EPar‚metros
+*  $EPar√¢metros
 *		$P face
         $P faceAresta
         $P linhaAresta
@@ -188,11 +188,11 @@ int pecaDeCimaTrocada(int face, int faceAresta, int linhaAresta, int colunaArest
 }
 
 /**************************
-*  $FC FunÁ„o: 2C  resolveArestaDeFace
+*  $FC Fun√ß√£o: 2C  resolveArestaDeFace
 *
-*  $ED DescriÁ„o da funÁ„o
+*  $ED Descri√ß√£o da fun√ß√£o
 *		Checa aonde pecas podem estar e chama o algoritmo certo
-*  $EPar‚metros
+*  $EPar√¢metros
 *		$P cubo
 *       $P face
 *       $P resolvidoPraCima
@@ -327,7 +327,7 @@ int resolveArestaDeFace(CUB_tpCubo** cubo, int face, int resolvidoPraCima) {
 	
 	int achado = 0;
 
-	// Checa todas as peÁas do Cubo em busca da Aresta da Direita da [face]
+	// Checa todas as pe√ßas do Cubo em busca da Aresta da Direita da [face]
 	// Muito obrigado ao trabalho original
 	for (int o = 0; o < 6; o++) {
 		if (achado) {
@@ -623,7 +623,7 @@ int resolveArestaDeFace(CUB_tpCubo** cubo, int face, int resolvidoPraCima) {
 
 	achado = 0;
 
-	// Checa todas as peÁas do Cubo em busca da Aresta da Esquerda da [face]
+	// Checa todas as pe√ßas do Cubo em busca da Aresta da Esquerda da [face]
 	for (int o = 0; o < 6; o++) {
 		if (achado) {
 			break;
@@ -939,26 +939,26 @@ int resolveArestaDeFace(CUB_tpCubo** cubo, int face, int resolvidoPraCima) {
 
 	
 	if (faceArestaD == face && linhaArestaD == 1 && colunaArestaD == 2) {
-		// Aresta da Direita de [face] est· resolvida
+		// Aresta da Direita de [face] est√° resolvida
 		restantes--;
 	}
 
 	else {
 
 		if (resolvidoPraCima) {
-			// Cubo est· resolvido para cima
+			// Cubo est√° resolvido para cima
 			if (faceArestaD == face && linhaArestaD == 2 && colunaArestaD == 1) {
 				// Algoritmo "Baixo" -> Direita
 				restantes--;
 			}
 
 			else if (faceArestaD == faceDireitaRelativa && linhaArestaD == 1 && colunaArestaD == 0) {
-				// Algoritmo de trocar a orientaÁ„o da aresta do lado direito
+				// Algoritmo de trocar a orienta√ß√£o da aresta do lado direito
 				restantes--;
 			}
 
 			else if (pecaDeCimaTrocada(face, faceArestaD, linhaArestaD, colunaArestaD, resolvidoPraCima)) {
-				// Algoritmo "Baixo" - > Direita + Trocar orientaÁ„o do lado direito
+				// Algoritmo "Baixo" - > Direita + Trocar orienta√ß√£o do lado direito
 				restantes--;
 			}
 		}
@@ -971,7 +971,7 @@ int resolveArestaDeFace(CUB_tpCubo** cubo, int face, int resolvidoPraCima) {
 			}
 
 			else if (faceArestaD == faceDireitaRelativa && linhaArestaD == 1 && colunaArestaD == 0) {
-				// Algoritmo de trocar a orientaÁ„o do lado direito
+				// Algoritmo de trocar a orienta√ß√£o do lado direito
 				executaAlgoritmo(cubo, algoDireita);
 				executaAlgoritmo(cubo, algoIntermediario);
 				executaAlgoritmo(cubo, algoDireita);
@@ -979,7 +979,7 @@ int resolveArestaDeFace(CUB_tpCubo** cubo, int face, int resolvidoPraCima) {
 			}
 
 			else if (pecaDeCimaTrocada(face, faceArestaD, linhaArestaD, colunaArestaD, resolvidoPraCima)) {
-				// Algoritmo Cima -> Direita + Trocar orientaÁ„o do lado direito
+				// Algoritmo Cima -> Direita + Trocar orienta√ß√£o do lado direito
 				executaAlgoritmo(cubo, algoDireita);
 				executaAlgoritmo(cubo, algoDireita);
 				executaAlgoritmo(cubo, algoIntermediario);
@@ -992,7 +992,7 @@ int resolveArestaDeFace(CUB_tpCubo** cubo, int face, int resolvidoPraCima) {
 	}
 
 	if (faceArestaE == face && linhaArestaE == 1 && colunaArestaE == 0) {
-		// Aresta da Esquerda de [face] est· resolvida
+		// Aresta da Esquerda de [face] est√° resolvida
 		restantes--;
 	}
 
@@ -1006,12 +1006,12 @@ int resolveArestaDeFace(CUB_tpCubo** cubo, int face, int resolvidoPraCima) {
 			}
 
 			else if (faceArestaE == faceEsquerdaRelativa && linhaArestaE == 1 && colunaArestaE == 2) {
-				// Algoritmo de trocar a orientaÁ„o da aresta do lado esquerdo
+				// Algoritmo de trocar a orienta√ß√£o da aresta do lado esquerdo
 				restantes--;
 			}
 
 			else if (pecaDeCimaTrocada(face, faceArestaE, linhaArestaE, colunaArestaE, resolvidoPraCima)) {
-				// Algoritmo "Baixo" - > Esquerda + Trocar orientaÁ„o do lado esquerda
+				// Algoritmo "Baixo" - > Esquerda + Trocar orienta√ß√£o do lado esquerda
 				restantes--;
 			}
 
@@ -1027,7 +1027,7 @@ int resolveArestaDeFace(CUB_tpCubo** cubo, int face, int resolvidoPraCima) {
 			}
 
 			else if (faceArestaE == faceEsquerdaRelativa && linhaArestaE == 1 && colunaArestaE == 2) {
-				// Algoritmo de trocar a orientaÁ„o do lado esquerdo
+				// Algoritmo de trocar a orienta√ß√£o do lado esquerdo
 				executaAlgoritmo(cubo, algoEsquerda);
 				executaAlgoritmo(cubo, algoIntermediario);
 				executaAlgoritmo(cubo, algoEsquerda);
@@ -1036,7 +1036,7 @@ int resolveArestaDeFace(CUB_tpCubo** cubo, int face, int resolvidoPraCima) {
 			}
 
 			else if (pecaDeCimaTrocada(face, faceArestaE, linhaArestaE, colunaArestaE, resolvidoPraCima)) {
-				// Algoritmo Cima -> Esquerda + Trocar orientaÁ„o do lado esquerda
+				// Algoritmo Cima -> Esquerda + Trocar orienta√ß√£o do lado esquerda
 				executaAlgoritmo(cubo, algoEsquerda);
 				executaAlgoritmo(cubo, algoEsquerda);
 				executaAlgoritmo(cubo, algoIntermediario);
@@ -1053,14 +1053,14 @@ int resolveArestaDeFace(CUB_tpCubo** cubo, int face, int resolvidoPraCima) {
 }
 
 /**************************
-*  $FC FunÁ„o: 2C  executaAlgoritmo
+*  $FC Fun√ß√£o: 2C  executaAlgoritmo
 *
-*  $ED DescriÁ„o da funÁ„o
+*  $ED Descri√ß√£o da fun√ß√£o
 *    Executa algoritmo recebido pela string
 *		
-*  $EPar‚metros
+*  $EPar√¢metros
 *		$P cubo = estrutura CUB_tppCUBO populada
-*       $P algoritmo = string de no m·ximo ALG elementos com comandos no estilo: "U R U' R' U' F' U U F F"
+*       $P algoritmo = string de no m√°ximo ALG elementos com comandos no estilo: "U R U' R' U' F' U U F F"
 *  $FV Valor retornado
 *       0 - sucesso
 *	Assertiva de Entrada
@@ -1163,11 +1163,11 @@ int executaAlgoritmo(CUB_tpCubo* cubo, char* algoritmo)
 	return 0;
 }
 /**************************
-*  $FC FunÁ„o: 2C  forcaCuboFrente
+*  $FC Fun√ß√£o: 2C  forcaCuboFrente
 *
-*  $ED DescriÁ„o da funÁ„o
+*  $ED Descri√ß√£o da fun√ß√£o
 *		Cuida do caso de pacas presas
-*  $EPar‚metros
+*  $EPar√¢metros
 *		$P face
         $P faceAresta
         $P linhaAresta
@@ -1209,7 +1209,7 @@ int forcaCuboFrente(CUB_tpCubo** cubo, int resolvidoPraCima) {
 	cor2ArestaD = corDireita;
 	cor2ArestaE = corEsquerda;
 
-	// Checa todas as peÁas do Cubo em busca da Aresta da Direita da [face]
+	// Checa todas as pe√ßas do Cubo em busca da Aresta da Direita da [face]
 	// Muito obrigado ao trabalho original
 	for (int o = 0; o < 6; o++) {
 		for (int l = 0; l < 3; l++) {
@@ -1401,7 +1401,7 @@ int forcaCuboFrente(CUB_tpCubo** cubo, int resolvidoPraCima) {
 		}
 	}
 
-	// Checa todas as peÁas do Cubo em busca da Aresta da Esquerda da [face]
+	// Checa todas as pe√ßas do Cubo em busca da Aresta da Esquerda da [face]
 	for (int o = 0; o < 6; o++) {
 		for (int l = 0; l < 3; l++) {
 			for (int c = 0; c < 3; c++) {
@@ -1595,7 +1595,7 @@ int forcaCuboFrente(CUB_tpCubo** cubo, int resolvidoPraCima) {
 
 
 	if (faceArestaD == DIREITA && linhaArestaD == 1 && colunaArestaD == 2) {
-		// Aresta da Direita est· na Direita da Face Direita
+		// Aresta da Direita est√° na Direita da Face Direita
 		// Algoritmo Cima <> Direita [da Direita]
 		if (!resolvidoPraCima) {
 			executaAlgoritmo(cubo, "U B U' B' U' R' U R ");
@@ -1610,7 +1610,7 @@ int forcaCuboFrente(CUB_tpCubo** cubo, int resolvidoPraCima) {
 	}
 
 	else if (faceArestaD == ESQUERDA && linhaArestaD == 1 && colunaArestaD == 0) {
-		// Aresta da Direita est· na Esquerda da Face Esquerda
+		// Aresta da Direita est√° na Esquerda da Face Esquerda
 		// Algoritmo Cima <> Esquerda [da Esquerda]
 		if (!resolvidoPraCima) {
 			executaAlgoritmo(cubo, "U' B' U B U L U' L' ");
@@ -1625,7 +1625,7 @@ int forcaCuboFrente(CUB_tpCubo** cubo, int resolvidoPraCima) {
 	}
 
 	else if (faceArestaD == ESQUERDA && linhaArestaD == 1 && colunaArestaD == 2) {
-		// Aresta da Direita est· na Direita da Face Esquerda
+		// Aresta da Direita est√° na Direita da Face Esquerda
 		// Algorima Cima <> Direita [da Esquerda]
 		if (!resolvidoPraCima) {
 			executaAlgoritmo(cubo, "U F U' F' U' L' U L ");
@@ -1639,7 +1639,7 @@ int forcaCuboFrente(CUB_tpCubo** cubo, int resolvidoPraCima) {
 	}
 
 	else if (faceArestaD == TRASEIRA && linhaArestaD == 1 && colunaArestaD == 0) {
-		// Aresta da Direita est· na Esquerda da Face Traseira
+		// Aresta da Direita est√° na Esquerda da Face Traseira
 		// Algoritmo Cima <> Esquerda [da Traseira]
 		if (!resolvidoPraCima) {
 			executaAlgoritmo(cubo, "U' R' U R U B U' B' ");
@@ -1654,7 +1654,7 @@ int forcaCuboFrente(CUB_tpCubo** cubo, int resolvidoPraCima) {
 	}
 
 	else if (faceArestaD == TRASEIRA && linhaArestaD == 1 && colunaArestaD == 2) {
-		// Aresta da Direita est· na Direita da Face Traseira
+		// Aresta da Direita est√° na Direita da Face Traseira
 		// Algoritmo Cima <> Direita [da Traseira]
 		if (!resolvidoPraCima) {
 			executaAlgoritmo(cubo, "U L U' L' U' B' U B ");
@@ -1669,7 +1669,7 @@ int forcaCuboFrente(CUB_tpCubo** cubo, int resolvidoPraCima) {
 	}
 
 	else if (faceArestaE == DIREITA && linhaArestaE == 1 && colunaArestaE == 0) {
-		// Aresta da Esquerda est· na Esquerda da Face Direita
+		// Aresta da Esquerda est√° na Esquerda da Face Direita
 		// Algoritmo Cima <> Esquerda [da Direita]
 		if (!resolvidoPraCima) {
 			executaAlgoritmo(cubo, "U' F' U F U R U' R' ");
@@ -1684,7 +1684,7 @@ int forcaCuboFrente(CUB_tpCubo** cubo, int resolvidoPraCima) {
 	}
 
 	else if (faceArestaE == DIREITA && linhaArestaE == 1 && colunaArestaE == 2) {
-		// Aresta da Esquerda est· na Direita da Face Direita
+		// Aresta da Esquerda est√° na Direita da Face Direita
 		// Algoritmo Cima <> Direita [da Direita]
 		if (!resolvidoPraCima) {
 			executaAlgoritmo(cubo, "U B U' B' U' R' U R ");
@@ -1699,7 +1699,7 @@ int forcaCuboFrente(CUB_tpCubo** cubo, int resolvidoPraCima) {
 	}
 
 	else if (faceArestaE == ESQUERDA && linhaArestaE == 1 && colunaArestaE == 0) {
-		// Aresta da Esquerda est· na Esquerda da Face Esquerda
+		// Aresta da Esquerda est√° na Esquerda da Face Esquerda
 		// Algoritmo Cima <> Esquerda [da Esquerda]
 		if (!resolvidoPraCima) {
 			executaAlgoritmo(cubo, "U' B' U B U L U' L' ");
@@ -1714,7 +1714,7 @@ int forcaCuboFrente(CUB_tpCubo** cubo, int resolvidoPraCima) {
 	}
 
 	else if (faceArestaE == TRASEIRA && linhaArestaE == 1 && colunaArestaE == 0) {
-		// Aresta da Esquerda est· na Esquerda da Face Traseira
+		// Aresta da Esquerda est√° na Esquerda da Face Traseira
 		// Algoritmo Cima <> Esquerda [da Traseira]
 		if (!resolvidoPraCima) {
 			executaAlgoritmo(cubo, "U' R' U R U B U' B' ");
@@ -1728,7 +1728,7 @@ int forcaCuboFrente(CUB_tpCubo** cubo, int resolvidoPraCima) {
 	}
 
 	else if (faceArestaE == TRASEIRA && linhaArestaE == 1 && colunaArestaE == 2) {
-		// Aresta da Esquerda est· na Direita da Face Traseira
+		// Aresta da Esquerda est√° na Direita da Face Traseira
 		// Algoritmo Cima <> Direita [da Traseira]
 		if (!resolvidoPraCima) {
 			executaAlgoritmo(cubo, "U L U' L' U' B' U B ");
@@ -1746,11 +1746,11 @@ int forcaCuboFrente(CUB_tpCubo** cubo, int resolvidoPraCima) {
 
 
 /**************************
-*  $FC FunÁ„o: 2C  resolveCubo
+*  $FC Fun√ß√£o: 2C  resolveCubo
 *
-*  $ED DescriÁ„o da funÁ„o
+*  $ED Descri√ß√£o da fun√ß√£o
 *		Resolve 2 camada
-*  $EPar‚metros
+*  $EPar√¢metros
 *		$P face
         $P faceAresta
         $P linhaAresta
@@ -1780,7 +1780,7 @@ int resolveCubo(CUB_tpCubo* cubo) {
 
 
 		if (i == 3) {
-			// forÁa o cubo
+			// for√ßa o cubo
 			i = 0;
 
 			//forcaCuboFrente(cubo);
