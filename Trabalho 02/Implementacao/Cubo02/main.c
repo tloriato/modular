@@ -943,7 +943,7 @@ int resolveArestaDeFace(CUB_tpCubo** cubo, int face, int resolvidoPraCima) {
 	return restantes;
 }
 
-int executaAlgoritmo(CUB_tpCubo* cubo, char* algoritmo)
+int executaAlgoritmo(CUB_tpCubo** cubo, char* algoritmo)
 {
 	strcat(instrucoes, algoritmo);
 
@@ -1748,7 +1748,11 @@ int main() {
 
 	}
 	
-	resolveCubo(&cubo);
+	//resolveCubo(&cubo);
+
+	//executaAlgoritmo(cubo, "D");
+
+	CUB_giraBaixoEsquerda(cubo, 1);
 
 	return 0;
 
