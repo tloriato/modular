@@ -1,8 +1,8 @@
 /******************************************************************************
-*  $MCD Módulo de definição: 2L		Segunda Camada
+*  $MCD Módulo de definição: 2c		Segunda Camada
 *
-*  Arquivo gerado:              secondLayer.h
-*  Letras identificadoras:      2L
+*  Arquivo gerado:              2camada.c
+*  Letras identificadoras:      2c
 *
 *  Projeto: INF 1301 Cubo mágico
 *  Gestor:  LES/DI/PUC-Rio
@@ -59,6 +59,17 @@ char execute[MAX]= "";
 *  $FV Valor retornado
 *		1- esta trocada
 *       0- sucesso
+*
+*	Assertiva de Entrada
+*	face -> inteiro entre 0 e 5
+*	faceAresta -> inteiro entre 0 e 5
+*	linhaAresta -> inteiro entre 0 e 2
+*	colunaAresta -> inteiro entre 0 e 2
+*	resolvidoPraCima -> 1 ou 0
+*
+*	Assertivas de Saida
+*   1 -> caso peca esteja trocada
+*   0 -> caso peca esteja normal
 **************************/
 
 int pecaDeCimaTrocada(int face, int faceAresta, int linhaAresta, int colunaAresta, int resolvidoPraCima) {
@@ -114,6 +125,17 @@ int pecaDeCimaTrocada(int face, int faceAresta, int linhaAresta, int colunaArest
 *				
 *  $FV Valor retornado
 *		restantes - numero de pecas que nao estao no lugar
+*
+*	Assertiva de Entrada
+*	cubo != NULL
+*	face -> inteiro entre 0 e 5
+*	resolvidoPraCima -> 1 ou 0
+*
+*	Assertivas de Saida
+*   return -1 caso NULL
+*	resolve a aresta
+*	retorna numero pecas restantes
+*
 **************************/
 
 int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
@@ -378,6 +400,14 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 *  $FV Valor retornado
 *       0 - sucesso
 *       1 - entrada inválida
+*
+*	Assertiva de Entrada
+*	cubo != NULL
+*	algoritmo != ""
+*
+*	Assertivas de Saida
+*	executa algoritmo passado
+*
 **************************/
 
 int executaAlgoritmo(CUB_tppCUBO cubo, char* algoritmo) {
@@ -456,6 +486,13 @@ int executaAlgoritmo(CUB_tppCUBO cubo, char* algoritmo) {
 *  $FV Valor retornado
 *		1- cubo para cima
 *       0- cubo para baixo
+*
+*	Assertiva de Entrada
+*	cubo != NULL
+*
+*	Assertivas de Saida
+*	retorna se cubo esta para cima ou para baixo	
+*
 **************************/
 
 // (cubo) -> 1 | 0
@@ -496,6 +533,13 @@ int resolvidoAcima(CUB_tppCUBO cubo) {
 *  $FV Valor retornado
 *		1- nao sao todas iguais
 *       0- se a=b=c=d
+*
+*	Assertiva de Entrada
+*	a,b,c,d -> inteiros
+*
+*	Assertivas de Saida
+*	retorna se são iguais ou não	
+*
 **************************/
 int aux(int a, int b, int c, int d) {
 	if (a == 0 && b == 0 && c == 0 && d == 0) {
@@ -520,6 +564,14 @@ int aux(int a, int b, int c, int d) {
 *  $FV Valor retornado
 *		1- n executou movimento
 *       0- sucesso
+*
+*	Assertiva de Entrada
+*	cubo != NULL
+*	resolvidoPraCima -> 1 ou 0
+*
+*	Assertivas de Saida
+*	executa a executaAlgoritmo	
+*
 **************************/
 
 int forcaCuboFrente(CUB_tppCUBO cubo, int resolvidoPraCima) {
@@ -713,7 +765,13 @@ int forcaCuboFrente(CUB_tppCUBO cubo, int resolvidoPraCima) {
         $P resolvidoPraCima
 *				
 *  $FV Valor retornado
-*		
+*	
+*	Assertiva de Entrada
+*	cubo != NULL
+*
+*	Assertivas de Saida
+*	executa algoritmo de resolucao do cubo
+*
 **************************/
 
 int resolveCubo(CUB_tppCUBO cubo) {

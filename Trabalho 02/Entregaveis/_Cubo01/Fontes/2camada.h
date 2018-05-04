@@ -65,6 +65,12 @@ typedef enum {
 *       C2C_CondRetCuboVazio     - Criou vazio.
 *		CUB_CondRetFaltouMemoria - Erro ao criar o cubo por falta de
 *								   memória.
+*	Assertivas de Entrada
+*	cubo != NULL
+*
+*	Assertivas de Saida
+*	condRetOK
+*	2 camada resolvida
 *
 **************************************************************************/
 
