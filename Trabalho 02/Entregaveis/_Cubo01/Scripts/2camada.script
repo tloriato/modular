@@ -1,35 +1,21 @@
 // Script: 2camada.script
+// CUBO 02
 // Autores: 	Ana Carolina Junger
 //		Bernardo Hörner
 //		Mariela Andrade
 //		Tiago Simões
-// Data: 02/05/2018
+// Data: 03/05/2018
 // Propósito: Testa a resolução da 2 camada
 
 == Caso cubo null
 =resolveCuboNull 0
 =recuperar
 
-== Resolve Cubo face branca p baixo com 2 camada ja resolvida
-=resolve2resolvida 0
-
-== Resolve Cubo face branca p baixo com peca presa
-=resolveCasoPreso 0
-
-== Resolve Cubo face branca p baixo algoritmo para esquerda 
-=resolve2casoEsquerda 0
-
-== Resolve Cubo face branca p baixo algoritmo para direita
-=resolve2casoDireita 0
-
 == Resolve Cubo face branca p cima algoritmo para direita
 =resolve2direitaInverso 0
 
 == Resolve Cubo face branca p cima algoritmo para 2 camada resolvida
 =resolve2resolvidaInverso 0
-
-== Resolve Cubo face branca p cima algoritmo caso preso
-=resolve2CasoPresoInverso 0
 
 == Resolve Cubo face branca p cima algoritmo para esquerda
 =resolve2esquerdaInverso 0

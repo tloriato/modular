@@ -1,8 +1,8 @@
 /******************************************************************************
-*  $MCD Módulo de definição: 2c		Segunda Camada
+*  $MCD Módulo de definição: 2L		Segunda Camada
 *
-*  Arquivo gerado:              2camada.c
-*  Letras identificadoras:      2c
+*  Arquivo gerado:              secondLayer.h
+*  Letras identificadoras:      2L
 *
 *  Projeto: INF 1301 Cubo mágico
 *  Gestor:  LES/DI/PUC-Rio
@@ -13,13 +13,17 @@
 *
 *  $HA Históico de evolução:
 *     Versão  Autor    Data     Observações
-*		2.0   TS      30/04/18  Código refatorado
-*		0.1   TS	  20/04/18   Início do código
+*		2.0   CJTSMMABHL      30/04/18  Código refatorado
+*		0.1   CJTSMMABHL	  20/04/18   Início do código
 *  $ED Descrição do módulo
 *		Implementa 2 Camada do Cubo mágico.
 ******************************************************************************/
 #include "CUBO.h"
-#include "2camada.h"
+#ifdef _MSC_VER
+#define _CRT_SECURE_NO_WARNINGS
+#endif
+
+#include "CUBO.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -42,7 +46,78 @@
 #define LARANJA 6
 
 /* STRING GLOBAL QUE GUARDA OS COMANDOS */
-char execute[MAX]= "";
+
+char instrucoes[MAX] = "";
+
+/**************************************************************************
+*
+*  $FC Função: 2L  ResolvidoAcima
+*
+*  $ED Descrição da função
+*		checa se cubo esta com face branca para cima
+*  $EParâmetros
+*		$P Cubo- Recebe um ponteiro para cubo
+*				
+*  $FV Valor retornado
+*		1- cubo para cima
+*		0- cubo normal
+*	Assertiva de Entrada
+*	cubo != NULL
+*
+*	Assertivas de Saida
+*	retorna se cubo esta para cima ou para baixo	
+**************************************************************************/
+
+
+int resolvidoAcima(CUB_tpCubo** cubo) {
+	int corCima, aux1, aux2, aux3, aux4, aux5, aux6, aux7, aux8;
+
+	CUB_ChecarCorDaFace(&aux1, *cubo, 0, 0, 0);
+	CUB_ChecarCorDaFace(&aux2, *cubo, 0, 0, 1);
+	CUB_ChecarCorDaFace(&aux3, *cubo, 0, 0, 2);
+
+	CUB_ChecarCorDaFace(&aux4, *cubo, 0, 1, 0);
+	CUB_ChecarCorDaFace(&corCima, *cubo, 0, 1, 1);
+	CUB_ChecarCorDaFace(&aux5, *cubo, 0, 1, 2);
+
+	CUB_ChecarCorDaFace(&aux6, *cubo, 0, 2, 0);
+	CUB_ChecarCorDaFace(&aux7, *cubo, 0, 2, 1);
+	CUB_ChecarCorDaFace(&aux8, *cubo, 0, 2, 2);
+
+	if (corCima == aux1 && aux1 == aux2 && aux2 == aux3 && aux3 == aux4 && aux4 == aux5 && aux5 == aux6 && aux6 == aux7 && aux7 == aux8) {
+		return 1;
+	}
+	else {
+		return 0;
+	}
+}
+
+/**************************
+*  $FC Função: 2C  aux
+*
+*  $ED Descrição da função
+*		Funcao auxiliar
+*  $EParâmetros
+*		 $P a
+*        $P b
+*        $P c
+*        $P d
+*  $FV Valor retornado
+*		1- nao sao todas iguais
+*       0- se a=b=c=d
+*	Assertiva de Entrada
+*	a,b,c,d -> inteiros
+*
+*	Assertivas de Saida
+*	retorna se s�o iguais ou n�o	
+**************************/
+int aux(int a, int b, int c, int d) {
+	if (a == 0 && b == 0 && c == 0 && d == 0) {
+		return 0;
+	}
+
+	return 1;
+}
 
 /**************************
 *  $FC Função: 2C  PecaDeCimaTrocada
@@ -60,7 +135,7 @@ char execute[MAX]= "";
 *		1- esta trocada
 *       0- sucesso
 *
-*	Assertiva de Entrada
+	Assertiva de Entrada
 *	face -> inteiro entre 0 e 5
 *	faceAresta -> inteiro entre 0 e 5
 *	linhaAresta -> inteiro entre 0 e 2
@@ -71,7 +146,6 @@ char execute[MAX]= "";
 *   1 -> caso peca esteja trocada
 *   0 -> caso peca esteja normal
 **************************/
-
 int pecaDeCimaTrocada(int face, int faceAresta, int linhaAresta, int colunaAresta, int resolvidoPraCima) {
 
 	if (face == DIREITA) {
@@ -135,32 +209,32 @@ int pecaDeCimaTrocada(int face, int faceAresta, int linhaAresta, int colunaArest
 *   return -1 caso NULL
 *	resolve a aresta
 *	retorna numero pecas restantes
-*
 **************************/
+int resolveArestaDeFace(CUB_tpCubo** cubo, int face, int resolvidoPraCima) {
 
-int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
+	if (cubo == NULL)
+		return -1;
+
 	int restantes = 2;
 
 	int corFrente, corCima, corDireita, corEsquerda, corTraseira, corBaixo;
+
 	int faceDireitaRelativa = 0, faceEsquerdaRelativa = 0;
 
 	int faceArestaD, linhaArestaD, colunaArestaD, cor1ArestaD, cor2ArestaD;
 	int faceArestaE, linhaArestaE, colunaArestaE, cor1ArestaE, cor2ArestaE;
+	int faceAux, faceCorAux;
 
 	char * algoDireita;
 	char * algoEsquerda;
 	char * algoIntermediario;
 
-
-	if (cubo == NULL)
-		return -1;
-
-	if (CUB_ChecarCorDaFace(&corFrente, cubo, 1, 1, FRENTE) != 0) { exit(1); }
-	if (CUB_ChecarCorDaFace(&corCima, cubo, 1, 1, CIMA) != 0) { exit(2); }
-	if (CUB_ChecarCorDaFace(&corDireita, cubo, 1, 1, DIREITA) != 0) { exit(3); }
-	if (CUB_ChecarCorDaFace(&corEsquerda, cubo, 1, 1, ESQUERDA) != 0) { exit(4); }
-	if (CUB_ChecarCorDaFace(&corTraseira, cubo, 1, 1, TRASEIRA) != 0) { exit(5); }
-	if (CUB_ChecarCorDaFace(&corBaixo, cubo, 1, 1, BAIXO) != 0) { exit(6); }
+	CUB_ChecarCorDaFace(&corCima, *cubo, 0, 1, 1);
+	CUB_ChecarCorDaFace(&corEsquerda, *cubo, 4, 1, 1);
+	CUB_ChecarCorDaFace(&corFrente, *cubo, 1, 1, 1);
+	CUB_ChecarCorDaFace(&corDireita, *cubo, 2, 1, 1);
+	CUB_ChecarCorDaFace(&corTraseira, *cubo, 3, 1, 1);
+	CUB_ChecarCorDaFace(&corBaixo, *cubo, 5, 1, 1);
 
 	switch (face) {
 	case(FRENTE): {
@@ -171,9 +245,9 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 		cor2ArestaE = corEsquerda;
 
 		if (resolvidoPraCima) {
-			algoDireita = "D' R' D R D F D' F'";
-			algoEsquerda = "D L D' L' D' F' D F";
-			algoIntermediario = "D D";
+			algoDireita = "D R' D' R D' F D F'";
+			algoEsquerda = "D' L D L' D F' D' F";
+			algoIntermediario = "D' D'";
 		}
 		else {
 			algoDireita = "U R U' R' U' F' U F";
@@ -191,9 +265,9 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 		cor2ArestaE = corFrente;
 
 		if (resolvidoPraCima) {
-			algoDireita = "D' B' D B D R D' R'";
-			algoEsquerda = "D F D' F' D' R' D R"; 
-			algoIntermediario = "D D";
+			algoDireita = "D F' D' F D' L D L'";
+			algoEsquerda = "D' B D B' D L' D' L";
+			algoIntermediario = "D' D'";;
 
 		}
 		else {
@@ -212,9 +286,9 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 		cor2ArestaE = corTraseira;
 
 		if (resolvidoPraCima) {
-			algoDireita = "D' F' D F D L D' L'";
-			algoEsquerda = "D B D' B' D' L' D L";
-			algoIntermediario = "D D";
+			algoDireita = "D B' D' B D' R D R'";
+			algoEsquerda = "D' F D F' D R' D' R";
+			algoIntermediario = "D' D'";
 
 		}
 		else {
@@ -233,9 +307,9 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 		cor2ArestaE = corDireita;
 
 		if (resolvidoPraCima) {
-			algoDireita = "D R D' R' D' B' D B";
-			algoEsquerda = "D' L' D L D B D' B'";
-			algoIntermediario = "D D";
+			algoDireita = "D L' D' L D' B D B'";
+			algoEsquerda = "D' R D R' D B' D' B";
+			algoIntermediario = "D' D'";
 
 		}
 		else {
@@ -250,14 +324,620 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 		return -1;
 	}
 	}
+	
+	int achado = 0;
 
-	if (CUB_EncontrarPosicaoDePecaDeAresta(&faceArestaD, &linhaArestaD, &colunaArestaD, cubo, cor1ArestaD, cor2ArestaD) != 0) { exit(8); }
-	if (CUB_EncontrarPosicaoDePecaDeAresta(&faceArestaE, &linhaArestaE, &colunaArestaE, cubo, cor1ArestaE, cor2ArestaE) != 0) { exit(9); }
+	// Checa todas as peças do Cubo em busca da Aresta da Direita da [face]
+	// Muito obrigado ao trabalho original
+	for (int o = 0; o < 6; o++) {
+		if (achado) {
+			break;
+		}
+		for (int l = 0; l < 3; l++) {
+			if (achado) {
+				break;
+			}
+			for (int c = 0; c < 3; c++) {
+				CUB_ChecarCorDaFace(&faceCorAux, *cubo, o, l, c);
+				if (faceCorAux == cor1ArestaD) {
+					if (o == 0) { // Se estiver na face de cima
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 3, 0, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 0;
+								colunaArestaD = 1;
+								faceArestaD = o;
 
-	(face + 1) == 5 ? faceDireitaRelativa = 1 : (faceDireitaRelativa = (face + 1));
-	(face - 1) == 0 ? faceEsquerdaRelativa = 4 : (faceEsquerdaRelativa = (face - 1));
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 4, 0, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 0;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 2, 0, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 2;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 1, 0, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 2;
+								colunaArestaD = 1;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+					}
+					else if (o == 1) { // Se estiver na face da frente
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 0, 2, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 0;
+								colunaArestaD = 1;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 4, 1, 2);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 0;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 2, 1, 0);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 2;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 5, 0, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 2;
+								colunaArestaD = 1;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+					}
+					else if (o == 2) { // Se estiver na face direita
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 0, 1, 2);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 0;
+								colunaArestaD = 1;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 1, 1, 2);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 0;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 3, 1, 0);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 2;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 5, 1, 2);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 2;
+								colunaArestaD = 1;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+					}
+					else if (o == 3) { // Se estiver na face traseira
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 0, 0, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 0;
+								colunaArestaD = 1;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 2, 1, 2);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 0;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 4, 1, 0);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 2;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 5, 2, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 2;
+								colunaArestaD = 1;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+					}
+					else if (o == 4) { // Se estiver na face esquerda
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 0, 1, 0);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 0;
+								colunaArestaD = 1;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 3, 1, 2);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 0;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 1, 1, 0);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 1;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 5, 1, 0);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 2;
+								colunaArestaD = 1;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+					}
+					else if (o == 5) { // Se estiver na face debaixo
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 1, 2, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 0;
+								colunaArestaD = 1;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 4, 2, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 0;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 2, 2, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 2;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 3, 2, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 2;
+								colunaArestaD = 1;
+								faceArestaD = o;
+
+								achado = 1;
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	achado = 0;
+
+	// Checa todas as peças do Cubo em busca da Aresta da Esquerda da [face]
+	for (int o = 0; o < 6; o++) {
+		if (achado) {
+			break;
+		}
+		for (int l = 0; l < 3; l++) {
+			if (achado) {
+				break;
+			}
+			for (int c = 0; c < 3; c++) {
+				CUB_ChecarCorDaFace(&faceCorAux, *cubo, o, l, c);
+				if (faceCorAux == cor1ArestaE) {
+					if (o == 0) { // Se estiver na face de cima
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 3, 0, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 0;
+								colunaArestaE = 1;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 4, 0, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 0;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 2, 0, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 2;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 1, 0, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 2;
+								colunaArestaE = 1;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+					}
+					else if (o == 1) { // Se estiver na face da frente
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 0, 2, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 0;
+								colunaArestaE = 1;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 4, 1, 2);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 0;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 2, 1, 0);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 2;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 5, 0, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 2;
+								colunaArestaE = 1;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+					}
+					else if (o == 2) { // Se estiver na face direita
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 0, 1, 2);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 0;
+								colunaArestaE = 1;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 1, 1, 2);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 0;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 3, 1, 0);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 2;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 5, 1, 2);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 2;
+								colunaArestaE = 1;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+					}
+					else if (o == 3) { // Se estiver na face traseira
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 0, 0, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 0;
+								colunaArestaE = 1;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 2, 1, 2);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 0;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 4, 1, 0);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 2;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 5, 2, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 2;
+								colunaArestaE = 1;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+					}
+					else if (o == 4) { // Se estiver na face esquerda
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 0, 1, 0);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 0;
+								colunaArestaE = 1;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 3, 1, 2);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 0;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 1, 1, 0);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 1;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 5, 1, 0);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 2;
+								colunaArestaE = 1;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+					}
+					else if (o == 5) { // Se estiver na face debaixo
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 1, 2, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 0;
+								colunaArestaE = 1;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 4, 2, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 0;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 2, 2, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 2;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 3, 2, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 2;
+								colunaArestaE = 1;
+								faceArestaE = o;
+
+								achado = 1;
+								break;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 
 
+	//if (CUB_EncontrarPosicaoDePecaDeAresta(&faceArestaD, &linhaArestaD, &colunaArestaD, cubo, cor1ArestaD, cor2ArestaD) != 0) { exit(8); }
+	//if (CUB_EncontrarPosicaoDePecaDeAresta(&faceArestaE, &linhaArestaE, &colunaArestaE, cubo, cor1ArestaE, cor2ArestaE) != 0) { exit(9); }
+
+	if (face == FRENTE) {
+		faceDireitaRelativa = DIREITA;
+		faceEsquerdaRelativa = ESQUERDA;
+	}
+	else if (face == DIREITA) {
+		faceDireitaRelativa = TRASEIRA;
+		faceEsquerdaRelativa = FRENTE;
+	}
+	else if (face == TRASEIRA) {
+		faceDireitaRelativa = ESQUERDA;
+		faceEsquerdaRelativa = DIREITA;
+	}
+	else if (face == ESQUERDA) {
+		faceDireitaRelativa = FRENTE;
+		faceEsquerdaRelativa = TRASEIRA;
+	}
+
+	
 	if (faceArestaD == face && linhaArestaD == 1 && colunaArestaD == 2) {
 		// Aresta da Direita de [face] está resolvida
 		restantes--;
@@ -269,24 +949,16 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 			// Cubo está resolvido para cima
 			if (faceArestaD == face && linhaArestaD == 2 && colunaArestaD == 1) {
 				// Algoritmo "Baixo" -> Direita
-				executaAlgoritmo(cubo, algoDireita);
 				restantes--;
 			}
 
 			else if (faceArestaD == faceDireitaRelativa && linhaArestaD == 1 && colunaArestaD == 0) {
 				// Algoritmo de trocar a orientação da aresta do lado direito
-				executaAlgoritmo(cubo, algoDireita);
-				executaAlgoritmo(cubo, algoIntermediario);
-				executaAlgoritmo(cubo, algoDireita);
 				restantes--;
 			}
 
 			else if (pecaDeCimaTrocada(face, faceArestaD, linhaArestaD, colunaArestaD, resolvidoPraCima)) {
 				// Algoritmo "Baixo" - > Direita + Trocar orientação do lado direito
-				executaAlgoritmo(cubo, algoDireita);
-				executaAlgoritmo(cubo, algoDireita);
-				executaAlgoritmo(cubo, algoIntermediario);
-				executaAlgoritmo(cubo, algoDireita);
 				restantes--;
 			}
 		}
@@ -330,24 +1002,16 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 
 			if (faceArestaE == face && linhaArestaE == 2 && colunaArestaE == 1) {
 				// Algoritmo "Baixo" -> Esquerda
-				executaAlgoritmo(cubo, algoEsquerda);
 				restantes--;
 			}
 
 			else if (faceArestaE == faceEsquerdaRelativa && linhaArestaE == 1 && colunaArestaE == 2) {
 				// Algoritmo de trocar a orientação da aresta do lado esquerdo
-				executaAlgoritmo(cubo, algoEsquerda);
-				executaAlgoritmo(cubo, algoIntermediario);
-				executaAlgoritmo(cubo, algoEsquerda);
 				restantes--;
 			}
 
 			else if (pecaDeCimaTrocada(face, faceArestaE, linhaArestaE, colunaArestaE, resolvidoPraCima)) {
 				// Algoritmo "Baixo" - > Esquerda + Trocar orientação do lado esquerda
-				executaAlgoritmo(cubo, algoEsquerda);
-				executaAlgoritmo(cubo, algoEsquerda);
-				executaAlgoritmo(cubo, algoIntermediario);
-				executaAlgoritmo(cubo, algoEsquerda);
 				restantes--;
 			}
 
@@ -384,8 +1048,8 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 
 	}
 
-	return restantes;
 	
+	return restantes;
 }
 
 /**************************
@@ -399,156 +1063,105 @@ int resolveArestaDeFace(CUB_tppCUBO cubo, int face, int resolvidoPraCima) {
 *       $P algoritmo = string de no máximo ALG elementos com comandos no estilo: "U R U' R' U' F' U U F F"
 *  $FV Valor retornado
 *       0 - sucesso
-*       1 - entrada inválida
-*
 *	Assertiva de Entrada
 *	cubo != NULL
 *	algoritmo != ""
 *
 *	Assertivas de Saida
 *	executa algoritmo passado
-*
 **************************/
-
-int executaAlgoritmo(CUB_tppCUBO cubo, char* algoritmo) {
-
-	
+int executaAlgoritmo(CUB_tpCubo* cubo, char* algoritmo)
+{
+	strcat(instrucoes, algoritmo);
 
 	int i = 0;
-	int jump = 2;
-	
+
 	char comandos[ALG];
-
-	strcat(execute, algoritmo);
-	
-
-
-	
 	memset(comandos, '\0', sizeof(comandos));
 	strcpy(comandos, algoritmo);
 
 	while (comandos[i]) {
 
-		char rot;
-		int face;
-
-		if (comandos[i + 1] == '\'') {
-			rot = 'a';
-			jump = 3;
-		}
-		else {
-			rot = 'h';
-			jump = 2;
-		}
-
-		switch (comandos[i]) {
-		case 'U':
-			face = 0;
-			break;
-		case 'L':
-			face = 4;
-			break;
-		case 'F':
-			face = 1;
-			break;
-		case 'R':
-			face = 2;
-			break;
-		case 'B':
-			face = 3;
-			break;
-		case 'D':
-			face = 5;
-			break;
-		default:
-			face = -1;
-			break;
+		if (comandos[i] == 'U') {
+			if (comandos[i + 1] == '\'') {
+				CUB_giraTrasDireita(cubo, 1);
+				//excuta sentido antihorario
+				i += 3;
+			}
+			else {
+				CUB_giraTopoEsquerda(cubo, 1);
+				//executa sentido horario
+				i += 2;
+			}
 		}
 
-		if (face < 0)
-			return -1;
+		else if (comandos[i] == 'B') {
+			if (comandos[i + 1] == '\'') {
+				CUB_giraTopoDireita(cubo, 1);
+				//excuta sentido antihorario
+				i += 3;
+			}
+			else {
+				CUB_giraTrasEsquerda(cubo, 1);
+				//executa sentido horario
+				i += 2;
+			}
+		}
 
-		if (CUB_GirarFace(cubo, face, 1, rot) != 0) { exit(10); }
+		else if (comandos[i] == 'D') {
+			if (comandos[i + 1] == '\'') {
+				CUB_giraBaixoDireita(cubo, 1);
+				//excuta sentido antihorario
+				i += 3;
+			}
+			else {
+				CUB_giraBaixoEsquerda(cubo, 1);
+				//executa sentido horario
+				i += 2;
+			}
+		}
+		else if (comandos[i] == 'F') {
+			if (comandos[i + 1] == '\'') {
+				CUB_giraFrenteDireita(cubo, 1);
+				//excuta sentido antihorario
+				i += 3;
+			}
+			else
+				CUB_giraFrenteEsquerda(cubo, 1);
+			//executa sentido horario
+			i += 2;
+		}
+		else if (comandos[i] == 'R') {
+			if (comandos[i + 1] == '\'') {
+				CUB_giraDireitaFrente(cubo, 1);
+				//excuta sentido antihorario
+				i += 3;
+			}
+			else {
+				CUB_giraDireitaTras(cubo, 1);
+				//executa sentido horario
+				i += 2;
+			}
+		}
+		else if (comandos[i] == 'L') {
+			if (comandos[i + 1] == '\'') {
+				CUB_giraEsquerdaTras(cubo, 1);
+				//excuta sentido antihorario
+				i += 3;
+			}
+			else {
+				CUB_giraEsquerdaFrente(cubo, 1);
+				//executa sentido horario
+				i += 2;
+			}
+		}
 
-		i += jump;
+
+
 	}
 
 	return 0;
 }
-
-/**************************
-*  $FC Função: 2C  resolvidoAcima
-*
-*  $ED Descrição da função
-*	Verifica se cubo está com a face branca para cima	
-*  $EParâmetros
-*		$P cubo			
-*  $FV Valor retornado
-*		1- cubo para cima
-*       0- cubo para baixo
-*
-*	Assertiva de Entrada
-*	cubo != NULL
-*
-*	Assertivas de Saida
-*	retorna se cubo esta para cima ou para baixo	
-*
-**************************/
-
-// (cubo) -> 1 | 0
-int resolvidoAcima(CUB_tppCUBO cubo) {
-	int corCima, aux1, aux2, aux3, aux4, aux5, aux6, aux7, aux8;
-
-	if (CUB_ChecarCorDaFace(&corCima, cubo, 1, 1, CIMA) != 0) { exit(11); }
-
-	if (CUB_ChecarCorDaFace(&aux1, cubo, 0, 0, CIMA) != 0) { exit(11); }
-	if (CUB_ChecarCorDaFace(&aux2, cubo, 0, 1, CIMA) != 0) { exit(12); }
-	if (CUB_ChecarCorDaFace(&aux3, cubo, 0, 2, CIMA) != 0) { exit(13); }
-
-	if (CUB_ChecarCorDaFace(&aux4, cubo, 1, 0, CIMA) != 0) { exit(14); }
-	if (CUB_ChecarCorDaFace(&aux5, cubo, 1, 2, CIMA) != 0) { exit(15); }
-
-	if (CUB_ChecarCorDaFace(&aux6, cubo, 2, 0, CIMA) != 0) { exit(16); }
-	if (CUB_ChecarCorDaFace(&aux7, cubo, 2, 1, CIMA) != 0) { exit(17); }
-	if (CUB_ChecarCorDaFace(&aux8, cubo, 2, 2, CIMA) != 0) { exit(18); }
-
-	if (corCima == aux1 && aux1 == aux2 && aux2 == aux3 && aux3 == aux4 && aux4 == aux5 && aux5 == aux6 && aux6 == aux7 && aux7 == aux8) {
-		return 1;
-	}
-	else {
-		return 0;
-	}
-}
-
-/**************************
-*  $FC Função: 2C  aux
-*
-*  $ED Descrição da função
-*		Funcao auxiliar
-*  $EParâmetros
-*		 $P a
-*        $P b
-*        $P c
-*        $P d
-*  $FV Valor retornado
-*		1- nao sao todas iguais
-*       0- se a=b=c=d
-*
-*	Assertiva de Entrada
-*	a,b,c,d -> inteiros
-*
-*	Assertivas de Saida
-*	retorna se são iguais ou não	
-*
-**************************/
-int aux(int a, int b, int c, int d) {
-	if (a == 0 && b == 0 && c == 0 && d == 0) {
-		return 0;
-	}
-
-	return 1;
-}
-
 /**************************
 *  $FC Função: 2C  forcaCuboFrente
 *
@@ -564,186 +1177,565 @@ int aux(int a, int b, int c, int d) {
 *  $FV Valor retornado
 *		1- n executou movimento
 *       0- sucesso
-*
 *	Assertiva de Entrada
 *	cubo != NULL
 *	resolvidoPraCima -> 1 ou 0
 *
 *	Assertivas de Saida
 *	executa a executaAlgoritmo	
-*
 **************************/
-
-int forcaCuboFrente(CUB_tppCUBO cubo, int resolvidoPraCima) {
+int forcaCuboFrente(CUB_tpCubo** cubo, int resolvidoPraCima) {
 
 	int alterado = 0;
 
 	int corFrente, corCima, corDireita, corEsquerda, corTraseira, corBaixo;
 
-	int faceAresta1, linhaAresta1, colunaAresta1, cor1Aresta1, cor2Aresta1;
-	int faceAresta2, linhaAresta2, colunaAresta2, cor1Aresta2, cor2Aresta2;
+	int faceArestaD, linhaArestaD, colunaArestaD, cor1ArestaD, cor2ArestaD;
+	int faceArestaE, linhaArestaE, colunaArestaE, cor1ArestaE, cor2ArestaE;
 
-	if (CUB_ChecarCorDaFace(&corFrente, cubo, 1, 1, FRENTE) != 0) { exit(18); }
-	if (CUB_ChecarCorDaFace(&corCima, cubo, 1, 1, CIMA) != 0) { exit(19); }
-	if (CUB_ChecarCorDaFace(&corDireita, cubo, 1, 1, DIREITA) != 0) { exit(20); }
-	if (CUB_ChecarCorDaFace(&corEsquerda, cubo, 1, 1, ESQUERDA) != 0) { exit(21); }
-	if (CUB_ChecarCorDaFace(&corTraseira, cubo, 1, 1, TRASEIRA) != 0) { exit(22); }
-	if (CUB_ChecarCorDaFace(&corBaixo, cubo, 1, 1, BAIXO) != 0) { exit(23); }
+	int faceAux;
+
+	CUB_ChecarCorDaFace(&corCima, *cubo, 0, 1, 1);
+	CUB_ChecarCorDaFace(&corEsquerda, *cubo, 4, 1, 1);
+	CUB_ChecarCorDaFace(&corFrente, *cubo, 1, 1, 1);
+	CUB_ChecarCorDaFace(&corDireita, *cubo, 2, 1, 1);
+	CUB_ChecarCorDaFace(&corTraseira, *cubo, 3, 1, 1);
+	CUB_ChecarCorDaFace(&corBaixo, *cubo, 5, 1, 1);
 
 	/* Cuidando da Face da Frente! */
-	cor1Aresta1 = corFrente;
-	cor1Aresta2 = corFrente;
+	cor1ArestaD = corFrente;
+	cor1ArestaE = corFrente;
 
-	cor2Aresta1 = corDireita;
-	cor2Aresta2 = corEsquerda;
+	cor2ArestaD = corDireita;
+	cor2ArestaE = corEsquerda;
 
-	if (CUB_EncontrarPosicaoDePecaDeAresta(&faceAresta1, &linhaAresta1, &colunaAresta1, cubo, cor1Aresta1, cor2Aresta1) != 0) { exit(24); }
-	if (CUB_EncontrarPosicaoDePecaDeAresta(&faceAresta2, &linhaAresta2, &colunaAresta2, cubo, cor1Aresta2, cor2Aresta2) != 0) { exit(25); }
+	// Checa todas as peças do Cubo em busca da Aresta da Direita da [face]
+	// Muito obrigado ao trabalho original
+	for (int o = 0; o < 6; o++) {
+		for (int l = 0; l < 3; l++) {
+			for (int c = 0; c < 3; c++) {
+				CUB_ChecarCorDaFace(&faceArestaD, *cubo, o, l, c);
+				if (faceArestaD == cor1ArestaD) {
+					if (o == 0) { // Se estiver na face de cima
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 3, 0, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 0;
+								colunaArestaD = 1;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 4, 0, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 0;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 2, 0, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 2;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 1, 0, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 2;
+								colunaArestaD = 1;
+							}
+						}
+					}
+					else if (o == 1) { // Se estiver na face da frente
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 0, 2, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 0;
+								colunaArestaD = 1;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 4, 1, 2);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 0;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 2, 1, 0);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 2;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 5, 0, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 2;
+								colunaArestaD = 1;
+							}
+						}
+					}
+					else if (o == 2) { // Se estiver na face direita
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 0, 1, 2);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 0;
+								colunaArestaD = 1;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 1, 1, 2);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 0;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 3, 1, 0);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 2;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 5, 1, 2);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 2;
+								colunaArestaD = 1;
+							}
+						}
+					}
+					else if (o == 3) { // Se estiver na face traseira
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 0, 0, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 0;
+								colunaArestaD = 1;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 2, 1, 2);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 0;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 4, 1, 0);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 2;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 5, 2, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 2;
+								colunaArestaD = 1;
+							}
+						}
+					}
+					else if (o == 4) { // Se estiver na face esquerda
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 0, 1, 0);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 0;
+								colunaArestaD = 1;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 3, 1, 2);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 0;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 1, 1, 0);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 1;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 5, 1, 0);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 2;
+								colunaArestaD = 1;
+							}
+						}
+					}
+					else if (o == 5) { // Se estiver na face debaixo
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 1, 2, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 0;
+								colunaArestaD = 1;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 4, 2, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 0;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 2, 2, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 1;
+								colunaArestaD = 2;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 3, 2, 1);
+							if (faceAux == cor2ArestaD) {
+								linhaArestaD = 2;
+								colunaArestaD = 1;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	// Checa todas as peças do Cubo em busca da Aresta da Esquerda da [face]
+	for (int o = 0; o < 6; o++) {
+		for (int l = 0; l < 3; l++) {
+			for (int c = 0; c < 3; c++) {
+				CUB_ChecarCorDaFace(&faceArestaE, *cubo, o, l, c);
+				if (faceArestaE == cor1ArestaE) {
+					if (o == 0) { // Se estiver na face de cima
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 3, 0, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 0;
+								colunaArestaE = 1;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 4, 0, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 0;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 2, 0, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 2;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 1, 0, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 2;
+								colunaArestaE = 1;
+							}
+						}
+					}
+					else if (o == 1) { // Se estiver na face da frente
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 0, 2, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 0;
+								colunaArestaE = 1;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 4, 1, 2);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 0;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 2, 1, 0);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 2;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 5, 0, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 2;
+								colunaArestaE = 1;
+							}
+						}
+					}
+					else if (o == 2) { // Se estiver na face direita
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 0, 1, 2);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 0;
+								colunaArestaE = 1;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 1, 1, 2);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 0;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 3, 1, 0);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 2;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 5, 1, 2);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 2;
+								colunaArestaE = 1;
+							}
+						}
+					}
+					else if (o == 3) { // Se estiver na face traseira
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 0, 0, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 0;
+								colunaArestaE = 1;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 2, 1, 2);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 0;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 4, 1, 0);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 2;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 5, 2, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 2;
+								colunaArestaE = 1;
+							}
+						}
+					}
+					else if (o == 4) { // Se estiver na face esquerda
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 0, 1, 0);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 0;
+								colunaArestaE = 1;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 3, 1, 2);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 0;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 1, 1, 0);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 1;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 5, 1, 0);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 2;
+								colunaArestaE = 1;
+							}
+						}
+					}
+					else if (o == 5) { // Se estiver na face debaixo
+						if (l == 0 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 1, 2, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 0;
+								colunaArestaE = 1;
+							}
+						}
+						if (l == 1 && c == 0) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 4, 2, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 0;
+							}
+						}
+						if (l == 1 && c == 2) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 2, 2, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 1;
+								colunaArestaE = 2;
+							}
+						}
+						if (l == 2 && c == 1) {
+							CUB_ChecarCorDaFace(&faceAux, *cubo, 3, 2, 1);
+							if (faceAux == cor2ArestaE) {
+								linhaArestaE = 2;
+								colunaArestaE = 1;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
 
 
 
-	if (faceAresta1 == DIREITA && linhaAresta1 == 1 && colunaAresta1 == 2) {
+	if (faceArestaD == DIREITA && linhaArestaD == 1 && colunaArestaD == 2) {
 		// Aresta da Direita está na Direita da Face Direita
 		// Algoritmo Cima <> Direita [da Direita]
 		if (!resolvidoPraCima) {
-			executaAlgoritmo(cubo, "U B U' B' U' R' U R");
+			executaAlgoritmo(cubo, "U B U' B' U' R' U R ");
 		}
 		else {
 			// Algoritmo Baixo <> Direita [da Direita]
-			executaAlgoritmo(cubo, "D' B' D B D R D' R'");
+			executaAlgoritmo(cubo, "D' B' D B D R D' R' ");
 		}
-		
+
 
 		return 1;
 	}
 
-	else if (faceAresta1 == ESQUERDA && linhaAresta1 == 1 && colunaAresta1 == 0) {
+	else if (faceArestaD == ESQUERDA && linhaArestaD == 1 && colunaArestaD == 0) {
 		// Aresta da Direita está na Esquerda da Face Esquerda
 		// Algoritmo Cima <> Esquerda [da Esquerda]
 		if (!resolvidoPraCima) {
-			executaAlgoritmo(cubo, "U' B' U B U L U' L'");
+			executaAlgoritmo(cubo, "U' B' U B U L U' L' ");
 		}
 		else {
 			// Algoritmo Baixo <> Esquerda [da Esquerda]
-			executaAlgoritmo(cubo, "D B D' B' D' L' D L");
+			executaAlgoritmo(cubo, "D B D' B' D' L' D L ");
 		}
-		
+
 
 		return 1;
 	}
 
-	else if (faceAresta1 == ESQUERDA && linhaAresta1 == 1 && colunaAresta1 == 2) {
+	else if (faceArestaD == ESQUERDA && linhaArestaD == 1 && colunaArestaD == 2) {
 		// Aresta da Direita está na Direita da Face Esquerda
 		// Algorima Cima <> Direita [da Esquerda]
 		if (!resolvidoPraCima) {
-			executaAlgoritmo(cubo, "U F U' F' U' L' U L");
+			executaAlgoritmo(cubo, "U F U' F' U' L' U L ");
 		}
 		else {
 			// Algorima Baixo <> Direita [da Esquerda]
-			executaAlgoritmo(cubo, "D' F' D F D L D' L'");
+			executaAlgoritmo(cubo, "D' F' D F D L D' L' ");
 		}
-		
+
 		return 1;
 	}
 
-	else if (faceAresta1 == TRASEIRA && linhaAresta1 == 1 && colunaAresta1 == 0) {
+	else if (faceArestaD == TRASEIRA && linhaArestaD == 1 && colunaArestaD == 0) {
 		// Aresta da Direita está na Esquerda da Face Traseira
 		// Algoritmo Cima <> Esquerda [da Traseira]
 		if (!resolvidoPraCima) {
-			executaAlgoritmo(cubo, "U' R' U R U B U' B'");
+			executaAlgoritmo(cubo, "U' R' U R U B U' B' ");
 		}
 		else {
 			// Algoritmo Baixo <> Esquerda [da Traseira]
-			executaAlgoritmo(cubo, "D' L' D L D B D' B'");
+			executaAlgoritmo(cubo, "D' L' D L D B D' B' ");
 		}
-		
+
 
 		return 1;
 	}
 
-	else if (faceAresta1 == TRASEIRA && linhaAresta1 == 1 && colunaAresta1 == 2) {
+	else if (faceArestaD == TRASEIRA && linhaArestaD == 1 && colunaArestaD == 2) {
 		// Aresta da Direita está na Direita da Face Traseira
 		// Algoritmo Cima <> Direita [da Traseira]
 		if (!resolvidoPraCima) {
-			executaAlgoritmo(cubo, "U L U' L' U' B' U B");
+			executaAlgoritmo(cubo, "U L U' L' U' B' U B ");
 		}
 		else {
 			// Algoritmo Baixo <> Direita [da Traseira]
-			executaAlgoritmo(cubo, "D R D' R' D' B' D B");
+			executaAlgoritmo(cubo, "D R D' R' D' B' D B ");
 		}
-		
+
 
 		return 1;
 	}
 
-	else if (faceAresta2 == DIREITA && linhaAresta2 == 1 && colunaAresta2 == 0) {
+	else if (faceArestaE == DIREITA && linhaArestaE == 1 && colunaArestaE == 0) {
 		// Aresta da Esquerda está na Esquerda da Face Direita
 		// Algoritmo Cima <> Esquerda [da Direita]
 		if (!resolvidoPraCima) {
-			executaAlgoritmo(cubo, "U' F' U F U R U' R'");
+			executaAlgoritmo(cubo, "U' F' U F U R U' R' ");
 		}
 		else {
 			// Algoritmo Baixo <> Esquerda [da Direita]
-			executaAlgoritmo(cubo, "D F D' F' D' R' D R");
+			executaAlgoritmo(cubo, "D F D' F' D' R' D R ");
 		}
-		
+
 
 		return 1;
 	}
 
-	else if (faceAresta2 == DIREITA && linhaAresta2 == 1 && colunaAresta2 == 2) {
+	else if (faceArestaE == DIREITA && linhaArestaE == 1 && colunaArestaE == 2) {
 		// Aresta da Esquerda está na Direita da Face Direita
 		// Algoritmo Cima <> Direita [da Direita]
 		if (!resolvidoPraCima) {
-			executaAlgoritmo(cubo, "U B U' B' U' R' U R");
+			executaAlgoritmo(cubo, "U B U' B' U' R' U R ");
 		}
 		else {
 			// Algoritmo Baixo <> Direita [da Direita]
-			executaAlgoritmo(cubo, "D' B' D B D R D' R'");
+			executaAlgoritmo(cubo, "D' B' D B D R D' R' ");
 		}
-		
+
 
 		return 1;
 	}
 
-	else if (faceAresta2 == ESQUERDA && linhaAresta2 == 1 && colunaAresta2 == 0) {
+	else if (faceArestaE == ESQUERDA && linhaArestaE == 1 && colunaArestaE == 0) {
 		// Aresta da Esquerda está na Esquerda da Face Esquerda
 		// Algoritmo Cima <> Esquerda [da Esquerda]
 		if (!resolvidoPraCima) {
-			executaAlgoritmo(cubo, "U' B' U B U L U' L'");
+			executaAlgoritmo(cubo, "U' B' U B U L U' L' ");
 		}
 		else {
 			// Algoritmo Baixo <> Esquerda [da Esquerda]
-			executaAlgoritmo(cubo, "D B D' B' D' L' D L");
+			executaAlgoritmo(cubo, "D B D' B' D' L' D L ");
 		}
-		
+
 
 		return 1;
 	}
 
-	else if (faceAresta2 == TRASEIRA && linhaAresta2 == 1 && colunaAresta2 == 0) {
+	else if (faceArestaE == TRASEIRA && linhaArestaE == 1 && colunaArestaE == 0) {
 		// Aresta da Esquerda está na Esquerda da Face Traseira
 		// Algoritmo Cima <> Esquerda [da Traseira]
 		if (!resolvidoPraCima) {
-			executaAlgoritmo(cubo, "U' R' U R U B U' B'");
+			executaAlgoritmo(cubo, "U' R' U R U B U' B' ");
 		}
 		else {
 			// Algoritmo Baixo <> Esquerda [da Traseira]
-			executaAlgoritmo(cubo, "D' L' D L D B D' B'");
+			executaAlgoritmo(cubo, "D' L' D L D B D' B' ");
 		}
-		
+
 		return 1;
 	}
 
-	else if (faceAresta2 == TRASEIRA && linhaAresta2 == 1 && colunaAresta2 == 2) {
+	else if (faceArestaE == TRASEIRA && linhaArestaE == 1 && colunaArestaE == 2) {
 		// Aresta da Esquerda está na Direita da Face Traseira
 		// Algoritmo Cima <> Direita [da Traseira]
 		if (!resolvidoPraCima) {
-			executaAlgoritmo(cubo, "U L U' L' U' B' U B");
+			executaAlgoritmo(cubo, "U L U' L' U' B' U B ");
 		}
 		else {
 			// Algoritmo Baixo <> Direita [da Traseira]
-			executaAlgoritmo(cubo, "D R D' R' D' B' D B");
+			executaAlgoritmo(cubo, "D R D' R' D' B' D B ");
 		}
 
 		return 1;
@@ -751,6 +1743,7 @@ int forcaCuboFrente(CUB_tppCUBO cubo, int resolvidoPraCima) {
 
 	return 0;
 }
+
 
 /**************************
 *  $FC Função: 2C  resolveCubo
@@ -773,24 +1766,24 @@ int forcaCuboFrente(CUB_tppCUBO cubo, int resolvidoPraCima) {
 *	executa algoritmo de resolucao do cubo
 *
 **************************/
-
-int resolveCubo(CUB_tppCUBO cubo) {
+int resolveCubo(CUB_tpCubo* cubo) {
 	int r = 1, j = 1, i = 0;
-	int resolvidoPraCima = resolvidoAcima(cubo);
+
 	int primeiraFrente = 2, segundaFrente = 2;
 	int primeiraDireita = 2, segundaDireita = 2;
 	int primeiraTraseira = 2, segundaTraseira = 2;
 	int primeiraEsquerda = 2, segundaEsquerda = 2;
 
-	
+	int resolvidoPraCima = resolvidoAcima(cubo);
 
 	while (r) {
+
 
 		if (i == 3) {
 			// força o cubo
 			i = 0;
 
-			forcaCuboFrente(cubo, resolvidoPraCima);
+			//forcaCuboFrente(cubo);
 		}
 
 		if (j == 0) {
@@ -825,29 +1818,25 @@ int resolveCubo(CUB_tppCUBO cubo) {
 		}
 	}
 
+	printf("Acabou mesmo?");
+	return 0;
 }
 
-C2C_tpCondRet resolve2camada(CUB_tppCUBO cubo){
 
-	int i, j = 0;
-	
+
+C2C_tpCondRet resolve2camada (CUB_tpCubo* cubo){
 
 	if (cubo == NULL){
 		return C2C_CondRetCuboVazio;
 	}
 
-	printf("\n");
-	CUB_ExibirCUBO(cubo);
-
-	resolveCubo(cubo);
+	imprimeCubo(&cubo);
+	resolveCubo(&cubo);
+	imprimeCubo(&cubo);
 
 	printf("\n%s\n", execute);
-	printf("\n");
-	CUB_ExibirCUBO(cubo);
-
 	strcpy(execute, "" );
 
-	
-
 	return C2C_CondRetOK;
+
 }

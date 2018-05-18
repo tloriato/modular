@@ -1,309 +1,464 @@
-#if ! defined( CUBO_ )
-#define CUBO_
-/******************************************************************************
+/***************************************************************************
 *
-*  $MCD Módulo de definição: CUB  Cubo mágico
+*  $Módulo de definição: Módulo  cubo
 *
-*  Arquivo gerado:              CUBO.h
+*  Arquivo gerado:              CUBO.H
 *  Letras identificadoras:      CUB
 *
-*  Projeto: INF 1301 Cubo mágico
-*  Gestor:  LES/DI/PUC-Rio
-*  Autores: dlas	Daniel Luca Alves da Silva
-			sgmpm	Sergio Gustavo Mendonça Pyrrho Moreira
+*  Arquivo da base de software: D:\INF1301\TRAB1-1\FONTES
+*
+*  Projeto: Disciplinas INF 1301
+*  Gestor:  Flavio B. Vilac
+*  Autores: AC, FM e MA
 *
 *  $HA Histórico de evolução:
-*     Versão  Autor    Data     Observações
-*	  10	  sgmpm  29/mar/2018 revisão final
-*	  9		  sgmpm	 28/mar/2018 formatação e revisão
-*	  8		  dlas	 28/mar/2018 implementação função busca quina
-*	  7		  dlas	 26/mar/2018 implementação função busca aresta
-*	  6		  dlas	 25/mar/2018 implementação da função giro
-*	  5		  dlas	 19/mar/2018 Mudança do arquivo interface
-*	  4		  sgmpm  18/mar/2018 Revisao
-*	  3		  sgmpm	 16/mar/2018 Otimização
-*	  2		  dlas	 12/mar/2018 Implementação das funções
-*     1       dlas   07/mar/2018 início desenvolvimento
+*     Versão   Autor     Data        Observações
+*       1.00  AC,FM,MA  01/03/2018   Início do desenvolvimento.
+*		1.10  AC,FM,MA  19/03/2018   Termino do desenvolvimento.
 *
 *  $ED Descrição do módulo
-*		Implementa Cubos mágicos.
+*     Este módulo implementa um conjunto de funções para criar e
+*     movimentar um cubo mágico.
+*     O cubo é gerado apartir de uma matiz cúbica.
+*     A cada momento o módulo admite no máximo um único cubo.
+*     Ao iniciar a execução do programa não existe cubo.
+*     O cubo deverá estár devidamente preenchido. Caso contrário as funções
+*	  não tem utilidae.
 *
-*		O módulo implementa a representação de cubos mágicos de posição fixa
-*			que são manipulados apenas tendo suas faces giradas. Ou seja, o
-*			quadrado central de uma dada face terá sempre o mesmo valor.
-*			O cubo deve ser inicializado com um vetor de inteiros, na ordem
-*			definida na função de exibição.
-*
-******************************************************************************/
-
-#if defined( CUBO_OWN )
-#define CUBO_EXT
-#else
-#define CUBO_EXT extern
-#endif
-
+***************************************************************************/
+ 
 /***** Declarações exportadas pelo módulo *****/
 
-/* Tipo referência para um Cubo */
+/* Tipo referência para um cubo */
 
-typedef struct CUB_tagCUBO * CUB_tppCUBO;
+typedef struct tpCubo CUB_tpCubo;
 
-/* Tipo faces de Cubo */
-typedef enum {
-	CUB_faceSuperior = 0,
+/***********************************************************************
+*
+*  $TC Tipo de dados: CUB Elemento da peça
+*
+*	$ED Descrição: 
+*		Referente a uma peça do cubo e tratada como se fosse um cubinho 
+*		 dentro do cubo maior. como o cubinho está inserido no cubo maior
+*		 possui apenas 2 ou 3 faces preenchidas, referenbtta aos tipos 
+*		 de peças de um cubo mágico (borda e quina).
+*
+***********************************************************************/
 
-	CUB_faceFrontal = 1,
+typedef struct tpPeca
+{
+	int C;
+		/* Será preenchida com a cor referente a face de cima da peça ou um valor nulo. */
+		
+	int E;
+		/* Será preenchida com a cor referente a face da esquerda da peça ou um valor nulo. */	
+		
+	int F;
+		/* Será preenchida com a cor referente a face da frente da peça ou um valor nulo. */
+		
+	int D;
+		/* Será preenchida com a cor referente a face da direita da peça ou um valor nulo. */
+		
+	int B;
+		/* Será preenchida com a cor referente a face de baixo da peça ou um valor nulo. */
+		
+	int T;
+		/* Será preenchida com a cor referente a face de trás da peça ou um valor nulo. */
+		
+	int coordPeca[3];
+		/* Mostra a coordenada da prça em 3 coordenadas, largura sendo referente a posiçao 0 do vetor, 
+		 *  altura referente a posiçao 1 do vetor e a profundidade é referente a terceira posiçao do vetor.
+		 * O domínio vai de 1 à 3, temdo como referencia a face da frente do cubo a quina inferior esquerda 
+		 *  sendo 1|1|1. */
+		
+}CUB_tpPeca;
 
-	CUB_faceDireita = 2,
-
-	CUB_faceTraseira = 3,
-
-	CUB_faceEsquerda = 4,
-
-	CUB_faceInferior = 5,
-
-} CUB_tpFaceDeCUBO;
-
-
-/**************************************************************************
+/***********************************************************************
 *
 *  $TC Tipo de dados: CUB Condições de retorno
 *
 *
 *  $ED Descrição do tipo
-*     Condições de retorno das funções do Cubo
+*     Condições de retorno das funções do cubo
 *
-**************************************************************************/
+***********************************************************************/
 
-typedef enum {
+ typedef enum {
 
-	CUB_CondRetOK,
-	/* Concluiu corretamente */
+         CUB_CondRetOK = 0 ,
+               /* Executou corretamente */
 
-	CUB_CondRetCuboInvalido,
-	/* O endereço recebido aponta para NULL */
+         CUB_CondRetFaltouMemoria = 1 ,
+               /* Faltou memoria ao alocar dados */
 
-	CUB_CondRetCorInvalida,
-	/* As cores não estão inseridas no  */
+         CUB_CondRetPecaNaoExiste = 2 ,
+               /* Peça buscada não é possível */
+		 
+		 CUB_CondRetPecaErrada = 3 ,
+		       /* Peça retornada errada */ 
+		 
+		 CUB_CondRetErro = 4 ,
+			   /* Qualquer condição de erro inesperada */
 
-	CUB_CondRetFaceInvalida,
-	/* O valor de face inserido não identifica nenhuma face
-	representável */
+  } CUB_tpCondRet ;
 
-	CUB_CondRetCoordenadasInvalidas,
-	/* As coordenadas inseridas nao estao sobre a face
-	do cubo */
-
-	CUB_CondRetFaltouMemoria
-	/* Faltou memória ao tentar criar um Cubo */
-
-} CUB_tpCondRet;
-
-
-/**************************************************************************
+/***********************************************************************
 *
-*  $FC Função: CUB  &Criar Cubo
+*  $FC Função: CUB Criar cubo
 *
 *  $ED Descrição da função
-*		Cria uma instância de Cubo mágico.
-*		Recebe o endereço de uma variável do tipo ponteiro para Cubo.
-*		A função é responsável por alocar a memória onde a estrutura
-*		do CUBO será guardada e escrever esta no parâmetro recebido.
-*
-*  $EP Parâmetros
-*					pCubo	-	Endereço no qual a função guardará a
-*								localização do CUBO na memória. Essa
-*								localização identifica um único cubo
-*								e deve ser usada para manipulá-lo.
-*
-*		ConfiguracaoInicial -	Vetor de inteiros que descrevem a
-*								configuração inicial que o cubo deve
-*								ter, na ordem em que esses seriam
-*								exibidos conforme descrito pela função
-*								de exibição.
+*     Cria um novo cubo vazio.
 *
 *  $FV Valor retornado
-*		CUB_CondRetOK			 - Criou um cubo com sucesso.
-*		CUB_CondRetFaltouMemoria - Erro ao criar o cubo por falta de
-*								   memória.
+*     Se executou corretamente retorna o ponteiro para o cubo.
+*     Este ponteiro será utilizado pelas funções que manipulem este cubo.
 *
-**************************************************************************/
-
-CUB_tpCondRet CUB_CriarCUBO(CUB_tppCUBO* pCubo, int* ConfiguracaoInicial);
-
-/**************************************************************************
+*     Se ocorreu algum erro, por exemplo falta de memória ou dados errados,
+*     a função retornará NULL.
+*     Não será dada mais informação quanto ao problema ocorrido.
 *
-*  $FC Função: CUB  &Exibir Cubo
+***********************************************************************/
+
+ void imprimeCubo(CUB_tpCubo *cubo);
+
+ CUB_tpCondRet CUB_criaCubo(CUB_tpCubo *cubo);
+
+ CUB_tpCondRet CUB_ChecarCorDaFace(int * pCor, CUB_tpCubo *cubo, int linha, int coluna, int face);
+
+
+/***********************************************************************
+*
+*  $FC Função: CUB Libera cubo
+*
+*  $EP Parâmetros
+*     $P cubo - parâmetro do cubo a ser destroido.
 *
 *  $ED Descrição da função
-*		Exibe na tela a configuração atual do Cubo mágico. Essa exibição
-*		segue a ideia de planificar a estrutura do Cubo Mágico tal que: A
-*		face superior é impressa no topo, acima da face frontal, com seus
-*		quadrados mais próximos da face traseira impressos no topo. As
-*		faces esquerda, frontal, direita e traseira impressas nessa ordem
-*		lado a lado com os quadrados mais altos impressos no topo. A face
-*		inferior exibida por último, abaixo da face frontal com seus
-*		quadrados mais próximos à face frontal exibidos no topo.
-*
-*  $EP Parâmetros
-*		pCubo	-	Endereço onde está armazenado o Cubo mágico.
+*     Destrói o corpo do cubo, anulando o cubo.
+*     Faz nada caso o cubo não exista.0
 *
 *  $FV Valor retornado
-*	CUB_CondRetOK			-	Executou normalmente.
-*	CUB_CondRetCuboInvalido	-	Recebeu um ponteiro NULL.
+*     CUB_CondRetOK  -  liberou sem problemas
 *
-**************************************************************************/
+***********************************************************************/
 
-CUB_tpCondRet CUB_ExibirCUBO(CUB_tppCUBO pCubo);
+CUB_tpCondRet CUB_liberaCubo(CUB_tpCubo *cubo);
 
-
-/**************************************************************************
+/***********************************************************************
 *
-*  $FC Função: CUB  &Destruir Cubo
+*  $FC Função: CUB Criar prça
 *
 *  $ED Descrição da função
-*		Destrói o Cubo fornecido.
-*		OBS. não existe previsão para possíveis falhas de execução.
-*  $EP Parâmetros
-*		pCubo	-	Identificador do cubo mágico.
+*     Cria uma peça vazia.
 *
 *  $FV Valor retornado
-*     CUB_CondRetOK    - destruiu sem problemas
+*     Se executou corretamente retorna o ponteiro para a peça.
+*     Este ponteiro será utilizado pelas funções que manipulem esta peça.
 *
-**************************************************************************/
-
-CUB_tpCondRet CUB_DestruirCUBO(CUB_tppCUBO pCubo);
-
-
-/**************************************************************************
+*     Se ocorreu algum erro, por exemplo falta de memória ou dados errados,
+*     a função retornará NULL.
+*     Não será dada mais informação quanto ao problema ocorrido.
 *
-*  $FC Função: CUB  &Girar face.
+***********************************************************************/
+
+CUB_tpPeca *CUB_criaPeca(void);
+
+/***********************************************************************
+*
+*  $FC Função: CUB Libera peça
+*
+*  $EP Parâmetros
+*     $P peca - parâmetro da peça a ser destroida.
 *
 *  $ED Descrição da função
-*		Gira a face uma quantidade qualquer de vezes passada como
-*		parâmetro. A função deve receber também o sentido do giro,
-*		podendo ser horário ou anti-horário.
+*     Destrói o corpo da peça, anulando a peça.
+*     Faz nada caso a peça não exista.
+*
+***********************************************************************/
+
+void CUB_liberaPeca(CUB_tpPeca *peca);
+
+/***********************************************************************
+*
+*  $FC Função: CUB Preenche cubo
 *
 *  $EP Parâmetros
-*			 pCubo	-	Identificador do cubo mágico.
-*		faceGirada	-	Identificador da Face que se pretende girar.
-*		  numGiros	-	quantidade de giros que devem ser realizadas.
-*		   sentido	-	'A' ou 'a' para anti-horário, 'h' ou demais
-*						caracteres para sentido horário.
-*
-*  $FV Valor retornado
-*	CUB_CondRetOK			-	Executou normalmente.
-*	CUB_CondRetCuboInvalido	-	Recebeu um ponteiro NULL.
-*	CUB_CondRetFaceInvalida	-	A face recebida como parâmetro não
-*								identifica nenhuma face representável.
-*
-**************************************************************************/
-
-CUB_tpCondRet CUB_GirarFace(CUB_tppCUBO pCubo, CUB_tpFaceDeCUBO faceGirada,
-	int numGiros, char sentido);
-
-
-/**************************************************************************
-*
-*  $FC Função: CUB  &Checar cor da Face
+*     $P cubo - parâmetro do cubo a ser preenchido.
 *
 *  $ED Descrição da função
-*		A função recebe um endereço onde deve escrever a cor de um quadrado
-*		descrito pelos demais parâmetros. A forma de indexação desse
-*		quadrado é a partir de um número de linha e coluna de uma face, ou
-*		seja, um número entre 0 e 2. O mapeamento é tal qual o definido na
-*		função de exibição.
-*
-*  $EP Parâmetros
-*				  pCor	-	Ponteiro onde é armazenada a cor encontrada.
-*				 pCubo	-	Identificador do cubo mágico.
-*				 linha	-	Coordenada da linha que se pretende checar.
-*				coluna	-	Coordenada da coluna que se pretende checar.
-*	  faceInspecionada	-	Identificador da Face que se pretende checar.
+*     preeche o cubo.
 *
 *  $FV Valor retornado
-*	CUB_CondRetOK					- Executou normalmente.
-*	CUB_CondRetCuboInvalido			- Recebeu um ponteiro NULL.
-*	CUB_CondRetCoordenadasInvalidas - As coordenadas não são válidas.
-*	CUB_CondRetFaceInvalida			- A face recebida como parâmetro não
-*									  identifica nenhuma face representável.
+*     Retorna um ponteiro para cubo preenchido.
 *
-**************************************************************************/
+***********************************************************************/
 
-CUB_tpCondRet CUB_ChecarCorDaFace(int* pCor, CUB_tppCUBO pCubo, int linha,
-	int coluna, CUB_tpFaceDeCUBO faceInspecionada);
+CUB_tpCondRet CUB_preencheCubo(CUB_tpCubo *cubo, int x , int y,  int z , int cor);
 
-/**************************************************************************
+/***********************************************************************
 *
-*  $FC Função: CUB  &Encontrar Posição de Peça de Aresta
+*  $FC Função: CUB Gira frente esquerda
 *
 *  $ED Descrição da função
-*		A função procura dentro do cubo qual peça de aresta, ou seja, que tem
-*		apenas duas faces visíveis, tem a configuração de cores fornecida e
-*		retorna a face, linha e coluna que identificam o quadrado dessa peça
-*		pintado com a cor1. Caso não encontre a peça, a função retorna a
-*		condição de retorno de Cor Inválida.
+*     Função que gira a face da frente do cubo recebido em 1/4 de volta 
+*	  ou 1/2 de volta para a esquerda.
 *
 *  $EP Parâmetros
-*		 pFace	-	Ponteiro onde é armazenada a face do quadrado pintado
-*					pela cor1.
-*		pLinha	-	Ponteiro onde deve ser colocada a linha do quadrado
-*					pintado pela cor1.
-*	   pColuna	-	Ponteiro onde deve ser colocada a coluna do quadrado
-*					pintado pela cor1.
-*		 pCubo	-	Identificador do cubo mágico.
-*		  cor1	-	Cor que a peça desejada possui.
-*		  cor2	-	A outra cor que a peça desejada possui.
+*     $P cubo - parâmetro a ser alterado.
+*	  $P n - valor que indica o números de 1/4 de volta a ser rotacionado.
 *
 *  $FV Valor retornado
-*	CUB_CondRetOK			-	Executou normalmente.
-*	CUB_CondRetCuboInvalido	-	Recebeu um ponteiro NULL.
-*	CUB_CondRetCorInvalida	-	Não há peça no cubo com a configuração
-*								de cores fornecida.
+*     Retorna um ponteiro para cubo rotacionado.
+*	  CUB_CondretOK  -  Giro aconteceu normalmente.
 *
-**************************************************************************/
+***********************************************************************/
 
-CUB_tpCondRet CUB_EncontrarPosicaoDePecaDeAresta(CUB_tpFaceDeCUBO* pFace,
-	int*pLinha, int* pColuna, CUB_tppCUBO pCubo, int cor1, int cor2);
+CUB_tpCondRet CUB_giraFrenteEsquerda(CUB_tpCubo *cubo, int n);
 
-/**************************************************************************
+/***********************************************************************
 *
-*  $FC Função: CUB  &Encontrar Posição de Peça de Quina
+*  $FC Função: CUB Gira frente direita
 *
 *  $ED Descrição da função
-*		A função procura dentro do cubo qual peça de quina (que três
-*		faces visíveis) contém as cores fornecidas e retorna a
-*		orientação, linha e coluna da face dessa quina pintada pela
-*		cor1. Caso não encontre a peça, a função retorna a condição de
-*		retorno de Cor Inválida.
+*     Função que gira a face da frente do cubo recebido em 1/4 de volta 
+*	  ou 1/2 de volta para a direita.
 *
 *  $EP Parâmetros
-*		 pFace	-	Ponteiro onde é armazenada a face do quadrado pintado
-*					pela cor1.
-*		pLinha	-	Ponteiro onde deve ser colocada a linha do quadrado
-*					pintado pela cor1.
-*	   pColuna	-	Ponteiro onde deve ser colocada a coluna do quadrado
-*					pintado pela cor1.
-*		 pCubo	-	Identificador do cubo mágico.
-*		  cor1	-	Cor que a peça desejada possui.
-*		  cor2	-	Outra cor que a peça desejada possui.
-*		  cor3	-	Outra cor que a peça desejada possui.
+*     $P cubo - parâmetro a ser alterado.
+*	  $P n - valor que indica o números de 1/4 de volta a ser rotacionado.
 *
 *  $FV Valor retornado
-*	CUB_CondRetOK			-	Executou normalmente.
-*	CUB_CondRetCuboInvalido	-	Recebeu um ponteiro NULL.
-*	CUB_CondRetCorInvalida	-	Não há peça no cubo com a configuração
-*								de cores fornecida.
+*     Retorna um ponteiro para cubo rotacionado.
+*	  CUB_CondretOK  -  Giro aconteceu normalmente.
 *
-**************************************************************************/
+***********************************************************************/
 
-CUB_tpCondRet CUB_EncontrarPosicaoDePecaDeQuina(CUB_tpFaceDeCUBO* pFace,
-	int*pLinha, int* pColuna, CUB_tppCUBO pCubo,
-	int cor1, int cor2, int cor3);
+CUB_tpCondRet CUB_giraFrenteDireita(CUB_tpCubo *cubo, int n);
 
-#undef Cubo_EXT
+/***********************************************************************
+*
+*  $FC Função: CUB Gira direita trás
+*
+*  $ED Descrição da função
+*     Função que gira a face da direita do cubo recebido em 1/4 de volta 
+*	  ou 1/2 de volta para trás.
+*
+*  $EP Parâmetros
+*     $P cubo - parâmetro a ser alterado.
+*	  $P n - valor que indica o números de 1/4 de volta a ser rotacionado.
+*
+*  $FV Valor retornado
+*     Retorna um ponteiro para cubo rotacionado.
+*	  CUB_CondretOK  -  Giro aconteceu normalmente.
+*
+***********************************************************************/
 
-/********** Fim do módulo de definição: CUB  Cubo duplamente encadeada **********/
+CUB_tpCondRet CUB_giraDireitaTras(CUB_tpCubo *cubo, int n);
 
-#else
-#endif
+/***********************************************************************
+*
+*  $FC Função: CUB Gira direita frente
+*
+*  $ED Descrição da função
+*     Função que gira a face da direita do cubo recebido em 1/4 de volta 
+*	  ou 1/2 de volta para a frente.
+*
+*  $EP Parâmetros
+*     $P cubo - parâmetro a ser alterado.
+*	  $P n - valor que indica o números de 1/4 de volta a ser rotacionado.
+*
+*  $FV Valor retornado
+*     Retorna um ponteiro para cubo rotacionado.
+*	  CUB_CondretOK  -  Giro aconteceu normalmente.
+*
+***********************************************************************/
+
+CUB_tpCondRet CUB_giraDireitaFrente(CUB_tpCubo *cubo, int n);
+
+/***********************************************************************
+*
+*  $FC Função: CUB Gira esquerda frente
+*
+*  $ED Descrição da função
+*     Função que gira a face da esquerda do cubo recebido em 1/4 de volta 
+*	  ou 1/2 de volta para a frente.
+*
+*  $EP Parâmetros
+*     $P cubo - parâmetro a ser alterado.
+*	  $P n - valor que indica o números de 1/4 de volta a ser rotacionado.
+*
+*  $FV Valor retornado
+*     Retorna um ponteiro para cubo rotacionado.
+*	  CUB_CondretOK  -  Giro aconteceu normalmente.
+*
+***********************************************************************/
+
+CUB_tpCondRet CUB_giraEsquerdaFrente(CUB_tpCubo *cubo, int n);
+
+/***********************************************************************
+*
+*  $FC Função: CUB Gira esquerda trás
+*
+*  $ED Descrição da função
+*     Função que gira a face da esqueda do cubo recebido em 1/4 de volta 
+*	  ou 1/2 de volta para trás.
+*
+*  $EP Parâmetros
+*     $P cubo - parâmetro a ser alterado.
+*	  $P n - valor que indica o números de 1/4 de volta a ser rotacionado.
+*
+*  $FV Valor retornado
+*     Retorna um ponteiro para cubo rotacionado.
+*	  CUB_CondretOK  -  Giro aconteceu normalmente.
+*
+***********************************************************************/
+
+CUB_tpCondRet CUB_giraEsquerdaTras(CUB_tpCubo *cubo, int n);
+
+/***********************************************************************
+*
+*  $FC Função: CUB Gira baixo esquerda
+*
+*  $ED Descrição da função
+*     Função que gira a face de baixo do cubo recebido em 1/4 de volta 
+*	  ou 1/2 de volta para a esquerda.
+*
+*  $EP Parâmetros
+*     $P cubo - parâmetro a ser alterado.
+*	  $P n - valor que indica o números de 1/4 de volta a ser rotacionado.
+*
+*  $FV Valor retornado
+*     Retorna um ponteiro para cubo rotacionado.
+*	  CUB_CondretOK  -  Giro aconteceu normalmente.
+*
+***********************************************************************/
+
+CUB_tpCondRet CUB_giraBaixoEsquerda(CUB_tpCubo *cubo, int n);
+
+/***********************************************************************
+*
+*  $FC Função: CUB Gira baixo direita
+*
+*  $ED Descrição da função
+*     Função que gira a face de baixo do cubo recebido em 1/4 de volta 
+*	  ou 1/2 de volta para a direita.
+*
+*  $EP Parâmetros
+*     $P cubo - parâmetro a ser alterado.
+*	  $P n - valor que indica o números de 1/4 de volta a ser rotacionado.
+*
+*  $FV Valor retornado
+*     Retorna um ponteiro para cubo rotacionado.
+*	  CUB_CondretOK  -  Giro aconteceu normalmente.
+*
+***********************************************************************/
+
+CUB_tpCondRet CUB_giraBaixoDireita(CUB_tpCubo *cubo, int n);
+
+/***********************************************************************
+*
+*  $FC Função: CUB Gira topo esquerda
+*
+*  $ED Descrição da função
+*     Função que gira a face do topo do cubo recebido em 1/4 de volta 
+*	  ou 1/2 de volta para a esquerda.
+*
+*  $EP Parâmetros
+*     $P cubo - parâmetro a ser alterado.
+*	  $P n - valor que indica o números de 1/4 de volta a ser rotacionado.
+*
+*  $FV Valor retornado
+*     Retorna um ponteiro para cubo rotacionado.
+*	  CUB_CondretOK  -  Giro aconteceu normalmente.
+*
+***********************************************************************/
+
+CUB_tpCondRet CUB_giraTopoEsquerda(CUB_tpCubo *cubo, int n);
+
+/***********************************************************************
+*
+*  $FC Função: CUB Gira tras direita
+*
+*  $ED Descrição da função
+*     Função que gira a face do tras do cubo recebido em 1/4 de volta 
+*	  ou 1/2 de volta para a direita.
+*
+*  $EP Parâmetros
+*     $P cubo - parâmetro a ser alterado.
+*	  $P n - valor que indica o números de 1/4 de volta a ser rotacionado.
+*
+*  $FV Valor retornado
+*     Retorna um ponteiro para cubo rotacionado.
+*	  CUB_CondretOK  -  Giro aconteceu normalmente.
+*
+***********************************************************************/
+
+CUB_tpCondRet CUB_giraTrasDireita(CUB_tpCubo *cubo, int n);
+
+/***********************************************************************
+*
+*  $FC Função: CUB Gira tras esquerda
+*
+*  $ED Descrição da função
+*     Função que gira a face de tras do cubo recebido em 1/4 de volta 
+*	  ou 1/2 de volta para a esquerda.
+*
+*  $EP Parâmetros
+*     $P cubo - parâmetro a ser alterado.
+*	  $P n - valor que indica o números de 1/4 de volta a ser rotacionado.
+*
+*  $FV Valor retornado
+*     Retorna um ponteiro para cubo rotacionado.
+*	  CUB_CondretOK  -  Giro aconteceu normalmente.
+*
+***********************************************************************/
+
+CUB_tpCondRet CUB_giraTrasEsquerda(CUB_tpCubo *cubo, int n);
+
+/***********************************************************************
+*
+*  $FC Função: CUB Gira topo direita
+*
+*  $ED Descrição da função
+*     Função que gira a face de topo do cubo recebido em 1/4 de volta 
+*	  ou 1/2 de volta para a direita.
+*
+*  $EP Parâmetros
+*     $P cubo - parâmetro a ser alterado.
+*	  $P n - valor que indica o números de 1/4 de volta a ser rotacionado.
+*
+*  $FV Valor retornado
+*     Retorna um ponteiro para cubo rotacionado.
+*	  CUB_CondretOK  -  Giro aconteceu normalmente.
+*
+***********************************************************************/
+
+CUB_tpCondRet CUB_giraTopoDireita(CUB_tpCubo *cubo, int n);
+
+/***********************************************************************
+*
+*  $FC Função: CUB Busca peça
+*
+*  $ED Descrição da função
+*     Função que busca determinada peça pelas suas cores e pela 
+*	  quantidade de cores na peça.
+*
+*  $EP Parâmetros
+*     $P cubo	  -  Parâmetro a ser alterado.
+*	  $P cores	  -  String que diz quais cores a peça a ser procura da possui.
+*					 Pode ter duas ou três diferentes cores relacionadas ao cubo.
+*	  $P numCores -  Valor que indica o números de cores da peça a ser procurada.
+*					 Pode conter apenas 2 ou 3. 
+*
+*  $FV Valor retornado
+*     Retorna um ponteiro para com dos dados da peça desejada.
+*	  CUB_CondretOK      -  Giro aconteceu normalmente.
+*	  CUB_PecaNaoExiste  -  Peça procurada não é possivel de ter em um cubo.
+*
+***********************************************************************/
+
+CUB_tpCondRet CUB_buscaPeca(CUB_tpPeca *Peca, CUB_tpCubo *cubo, int cores[], int numCores);
+
+CUB_tpCondRet CUB_ChecarCorDaFace(int * pCor, CUB_tpCubo * pCubo, int linha, int coluna, int face);
+
+/********** Fim do módulo de definição: CUB Módulo Cubo **********/

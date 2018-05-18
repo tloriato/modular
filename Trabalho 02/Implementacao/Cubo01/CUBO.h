@@ -10,11 +10,13 @@
 *  Projeto: Disciplinas INF 1301
 *  Gestor:  Flavio B. Vilac
 *  Autores: AC, FM e MA
+*  Autores: Bernardo L., Carol J., Mariela, Tiago S.
 *
 *  $HA Histórico de evolução:
 *     Versão   Autor     Data        Observações
 *       1.00  AC,FM,MA  01/03/2018   Início do desenvolvimento.
 *		1.10  AC,FM,MA  19/03/2018   Termino do desenvolvimento.
+*		1.20    BCMT    02/05/2018	 Alteração na função de Buscar Peça
 *
 *  $ED Descrição do módulo
 *     Este módulo implementa um conjunto de funções para criar e
@@ -26,7 +28,7 @@
 *	  não tem utilidae.
 *
 ***************************************************************************/
- 
+
 /***** Declarações exportadas pelo módulo *****/
 
 /* Tipo referência para um cubo */
@@ -37,10 +39,10 @@ typedef struct tpCubo CUB_tpCubo;
 *
 *  $TC Tipo de dados: CUB Elemento da peça
 *
-*	$ED Descrição: 
-*		Referente a uma peça do cubo e tratada como se fosse um cubinho 
+*	$ED Descrição:
+*		Referente a uma peça do cubo e tratada como se fosse um cubinho
 *		 dentro do cubo maior. como o cubinho está inserido no cubo maior
-*		 possui apenas 2 ou 3 faces preenchidas, referenbtta aos tipos 
+*		 possui apenas 2 ou 3 faces preenchidas, referenbtta aos tipos
 *		 de peças de um cubo mágico (borda e quina).
 *
 ***********************************************************************/
@@ -48,30 +50,30 @@ typedef struct tpCubo CUB_tpCubo;
 typedef struct tpPeca
 {
 	int C;
-		/* Será preenchida com a cor referente a face de cima da peça ou um valor nulo. */
-		
+	/* Será preenchida com a cor referente a face de cima da peça ou um valor nulo. */
+
 	int E;
-		/* Será preenchida com a cor referente a face da esquerda da peça ou um valor nulo. */	
-		
+	/* Será preenchida com a cor referente a face da esquerda da peça ou um valor nulo. */
+
 	int F;
-		/* Será preenchida com a cor referente a face da frente da peça ou um valor nulo. */
-		
+	/* Será preenchida com a cor referente a face da frente da peça ou um valor nulo. */
+
 	int D;
-		/* Será preenchida com a cor referente a face da direita da peça ou um valor nulo. */
-		
+	/* Será preenchida com a cor referente a face da direita da peça ou um valor nulo. */
+
 	int B;
-		/* Será preenchida com a cor referente a face de baixo da peça ou um valor nulo. */
-		
+	/* Será preenchida com a cor referente a face de baixo da peça ou um valor nulo. */
+
 	int T;
-		/* Será preenchida com a cor referente a face de trás da peça ou um valor nulo. */
-		
+	/* Será preenchida com a cor referente a face de trás da peça ou um valor nulo. */
+
 	int coordPeca[3];
-		/* Mostra a coordenada da prça em 3 coordenadas, largura sendo referente a posiçao 0 do vetor, 
-		 *  altura referente a posiçao 1 do vetor e a profundidade é referente a terceira posiçao do vetor.
-		 * O domínio vai de 1 à 3, temdo como referencia a face da frente do cubo a quina inferior esquerda 
-		 *  sendo 1|1|1. */
-		
-}CUB_tpPeca;
+	/* Mostra a coordenada da prça em 3 coordenadas, largura sendo referente a posiçao 0 do vetor,
+	*  altura referente a posiçao 1 do vetor e a profundidade é referente a terceira posiçao do vetor.
+	* O domínio vai de 1 à 3, tendo como referencia a face da frente do cubo a quina inferior esquerda
+	*  sendo 1|1|1. */
+
+} CUB_tpPeca;
 
 /***********************************************************************
 *
@@ -83,24 +85,24 @@ typedef struct tpPeca
 *
 ***********************************************************************/
 
- typedef enum {
+typedef enum {
 
-         CUB_CondRetOK = 0 ,
-               /* Executou corretamente */
+	CUB_CondRetOK = 0,
+	/* Executou corretamente */
 
-         CUB_CondRetFaltouMemoria = 1 ,
-               /* Faltou memoria ao alocar dados */
+	CUB_CondRetFaltouMemoria = 1,
+	/* Faltou memoria ao alocar dados */
 
-         CUB_CondRetPecaNaoExiste = 2 ,
-               /* Peça buscada não é possível */
-		 
-		 CUB_CondRetPecaErrada = 3 ,
-		       /* Peça retornada errada */ 
-		 
-		 CUB_CondRetErro = 4 ,
-			   /* Qualquer condição de erro inesperada */
+	CUB_CondRetPecaNaoExiste = 2,
+	/* Peça buscada não é possível */
 
-  } CUB_tpCondRet ;
+	CUB_CondRetPecaErrada = 3,
+	/* Peça retornada errada */
+
+	CUB_CondRetErro = 4,
+	/* Qualquer condição de erro inesperada */
+
+} CUB_tpCondRet;
 
 /***********************************************************************
 *
@@ -119,25 +121,7 @@ typedef struct tpPeca
 *
 ***********************************************************************/
 
-
- CUB_tpCondRet CUB_criaCubo(CUB_tpCubo *cubo);
-
-
- /***********************************************************************
-*
-*  $FC Função: CUB Imprime cubo
-*
-*  $EP Parâmetros
-*     $P cubo - parâmetro do cubo a ser exibido.
-*
-*  $ED Descrição da função
-*     Imprime o estado atual do cubo.
-*
-***********************************************************************/
-
-
- void imprimeCubo(CUB_tpCubo *cubo);
-
+CUB_tpCondRet CUB_criaCubo(CUB_tpCubo **cubo);
 
 /***********************************************************************
 *
@@ -159,7 +143,7 @@ CUB_tpCondRet CUB_liberaCubo(CUB_tpCubo *cubo);
 
 /***********************************************************************
 *
-*  $FC Função: CUB Criar prça
+*  $FC Função: CUB Criar peça
 *
 *  $ED Descrição da função
 *     Cria uma peça vazia.
@@ -206,14 +190,14 @@ void CUB_liberaPeca(CUB_tpPeca *peca);
 *
 ***********************************************************************/
 
-CUB_tpCondRet CUB_preencheCubo(CUB_tpCubo *cubo, int x , int y,  int z , int cor);
+CUB_tpCondRet CUB_preencheCubo(CUB_tpCubo *cubo, int x, int y, int z, int cor);
 
 /***********************************************************************
 *
 *  $FC Função: CUB Gira frente esquerda
 *
 *  $ED Descrição da função
-*     Função que gira a face da frente do cubo recebido em 1/4 de volta 
+*     Função que gira a face da frente do cubo recebido em 1/4 de volta
 *	  ou 1/2 de volta para a esquerda.
 *
 *  $EP Parâmetros
@@ -233,7 +217,7 @@ CUB_tpCondRet CUB_giraFrenteEsquerda(CUB_tpCubo *cubo, int n);
 *  $FC Função: CUB Gira frente direita
 *
 *  $ED Descrição da função
-*     Função que gira a face da frente do cubo recebido em 1/4 de volta 
+*     Função que gira a face da frente do cubo recebido em 1/4 de volta
 *	  ou 1/2 de volta para a direita.
 *
 *  $EP Parâmetros
@@ -253,7 +237,7 @@ CUB_tpCondRet CUB_giraFrenteDireita(CUB_tpCubo *cubo, int n);
 *  $FC Função: CUB Gira direita trás
 *
 *  $ED Descrição da função
-*     Função que gira a face da direita do cubo recebido em 1/4 de volta 
+*     Função que gira a face da direita do cubo recebido em 1/4 de volta
 *	  ou 1/2 de volta para trás.
 *
 *  $EP Parâmetros
@@ -273,7 +257,7 @@ CUB_tpCondRet CUB_giraDireitaTras(CUB_tpCubo *cubo, int n);
 *  $FC Função: CUB Gira direita frente
 *
 *  $ED Descrição da função
-*     Função que gira a face da direita do cubo recebido em 1/4 de volta 
+*     Função que gira a face da direita do cubo recebido em 1/4 de volta
 *	  ou 1/2 de volta para a frente.
 *
 *  $EP Parâmetros
@@ -293,7 +277,7 @@ CUB_tpCondRet CUB_giraDireitaFrente(CUB_tpCubo *cubo, int n);
 *  $FC Função: CUB Gira esquerda frente
 *
 *  $ED Descrição da função
-*     Função que gira a face da esquerda do cubo recebido em 1/4 de volta 
+*     Função que gira a face da esquerda do cubo recebido em 1/4 de volta
 *	  ou 1/2 de volta para a frente.
 *
 *  $EP Parâmetros
@@ -313,7 +297,7 @@ CUB_tpCondRet CUB_giraEsquerdaFrente(CUB_tpCubo *cubo, int n);
 *  $FC Função: CUB Gira esquerda trás
 *
 *  $ED Descrição da função
-*     Função que gira a face da esqueda do cubo recebido em 1/4 de volta 
+*     Função que gira a face da esqueda do cubo recebido em 1/4 de volta
 *	  ou 1/2 de volta para trás.
 *
 *  $EP Parâmetros
@@ -333,7 +317,7 @@ CUB_tpCondRet CUB_giraEsquerdaTras(CUB_tpCubo *cubo, int n);
 *  $FC Função: CUB Gira baixo esquerda
 *
 *  $ED Descrição da função
-*     Função que gira a face de baixo do cubo recebido em 1/4 de volta 
+*     Função que gira a face de baixo do cubo recebido em 1/4 de volta
 *	  ou 1/2 de volta para a esquerda.
 *
 *  $EP Parâmetros
@@ -353,7 +337,7 @@ CUB_tpCondRet CUB_giraBaixoEsquerda(CUB_tpCubo *cubo, int n);
 *  $FC Função: CUB Gira baixo direita
 *
 *  $ED Descrição da função
-*     Função que gira a face de baixo do cubo recebido em 1/4 de volta 
+*     Função que gira a face de baixo do cubo recebido em 1/4 de volta
 *	  ou 1/2 de volta para a direita.
 *
 *  $EP Parâmetros
@@ -373,7 +357,7 @@ CUB_tpCondRet CUB_giraBaixoDireita(CUB_tpCubo *cubo, int n);
 *  $FC Função: CUB Gira topo esquerda
 *
 *  $ED Descrição da função
-*     Função que gira a face do topo do cubo recebido em 1/4 de volta 
+*     Função que gira a face do topo do cubo recebido em 1/4 de volta
 *	  ou 1/2 de volta para a esquerda.
 *
 *  $EP Parâmetros
@@ -393,7 +377,7 @@ CUB_tpCondRet CUB_giraTopoEsquerda(CUB_tpCubo *cubo, int n);
 *  $FC Função: CUB Gira tras direita
 *
 *  $ED Descrição da função
-*     Função que gira a face do tras do cubo recebido em 1/4 de volta 
+*     Função que gira a face do tras do cubo recebido em 1/4 de volta
 *	  ou 1/2 de volta para a direita.
 *
 *  $EP Parâmetros
@@ -413,7 +397,7 @@ CUB_tpCondRet CUB_giraTrasDireita(CUB_tpCubo *cubo, int n);
 *  $FC Função: CUB Gira tras esquerda
 *
 *  $ED Descrição da função
-*     Função que gira a face de tras do cubo recebido em 1/4 de volta 
+*     Função que gira a face de tras do cubo recebido em 1/4 de volta
 *	  ou 1/2 de volta para a esquerda.
 *
 *  $EP Parâmetros
@@ -433,7 +417,7 @@ CUB_tpCondRet CUB_giraTrasEsquerda(CUB_tpCubo *cubo, int n);
 *  $FC Função: CUB Gira topo direita
 *
 *  $ED Descrição da função
-*     Função que gira a face de topo do cubo recebido em 1/4 de volta 
+*     Função que gira a face de topo do cubo recebido em 1/4 de volta
 *	  ou 1/2 de volta para a direita.
 *
 *  $EP Parâmetros
@@ -453,7 +437,7 @@ CUB_tpCondRet CUB_giraTopoDireita(CUB_tpCubo *cubo, int n);
 *  $FC Função: CUB Busca peça
 *
 *  $ED Descrição da função
-*     Função que busca determinada peça pelas suas cores e pela 
+*     Função que busca determinada peça pelas suas cores e pela
 *	  quantidade de cores na peça.
 *
 *  $EP Parâmetros
@@ -461,7 +445,7 @@ CUB_tpCondRet CUB_giraTopoDireita(CUB_tpCubo *cubo, int n);
 *	  $P cores	  -  String que diz quais cores a peça a ser procura da possui.
 *					 Pode ter duas ou três diferentes cores relacionadas ao cubo.
 *	  $P numCores -  Valor que indica o números de cores da peça a ser procurada.
-*					 Pode conter apenas 2 ou 3. 
+*					 Pode conter apenas 2 ou 3.
 *
 *  $FV Valor retornado
 *     Retorna um ponteiro para com dos dados da peça desejada.
@@ -470,7 +454,10 @@ CUB_tpCondRet CUB_giraTopoDireita(CUB_tpCubo *cubo, int n);
 *
 ***********************************************************************/
 
-CUB_tpCondRet CUB_buscaPeca(CUB_tpPeca *Peca, CUB_tpCubo *cubo, int cores[], int numCores);
+CUB_tpCondRet CUB_buscaPeca(CUB_tpCubo *cubo, int cores[], int numCores, CUB_tpPeca *peca);
+
+
+CUB_tpCondRet CUB_ChecarCorDaFace(int * pCor, CUB_tpCubo * pCubo, int linha, int coluna, int face);
 
 
 /********** Fim do módulo de definição: CUB Módulo Cubo **********/

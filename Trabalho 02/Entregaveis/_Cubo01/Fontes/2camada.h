@@ -1,39 +1,39 @@
-ï»¿/******************************************************************************
+/******************************************************************************
 *
-*  $MCD MÃ³dulo de definiÃ§Ã£o: 2C		Segunda Camada
+*  $MCD Módulo de definição: 2C		Segunda Camada
 *
 *  Arquivo gerado:              2camada.h
 *  Letras identificadoras:      2C
 *
-*  Projeto: INF 1301 Cubo mÃ¡gico
+*  Projeto: INF 1301 Cubo mágico
 *  Gestor:  LES/DI/PUC-Rio
 *  Autores:  CJ - Ana Carolina Junger
-*			 TS - Tiago SimÃµes	
+*			 TS - Tiago Simões	
 *			 MMA - Mariela Mendonca de Andrade
 *			 BHL - 	Bernardo Horner Lopes  
 *
-*  $HA HistÃ³rico de evoluÃ§Ã£o:
-*     VersÃ£o  Autor    Data       ObservaÃ§Ãµes
+*  $HA Histórico de evolução:
+*     Versão  Autor    Data       Observações
 *      1.0	  MMA      29/04/18   Separar .h
 *
-*  $ED DescriÃ§Ã£o do mÃ³dulo
-*		Implementa 2 Camada do Cubo mÃ¡gico.
+*  $ED Descrição do módulo
+*		Implementa 2 Camada do Cubo mágico.
 *
 *		
 *
 ******************************************************************************/
 
-/* Tipo referÃªncia para um Cubo */
+/* Tipo referência para um Cubo */
 
-typedef struct CUB_tagCUBO * CUB_tppCUBO;
+typedef struct tpCubo CUB_tpCubo;
 
 /**************************************************************************
 *
-*  $TC Tipo de dados: CUB CondiÃ§Ãµes de retorno
+*  $TC Tipo de dados: CUB Condições de retorno
 *
 *
-*  $ED DescriÃ§Ã£o do tipo
-*     CondiÃ§Ãµes de retorno das funÃ§Ãµes do Cubo
+*  $ED Descrição do tipo
+*     Condições de retorno das funções do Cubo
 *
 **************************************************************************/
 
@@ -46,33 +46,26 @@ typedef enum {
 	/* Cubo Vazio */
 
 	C2C_CondRetFaltouMemoria
-	/* Faltou MemÃ³ria */
+	/* Faltou Memória */
 
 } C2C_tpCondRet;
 
 
 /**************************************************************************
 *
-*  $FC FunÃ§Ã£o: 2L  Resolve 2 camada
+*  $FC Função: 2L  Resolve 2 camada
 *
-*  $ED DescriÃ§Ã£o da funÃ§Ã£o
+*  $ED Descrição da função
 *		Resolve 2 camada
-*  $EParÃ¢metros
-*		$P Cubo- Recebe um cubo
+*  $EParâmetros
+*		$P Cubo- Recebe um ponteiro para cubo
 *				
 *  $FV Valor retornado
 *		CUB_CondRetOK			 - Criou um cubo com sucesso.
 *       C2C_CondRetCuboVazio     - Criou vazio.
 *		CUB_CondRetFaltouMemoria - Erro ao criar o cubo por falta de
-*								   memÃ³ria.
-*	Assertivas de Entrada
-*	cubo != NULL
-*
-*	Assertivas de Saida
-*	condRetOK
-*	2 camada resolvida
+*								   memória.
 *
 **************************************************************************/
 
-C2C_tpCondRet resolve2camada (CUB_tppCUBO cubo);
-
+C2C_tpCondRet resolve2camada (CUB_tpCubo* cubo);
