@@ -13,23 +13,19 @@
 *			 BHL - 	Bernardo Horner Lopes  
 *
 *  $HA Histórico de evolução:
-*     Versão  Autor    Data       Observações
-*      1.0	  MMA      29/04/18   Separar .h
+*	Versão  Autor		Data		Observações
+*	3.0		TSMMABHL	02/06/18	Código refeito para melhor atender o módulo do cubo 1	
+*	2.0		CJTSMMABHL	30/04/18	Código refatorado
+*	1.0		MMA			29/04/18	Separar .h
 *
 *  $ED Descrição do módulo
-*		Implementa 2 Camada do Cubo mágico.
-*
-*		
-*
+*		Este módulo visa resolver a 2a camada do cubo mágico usando o método de 
+*		iniciante (método das camadas) tendo o módulo do cubo 1 como base.
 ******************************************************************************/
-
-/* Tipo referência para um Cubo */
-
-typedef struct tpCubo CUB_tpCubo;
-
+#include "CUBO.h"
 /**************************************************************************
 *
-*  $TC Tipo de dados: CUB Condições de retorno
+*  $TC Tipo de dados: C2C Condições de retorno
 *
 *
 *  $ED Descrição do tipo
@@ -42,30 +38,35 @@ typedef enum {
 	C2C_CondRetOK,
 	/* Concluiu corretamente */
 
-	C2C_CondRetCuboVazio,
+	C2C_CondRetCuboVazio
 	/* Cubo Vazio */
-
-	C2C_CondRetFaltouMemoria
-	/* Faltou Memória */
 
 } C2C_tpCondRet;
 
 
-/**************************************************************************
-*
-*  $FC Função: 2L  Resolve 2 camada
+/**************************
+*  $FC Função: C2C  resolve 2ª camada
 *
 *  $ED Descrição da função
-*		Resolve 2 camada
+*		Resolve a segunda camada de um cubo mágico com a primeira camada resovida,
+*		seguindo os passos de resolução do método de iniciantes (método das camadas)
+*		
 *  $EParâmetros
-*		$P Cubo- Recebe um ponteiro para cubo
-*				
+*		$P cubo = estrutura CUB_tppCUBO populada
+*		$P instrucoes = string vazio que abrigará os comandos de giro obtidos na função
+*       
 *  $FV Valor retornado
-*		CUB_CondRetOK			 - Criou um cubo com sucesso.
-*       C2C_CondRetCuboVazio     - Criou vazio.
-*		CUB_CondRetFaltouMemoria - Erro ao criar o cubo por falta de
-*								   memória.
+*       C2C_CondRetCuboVazio - O cubo recebido está vazio
+*		C2C_CondRetOK - A segunda camada foi resolvida com sucesso
 *
-**************************************************************************/
-
-C2C_tpCondRet resolve2camada (CUB_tpCubo* cubo);
+*	Assertiva de Entrada
+*	- cubo != NULL
+*	- instrucoes está vazio
+*
+*	Assertivas de Saida
+*	- O cubo está com a segunda camada resolvida
+*	- O vetor de instruções está com o tamanho certo e com os comandos para resolver
+*	a segunda camada para o cubo dado
+*	
+**************************/
+C2C_tpCondRet resolve2camada (CUB_tppCubo cubo, char *instrucoes);

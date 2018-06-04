@@ -7,19 +7,11 @@
 // Data: 03/05/2018
 // Propósito: Testa a resolução da 2 camada
 
-== Caso cubo null
-=resolveCuboNull 0
-=recuperar
+== Resolve normal
+=resolve2camada 0
 
-== Resolve Cubo face branca p cima algoritmo para direita
-=resolve2direitaInverso 0
+== Resolve nulo
+=resolveCuboNull 1
 
-== Resolve Cubo face branca p cima algoritmo para 2 camada resolvida
-=resolve2resolvidaInverso 0
-
-== Resolve Cubo face branca p cima algoritmo para esquerda
-=resolve2esquerdaInverso 0
-
-
-
-
+== Resolve com segunda camada feita
+=2aCamadaFeita 0

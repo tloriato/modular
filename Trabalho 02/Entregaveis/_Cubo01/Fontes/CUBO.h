@@ -31,8 +31,7 @@
 
 /* Tipo referência para um cubo */
 
-typedef struct tpCubo CUB_tpCubo;
-
+typedef struct tpCubo *CUB_tppCubo;
 /***********************************************************************
 *
 *  $TC Tipo de dados: CUB Elemento da peça
@@ -72,7 +71,7 @@ typedef struct tpPeca
 		 *  sendo 1|1|1. */
 		
 }CUB_tpPeca;
-
+typedef struct tpPeca* CUB_tppPeca;
 /***********************************************************************
 *
 *  $TC Tipo de dados: CUB Condições de retorno
@@ -119,11 +118,24 @@ typedef struct tpPeca
 *
 ***********************************************************************/
 
- void imprimeCubo(CUB_tpCubo *cubo);
 
- CUB_tpCondRet CUB_criaCubo(CUB_tpCubo *cubo);
+ CUB_tpCondRet CUB_criaCubo(CUB_tppCubo *cubo);
 
- CUB_tpCondRet CUB_ChecarCorDaFace(int * pCor, CUB_tpCubo *cubo, int linha, int coluna, int face);
+
+ /***********************************************************************
+*
+*  $FC Função: CUB Imprime cubo
+*
+*  $EP Parâmetros
+*     $P cubo - parâmetro do cubo a ser exibido.
+*
+*  $ED Descrição da função
+*     Imprime o estado atual do cubo.
+*
+***********************************************************************/
+
+
+ void imprimeCubo(CUB_tppCubo cubo);
 
 
 /***********************************************************************
@@ -142,7 +154,7 @@ typedef struct tpPeca
 *
 ***********************************************************************/
 
-CUB_tpCondRet CUB_liberaCubo(CUB_tpCubo *cubo);
+CUB_tpCondRet CUB_liberaCubo(CUB_tppCubo cubo);
 
 /***********************************************************************
 *
@@ -161,7 +173,7 @@ CUB_tpCondRet CUB_liberaCubo(CUB_tpCubo *cubo);
 *
 ***********************************************************************/
 
-CUB_tpPeca *CUB_criaPeca(void);
+void CUB_criaPeca( CUB_tppPeca *peca );
 
 /***********************************************************************
 *
@@ -176,7 +188,7 @@ CUB_tpPeca *CUB_criaPeca(void);
 *
 ***********************************************************************/
 
-void CUB_liberaPeca(CUB_tpPeca *peca);
+void CUB_liberaPeca(CUB_tppPeca peca);
 
 /***********************************************************************
 *
@@ -193,7 +205,7 @@ void CUB_liberaPeca(CUB_tpPeca *peca);
 *
 ***********************************************************************/
 
-CUB_tpCondRet CUB_preencheCubo(CUB_tpCubo *cubo, int x , int y,  int z , int cor);
+CUB_tpCondRet CUB_preencheCubo(CUB_tppCubo cubo, int x , int y,  int z , int cor);
 
 /***********************************************************************
 *
@@ -213,7 +225,7 @@ CUB_tpCondRet CUB_preencheCubo(CUB_tpCubo *cubo, int x , int y,  int z , int cor
 *
 ***********************************************************************/
 
-CUB_tpCondRet CUB_giraFrenteEsquerda(CUB_tpCubo *cubo, int n);
+CUB_tpCondRet CUB_giraFrenteEsquerda(CUB_tppCubo cubo, int n);
 
 /***********************************************************************
 *
@@ -233,7 +245,7 @@ CUB_tpCondRet CUB_giraFrenteEsquerda(CUB_tpCubo *cubo, int n);
 *
 ***********************************************************************/
 
-CUB_tpCondRet CUB_giraFrenteDireita(CUB_tpCubo *cubo, int n);
+CUB_tpCondRet CUB_giraFrenteDireita(CUB_tppCubo cubo, int n);
 
 /***********************************************************************
 *
@@ -253,7 +265,7 @@ CUB_tpCondRet CUB_giraFrenteDireita(CUB_tpCubo *cubo, int n);
 *
 ***********************************************************************/
 
-CUB_tpCondRet CUB_giraDireitaTras(CUB_tpCubo *cubo, int n);
+CUB_tpCondRet CUB_giraDireitaTras(CUB_tppCubo cubo, int n);
 
 /***********************************************************************
 *
@@ -273,7 +285,7 @@ CUB_tpCondRet CUB_giraDireitaTras(CUB_tpCubo *cubo, int n);
 *
 ***********************************************************************/
 
-CUB_tpCondRet CUB_giraDireitaFrente(CUB_tpCubo *cubo, int n);
+CUB_tpCondRet CUB_giraDireitaFrente(CUB_tppCubo cubo, int n);
 
 /***********************************************************************
 *
@@ -293,7 +305,7 @@ CUB_tpCondRet CUB_giraDireitaFrente(CUB_tpCubo *cubo, int n);
 *
 ***********************************************************************/
 
-CUB_tpCondRet CUB_giraEsquerdaFrente(CUB_tpCubo *cubo, int n);
+CUB_tpCondRet CUB_giraEsquerdaFrente(CUB_tppCubo cubo, int n);
 
 /***********************************************************************
 *
@@ -313,7 +325,7 @@ CUB_tpCondRet CUB_giraEsquerdaFrente(CUB_tpCubo *cubo, int n);
 *
 ***********************************************************************/
 
-CUB_tpCondRet CUB_giraEsquerdaTras(CUB_tpCubo *cubo, int n);
+CUB_tpCondRet CUB_giraEsquerdaTras(CUB_tppCubo cubo, int n);
 
 /***********************************************************************
 *
@@ -333,7 +345,7 @@ CUB_tpCondRet CUB_giraEsquerdaTras(CUB_tpCubo *cubo, int n);
 *
 ***********************************************************************/
 
-CUB_tpCondRet CUB_giraBaixoEsquerda(CUB_tpCubo *cubo, int n);
+CUB_tpCondRet CUB_giraBaixoEsquerda(CUB_tppCubo cubo, int n);
 
 /***********************************************************************
 *
@@ -353,7 +365,7 @@ CUB_tpCondRet CUB_giraBaixoEsquerda(CUB_tpCubo *cubo, int n);
 *
 ***********************************************************************/
 
-CUB_tpCondRet CUB_giraBaixoDireita(CUB_tpCubo *cubo, int n);
+CUB_tpCondRet CUB_giraBaixoDireita(CUB_tppCubo cubo, int n);
 
 /***********************************************************************
 *
@@ -373,7 +385,7 @@ CUB_tpCondRet CUB_giraBaixoDireita(CUB_tpCubo *cubo, int n);
 *
 ***********************************************************************/
 
-CUB_tpCondRet CUB_giraTopoEsquerda(CUB_tpCubo *cubo, int n);
+CUB_tpCondRet CUB_giraTopoEsquerda(CUB_tppCubo cubo, int n);
 
 /***********************************************************************
 *
@@ -393,7 +405,7 @@ CUB_tpCondRet CUB_giraTopoEsquerda(CUB_tpCubo *cubo, int n);
 *
 ***********************************************************************/
 
-CUB_tpCondRet CUB_giraTrasDireita(CUB_tpCubo *cubo, int n);
+CUB_tpCondRet CUB_giraTrasDireita(CUB_tppCubo cubo, int n);
 
 /***********************************************************************
 *
@@ -413,7 +425,7 @@ CUB_tpCondRet CUB_giraTrasDireita(CUB_tpCubo *cubo, int n);
 *
 ***********************************************************************/
 
-CUB_tpCondRet CUB_giraTrasEsquerda(CUB_tpCubo *cubo, int n);
+CUB_tpCondRet CUB_giraTrasEsquerda(CUB_tppCubo cubo, int n);
 
 /***********************************************************************
 *
@@ -433,7 +445,7 @@ CUB_tpCondRet CUB_giraTrasEsquerda(CUB_tpCubo *cubo, int n);
 *
 ***********************************************************************/
 
-CUB_tpCondRet CUB_giraTopoDireita(CUB_tpCubo *cubo, int n);
+CUB_tpCondRet CUB_giraTopoDireita(CUB_tppCubo cubo, int n);
 
 /***********************************************************************
 *
@@ -457,8 +469,7 @@ CUB_tpCondRet CUB_giraTopoDireita(CUB_tpCubo *cubo, int n);
 *
 ***********************************************************************/
 
-CUB_tpCondRet CUB_buscaPeca(CUB_tpPeca *Peca, CUB_tpCubo *cubo, int cores[], int numCores);
+CUB_tpCondRet CUB_buscaPeca(CUB_tppPeca Peca, CUB_tppCubo cubo, int cores[], int numCores);
 
-CUB_tpCondRet CUB_ChecarCorDaFace(int * pCor, CUB_tpCubo * pCubo, int linha, int coluna, int face);
 
 /********** Fim do módulo de definição: CUB Módulo Cubo **********/
