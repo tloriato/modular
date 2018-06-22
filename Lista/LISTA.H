@@ -114,7 +114,26 @@ typedef struct LIS_tagLista * LIS_tppLista ;
         /* A lista passada não existe */
         LIS_verifInexistente,
 
-        /* O que mais pode verificar? */
+        /* Lista com origem nula mas elemento corrente */
+
+        LIS_verifSemOrigemComCorrente,
+
+        /* Lista com origem nula, corrente nulo, mas com 
+        elemento final */
+
+        LIS_verifSemOrigemComFinal,
+
+        /* Lista com origem, corrente, final nulos mas numero 
+        de elementos diferente de 0 */
+
+        LIS_verifSemOrigemComElemento,
+
+        /* Equivalentemente para lista sem elemento final */
+        LIS_verifSemFimComOrigem,
+        LIS_verifSemFimComCorrente,
+        LIS_verifSemFimComElemento
+
+        
 
 
     } LIS_verifCondRet
