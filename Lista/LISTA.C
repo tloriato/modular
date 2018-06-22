@@ -497,7 +497,6 @@
             // Se o ponteiro para a origem da lista é nulo,
             // todos os demais também devem ser, pois não deverá existir elementos
             // na lista.
-
             if (ptLista->pOrigemLista == NULL) {
                   if (ptLista->pElemCorr != NULL) 
                         return LIS_verifSemOrigemComCorrente;
@@ -510,7 +509,6 @@
             }
 
             // Equivalentemente, para ponteiro final da lista nulo
-
             if (ptLista->pFimLista == NULL) {
                   if (ptLista->pOrigemLista != NULL) 
                         return LIS_verifSemFimComOrigem;
@@ -521,6 +519,22 @@
                   if (ptLista->numElem != 0) 
                         return LIS_verifSemFimComElemento;
             }
+
+            // numElem não pode ser menor que 0
+            if (ptLista->numElem < 0)
+                  return LIS_verifNumElementosNegativo;
+            
+            // Tomar cuidado para não acessar à dentro de 
+            // ponteiros nulos!
+            if (ptLista->pOrigemLista != NULL)
+                  if (ptLista->pOrigemLista->pAnt != NULL)
+                        return LIS_verifOrigemIncorreta;
+
+            if (ptLista->pFimLista != NULL)
+                  if (ptLista->pFimLista->pProx != NULL)
+                        return LIS_verifFinalIncorreto;
+
+            
 
 
 

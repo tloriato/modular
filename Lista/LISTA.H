@@ -131,9 +131,21 @@ typedef struct LIS_tagLista * LIS_tppLista ;
         /* Equivalentemente para lista sem elemento final */
         LIS_verifSemFimComOrigem,
         LIS_verifSemFimComCorrente,
-        LIS_verifSemFimComElemento
+        LIS_verifSemFimComElemento,
 
-        
+        /* Numero de Elementos da Lista invalido (negativo) */
+
+        LIS_verifNumElementosNegativo,
+
+        /* Ponteiro para origem incorreta pois existe anterior */
+
+        LIS_verifOrigemIncorreta,
+
+        /* Ponteiro para final incorreto pois existe próximo */
+
+        LIS_verifFinalIncorreto
+
+
 
 
     } LIS_verifCondRet
