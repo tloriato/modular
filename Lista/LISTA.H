@@ -143,7 +143,11 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 
         /* Ponteiro para final incorreto pois existe próximo */
 
-        LIS_verifFinalIncorreto
+        LIS_verifFinalIncorreto,
+
+        /* Lista com tipos não homogêneos */
+
+        LIS_
 
 
 
