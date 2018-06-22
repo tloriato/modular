@@ -364,6 +364,7 @@ typedef struct LIS_tagLista * LIS_tppLista ;
                                     void * pValor        ) ;
 
 
+#ifdef _DEBUG
 /*********************************************************************
  * 
  * $FC Função: LIS &Verificar a Lista
@@ -379,6 +380,9 @@ typedef struct LIS_tagLista * LIS_tppLista ;
  *******************************************************************/
 
     LIS_verifCondRet LIS_VerificarLista (LIS_tppLista ptLista);
+
+#endif
+
 
 #undef LISTA_EXT
 
