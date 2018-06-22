@@ -534,10 +534,41 @@
                   if (ptLista->pFimLista->pProx != NULL)
                         return LIS_verifFinalIncorreto;
 
+            // Verifica se conseguimos partir da origem e chegar 
+            // no final, enquanto conta os passos e depois
+            // checa com o número de elementos declarados
+            // Verifica se o elemento anterior está sempre linkado corretamente 
+            // e que nenhum elemento aponta para um valor nulo
+
+            if (ptLista->pOrigemLista != NULL) {
+                  int contador = 1;
+                  int numElem = ptLista->numElem;
+
+                  tpElemLista * temp = ptLista->pOrigemLista;
+                  tpElemLista * ant = NULL;
+
+                  while (temp->pProx != NULL || temp->pValor != ptLista->pFimLista->pValor) {
+                        if (temp->pAnt != ant) {
+                              return LIS_verifAntLinkErrado;
+                        }
+                        if (temp->pValor == NULL) {
+                              return LIS_verifElemNulo;
+                        }
+                        contador++;
+                        ant = temp;
+                        temp = temp->pProx;
+                  }
+
+                  if (temp->pValor != ptLista->pFimLista->pValor)
+                        return LIS_verifOrigemNaoChegaAoFinal;
+                  
+                  if (contador != numElem)
+                        return LIS_verifNumElemInconsisente;
+
+            }
+
+            return LIS_verifOK;
             
-
-
-
       }
 
 

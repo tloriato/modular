@@ -145,13 +145,26 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 
         LIS_verifFinalIncorreto,
 
-        /* Lista com tipos não homogêneos */
+        /* Lista ligada de maneira errada no sentido -> */
 
-        LIS_
+        LIS_verifOrigemNaoChegaAoFinal,
 
+        /* Lista ligada de maneira errada no sentido <- */
 
+        LIS_verifAntLinkErrado,
 
+        /* Numero de Elementos inconsisente*/
 
+        LIS_verifNumElemInconsisente,
+
+        /* Elemento da Lista aponta para o valor nulo */
+
+        LIS_verifElemNulo,
+
+        /* Lista está estruturada corretamente */
+
+        LIS_verifOK
+        
     } LIS_verifCondRet
 
 /***********************************************************************
