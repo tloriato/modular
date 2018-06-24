@@ -48,6 +48,16 @@
          struct tagElemLista * pProx ;
                /* Ponteiro para o elemento sucessor */
 
+      #ifdef _DEBUG
+
+            /* Precisamos dessas duas informações para
+            realizer testes de integridades completos
+            com o propósito do módulo */
+
+            LIS_tppLista ptCabeca;
+
+            char tipo;
+
    } tpElemLista ;
 
 /***********************************************************************
@@ -73,6 +83,10 @@
 
          void ( * ExcluirValor ) ( void * pValor ) ;
                /* Ponteiro para a fun��o de destrui��o do valor contido em um elemento */
+      
+      #ifdef _DEBUG
+            char tipo;
+      #endif
 
    } LIS_tpLista ;
 
@@ -106,6 +120,13 @@
       } /* if */
 
       LimparCabeca( pLista ) ;
+
+      #ifdef _DEBUG
+            pLista->Tipo = LIS_TipoEspacoCabeca;
+            CED_DefinirTipoEspaco(pLista, LIS_TipoEspacoCabeca);
+      #elif
+            
+      #endif
 
       pLista->ExcluirValor = ExcluirValor ;
 
@@ -546,14 +567,24 @@
 
                   tpElemLista * temp = ptLista->pOrigemLista;
                   tpElemLista * ant = NULL;
+                  tpElemLista * corr = ptLista->pElemCorr;
+
+                  int corrente = 0;
 
                   while (temp->pProx != NULL || temp->pValor != ptLista->pFimLista->pValor) {
+                        
                         if (temp->pAnt != ant) {
                               return LIS_verifAntLinkErrado;
                         }
+                        
                         if (temp->pValor == NULL) {
                               return LIS_verifElemNulo;
                         }
+
+                        if (corr = temp) {
+                              corrente = 1;
+                        }
+                        
                         contador++;
                         ant = temp;
                         temp = temp->pProx;
@@ -564,8 +595,68 @@
                   
                   if (contador != numElem)
                         return LIS_verifNumElemInconsisente;
-
+                  
+                  if (corrente = 0 && ptLista->pElemCorr != NULL)
+                        return LIS_verifCorrenteNaoLigado;
             }
+
+            void * ptVoid = (void *) ptLista;
+            // Marcar os espaços dinâmicos inativos
+            CED_MarcarTodosEspacosInativos();
+            // Marca o tipo da lista e aponta o espaço como ativo
+            int tipoCabeca = CED_ObterTipoEspaco(ptVoid);
+            CED_MarcarEspacoAtivo(ptVoid);
+
+            if (tipoCabeca != LIS_TipoEspacoCabeca) {
+                  return LIS_verifCabecaTipoInconsistente;
+            }
+
+            tpElemLista * temp = ptLista->pOrigemLista;
+            int tipoEsp;
+
+            while (tpElemLista != NULL) {
+
+                  if (CED_ObterTipoEspaco(temp) != temp->tipo) {
+                        return LIS_verifElemTpInconsistente;
+                  }
+
+                  if (CED_ObterTipoEspaco(temp->ptCabeca) != ptLista->tipo) {
+                        return LIS_verifCabecaTipoInconsistente;
+                  }
+                  
+                  // Checa o controle da memória dinâmica
+                  // marca os visitados como ativo
+                  ptVoid = (void *) temp;
+                  CED_MarcarEspacoAtivo(ptVoid);
+
+                  ptVoid = (void *) temp->pValor;
+                  tipoEsp = CED_ObterTipoEspaco(ptVoid);
+                  CED_MarcarEspacoAtivo(ptVoid);
+
+                  temp = temp->pProx;
+            }
+
+            /* Controla Vazamento da Memória da Lista */
+            int espacos = CED_ObterNumeroEspacosAlocados();
+
+            CED_InicializarIteradorEspacos();
+
+            for (int i = 0; i < espacos; i++) {
+                  ptVoid = CED_ObterPonteiroEspacoCorrente();
+                  int statusAtivo = CED_EhEspacoAtivo(ptVoid);
+                  tipoEsp = CED_ObterTipoEspaco(ptVoid);
+
+                  if (tipoEsp == tipoCabeca) {
+                        if (statusAtivo == 0) {
+                              CED_TerminarIteradorEspacos();
+                              return LIS_verifVazamentoMemoria;
+                        }
+                  }
+
+                  CED_AvancarProximoEspaco();
+            }
+
+            CED_TerminarIteradorEspacos();
 
             return LIS_verifOK;
             

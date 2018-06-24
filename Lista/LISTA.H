@@ -153,6 +153,10 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 
         LIS_verifAntLinkErrado,
 
+        /* Elemento corrente nao encontrado partindo do primeiro */
+
+        LIS_verifCorrenteNaoLigado,
+
         /* Numero de Elementos inconsisente*/
 
         LIS_verifNumElemInconsisente,
@@ -161,11 +165,21 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 
         LIS_verifElemNulo,
 
+        /* Tipo da cabeça inconsistente */
+        LIS_verifCabecaTipoInconsistente,
+
+        /* Tipo do Elemen inconsistente */
+        LIS_verifElemTpInconsistente,
+
+        /* Memoria vazando */
+        
+        LIS_verifVazamentoMemoria,
+
         /* Lista está estruturada corretamente */
 
         LIS_verifOK
         
-    } LIS_verifCondRet
+    } LIS_verifCondRet;
 
 /***********************************************************************
 *
