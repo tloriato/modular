@@ -238,9 +238,18 @@ typedef struct LIS_tagLista * LIS_tppLista ;
             /* Num de elementos menor 0*/
             LIS_DeturpaNumElementos,
 
-			/*Não realiza ação de deturpar*/
-			LIS_naoDeturpa,
-	
+            /*Não realiza ação de deturpar*/
+            LIS_naoDeturpa,
+
+            /*Altera tipo estrutura*/
+            LIS_DeturpaAlteraTipoEstrutura,
+
+            /*Elimina o elemento corrente da lista*/
+            LIS_DeturpaEliminaCorrente,
+
+            /*Desencadeia nó sem liberálo com free */
+            LIS_DeturpaDesencadeiaSemFree
+  
       }LIS_tpModosDeDeturpacao;
 #endif
 
