@@ -13,6 +13,8 @@
 *
 *  $HA Hist�rico de evolu��o:
 *     Vers�o  Autor    Data     Observa��es
+*	  6       bmt     24/08/18  Função de Deturpação
+*     5       bmt   Junho, 2018 Transformação para uma lista verificável
 *     4       avs   01/fev/2006 criar linguagem script simb�lica
 *     3       avs   08/dez/2004 uniformiza��o dos exemplos
 *     2       avs   07/jul/2003 unifica��o de todos os m�dulos em um s� projeto
@@ -89,6 +91,16 @@
       #endif
 
    } LIS_tpLista ;
+
+
+/*****  Dados encapsulados no módulo  *****/
+
+#ifdef _DEBUG
+
+  static char EspacoLixo[ 256 ] =
+          "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" ;
+  /* Espaço de dados lixo usado ao testar */
+ #endif
 
 /***** Prot�tipos das fun��es encapuladas no m�dulo *****/
 
@@ -661,6 +673,103 @@
             return LIS_verifOK;
             
       }
+
+
+
+/*****************************************************************
+ * 
+ * Função: LIS &Deturpar Lista
+ * 
+ * ***************************************************************/
+
+#ifdef _DEBUG
+
+ LIS_tpCondRet LIS_DeturpaLista(LIS_tppLista ptLista,  LIS_tpModosDeDeturpacao modoDeturpar) {
+
+       if (ptLista == NULL)
+            return LIS_verifInexistente;
+      
+      switch(modoDeturpar){
+
+            case naoDeturpa:
+                  break;
+
+            case DeturpaOrigem:
+                  ptLista->pOrigemLista == NULL;
+                  break;
+            
+            case DeturpaFinal:
+                  ptLista->pFimLista == NULL;
+                  break;
+
+            case DeturpaNumElementos:
+                  ptLista->numElem = -1;
+                  break;
+            
+            case DeturpaAnteriorOrigem: 
+                  ptLista->pOrigemLista->pAnt == 10;
+                  break;
+            
+            case DeturpaProxFimLista: 
+                  ptLista->pFimLista->pProx == 10;
+                  break;
+
+            case DeturpaValorOrigemNULL:
+                  ptLista->pOrigemLista->pValor== NULL;
+                  break;
+
+            case DeturpaCorrNULL: 
+                  ptLista->pElemCorr->pValor == NULL;
+                  break;
+
+            case LIS_DeturpaNULLCabeca:
+				  pLista->pElemCorr->pCabeca = NULL;
+			break;
+
+            case DeturpaPtCabecaLixo:
+                  pLista->pElemCorr->pCabeca = ( tpElemLista * )( EspacoLixo);
+                  break;
+
+            case DeturpaFinalLixo:
+                  ptLista->pFimLista = (tpElemLista * )( EspacoLixo);
+                  break;
+
+            case DeturpaCorrLixo:
+                  ptLista->pElemCorr = (tpElemLista * )( EspacoLixo);
+                  break;
+
+            case DeturpaProxLixo:
+                  ptLista->pElemCorr->pProx = (tpElemLista * )( EspacoLixo);
+                  break;
+
+            case DeturpaAntLixo:
+                  ptLista->pElemCorr->pAnt = (tpElemLista * )( EspacoLixo);
+                  break;
+
+            default :
+				  return LIS_CondRetDeturpacaoInexistente;
+      } 
+	  return LIS_CondRetOK;
+ }
+#endif
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*****  C�digo das fun��es encapsuladas no m�dulo  *****/

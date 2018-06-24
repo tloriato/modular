@@ -17,6 +17,7 @@
 *
 *  $HA Hist�rico de evolu��o:
 *     Vers�o  Autor    Data     Observa��es
+*	  6       bmt     24/08/18  Função de Deturpação
 *     5       bmt   Junho, 2018 Transformação para uma lista verificável
 *     4       avs   01/fev/2006 criar linguagem script simb�lica
 *     3       avs   08/dez/2004 uniformiza��o dos exemplos
@@ -57,6 +58,7 @@
     #include "GENERICO.h"
     #include "CESPDING.h"
     #include "CONTA.h"
+	#include   "IdTiposEspaco.def"
 #endif
  
 #if defined( LISTA_OWN )
@@ -180,6 +182,67 @@ typedef struct LIS_tagLista * LIS_tppLista ;
         LIS_verifOK
         
     } LIS_verifCondRet;
+
+
+
+
+	
+/************************************************
+ * 
+ * $TC Tipo de dados: Lis Deturpação
+ * 
+ * $ED Descrição oo tipo
+ *      Retorno das funções de verificação em ordem hierárquica
+************************************************/
+
+#ifdef _DEBUG
+
+      typedef enum {
+
+            /* Ponteiro de origem com valor NULL*/
+            LIS_DeturpaOrigem,
+
+            /* Ponteiro final com valor NULL*/
+            LIS_DeturpaFinal,
+
+            /* Ponteiro anterior a origem diferente NULL*/
+            LIS_DeturpaAnteriorOrigem,
+
+            /* Ponteiro proximo ao final diferente NULL*/
+            LIS_DeturpaProxFimLista,
+
+            /* Elemento da lista com valor NULL */
+            LIS_DeturpaValorNULL,
+
+            /* Elemento corrente da lista com valorNULL */
+            LIS_DeturpaCorrNULL,
+
+            /* Elemento cabeca da lista com valor NULL */
+            LIS_DeturpaNULLCabeca,
+
+            /* Faz ponteiro cabeça apontar para lixo */
+            LIS_DeturpaPtCabecaLixo, 
+
+            /* Faz ponteiro final apontar para lixo */
+            LIS_DeturpaFinalLixo,
+
+            /* Faz ponteiro corrente apontar para lixo */
+            LIS_DeturpaCorrLixo, 
+
+            /* Faz ponteiro prox apontar para lixo */
+            LIS_DeturpaProxLixo,
+
+            /* Faz ponteiro ant apontar para lixo */
+            LIS_DeturpaAntLixo,   
+
+            /* Num de elementos menor 0*/
+            LIS_DeturpaNumElementos,
+
+			/*Não realiza ação de deturpar*/
+			LIS_naoDeturpa,
+	
+      }LIS_tpModosDeDeturpacao;
+#endif
 
 /***********************************************************************
 *
@@ -442,6 +505,29 @@ typedef struct LIS_tagLista * LIS_tppLista ;
  *******************************************************************/
 
     LIS_verifCondRet LIS_VerificarLista (LIS_tppLista ptLista);
+
+#endif
+
+
+#ifdef _DEBUG
+/*********************************************************************
+ * 
+ * $FC Função: LIS &Deturpar a Lista
+ * 
+ * $ED Descrição:
+ *      Provoca falhas intencionais na lista
+ * 
+ * $EP Parâmetros
+ *      ptLista     -   Ponteiro p/ cabeça da Lista
+ *		modoDeturpar - Ação escolhida para deturpar lista
+ * 
+ * $FV Valor retornado
+ *      LIS_CondRetAcaoDeturpInexistente
+ *		LIS_CondRetOK
+ *		LIS_verifInexistente
+ *******************************************************************/
+
+    LIS_tpCondRet LIS_DeturpaLista(LIS_tppLista ptLista,  LIS_tpModosDeDeturpacao modoDeturpar);
 
 #endif
 
