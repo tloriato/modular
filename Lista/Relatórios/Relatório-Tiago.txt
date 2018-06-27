@@ -1,0 +1,5 @@
+Data		  Horas Trabalhadas	Tipo Tarefa	  Descrição da Tarefa Realizada
+22/06/18	  4			          Programar		  Transformar a lista em auto verificavel
+22/06/18    0.2             Fugir         Meu prédio pegou fogo então eu commitei o que tava fazendo e desci as escadas
+25/06/18	  1			          Programar     Pequenas correções gerais
+27/06/18    1               Programar     Outras pequenas correções não tão gerais
