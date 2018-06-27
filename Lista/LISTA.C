@@ -663,7 +663,7 @@
             tpElemLista * temp = ptLista->pOrigemLista;
             int tipoEsp;
 
-            while (tpElemLista != NULL) {
+            while (temp != NULL) {
 
                   if (CED_ObterTipoEspaco(temp) != temp->tipo) {
                         CNT_CONTAR("LIS_verifElemTpInconsistente");
@@ -710,7 +710,7 @@
 
             CED_TerminarIteradorEspacos();
 
-            NT_CONTAR("LIS_verifOK");
+            CNT_CONTAR("LIS_verifOK");
             return LIS_verifOK;
             
       }
@@ -725,81 +725,81 @@
 
 #ifdef _DEBUG
 
- LIS_tpCondRet LIS_DeturpaLista(LIS_tppLista ptLista,  LIS_tpModosDeDeturpacao modoDeturpar) {
+ LIS_verifCondRet LIS_DeturpaLista(LIS_tppLista ptLista,  LIS_tpModosDeDeturpacao modoDeturpar) {
 
        if (ptLista == NULL)
             return LIS_verifInexistente;
       
       switch(modoDeturpar){
            
-            case naoDeturpa:
+            case LIS_naoDeturpa:
                   break;
 
              //elimina o elemento corrente da lista
-             case DeturpaEliminaCorrente :
-                  free(pLista->pElemCorr) ;
-                  pLista->pElemCorr = NULL ;
-                  pLista->NumeroDeElementos-- ;
+             case LIS_DeturpaEliminaCorrente :
+                  free(ptLista->pElemCorr) ;
+                  ptLista->pElemCorr = NULL ;
+                  ptLista->numElem-- ;
                   break ;
 
             //atribui null ao ponteiro para prox no
-            case DeturpaProxNull:
+            case LIS_DeturpaPontProxNULL:
                   ptLista->pElemCorr->pProx = NULL;
                   break;
             
             //atribui null ao ponteiro para no anterior
-            case DeturpaAntNull:
+            case LIS_DeturpaPontAntNULL:
                   ptLista->pElemCorr->pAnt = NULL;
 
             //atribui lixo ao ponteiro de prox no
-            case DeturpaProxLixo:
+            case LIS_DeturpaProxLixo:
                   ptLista->pElemCorr->pProx = (tpElemLista *)(EspacoLixo);
                   break;
 
             //atribui lixo ao ponteiro de no anterior
-            case DeturpaAntLixo:
+            case LIS_DeturpaAntLixo:
                   ptLista->pElemCorr->pAnt = (tpElemLista *)(EspacoLixo);
                   break;
             
-            //atribui null ao conteudo do no  
-            case DeturpaConteudoNull:
-                  ptLista->pValor == NULL;
+            //atribui null ao conteudo do no corrente  
+            case LIS_DeturpaValorNULL:
+				ptLista->pElemCorr->pValor == NULL;
                   break;
    
             //altera tipo de estrutura apontada no no 
-            case DeturpaAlteraTipoEstrutura :
-                  pLista->tipo++;
+            case LIS_DeturpaAlteraTipoEstrutura :
+                  ptLista->tipo++;
                   break ;
             
-            //desencadeia nó sem liberálo com free 
-            case DeturpaDesencadeiaSemFree:
-                  if (pLista->pElemCorr->pAnt != NULL)
-                        pLista->pElemCorr->pAnt->pProx = pLista->pElemCorr->pProx ;
+            //desencadeia nó sem liberá-lo com free 
+            case LIS_DeturpaDesencadeiaSemFree:
+                  if (ptLista->pElemCorr->pAnt != NULL)
+                        ptLista->pElemCorr->pAnt->pProx = ptLista->pElemCorr->pProx ;
                   else
-                        pLista->pOrigemLista = pLista->pElemCorr->pProx;
+                        ptLista->pOrigemLista = ptLista->pElemCorr->pProx;
 
-                  if (pLista->pElemCorr->pProx != NULL)
-                        pLista->pElemCorr->pProx->pAnt = pLista->pElemCorr->pAnt ;
+                  if (ptLista->pElemCorr->pProx != NULL)
+                        ptLista->pElemCorr->pProx->pAnt = ptLista->pElemCorr->pAnt ;
                   else
-                        pLista->pFimLista = pLista->pElemCorr->pAnt;
+                        ptLista->pFimLista = ptLista->pElemCorr->pAnt;
 
-                  pLista->numElem --;
-                  pLista->pElemCorr = NULL;
+                  ptLista->numElem --;
+                  ptLista->pElemCorr = NULL;
                   break ;
 
             //atribui null ao ponteiro corrente
-            case DeturpaCorrNULL: 
+            case LIS_DeturpaPontCorr: 
                   ptLista->pElemCorr == NULL;
                   break;
 
              //atribui null ao ponteiro de origem
-            case DeturpaOrigem:
+            case LIS_DeturpaPontOrigem:
                   ptLista->pOrigemLista == NULL;
                   break;
             
             //// outros casos //
 
-            case DeturpaFinal:
+           /* case DeturpaFinal:
                   ptLista->pFimLista == NULL;
                   break;
 
@@ -833,12 +833,12 @@
 
             case DeturpaCorrLixo:
                   ptLista->pElemCorr = (tpElemLista *)(EspacoLixo);
-                  break;
+                  break;*/
 
             default :
          return LIS_CondRetDeturpacaoInexistente;
       } 
-     return LIS_CondRetOK;
+     return LIS_verifOK;
  }
 #endif
 

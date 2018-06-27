@@ -174,8 +174,10 @@ typedef struct LIS_tagLista * LIS_tppLista ;
         LIS_verifElemTpInconsistente,
 
         /* Memoria vazando */
-        
         LIS_verifVazamentoMemoria,
+
+		/* Deturpação recebida não existe*/
+		LIS_CondRetDeturpacaoInexistente,
 
         /* Lista está estruturada corretamente */
 
@@ -195,60 +197,75 @@ typedef struct LIS_tagLista * LIS_tppLista ;
  *      Retorno das funções de verificação em ordem hierárquica
 ************************************************/
 
+
+	/*					!!!!!!!!!!! OBS !!!!!!!!!!!
+	No deturpador (abaixo), sempre que houver um tipo dizendo que
+	realiza uma ação em um nó, sem especificar qual, implica-se que
+	esta sendo aplicado no elemento corrente.*/
+
 #ifdef _DEBUG
 
       typedef enum {
 
-            /* Ponteiro de origem com valor NULL*/
-            LIS_DeturpaOrigem,
+            /* !!! Ponteiro de origem com valor NULL*/
+            LIS_DeturpaPontOrigem,
 
             /* Ponteiro final com valor NULL*/
-            LIS_DeturpaFinal,
+            //LIS_DeturpaPontFinal,
 
             /* Ponteiro anterior a origem diferente NULL*/
-            LIS_DeturpaAnteriorOrigem,
+            //LIS_DeturpaPontAnteriorOrigem,
 
             /* Ponteiro proximo ao final diferente NULL*/
-            LIS_DeturpaProxFimLista,
+           // LIS_DeturpaPontProxFimLista,
 
-            /* Elemento da lista com valor NULL */
+			/* !!! Ponteiro do elemento corrente com NULL */
+			LIS_DeturpaPontCorr,
+		
+            /* !!! Elemento corrente da lista com valor NULL */
             LIS_DeturpaValorNULL,
 
-            /* Elemento corrente da lista com valorNULL */
-            LIS_DeturpaCorrNULL,
+            /* Endereço do elemento corrente da lista com NULL */
+            //LIS_DeturpaEndCorrNULL,
+
+			/* !!! Ponteiro para o proximo elemento da lista com NULL*/
+			LIS_DeturpaPontProxNULL,
+
+			/* !!! Ponteiro para o elemento anterior da lista com NULL*/
+			LIS_DeturpaPontAntNULL,
 
             /* Elemento cabeca da lista com valor NULL */
-            LIS_DeturpaNULLCabeca,
+            //LIS_DeturpaNULLCabeca,
 
             /* Faz ponteiro cabeça apontar para lixo */
-            LIS_DeturpaPtCabecaLixo, 
+            //LIS_DeturpaPtCabecaLixo, 
 
             /* Faz ponteiro final apontar para lixo */
-            LIS_DeturpaFinalLixo,
+            //LIS_DeturpaFinalLixo,
 
             /* Faz ponteiro corrente apontar para lixo */
-            LIS_DeturpaCorrLixo, 
+            //LIS_DeturpaCorrLixo, 
 
-            /* Faz ponteiro prox apontar para lixo */
+            /* !!! Faz ponteiro para o prox apontar para lixo */
             LIS_DeturpaProxLixo,
 
-            /* Faz ponteiro ant apontar para lixo */
+            /* !!! Faz ponteiro para o ant apontar para lixo */
             LIS_DeturpaAntLixo,   
 
             /* Num de elementos menor 0*/
-            LIS_DeturpaNumElementos,
+            //LIS_DeturpaNumElementos,
 
-            /*Não realiza ação de deturpar*/
-            LIS_naoDeturpa,
-
-            /*Altera tipo estrutura*/
+            /* !!! Altera tipo estrutura*/
             LIS_DeturpaAlteraTipoEstrutura,
 
-            /*Elimina o elemento corrente da lista*/
+            /* !!! Elimina o elemento corrente da lista*/
             LIS_DeturpaEliminaCorrente,
 
-            /*Desencadeia nó sem liberálo com free */
-            LIS_DeturpaDesencadeiaSemFree
+            /* !!! Desencadeia nó sem liberálo com free */
+            LIS_DeturpaDesencadeiaSemFree,
+
+			/* !!! Não deturpa a lista*/
+            LIS_naoDeturpa
   
       }LIS_tpModosDeDeturpacao;
 #endif
