@@ -246,8 +246,7 @@
 *  Fun��o: LIS  &Inserir elemento ap�s
 *  ****/
 
-   LIS_tpCondRet LIS_InserirElementoApos( LIS_tppLista pLista ,
-                                          void * pValor        )
+   LIS_tpCondRet LIS_InserirElementoApos( LIS_tppLista pLista ,void * pValor)
       
    {
 
@@ -523,6 +522,7 @@
 
             // Se o ponteiro passado for nulo, a lista, evidentemente, não existe
             if (ptLista == NULL) {
+                  CNT_CONTAR("LIS_verifInexistente");
                   return LIS_verifInexistente;
             }
 
@@ -532,40 +532,65 @@
             // na lista.
             if (ptLista->pOrigemLista == NULL) {
                   if (ptLista->pElemCorr != NULL) 
+                  {
+                        CNT_CONTAR("LIS_verifSemOrigemComCorrente");
                         return LIS_verifSemOrigemComCorrente;
+                  }
 
-                  if (ptLista->pFimLista != NULL) 
+                  if (ptLista->pFimLista != NULL){
+                        CNT_CONTAR("LIS_verifSemOrigemComFinal");
                         return LIS_verifSemOrigemComFinal;
-                  
-                  if (ptLista->numElem != 0) 
+                  } 
+                  if (ptLista->numElem != 0){
+                        CNT_CONTAR("LIS_verifSemOrigemComElemento");
                         return LIS_verifSemOrigemComElemento;
+                  }
+                        
             }
 
             // Equivalentemente, para ponteiro final da lista nulo
             if (ptLista->pFimLista == NULL) {
-                  if (ptLista->pOrigemLista != NULL) 
+                  if (ptLista->pOrigemLista != NULL) {
+                        CNT_CONTAR("LIS_verifSemFimComOrigem");
                         return LIS_verifSemFimComOrigem;
+                  }
+                        
 
-                  if (ptLista->pElemCorr != NULL) 
+                  if (ptLista->pElemCorr != NULL) {
+                        CNT_CONTAR("LIS_verifSemFimComCorrente");
                         return LIS_verifSemFimComCorrente;
+                  }
+                        
                   
-                  if (ptLista->numElem != 0) 
+                  if (ptLista->numElem != 0) {
+                        CNT_CONTAR("LIS_verifSemFimComElemento");
                         return LIS_verifSemFimComElemento;
+                  }
+                        
             }
 
-            // numElem não pode ser menor que 0
-            if (ptLista->numElem < 0)
+            // numElem não pode ser menor que 0     ok-> tem deturpador
+            if (ptLista->numElem < 0){
+                  CNT_CONTAR("LIS_verifNumElementosNegativo");
                   return LIS_verifNumElementosNegativo;
+            }
+                  
             
             // Tomar cuidado para não acessar à dentro de 
             // ponteiros nulos!
             if (ptLista->pOrigemLista != NULL)
-                  if (ptLista->pOrigemLista->pAnt != NULL)
+                  if (ptLista->pOrigemLista->pAnt != NULL){
+                        CNT_CONTAR("LIS_verifOrigemIncorreta");
                         return LIS_verifOrigemIncorreta;
+                  }
+                        
 
             if (ptLista->pFimLista != NULL)
-                  if (ptLista->pFimLista->pProx != NULL)
+                  if (ptLista->pFimLista->pProx != NULL){
+                        CNT_CONTAR("LIS_verifFinalIncorreto");
                         return LIS_verifFinalIncorreto;
+                  }
+                        
 
             // Verifica se conseguimos partir da origem e chegar 
             // no final, enquanto conta os passos e depois
@@ -586,10 +611,12 @@
                   while (temp->pProx != NULL || temp->pValor != ptLista->pFimLista->pValor) {
                         
                         if (temp->pAnt != ant) {
+                              CNT_CONTAR("LIS_verifAntLinkErrado");
                               return LIS_verifAntLinkErrado;
                         }
                         
                         if (temp->pValor == NULL) {
+                              CNT_CONTAR("LIS_verifElemNulo");
                               return LIS_verifElemNulo;
                         }
 
@@ -602,14 +629,23 @@
                         temp = temp->pProx;
                   }
 
-                  if (temp->pValor != ptLista->pFimLista->pValor)
+                  if (temp->pValor != ptLista->pFimLista->pValor){
+                        CNT_CONTAR("LIS_verifOrigemNaoChegaAoFinal");
                         return LIS_verifOrigemNaoChegaAoFinal;
+                  }
+                        
                   
-                  if (contador != numElem)
+                  if (contador != numElem){
+                        CNT_CONTAR("LIS_verifNumElemInconsisente");
                         return LIS_verifNumElemInconsisente;
+                  }
+                        
                   
-                  if (corrente = 0 && ptLista->pElemCorr != NULL)
-                        return LIS_verifCorrenteNaoLigado;
+                  if (corrente = 0 && ptLista->pElemCorr != NULL){
+                        CNT_CONTAR("LIS_verifCorrenteNaoLigado");
+                        return LIS_verifCorrenteNaoLigado;   
+                  }
+                        
             }
 
             void * ptVoid = (void *) ptLista;
@@ -620,6 +656,7 @@
             CED_MarcarEspacoAtivo(ptVoid);
 
             if (tipoCabeca != LIS_TipoEspacoCabeca) {
+                  CNT_CONTAR("LIS_verifCabecaTipoInconsistente");
                   return LIS_verifCabecaTipoInconsistente;
             }
 
@@ -629,10 +666,12 @@
             while (tpElemLista != NULL) {
 
                   if (CED_ObterTipoEspaco(temp) != temp->tipo) {
+                        CNT_CONTAR("LIS_verifElemTpInconsistente");
                         return LIS_verifElemTpInconsistente;
                   }
 
                   if (CED_ObterTipoEspaco(temp->ptCabeca) != ptLista->tipo) {
+                        CNT_CONTAR("LIS_verifCabecaTipoInconsistente");
                         return LIS_verifCabecaTipoInconsistente;
                   }
                   
@@ -661,6 +700,7 @@
                   if (tipoEsp == tipoCabeca) {
                         if (statusAtivo == 0) {
                               CED_TerminarIteradorEspacos();
+                              CNT_CONTAR("LIS_verifVazamentoMemoria");
                               return LIS_verifVazamentoMemoria;
                         }
                   }
@@ -670,6 +710,7 @@
 
             CED_TerminarIteradorEspacos();
 
+            NT_CONTAR("LIS_verifOK");
             return LIS_verifOK;
             
       }
@@ -696,10 +737,10 @@
 
              //elimina o elemento corrente da lista
              case DeturpaEliminaCorrente :
-         free(pLista->pElemCorr) ;
-         pLista->pElemCorr = NULL ;
-         pLista->NumeroDeElementos-- ;
-         break ;
+                  free(pLista->pElemCorr) ;
+                  pLista->pElemCorr = NULL ;
+                  pLista->NumeroDeElementos-- ;
+                  break ;
 
             //atribui null ao ponteiro para prox no
             case DeturpaProxNull:
@@ -727,24 +768,24 @@
    
             //altera tipo de estrutura apontada no no 
             case DeturpaAlteraTipoEstrutura :
-         pLista->tipo++;
-         break ;
+                  pLista->tipo++;
+                  break ;
             
             //desencadeia nó sem liberálo com free 
             case DeturpaDesencadeiaSemFree:
-         if (pLista->pElemCorr->pAnt != NULL)
-               pLista->pElemCorr->pAnt->pProx = pLista->pElemCorr->pProx ;
-         else
-            pLista->pOrigemLista = pLista->pElemCorr->pProx;
+                  if (pLista->pElemCorr->pAnt != NULL)
+                        pLista->pElemCorr->pAnt->pProx = pLista->pElemCorr->pProx ;
+                  else
+                        pLista->pOrigemLista = pLista->pElemCorr->pProx;
 
-         if (pLista->pElemCorr->pProx != NULL)
-               pLista->pElemCorr->pProx->pAnt = pLista->pElemCorr->pAnt ;
-         else
-            pLista->pFimLista = pLista->pElemCorr->pAnt;
+                  if (pLista->pElemCorr->pProx != NULL)
+                        pLista->pElemCorr->pProx->pAnt = pLista->pElemCorr->pAnt ;
+                  else
+                        pLista->pFimLista = pLista->pElemCorr->pAnt;
 
-         pLista->numElem --;
-         pLista->pElemCorr = NULL;
-         break ;
+                  pLista->numElem --;
+                  pLista->pElemCorr = NULL;
+                  break ;
 
             //atribui null ao ponteiro corrente
             case DeturpaCorrNULL: 
@@ -779,8 +820,8 @@
                   break;
 
             case LIS_DeturpaNULLCabeca:
-         pLista->pElemCorr->pCabeca = NULL;
-         break;
+                  pLista->pElemCorr->pCabeca = NULL;
+                  break;
 
             case DeturpaPtCabecaLixo:
                   pLista->pElemCorr->pCabeca = (tpElemLista *)(EspacoLixo);
