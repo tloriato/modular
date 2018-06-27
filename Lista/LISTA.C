@@ -521,6 +521,15 @@
       int LIS_VerificarLista(LIS_tppLista ptLista) {
 
             int counterErrors = 0;
+			
+			int contador = 1;
+            int numElem = ptLista->numElem;
+
+            tpElemLista * elemento = ptLista->pOrigemLista;
+            tpElemLista * ant = NULL;
+            tpElemLista * corr = ptLista->pElemCorr;
+
+            int corrente = 0;
 
             // Se o ponteiro passado for nulo, a lista, evidentemente, não existe
             if (ptLista == NULL) {
@@ -528,104 +537,115 @@
                   return LIS_verifInexistente;
             }
 
-
             // Se o ponteiro para a origem da lista é nulo,
             // todos os demais também devem ser, pois não deverá existir elementos
             // na lista.
             if (ptLista->pOrigemLista == NULL) {
-                  if (ptLista->pElemCorr != NULL)
-                        counterErrors++; 
+                  if (ptLista->pElemCorr != NULL){
+					counterErrors++; 
+					CNT_CONTAR("LIS_verifSemOrigemComCorrente");
                         //return LIS_verifSemOrigemComCorrente;
-
-                  if (ptLista->pFimLista != NULL) 
+				  }
+                  if (ptLista->pFimLista != NULL){
                         counterErrors++; 
+						CNT_CONTAR("LIS_verifSemOrigemComFinal");
                         //return LIS_verifSemOrigemComFinal;
-                  
-                  if (ptLista->numElem != 0) 
+				  }
+                  if (ptLista->numElem != 0){
                         counterErrors++;
+						CNT_CONTAR("LIS_verifSemOrigemComElemento");
                         //return LIS_verifSemOrigemComElemento;
+				  }
             }
-
-            // Equivalentemente, para ponteiro final da lista nulo
+			// Equivalentemente, para ponteiro final da lista nulo
             if (ptLista->pFimLista == NULL) {
-                  if (ptLista->pOrigemLista != NULL) 
+                  if (ptLista->pOrigemLista != NULL){
                         counterErrors++; 
+						CNT_CONTAR("LIS_verifSemFimComOrigem");
                         //return LIS_verifSemFimComOrigem;
-
-                  if (ptLista->pElemCorr != NULL) 
+				  }
+                  if (ptLista->pElemCorr != NULL){
                         counterErrors++; 
+						CNT_CONTAR("LIS_verifSemFimComCorrente");
                         //return LIS_verifSemFimComCorrente;
-                  
-                  if (ptLista->numElem != 0) 
+				  }
+                  if (ptLista->numElem != 0){
                         counterErrors++; 
+						CNT_CONTAR("LIS_verifSemFimComElemento");
                         //return LIS_verifSemFimComElemento;
+				  }
             }
 
             // numElem não pode ser menor que 0
-            if (ptLista->numElem < 0)
+            if (ptLista->numElem < 0){
                   counterErrors++; 
+				  CNT_CONTAR("LIS_verifNumElementosNegativo");
                   //return LIS_verifNumElementosNegativo;
+			}
             
             // Tomar cuidado para não acessar à dentro de 
             // ponteiros nulos!
             if (ptLista->pOrigemLista != NULL)
-                  if (ptLista->pOrigemLista->pAnt != NULL)
-                        counterErrors++; 
+                  if (ptLista->pOrigemLista->pAnt != NULL){
+                        counterErrors++;
+						CNT_CONTAR("LIS_verifOrigemComElemAnterior");
                         //return LIS_verifOrigemIncorreta;
-
+				  }
             if (ptLista->pFimLista != NULL)
-                  if (ptLista->pFimLista->pProx != NULL)
+                  if (ptLista->pFimLista->pProx != NULL){
                         counterErrors++; 
+						CNT_CONTAR("LIS_verifFinalComProximoElem");
                         //return LIS_verifFinalIncorreto;
+				  }
 
             // Verifica se conseguimos partir da origem e chegar 
             // no final, enquanto conta os passos e depois
             // checa com o número de elementos declarados
-            // Verifica se o elemento anterior está sempre linkado corretamente 
+            // Sempre verifica se o elemento anterior está linkado corretamente 
             // e que nenhum elemento aponta para um valor nulo
 
             if (ptLista->pOrigemLista != NULL) {
-                  int contador = 1;
-                  int numElem = ptLista->numElem;
 
-                  tpElemLista * temp = ptLista->pOrigemLista;
-                  tpElemLista * ant = NULL;
-                  tpElemLista * corr = ptLista->pElemCorr;
-
-                  int corrente = 0;
-
-                  while (temp->pProx != NULL || temp->pValor != ptLista->pFimLista->pValor) {
+                  while (elemento->pProx != NULL || elemento->pValor != ptLista->pFimLista->pValor) {
                         
-                        if (temp->pAnt != ant) {
+                        if (elemento->pAnt != ant) {
                               counterErrors++; 
+							  CNT_CONTAR("LIS_verifAntEndErrado");
                               //return LIS_verifAntLinkErrado;
                         }
                         
-                        if (temp->pValor == NULL) {
+                        if (elemento->pValor == NULL) {
                               counterErrors++; 
+							  CNT_CONTAR("LIS_verifElemNulo");
                               //return LIS_verifElemNulo;
                         }
 
-                        if (corr = temp) {
+                        if (corr = elemento) {
                               corrente = 1;
                         }
                         
                         contador++;
-                        ant = temp;
-                        temp = temp->pProx;
+                        ant = elemento;
+                        elemento = elemento->pProx;
                   }
 
-                  if (temp->pValor != ptLista->pFimLista->pValor)
+                  if (elemento->pValor != ptLista->pFimLista->pValor){
                         counterErrors++; 
+						CNT_CONTAR("LIS_verifOrigemNaoChegaAoFinal");
                         //return LIS_verifOrigemNaoChegaAoFinal;
+				  }
                   
-                  if (contador != numElem)
+                  if (contador != numElem){
                         counterErrors++; 
+						CNT_CONTAR("LIS_verifNumElemInconsisente");
                         //return LIS_verifNumElemInconsisente;
+				  }
                   
-                  if (corrente = 0 && ptLista->pElemCorr != NULL)
-                        counterErrors++; 
+                  if (corrente = 0 && ptLista->pElemCorr != NULL){
+                        counterErrors++;
+						CNT_CONTAR("LIS_verifCorrenteNaoLigado");
                         //return LIS_verifCorrenteNaoLigado;
+				  }
             }
 
             void * ptVoid = (void *) ptLista;
@@ -637,34 +657,37 @@
 
             if (tipoCabeca != LIS_TipoEspacoCabeca) {
                   counterErrors++; 
+				  CNT_CONTAR("LIS_verifCabecaTipoInconsistente");
                   //return LIS_verifCabecaTipoInconsistente;
             }
 
-            tpElemLista * temp = ptLista->pOrigemLista;
+            tpElemLista * elemento = ptLista->pOrigemLista;
             int tipoEsp;
 
-            while (temp != NULL) {
+            while (elemento != NULL) {
 
-                  if (CED_ObterTipoEspaco(temp) != temp->tipo) {
+                  if (CED_ObterTipoEspaco(elemento) != elemento->tipo) {
                         counterErrors++; 
+						CNT_CONTAR("LIS_verifElemTpInconsistente");
                         //return LIS_verifElemTpInconsistente;
                   }
 
-                  if (CED_ObterTipoEspaco(temp->ptCabeca) != ptLista->tipo) {
+                  if (CED_ObterTipoEspaco(elemento->ptCabeca) != ptLista->tipo) {
                         counterErrors++; 
+						CNT_CONTAR("LIS_verifCabecaTipoInconsistente");
                         //return LIS_verifCabecaTipoInconsistente;
                   }
                   
                   // Checa o controle da memória dinâmica
                   // marca os visitados como ativo
-                  ptVoid = (void *) temp;
+                  ptVoid = (void *) elemento;
                   CED_MarcarEspacoAtivo(ptVoid);
 
-                  ptVoid = (void *) temp->pValor;
+                  ptVoid = (void *) elemento->pValor;
                   tipoEsp = CED_ObterTipoEspaco(ptVoid);
                   CED_MarcarEspacoAtivo(ptVoid);
 
-                  temp = temp->pProx;
+                  elemento = elemento->pProx;
             }
 
             /* Controla Vazamento da Memória da Lista */
@@ -681,6 +704,7 @@
                         if (statusAtivo == 0) {
                               CED_TerminarIteradorEspacos();
                               counterErrors++; 
+							  CNT_CONTAR("LIS_verifVazamentoMemoria");
                               //return LIS_verifVazamentoMemoria;
                         }
                   }
