@@ -56,9 +56,9 @@
 
 #ifdef _DEBUG
     #include "GENERICO.h"
-    #include "CESPDING.h"
+    #include "CESPDIN.h"
     #include "CONTA.h"
-	#include   "IdTiposEspaco.def"
+	#include "IdTiposEspaco.def"
 #endif
  
 #if defined( LISTA_OWN )
@@ -422,7 +422,7 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *
 ***********************************************************************/
 
-   void IrInicioLista( LIS_tppLista pLista ) ;
+   void LIS_IrInicioLista( LIS_tppLista pLista ) ;
 
 
 /***********************************************************************
@@ -438,7 +438,7 @@ typedef struct LIS_tagLista * LIS_tppLista ;
 *
 ***********************************************************************/
 
-   void IrFinalLista( LIS_tppLista pLista ) ;
+   void LIS_IrFinalLista( LIS_tppLista pLista ) ;
 
 
 /***********************************************************************

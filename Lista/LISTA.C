@@ -50,16 +50,16 @@
          struct tagElemLista * pProx ;
                /* Ponteiro para o elemento sucessor */
 
-      #ifdef _DEBUG
+	#ifdef _DEBUG
 
-            /* Precisamos dessas duas informações para
-            realizer testes de integridades completos
-            com o propósito do módulo */
+		/* Precisamos dessas duas informações para
+		realizar testes de integridades completos
+		com o propósito do módulo */
 
-            LIS_tppLista ptCabeca;
+		LIS_tppLista ptCabeca;
+		char tipo;
 
-            char tipo;
-
+	#endif
    } tpElemLista ;
 
 /***********************************************************************
@@ -134,7 +134,7 @@
       LimparCabeca( pLista ) ;
 
       #ifdef _DEBUG
-            pLista->Tipo = LIS_TipoEspacoCabeca;
+            pLista->tipo = LIS_TipoEspacoCabeca;
             CED_DefinirTipoEspaco(pLista, LIS_TipoEspacoCabeca);
       #elif
             

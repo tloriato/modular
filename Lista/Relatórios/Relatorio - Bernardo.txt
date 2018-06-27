@@ -1,0 +1,3 @@
+Data		Horas Trabalhadas	Tipo Tarefa	Descrição da Tarefa Realizada
+16/06/18	2			Estudar		Estudamos os requisitos do trabalho
+23/06/18	2			Projetar	Fiz a primeira versão do modelo físico
