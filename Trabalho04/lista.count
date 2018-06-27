@@ -1,20 +1,22 @@
 Arquivo de declaração de contadores
 Conta módulo lista marcado
 
-	LIS_CriarLista
-	LIS_DestruirLista
-	LIS_EsvaziarLista
-	LIS_InserirElementoAntes
-	LIS_InserirElementoApos
-	LIS_ExcluirElemento
-	LIS_ObterValor
-	LIS_IrInicioLista
-	LIS_IrFinalLista
-	LIS_AvancarElementoCorrente
-	LIS_ProcurarValor
-	LIS_VerificarLista
-	LIS_LiberarElemento
-	
-	
-	
+	LIS_verifInexistente
+	LIS_verifSemOrigemComCorrente
+	LIS_verifSemOrigemComFinal	
+	LIS_verifSemOrigemComElemento
+	LIS_verifSemFimComOrigem
+	LIS_verifSemFimComCorrente
+	LIS_verifSemFimComElemento
+	LIS_verifNumElementosNegativo
+	LIS_verifOrigemComElemAnterior
+	LIS_verifFinalComProximoElem
+	LIS_verifAntEndErrado
+	LIS_verifElemNulo	
+	LIS_verifOrigemNaoChegaAoFinal
+	LIS_verifNumElemInconsisente
+	LIS_verifCorrenteNaoLigado
+	LIS_verifCabecaTipoInconsistente
+	LIS_verifElemTpInconsistente
+	LIS_verifVazamentoMemoria
 	
