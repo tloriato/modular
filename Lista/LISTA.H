@@ -530,7 +530,7 @@ typedef struct LIS_tagLista * LIS_tppLista ;
  *      LIS_verifCondRet: retorna o erro encontrado na lista
  *******************************************************************/
 
-    LIS_verifCondRet LIS_VerificarLista (LIS_tppLista ptLista);
+    int LIS_VerificarLista (LIS_tppLista ptLista);
 
 #endif
 
