@@ -1,0 +1,20 @@
+Arquivo de declaração de contadores
+Conta módulo lista marcado
+
+	LIS_CriarLista
+	LIS_DestruirLista
+	LIS_EsvaziarLista
+	LIS_InserirElementoAntes
+	LIS_InserirElementoApos
+	LIS_ExcluirElemento
+	LIS_ObterValor
+	LIS_IrInicioLista
+	LIS_IrFinalLista
+	LIS_AvancarElementoCorrente
+	LIS_ProcurarValor
+	LIS_VerificarLista
+	LIS_LiberarElemento
+	
+	
+	
+	

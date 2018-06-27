@@ -1,0 +1,35 @@
+﻿Autores:      Bernardo Hörner, 
+                Mariela Andrade, 
+                Tiago Loriato
+
+Data:           27/06/2018
+
+Estruturação de diretórios:
+
+EXECUTAVEL - Contém o arquivo compilado
+
+FONTES - Contém o .h e .c para compilação do programa.
+
+SCRIPTS - Contém o arquivo de testes feito pelo grupo.
+
+
+Para executar o programa:
+
+Modulo Lista Sem Deturpação:
+
+	1)Abra a pasta do trabalho
+
+	2)Clique no trab4-1.bat duas vezes.
+
+	3)Leia a saida com relatorio de erro no arquivo saida1.txt .  
+
+Modulo Lista Com Deturpação:
+
+	1)Abra a pasta do trabalho
+
+	2)Clique no trab-2.bat duas vezes.
+
+	3)Leia a saida com relatorio de erro no arquivo saida2.txt. O total de contadores será impressa na tela e ficará contida no arquivo Contadores.count.  
+
+
+	

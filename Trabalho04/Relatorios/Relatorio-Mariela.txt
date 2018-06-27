@@ -1,0 +1,5 @@
+Data		Horas Trabalhadas	Tipo Tarefa		Descrição da Tarefa Realizada
+16/06/18	2			Estudar			Estudamos os requisitos do trabalho
+24/06/18        2			codificar módulo       	Funcões de deturpacao
+26/06/18	2			codificar módulo	Revisão funções de deturpação
+27/06/18	4			Testes			Integrar com arcabouço de teste
