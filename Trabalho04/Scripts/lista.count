@@ -1,8 +1,10 @@
-Arquivo de declaração de contadores
-Conta módulo lista marcado
+///////////////////////////////////////
+//Arquivo de declaração de contadores
+//Conta módulo lista marcado
+///////////////////////////////////////
 
 	LIS_verifInexistente
-	LIS_verifSemOrigemComCorrente
+	LIS_verifSemOrigemComCorrente 
 	LIS_verifSemOrigemComFinal	
 	LIS_verifSemOrigemComElemento
 	LIS_verifSemFimComOrigem
@@ -12,10 +14,9 @@ Conta módulo lista marcado
 	LIS_verifOrigemComElemAnterior
 	LIS_verifFinalComProximoElem
 	LIS_verifAntEndErrado
-	LIS_verifElemNulo	
+	LIS_verifValorElemNulo	
 	LIS_verifOrigemNaoChegaAoFinal
-	LIS_verifNumElemInconsisente
-	LIS_verifCorrenteNaoLigado
+	LIS_verifNumElemInconsistente
 	LIS_verifCabecaTipoInconsistente
 	LIS_verifElemTpInconsistente
 	LIS_verifVazamentoMemoria
