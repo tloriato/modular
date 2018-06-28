@@ -3,3 +3,4 @@ Data		Horas Trabalhadas	Tipo Tarefa		Descrição da Tarefa Realizada
 23/06/18	2			Projetar		Fiz a primeira versão do modelo físico
 26/06/18	2			codificar módulo	Revisei o código já escrito, corrigindo alguns erros
 26/06/18	2			codificar módulo	Distribuí os contadores pelo módulo
+26/06/18	3			codificar módulo	Tentei consertar os deturpadores e verificador
