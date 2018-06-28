@@ -528,8 +528,12 @@
             tpElemLista * elemento = ptLista->pOrigemLista;
             tpElemLista * ant = NULL;
             tpElemLista * corr = ptLista->pElemCorr;
-
             int corrente = 0;
+			void * ptVoid = (void *) ptLista;
+			int statusAtivo = CED_EhEspacoAtivo(ptVoid);
+			int tipoCabeca = CED_ObterTipoEspaco(ptVoid);
+			int espacos = CED_ObterNumeroEspacosAlocados();
+			int tipoEsp, i;
 
             // Se o ponteiro passado for nulo, a lista, evidentemente, não existe
             if (ptLista == NULL) {
@@ -642,11 +646,10 @@
 				  }
             }
 
-            void * ptVoid = (void *) ptLista;
             // Marcar os espaços dinâmicos inativos
             CED_MarcarTodosEspacosInativos();
             // Marca o tipo da lista e aponta o espaço como ativo
-            int tipoCabeca = CED_ObterTipoEspaco(ptVoid);
+            
             CED_MarcarEspacoAtivo(ptVoid);
 
             if (tipoCabeca != LIS_TipoEspacoCabeca) {
@@ -656,7 +659,6 @@
             }
 
             tpElemLista * elemento = ptLista->pOrigemLista;
-            int tipoEsp;
 
             while (elemento != NULL) {
 
@@ -685,13 +687,11 @@
             }
 
             /* Controla Vazamento da Memória da Lista */
-            int espacos = CED_ObterNumeroEspacosAlocados();
 
             CED_InicializarIteradorEspacos();
 
-            for (int i = 0; i < espacos; i++) {
+            for (i = 0; i < espacos; i++) {
                   ptVoid = CED_ObterPonteiroEspacoCorrente();
-                  int statusAtivo = CED_EhEspacoAtivo(ptVoid);
                   tipoEsp = CED_ObterTipoEspaco(ptVoid);
 
                   if (tipoEsp == tipoCabeca) {
@@ -699,7 +699,6 @@
                               CED_TerminarIteradorEspacos();
                               counterErrors++; 
 							  CNT_CONTAR("LIS_verifVazamentoMemoria");
-                              //return LIS_verifVazamentoMemoria;
                         }
                   }
 
